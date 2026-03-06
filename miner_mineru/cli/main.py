@@ -27,42 +27,78 @@ except ImportError:
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Extract TOC and summary from a MinerU-generated markdown file."
-    )
-    parser.add_argument("markdown_file", help="Path to MinerU-generated markdown file")
-    parser.add_argument("--output", "-o", help="Output JSON file path (default: stdout)", default=None)
+    parser = argparse.ArgumentParser(description="MinerU TOC extraction and fixing tools")
+    subparsers = parser.add_subparsers(dest="command", help="Subcommand")
+
+    # extract subcommand
+    extract_parser = subparsers.add_parser("extract", help="Extract TOC from markdown (default)")
+    extract_parser.add_argument("markdown_file", help="Path to MinerU-generated markdown file")
+    extract_parser.add_argument("--output", "-o", help="Output JSON file path (default: stdout)", default=None)
+
+    # fix subcommand
+    fix_parser = subparsers.add_parser("fix", help="Fix markdown heading levels using extracted TOC")
+    fix_parser.add_argument("markdown_file", help="Path to source markdown file")
+    fix_parser.add_argument("--toc", required=True, help="Path to step 1 output JSON (contains toc array)")
+    fix_parser.add_argument("--output-dir", "-o", required=True, help="Output directory for corrected markdown + report")
+
     args = parser.parse_args()
 
-    from miner_mineru.providers.factory import build_client
-    client = build_client()
+    # Handle fix subcommand
+    if args.command == "fix":
+        from miner_mineru.pipeline.md_fixer import fix_markdown
+        try:
+            print(f"INFO: Fixing markdown: {args.markdown_file}", file=sys.stderr)
+            report = fix_markdown(args.markdown_file, args.toc, args.output_dir)
+            print(f"INFO: Lines changed: {report.lines_changed}, Lines demoted: {report.lines_demoted}", file=sys.stderr)
+            print(f"INFO: Output written to {args.output_dir}", file=sys.stderr)
+            print(json.dumps(report.to_dict(), indent=2, ensure_ascii=False))
+            sys.exit(0)
+        except FileNotFoundError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            sys.exit(1)
+        except Exception as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            sys.exit(1)
 
-    print(f"INFO: Reading file: {args.markdown_file}", file=sys.stderr)
+    # Default: extract subcommand (or no subcommand specified)
+    if args.command == "extract" or args.command is None:
+        if args.command is None:
+            # If no subcommand, treat first arg as markdown file (backward compat)
+            if len(sys.argv) < 2:
+                parser.print_help()
+                sys.exit(0)
+            args.markdown_file = sys.argv[1]
+            args.output = sys.argv[3] if len(sys.argv) > 2 and sys.argv[2] in ['-o', '--output'] else None
 
-    try:
-        from miner_mineru.pipeline.extractor import extract_toc
-        result = extract_toc(args.markdown_file, client)
-    except FileNotFoundError as e:
-        print(f"ERROR: {e}", file=sys.stderr)
-        sys.exit(1)
-    except ValueError as e:
-        print(f"ERROR: {e}", file=sys.stderr)
-        sys.exit(2)
-    except Exception as e:
-        print(f"ERROR: LLM API error: {e}", file=sys.stderr)
-        sys.exit(3)
+        from miner_mineru.providers.factory import build_client
+        client = build_client()
 
-    output_json = json.dumps(result.to_dict(), indent=2, ensure_ascii=False)
+        print(f"INFO: Reading file: {args.markdown_file}", file=sys.stderr)
 
-    if args.output:
-        with open(args.output, "w", encoding="utf-8") as f:
-            f.write(output_json)
-        print(f"INFO: Output written to {args.output}", file=sys.stderr)
-    else:
-        print(output_json)
+        try:
+            from miner_mineru.pipeline.extractor import extract_toc
+            result = extract_toc(args.markdown_file, client)
+        except FileNotFoundError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            sys.exit(1)
+        except ValueError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            sys.exit(2)
+        except Exception as e:
+            print(f"ERROR: LLM API error: {e}", file=sys.stderr)
+            sys.exit(3)
 
-    print("INFO: Extraction complete.", file=sys.stderr)
-    sys.exit(0)
+        output_json = json.dumps(result.to_dict(), indent=2, ensure_ascii=False)
+
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(output_json)
+            print(f"INFO: Output written to {args.output}", file=sys.stderr)
+        else:
+            print(output_json)
+
+        print("INFO: Extraction complete.", file=sys.stderr)
+        sys.exit(0)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,31 @@
+{
+  "toc": [
+    {
+      "title": "Definitions",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 1",
+      "page": 2,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Purpose of the call",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 2",
+      "page": 3,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Categories of students",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 3",
+      "page": 3,
+      "confidence": 0.95,
+      "children": []
+    }
+  ]
+}
