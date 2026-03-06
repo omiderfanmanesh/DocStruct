@@ -31,7 +31,7 @@
 
 ## Notes
 
-- Specification is complete and ready for `/speckit.clarify` or `/speckit.plan`
-- All three user stories are independently testable and deliver value
-- Requirements balance automation with auditability
-- Success criteria include both accuracy metrics and performance targets
+- 5 clarifications resolved in session 2026-03-06
+- Feature replaces regex-based feature-001 with LLM agent approach
+- LLM-based classification means FR-008 uses SHOULD (not MUST) for determinism
+- Two-stage pipeline clearly scoped: this feature = stage 1 (TOC extraction)
