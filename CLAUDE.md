@@ -25,6 +25,7 @@ miner_mineru/              # Main Python package
     reader.py              # File I/O and content slicing
     heading_map.py         # Nested tree builder
     rule_engine.py         # Rule-based heading classifier
+    md_fixer.py            # Markdown fixer: normalize heading levels using extracted TOC
   providers/               # LLM backend abstraction
     factory.py             # build_client() — reads LLM_PROVIDER env var
     anthropic.py           # Anthropic Claude client
@@ -46,8 +47,11 @@ output/                    # Agent JSON output (gitignored)
 # Run tests (conda agent env, bypass anyio SSL issue)
 PYTHONNOUSERSITE=1 "/c/Users/ERO8OFO/.conda/envs/agent/python.exe" -m pytest -p no:anyio
 
-# Run CLI agent
-python -m miner_mineru <markdown_file> --output <output.json>
+# Run CLI agent (extract TOC)
+python -m miner_mineru extract <markdown_file> --output <output.json>
+
+# Fix markdown heading levels using extracted TOC
+python -m miner_mineru fix <source.md> --toc <toc.json> --output-dir <output/fixed>
 ```
 
 ## Code Style
