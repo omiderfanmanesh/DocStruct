@@ -64,7 +64,7 @@ Published on August 4, 2025 Deadline for application: 12:00 AM on September 18, 
 
 ### 4.3 Applicants whose household qualified in 2021 for IRPEF-exempt income or revenue (welfare, social security, indemnity, etc.) and are previous recipients of university benefits in academic years prior to 2025/2026.... Errore. Il segnalibro non è definito.
 
-4.4 ISEE certification omissions or discrepancies... 17 
+### 4.4 ISEE certification omissions or discrepancies... 17
 
 ### 4.5 Applicant status details . 18
 
@@ -78,7 +78,7 @@ Published on August 4, 2025 Deadline for application: 12:00 AM on September 18, 
 
 ### 4.5.5 Applicant with citizenship of an EU country (other than Italy) and a non-EU country, as well as coming from particularly poor or developing foreign countries, with a household resident in Italy ..... 19
 
-4.5.6 Applicants enrolled in doctoral research courses 20 
+### 4.5.6 Applicants enrolled in doctoral research courses 20
 
 ## ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION 20
 
@@ -96,9 +96,9 @@ Published on August 4, 2025 Deadline for application: 12:00 AM on September 18, 
 
 ### 5.3.4 Applicants who have benefited from bonuses 22
 
-5.4 Transfer of application for applicants from other HEIs/AFAM institutes ....... 22 
+### 5.4 Transfer of application for applicants from other HEIs/AFAM institutes ....... 22
 
-5.5 Information and Support. 22 
+### 5.5 Information and Support. 22
 
 ## ARTICLE 6 – AMOUNT OF THE SCHOLARSHIP. INCREASES AND DECREASES ... 23
 

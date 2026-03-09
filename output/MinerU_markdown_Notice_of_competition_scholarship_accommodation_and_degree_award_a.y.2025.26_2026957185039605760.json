@@ -1,0 +1,167 @@
+{
+  "toc": [
+    {
+      "title": "RECIPIENTS AND AMOUNTS",
+      "kind": "section",
+      "depth": 1,
+      "numbering": "SECTION I",
+      "page": 10,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "COURSES AND UNIVERSITIES FOR WHICH BENEFITS ARE GRANTED",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "ART. 1",
+      "page": 11,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "COURSES",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "ART. 1(1)",
+      "page": 11,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "UNIVERSITIES",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "ART. 1(2)",
+      "page": null,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "COURSE LOCATIONS",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "ART. 1(3)",
+      "page": null,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "DISTRIBUTION OF SCHOLARSHIPS AND ACCOMMODATION",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "ART. 1(4)",
+      "page": null,
+      "confidence": 1.0,
+      "children": []
+    }
+  ],
+  "heading_map": [
+    {
+      "title": "RECIPIENTS AND AMOUNTS",
+      "kind": "section",
+      "depth": 1,
+      "numbering": "SECTION I",
+      "page": 10,
+      "confidence": 1.0,
+      "children": [
+        {
+          "title": "COURSES AND UNIVERSITIES FOR WHICH BENEFITS ARE GRANTED",
+          "kind": "article",
+          "depth": 2,
+          "numbering": "ART. 1",
+          "page": 11,
+          "confidence": 1.0,
+          "children": [
+            {
+              "title": "COURSES",
+              "kind": "subarticle",
+              "depth": 3,
+              "numbering": "ART. 1(1)",
+              "page": 11,
+              "confidence": 1.0,
+              "children": []
+            },
+            {
+              "title": "UNIVERSITIES",
+              "kind": "subarticle",
+              "depth": 3,
+              "numbering": "ART. 1(2)",
+              "page": null,
+              "confidence": 1.0,
+              "children": []
+            },
+            {
+              "title": "COURSE LOCATIONS",
+              "kind": "subarticle",
+              "depth": 3,
+              "numbering": "ART. 1(3)",
+              "page": null,
+              "confidence": 1.0,
+              "children": []
+            },
+            {
+              "title": "DISTRIBUTION OF SCHOLARSHIPS AND ACCOMMODATION",
+              "kind": "subarticle",
+              "depth": 3,
+              "numbering": "ART. 1(4)",
+              "page": null,
+              "confidence": 1.0,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": "This document is a formal notice of competition issued for the 2025/26 academic year by a regional or university accommodation and scholarship body (likely EDISU Piemonte). Its main purpose is to announce updated scholarship amounts and rules related to student financial aid, accommodation, and degree awards for eligible students. Key topics covered include scholarship eligibility and amounts based on student residency status, economic requirements for applications, procedures for submitting applications, lease update obligations for students living off-campus, and special provisions for certain medical filter semester students.",
+  "metadata": {
+    "title": "Notice of competition for the awarding of Scholarships, Accommodation Service, Degree Awards",
+    "source": "explicit",
+    "year": "2025/26",
+    "document_type": "Notice of competition",
+    "organization": null
+  },
+  "toc_boundaries": {
+    "start_line": 67,
+    "end_line": 699,
+    "marker": "(agent-detected)"
+  },
+  "processing_log": [
+    {
+      "action": "read",
+      "detail": "Read 5022 lines from C:\\Projects\\personal\\Miner-MinerU\\data\\MinerU_markdown_Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26_2026957185039605760.md",
+      "line": null
+    },
+    {
+      "action": "detected",
+      "detail": "TOC marker '(agent-detected)' at line 67",
+      "line": 67
+    },
+    {
+      "action": "boundary",
+      "detail": "TOC spans lines 67–699",
+      "line": null
+    },
+    {
+      "action": "classified",
+      "detail": "LLM classified 6 TOC entries",
+      "line": null
+    },
+    {
+      "action": "mapped",
+      "detail": "Built heading tree with 1 root nodes",
+      "line": null
+    },
+    {
+      "action": "summarized",
+      "detail": "Generated document summary",
+      "line": null
+    },
+    {
+      "action": "metadata",
+      "detail": "Extracted metadata: title='Notice of competition for the awarding of Scholarships, Accommodation Service, Degree Awards', source=explicit",
+      "line": null
+    }
+  ],
+  "extracted_at": "2026-03-09T10:32:54.724805Z"
+}

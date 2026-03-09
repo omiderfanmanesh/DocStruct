@@ -1,0 +1,318 @@
+{
+  "source_file": "C:\\Projects\\personal\\Miner-MinerU\\data\\MinerU_markdown_Competition-Notice-a.y.-2025_2026_2029912065198985216.md",
+  "output_file": "C:\\Projects\\personal\\Miner-MinerU\\output\\fixed\\MinerU_markdown_Competition-Notice-a.y.-2025_2026_2029912065198985216.md",
+  "total_lines": 2083,
+  "lines_changed": 44,
+  "lines_demoted": 1,
+  "unmatched_toc_entries": [],
+  "corrections": [
+    {
+      "line_number": 1,
+      "old_level": 1,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 5,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Scholarship",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 11,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Benefits of the Competition Notice",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 13,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Eligible students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 15,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Duration of the concession of the benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 19,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Accommodation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 21,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Scholarship for disabled students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 23,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Accommodation for disabled students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 25,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Clarifications on the duration of the benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 27,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Definitions of the type of students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 29,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Conventional year of first registration, provisions for changes of course or renunciation of studies",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 31,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Method for the submission of on-line applications for the assignment of benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 33,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Exceptions to the use of SPID/CIE (until new regulatory dispositions):",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 35,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "How to apply for benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 37,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Modifying the information in the application form",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 39,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Deadline dates for the online application for benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 41,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Students registered for the 1st year (1st and 2nd level) \u2010 Requirements for merit",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 43,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Requirements of merit for students of all courses enrolled for years after the first",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 45,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Students enrolled in current system courses",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 47,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Bonus credits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 49,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Seventh semester and first year of a master's degree \u2010 admission and merit requirements",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 51,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Last semester \u2013 Access and merit requirements",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 53,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Requirements of merit for students registered for doctorate and specialisation courses",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 55,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Economical requirements",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 57,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "University ISEE/Parified ISEE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 59,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "ISEEU - ISEE University Attestation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 61,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "ISEEUP - ISEE Parified University Certificate",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 63,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "ISEEU or ISEEUP request",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 65,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Economical and income limitations \u2013 ISEEU \u2013 ISEEUP and ISPEU - ISPEUP",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 67,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Non-EU international students without a visa- access to the online application",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 69,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Students from particularly poor and developing countries",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 71,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Stateless and internationally protected students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 73,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Independent family unit",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 75,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Independent student",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 77,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Students who are married or in a de facto cohabitation regime (article 1 paragraph 36 law no. 76/2016) registered with the municipality of residence",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 81,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Separated or divorced student",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 83,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Cases in which the family unit consists of only one student",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 85,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Economic requirements for students enrolled in PhD courses and schools of specialisation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 87,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Supplements to the scholarship",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 89,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Scholarship Integration and Benefits Facilitation for Students with Disabilities (recognition of disability pursuant to Article 3 paragraph 1 of Law No. 104 of February 5, 1992, or with disability of $6 6 \\%$ or more)",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 93,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "International mobility contributions for students taking part in mobility programmes",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 95,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Criteria for the assignment of scholarships",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 97,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Criteria for the formulation of scholarship ranking lists",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 99,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Amounts of the scholarship and related services",
+      "match_method": "exact"
+    }
+  ]
+}

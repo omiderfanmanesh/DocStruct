@@ -42,7 +42,7 @@ ACADEMIC YEAR 2025/2026
 
 ## Art. 19 - Regulatory references .................... ...... 24
 
-# Art. 1 - Definitions
+## Art. 1 - Definitions
 
 1. Pursuant to this call, the following terms shall be understood as indicated: 
 
@@ -100,7 +100,7 @@ w) S.T.E.M. study programmes: Bachelor’s degree and Master’s degree in field
 
 genere/resource/3f52db2f-24ce-4605-8e51-5618cc4ff4e3. Ca’ Foscari University offers the following S.T.E.M. programmes: 
 
-# Bachelor’s degree:
+### Bachelor’s degree:
 
 • Sustainable Chemistry and Technologies (cod.CT7 – ministerial degree code L-27) 
 
@@ -116,7 +116,7 @@ genere/resource/3f52db2f-24ce-4605-8e51-5618cc4ff4e3. Ca’ Foscari University o
 
 • Ingegneria ambientale per la transizione ecologica (cod. CT10 – ministerial degree code L-7) 
 
-# Master’s degree courses:
+### Master’s degree courses:
 
 Biotechnologies for Sustainable Development and the Environment (cod.CM10 – ministerial degree code LM-8) 
 
@@ -142,13 +142,13 @@ Conservation Science and Technology for Cultural Heritage (cod.CM60 – minister
 
 • Environmental Sciences (cod.CM5 – ministerial degree code LM-75) 
 
-# Art. 2 - Purpose of the call
+## Art. 2 - Purpose of the call
 
 1. As part of the annual plan of action to implement the Right to University Education of the Veneto Region Veneto for the 2025/2026 academic year and in compliance with the National Recovery and Resilience Plan (NRRP) which allocates further financial resources, funded by both the European Union - Next Generation EU and the mission 4, component 1, investment 1.7 “Scholarships for University access” of the NRRP, the Ca’ Foscari University of Venice issues the call for the assignment of scholarships for capable and deserving students in difficult financial conditions. 
 
 2. The aim of the Scholarship is to contribute to covering the maintenance costs incurred by students over at least ten months for each year of the course. The NRRP financial resources are aimed at increasing the number and the amount of the scholarships for capable and deserving students in difficult financial conditions. 
 
-# Art. 3 - Categories of students who can apply for a Scholarship
+## Art. 3 - Categories of students who can apply for a Scholarship
 
 1. The scholarship is awarded through competitive selection, according to the procedures established in this call: 
 
@@ -268,7 +268,7 @@ If the student fails to meet the requirements, fails to submit the scholarship a
 
 4. Students who transfer from another university may apply for the scholarship by registering on the Ca’ Foscari website and submitting the Benefits Application by 12:30 pm on 30 September 2025, provided that they forward the transfer request made at the university of origin no later than the deadline of 30 September 2025 and meet the requirements set out in Articles 7 and 8 of this call. The merit requirements also take into consideration the years of enrolment at the university of origin. Students must complete the application procedure for the call by requesting the I.S.E.E. certificate and enrolling in the academic year 2025/2026 according to the procedures and deadlines described in letters b) and c) of paragraph 2 of this article. 
 
-# Art. 5 - Definition of student status
+## Art. 5 - Definition of student status
 
 1. For the purpose of accessing benefits, student status is defined—according to the classification "local / commuter / non-resident student" described below—based on the distance between the student’s residence and the location of the degree program attended. The distance is calculated between the train station of the student’s town of residence (or the bus station, particularly if no train station exists in the town of residence) and the train or bus station in the town where the course is held, using the fastest available public transportation. A student is classified as follows: 
 
@@ -322,7 +322,7 @@ Failure to comply with the indications outlined in this paragraph shall result i
 
 3. Students who take part in international mobility programmes shall, in any case, retain the scholarship originally awarded (off site scholarship, commuter scholarship, on site scholarship), with no possibility of changing status and increasing the aforementioned scholarship. However, they must still fulfil the necessary requirements for the definition of the status (e.g. non-resident: to maintain this status, they must satisfy the living requirements in the town/city where the study programme is based for at least ten months, as indicated in the aforementioned paragraphs). 
 
-# Art. 6 - Loans and amounts
+## Art. 6 - Loans and amounts
 
 1. In order to award the scholarship for the 2025/2026 academic year, funds have been set aside deriving from: 
 
@@ -434,7 +434,7 @@ If students enrolled in the 2025/2026 academic year with full-time status later 
 
 18. Regional scholarships may be combined with other scholarships that do not have similar purposes related to student maintenance, regardless of the reason for which they are assigned. Scholarships granted by national or foreign institutions to support education or research abroad (mobility grants) are compatible. If students awarded a regional scholarship have already won, or simultaneously win another scholarship (with the exception of mobility grants), they must opt for one or the other scholarship, giving notice within 15 days to the Financial Aid Office (dirittoallostudio@unive.it). Students who give up the regional scholarship also lose their eligibility for the related benefits (i.e. exemption from the payment of fees, subsidised catering and housing services). 
 
-# Art. 7 - I.S.E.E. and criteria for the evaluation of the financial situation
+## Art. 7 - I.S.E.E. and criteria for the evaluation of the financial situation
 
 1. The financial situation of students is identified according to the I.S.E.E. certificate, as referred to in Prime Ministerial Decree no. 159 of 5 December 2013 and subsequent amendments and additions; 
 
@@ -486,7 +486,7 @@ Pursuant to the aforementioned Article 46, paragraph 5 of Presidential Decree no
 
 14. Pursuant to Article 8, paragraph 3 of Legislative Decree no. 68/2012 and Article 2, paragraph 1 of Prime Ministerial Decree no. 159 of 5 December 2013, and as definied by the Deliberazione Giunta Regionale del Veneto n. 774 of 8 July 2025, students for whom the household I.S.P.E. referred to in paragraph 12 above exceeds the cap of €42.530,50 shall be in any case excluded from the benefit. 
 
-# Art. 8 - Criteria for determining merit
+## Art. 8 - Criteria for determining merit
 
 1. Students who are enrolled for the first time in Bachelor’s and Master’s degree programmes shall be awarded the scholarship solely on the basis of the I.S.E.E. requirements referred to in Article 7 above. The merit requirement for access to benefits is assessed ex post in accordance with the provisions of Article 11, paragraph 1 below. 
 
@@ -568,7 +568,7 @@ be counted as “full-time,” and therefore the academic year 2025/2026 will be
 
 For students who enrolled in the program with “full-time” status and later switched to “part-time” status during their academic career, each academic year attended as “full-time” will be counted as two “part-time” years for the purpose of determining the number of years and the related merit requirements, as outlined in the table above. 
 
-# Art. 9 - Ranking formation
+## Art. 9 - Ranking formation
 
 1. Pursuant to Article 4, paragraph 7 of Prime Ministerial Decree 9 April 2001, the benefit rankings for the 2025/2026 academic year shall be defined according to the following procedures: 
 
@@ -600,7 +600,7 @@ d) by 13 February 2026, the scholarship assignment rankings for students enrolle
 
 3. Each student shall be listed in the ranking list with the serial number issued in the receipt obtained after the correct submission of the Benefit request form referred to in Art.4 of this call. 
 
-# Art. 10 - Methods of payment of the scholarship
+## Art. 10 - Methods of payment of the scholarship
 
 1. The monetary part of the scholarship shall be paid in two equal half-yearly instalments. 
 
@@ -616,7 +616,7 @@ d) by 13 February 2026, the scholarship assignment rankings for students enrolle
 
 The Ca’ Foscari CartaConto shall be the sole method of paying the instalments of any scholarship awarded and refunding the instalment paid for enrolment in the academic year 2025/2026 (with the exception of stamp duty). Activating CartaConto later than the deadlines indicated above will result in the postponement of the only remaining attempt to pay the scholarship, which will take place within six months from the date the scholarship award decision is issued. Failure to activate the CartaConto or a significant delay in activation will result in the inability to receive the funds. 
 
-# Art. 11 - Revocation/forfeiture of the scholarship and relative eligibility
+## Art. 11 - Revocation/forfeiture of the scholarship and relative eligibility
 
 1. The scholarship, and relative eligibility, shall be revoked for students enrolled for the first time in Bachelor's degree programmes and Master’s degree programmes who, by 30 November 2026, have failed to earn at least 20 credits (10 credits for part-time students), considered valid for the study programme in which the student is enrolled in or, alternatively, for the study programme in which they will enrol in the academic year 2026/2027, if different from the course above. The bonus referred to in Article 8, paragraph 6 cannot be used to achieve this merit requirement. 
 
@@ -646,7 +646,7 @@ Students subject to revocation or forfeiture of the benefit must pay the proport
 
 For this reason, students are strongly encouraged to promptly inform the Financial Aid Office (dirittoallostudio@unive.it) of any changes occurring after the call deadline, and in particular, to request any change from full-time to part-time status by November 15, 2025 (see also Article 15). 
 
-# Art. 12 - Supplements and benefits for international mobility
+## Art. 12 - Supplements and benefits for international mobility
 
 1. Eligible students who are not assigned a scholarship and scholarship beneficiaries in the academic year 2025/2026 who take part in international mobility programmes during the same academic year, enrolled in Bachelor's degree programmes, Master’s degree programmes and PhD courses that do not benefit from the scholarship referred to in Ministerial Decree 226/2021, may apply for international mobility contributions, subject to the availability of resources and only once for each course. 
 
@@ -676,7 +676,7 @@ The assignees of the supplement described above shall be contacted by the Financ
 
 10. In case of failure to achieve the results required by the programme (for example, failure to sit exams or complete educational activities agreed with the local exchange manager), the initial instalment assigned to the student, referred to in the previous paragraph, must be returned by the same to the university within 30 days of notification by the Financial Aid Office. 
 
-# Art. 13 - Foreign students
+## Art. 13 - Foreign students
 
 1. Non-EU students, under the same treatment as Italian students, shall access the services and measures for the right to education pursuant to Article 46, paragraph 5 of Presidential Decree no. 394 of 31 August 1999. 
 
@@ -692,7 +692,7 @@ For students enrolling in the first year of Bachelor's degree and Master’s deg
 
 5. For the purpose of assessing the financial situation of students recognized as political, stateless refugees and holders of subsidiary and temporary protection status, only income and assets held in Italy are taken into account according to the procedures referred to in Article 7. 
 
-# Art. 14 - Students with disabilities
+## Art. 14 - Students with disabilities
 
 1. For disabled students with a recognized handicap pursuant to article 3, paragraph 1 of Italian Law no. 104 of 5 February 1992 or with disability rate (recognized by the Italian National Health Commissions) of $66 \%$ or more, who are enrolled in Bachelor's/Master’s degree programmes, the benefits referred to in Article 3 shall be awarded for: 
 
@@ -722,7 +722,7 @@ Students who use their bonus CFU partially in the academic year of their request
 
 5. Students with disabilities, with handicap recognised pursuant to Art. 3, paragraph 1, of Law no. 104 of 5 February 1992, no. 104, or with a disability rate of at least $6 6 \%$ , are totally exempt from the tuition fees. Therefore, they do not need to pay the regional tax for the right to university education; the payment of the stamp duty is due only if they are enrolling for the first time in their study programme. 
 
-# Art. 15 - Part-time students
+## Art. 15 - Part-time students
 
 1. Students assigned part-time status pursuant to the administrative provisions published on the website www.unive.it/part-time can apply for the benefits referred to in Article 3 as follows: 
 
@@ -778,7 +778,7 @@ For part-time students enrolled for the first time, the second instalment of the
 
 The other reasons for revocation already mentioned in Article 11 also apply. 
 
-# Art. 16 - Declarations: corrections and verifications
+## Art. 16 - Declarations: corrections and verifications
 
 1. Benefit applications, accompanied by information on financial situation and merit, are presented by students with the right of self-certification pursuant to Presidential Decree no. 445 of 28 December 2000. 
 
@@ -794,11 +794,11 @@ completeness and truthfulness of the information declared, including for the pur
 
 6. Students must notify the Financial Aid Office (dirittoallostudio@unive.it) promptly of any event occurring after the date of the submission of the application that is significant for the purpose of awarding the scholarship, of the status (non-resident, commuter, local) or of revoking the scholarship, 
 
-# Art. 17 - Head of the procedure
+## Art. 17 - Head of the procedure
 
 1. The person in charge of the procedure, pursuant to and in accordance with Law no. 241/1990, is the director of the Office for Student Careers and the Right to Education, Dr Micaela Scarpa. 
 
-# Art. 18 – Information on the processing of personal data
+## Art. 18 – Information on the processing of personal data
 
 Pursuant to Article 13 of EU Regulation 2016/679, known as the General Data Protection Regulation (GDPR), applicants to this selection process are informed that the processing of personal data, either provided by them or otherwise acquired by the University for this purpose, is carried out solely for the execution of the selection procedure. Processing will be done by authorized personnel at Ca’ Foscari University of Venice, using manual and/or electronic means, in ways and within the limits necessary to achieve the above-stated purposes. 
 
@@ -816,7 +816,7 @@ If applicants believe that the processing of their personal data is in violation
 
 The Data Controller is Ca’ Foscari University of Venice, located at Dorsoduro 3246, 30123 Venice (VE), represented by the Rector. 
 
-# Art. 19 - Information references
+## Art. 19 - Information references
 
 For information on this call, contact the Financial Aid Office (c/o Palazzo Ca’ Foscari - Dorsoduro, 3246 - 30123 - Venice) of the Teaching and Student Services Area, Office of Student Careers and Right to Education via: 
 
@@ -826,7 +826,7 @@ For information on this call, contact the Financial Aid Office (c/o Palazzo Ca�
 
 ➢ help desk available by appointment, to be booked online at https://www.unive.it/pag/20068/, during the following opening hours: Tuesday, Thursday and Friday: 9.30 - 12.30 am; Wednesday: 2.30 - 4.30 pm 
 
-# Art. 20 - Regulatory references
+## Art. 20 - Regulatory references
 
 University Statute Rector’s Decree no. 750 of 8 September 2011 and subsequent amendments and additions Italian Presidential Decree no.394 of 31 August 1999 
 

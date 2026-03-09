@@ -64,7 +64,7 @@
       "children": []
     },
     {
-      "title": "Criteria for determining merit",
+      "title": "Criteria for determining merit.",
       "kind": "article",
       "depth": 2,
       "numbering": "Art. 8",
@@ -109,7 +109,7 @@
       "children": []
     },
     {
-      "title": "Foreign students",
+      "title": "Foreign students.",
       "kind": "article",
       "depth": 2,
       "numbering": "Art. 13",
@@ -136,7 +136,7 @@
       "children": []
     },
     {
-      "title": "Declarations: corrections and verifications",
+      "title": "Declarations: corrections and verifications.",
       "kind": "article",
       "depth": 2,
       "numbering": "Art. 16",
@@ -237,7 +237,7 @@
       "children": []
     },
     {
-      "title": "Criteria for determining merit",
+      "title": "Criteria for determining merit.",
       "kind": "article",
       "depth": 2,
       "numbering": "Art. 8",
@@ -282,7 +282,7 @@
       "children": []
     },
     {
-      "title": "Foreign students",
+      "title": "Foreign students.",
       "kind": "article",
       "depth": 2,
       "numbering": "Art. 13",
@@ -309,7 +309,7 @@
       "children": []
     },
     {
-      "title": "Declarations: corrections and verifications",
+      "title": "Declarations: corrections and verifications.",
       "kind": "article",
       "depth": 2,
       "numbering": "Art. 16",
@@ -345,7 +345,7 @@
       "children": []
     }
   ],
-  "summary": "This document is an official call issued by an educational or governmental body inviting students to apply for scholarships for the university academic year 2025/2026. Its main purpose is to outline the eligibility, application procedures, financial criteria, and conditions for awarding scholarships that support the right to higher education. Key topics covered include applicant categories, deadlines, evaluation of financial and merit criteria, scholarship payment methods, special provisions for international, disabled, and part-time students, as well as rules on revocation and administrative procedures.",
+  "summary": "This document is an official call issued for the assignment of scholarships for the right to university education for the academic year 2025/2026. Its main purpose is to outline the eligibility, application process, and selection criteria for students seeking financial aid to support their university studies. Key topics covered include definitions, student categories, application deadlines, evaluation of financial and merit criteria, scholarship payment methods, special provisions for international and disabled students, and rules on scholarship forfeiture.",
   "metadata": {
     "title": "CALL FOR THE ASSIGNMENT OF SCHOLARSHIPS FOR THE RIGHT TO UNIVERSITY EDUCATION",
     "source": "explicit",
@@ -356,17 +356,17 @@
   "toc_boundaries": {
     "start_line": 6,
     "end_line": 42,
-    "marker": "(unmarked)"
+    "marker": "(agent-detected)"
   },
   "processing_log": [
     {
       "action": "read",
-      "detail": "Read 885 lines from .\\data\\MinerU_markdown_Bando_Borse_di_studio_2025-2026_ENG_2029898716306407424.md",
+      "detail": "Read 885 lines from C:\\Projects\\personal\\Miner-MinerU\\data\\MinerU_markdown_Bando_Borse_di_studio_2025-2026_ENG_2029898716306407424.md",
       "line": null
     },
     {
       "action": "detected",
-      "detail": "TOC marker '(unmarked)' at line 6",
+      "detail": "TOC marker '(agent-detected)' at line 6",
       "line": 6
     },
     {
@@ -395,5 +395,5 @@
       "line": null
     }
   ],
-  "extracted_at": "2026-03-06T12:42:51.349060Z"
+  "extracted_at": "2026-03-09T10:29:23.311839Z"
 }

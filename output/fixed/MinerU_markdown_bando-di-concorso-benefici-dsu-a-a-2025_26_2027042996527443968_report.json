@@ -1,0 +1,227 @@
+{
+  "source_file": "C:\\Projects\\personal\\Miner-MinerU\\data\\MinerU_markdown_bando-di-concorso-benefici-dsu-a-a-2025_26_2027042996527443968.md",
+  "output_file": "C:\\Projects\\personal\\Miner-MinerU\\output\\fixed\\MinerU_markdown_bando-di-concorso-benefici-dsu-a-a-2025_26_2027042996527443968.md",
+  "total_lines": 9682,
+  "lines_changed": 25,
+  "lines_demoted": 0,
+  "unmatched_toc_entries": [],
+  "corrections": [
+    {
+      "line_number": 1,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 2,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 3,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 4,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 5,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 6,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 40,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "Benefici a concorso e durata dell\u2019assegnazione",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 42,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Durata di assegnazione dei benefici per studenti iscritti alle Universit\u00e0, agli Istituti dell\u2019Alta Formazione Artistica e Musicale (AFAM), alla Scuola Superiore per Mediatori Linguistici di Rimini e al CIELS Bologna.",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 44,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Disposizioni particolari per la durata di assegnazione dei benefici per gli studenti che si trasferiscono da un corso di altro ateneo o istituto di grado universitario, anche estero, o effettuano un passaggio di corso interno all\u2019ateneo o istituto di grado universitario, che si immatricolano nuovamente a seguito di rinuncia o decadenza, che passano o si trasferiscono da corsi di laurea a corsi di laurea magistrale a ciclo unico, che si laureano e chiedono l\u2019abbreviazione di corso nella laurea Magistrale a ciclo unico.",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 46,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Disposizioni particolari per gli studenti che optano per un curriculum di durata inferiore o superiore a quello normale di un Corso di Laurea, di Laurea Magistrale a ciclo unico, di Laurea Magistrale",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 48,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "Destinatari",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 50,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Destinatari",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 52,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Destinatari iscritti ai corsi interateneo",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 54,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Destinatari in contemporanea iscrizione a due corsi di studio",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 56,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Cause di esclusione e decadenza",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 58,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Studenti internazionali",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 60,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "La documentazione richiesta agli studenti internazionali provenienti da Paesi non appartenenti all\u2019Unione Europea",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 62,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "La documentazione richiesta agli studenti internazionali provenienti da Paesi dell\u2019Unione Europea",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 64,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Disposizioni comuni a studenti internazionali provenienti da Paesi UE e da Paesi extra UE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 66,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Studenti internazionali provenienti da Paesi UE e da Paesi extra UE, con redditi e/o patrimoni in Italia",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 68,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Studenti internazionali riconosciuti apolidi o titolari di protezione internazionale (con permesso di soggiorno per asilo politico o protezione sussidiaria) o titolari di permesso di soggiorno per protezione temporanea o complementare (ad es. protezione speciale, casi speciali).",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 70,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "Modalit\u00e0 di riscossione degli interventi economici",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 72,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "Revoca dei benefici",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 74,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "Restituzione dei benefici",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 76,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "Requisiti richiesti",
+      "match_method": "fuzzy"
+    },
+    {
+      "line_number": 90,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Requisiti economici",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 92,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Requisiti di merito-Studenti iscritti al primo anno dei corsi di primo ciclo e ciclo unico",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 94,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Requisiti di merito-Studenti iscritti al primo anno dei corsi di secondo ciclo",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 96,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Requisiti di merito-Studenti iscritti al primo anno dei corsi di terzo ciclo",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 98,
+      "old_level": null,
+      "new_level": 2,
+      "matched_toc_title": "Requisiti di merito-Studenti iscritti ad anni successivi al primo dei corsi di tutti i cicli",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 100,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Requisiti per accedere ai servizi e ottenere la prima rata della borsa di studio",
+      "match_method": "exact"
+    }
+  ]
+}

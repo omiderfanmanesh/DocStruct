@@ -188,17 +188,15 @@ def find_first_toc_match_index(source_lines: List[SourceLine], matched_pairs: Di
 # Heading Level Mapping & Correction Functions (T014, T015, T016)
 # ============================================================================
 
-def kind_to_heading_level(kind: str) -> int:
-    """Map TOC entry kind to heading level (1-4)."""
+def kind_to_heading_level(kind: str) -> Optional[int]:
+    """Map TOC entry kind to heading level for supported kinds only."""
     mapping = {
         'section': 1,
         'article': 2,
         'subarticle': 3,
         'subsection': 3,
-        'topic': 4,
-        'annex': 1,
     }
-    return mapping.get(kind, 3)
+    return mapping.get(kind)
 
 
 def collect_unmatched_headings(
@@ -284,86 +282,28 @@ def apply_all_corrections(
     corrected_lines = []
     corrections = []
 
-    # Find first TOC match to distinguish cover page from body
-    first_match_line = find_first_toc_match_index(source_lines, matched_pairs)
-
-    # Build context of recent headings for LLM
-    recent_headings = []
-
-    # Step 1: Collect all unmatched headings AFTER first match for batch inference
-    unmatched_headings = collect_unmatched_headings(source_lines, matched_pairs, first_match_line)
-
-    # Step 2: Call LLM ONCE for all unmatched headings (batch inference)
-    inferred_levels_map = {}
-    if client and unmatched_headings:
-        toc_dicts = [
-            {
-                "kind": entry.kind,
-                "title": entry.title,
-                "numbering": entry.numbering,
-            }
-            for entry in toc_entries
-        ]
-        inferred_levels_map = infer_headings_batch(client, unmatched_headings, recent_headings, toc_dicts)
-
-    # Step 3: Apply corrections using pre-computed inferred levels
+    # Apply TOC-based corrections only for supported kinds.
     for source_line in source_lines:
         if source_line.line_number in matched_pairs:
-            # Matched TOC entry: re-level based on kind
+            # Matched TOC entry: re-level only for supported kinds
             toc_entry = matched_pairs[source_line.line_number]
             new_level = kind_to_heading_level(toc_entry.kind)
-            corrected_line = apply_heading_level(source_line, new_level)
-            corrected_lines.append(corrected_line)
-
-            # Track in recent headings for context
-            recent_headings.append((new_level, toc_entry.title))
-            if len(recent_headings) > 10:
-                recent_headings.pop(0)
-
-            corrections.append(CorrectionEntry(
-                line_number=source_line.line_number,
-                old_level=source_line.heading_level,
-                new_level=new_level,
-                matched_toc_title=toc_entry.title,
-                match_method='exact' if toc_entry.numbering and toc_entry.numbering.lower() in source_line.stripped_text.lower() else 'fuzzy',
-            ))
-        elif source_line.heading_level and first_match_line and source_line.line_number < first_match_line:
-            # Unmatched heading BEFORE first TOC match: demote to plain text (cover page junk)
-            demoted_line = SourceLine(line_number=source_line.line_number, raw_text=source_line.stripped_text)
-            corrected_lines.append(demoted_line)
-
-            corrections.append(CorrectionEntry(
-                line_number=source_line.line_number,
-                old_level=source_line.heading_level,
-                new_level=None,
-                matched_toc_title=None,
-                match_method='demoted',
-            ))
-        elif source_line.heading_level and first_match_line and source_line.line_number > first_match_line:
-            # Unmatched heading AFTER first TOC match: use pre-computed batch inference result
-            inferred_level = inferred_levels_map.get(source_line.stripped_text)
-
-            if inferred_level and inferred_level != source_line.heading_level:
-                # Re-level based on LLM decision
-                corrected_line = apply_heading_level(source_line, inferred_level)
+            if new_level is not None:
+                corrected_line = apply_heading_level(source_line, new_level)
                 corrected_lines.append(corrected_line)
-
-                recent_headings.append((inferred_level, source_line.stripped_text))
-                if len(recent_headings) > 10:
-                    recent_headings.pop(0)
 
                 corrections.append(CorrectionEntry(
                     line_number=source_line.line_number,
                     old_level=source_line.heading_level,
-                    new_level=inferred_level,
-                    matched_toc_title=None,
-                    match_method='llm_inferred',
+                    new_level=new_level,
+                    matched_toc_title=toc_entry.title,
+                    match_method='exact' if toc_entry.numbering and toc_entry.numbering.lower() in source_line.stripped_text.lower() else 'fuzzy',
                 ))
             else:
-                # Cannot determine, preserve as-is
+                # Unsupported kind: preserve as-is
                 corrected_lines.append(source_line)
         else:
-            # Everything else: preserve as-is
+            # Unmatched lines: preserve as-is
             corrected_lines.append(source_line)
 
     return corrected_lines, corrections

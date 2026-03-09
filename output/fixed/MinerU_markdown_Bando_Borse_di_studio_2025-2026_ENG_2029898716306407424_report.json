@@ -2,7 +2,7 @@
   "source_file": "C:\\Projects\\personal\\Miner-MinerU\\data\\MinerU_markdown_Bando_Borse_di_studio_2025-2026_ENG_2029898716306407424.md",
   "output_file": "C:\\Projects\\personal\\Miner-MinerU\\output\\fixed\\MinerU_markdown_Bando_Borse_di_studio_2025-2026_ENG_2029898716306407424.md",
   "total_lines": 885,
-  "lines_changed": 22,
+  "lines_changed": 43,
   "lines_demoted": 3,
   "unmatched_toc_entries": [],
   "corrections": [
@@ -80,7 +80,7 @@
       "line_number": 21,
       "old_level": null,
       "new_level": 2,
-      "matched_toc_title": "Criteria for determining merit",
+      "matched_toc_title": "Criteria for determining merit.",
       "match_method": "exact"
     },
     {
@@ -115,7 +115,7 @@
       "line_number": 31,
       "old_level": null,
       "new_level": 2,
-      "matched_toc_title": "Foreign students",
+      "matched_toc_title": "Foreign students.",
       "match_method": "exact"
     },
     {
@@ -136,7 +136,7 @@
       "line_number": 37,
       "old_level": null,
       "new_level": 2,
-      "matched_toc_title": "Declarations: corrections and verifications",
+      "matched_toc_title": "Declarations: corrections and verifications.",
       "match_method": "exact"
     },
     {
@@ -159,6 +159,153 @@
       "new_level": 2,
       "matched_toc_title": "Regulatory references",
       "match_method": "exact"
+    },
+    {
+      "line_number": 45,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 103,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 119,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 145,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 151,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 271,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 325,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 437,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 489,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 571,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 603,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 619,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 649,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 679,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 695,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 725,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 781,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 797,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 801,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 819,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
+    },
+    {
+      "line_number": 829,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": null,
+      "match_method": "llm_inferred"
     }
   ]
 }

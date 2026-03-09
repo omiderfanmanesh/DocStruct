@@ -51,7 +51,7 @@
       "depth": 4,
       "numbering": "1.2.3",
       "page": null,
-      "confidence": 0.95,
+      "confidence": 0.9,
       "children": []
     },
     {
@@ -69,7 +69,7 @@
       "depth": 4,
       "numbering": "1.2.5",
       "page": null,
-      "confidence": 0.7,
+      "confidence": 0.8,
       "children": []
     },
     {
@@ -78,7 +78,7 @@
       "depth": 4,
       "numbering": "1.2.6",
       "page": null,
-      "confidence": 0.7,
+      "confidence": 0.8,
       "children": []
     },
     {
@@ -222,7 +222,16 @@
       "depth": 3,
       "numbering": "4.3",
       "page": null,
-      "confidence": 0.6,
+      "confidence": 0.7,
+      "children": []
+    },
+    {
+      "title": "ISEE certification omissions or discrepancies",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "4.4",
+      "page": 17,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -258,6 +267,33 @@
       "depth": 4,
       "numbering": "4.5.3",
       "page": 18,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Applicant from a particularly poor or developing country",
+      "kind": "subarticle",
+      "depth": 4,
+      "numbering": "4.5.4",
+      "page": 19,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Applicant with citizenship of an EU country (other than Italy) and a non-EU country, as well as coming from particularly poor or developing foreign countries, with a household resident in Italy",
+      "kind": "subarticle",
+      "depth": 4,
+      "numbering": "4.5.5",
+      "page": 19,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Applicants enrolled in doctoral research courses",
+      "kind": "subarticle",
+      "depth": 4,
+      "numbering": "4.5.6",
+      "page": 20,
       "confidence": 1.0,
       "children": []
     },
@@ -843,7 +879,7 @@
               "depth": 4,
               "numbering": "1.2.3",
               "page": null,
-              "confidence": 0.95,
+              "confidence": 0.9,
               "children": []
             },
             {
@@ -861,7 +897,7 @@
               "depth": 4,
               "numbering": "1.2.5",
               "page": null,
-              "confidence": 0.7,
+              "confidence": 0.8,
               "children": []
             },
             {
@@ -870,7 +906,7 @@
               "depth": 4,
               "numbering": "1.2.6",
               "page": null,
-              "confidence": 0.7,
+              "confidence": 0.8,
               "children": []
             },
             {
@@ -1018,7 +1054,16 @@
           "depth": 3,
           "numbering": "4.3",
           "page": null,
-          "confidence": 0.6,
+          "confidence": 0.7,
+          "children": []
+        },
+        {
+          "title": "ISEE certification omissions or discrepancies",
+          "kind": "subarticle",
+          "depth": 3,
+          "numbering": "4.4",
+          "page": 17,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1053,6 +1098,33 @@
               "depth": 4,
               "numbering": "4.5.3",
               "page": 18,
+              "confidence": 1.0,
+              "children": []
+            },
+            {
+              "title": "Applicant from a particularly poor or developing country",
+              "kind": "subarticle",
+              "depth": 4,
+              "numbering": "4.5.4",
+              "page": 19,
+              "confidence": 1.0,
+              "children": []
+            },
+            {
+              "title": "Applicant with citizenship of an EU country (other than Italy) and a non-EU country, as well as coming from particularly poor or developing foreign countries, with a household resident in Italy",
+              "kind": "subarticle",
+              "depth": 4,
+              "numbering": "4.5.5",
+              "page": 19,
+              "confidence": 1.0,
+              "children": []
+            },
+            {
+              "title": "Applicants enrolled in doctoral research courses",
+              "kind": "subarticle",
+              "depth": 4,
+              "numbering": "4.5.6",
+              "page": 20,
               "confidence": 1.0,
               "children": []
             }
@@ -1599,7 +1671,7 @@
       "children": []
     }
   ],
-  "summary": "This document is a formal Call for Applications issued by A.Di.S.U.R.C., the Azienda per il Diritto allo Studio Universitario della Regione Campania, for the academic year 2025/2026. Its main purpose is to invite eligible students to apply for scholarships, accommodation places, and international mobility grants. The document details key topics such as eligibility and merit criteria, economic conditions for applicants, types of study courses covered, compatibility with other benefits, and procedural requirements for the application process.",
+  "summary": "This document is an official call for applications issued by A.Di.S.U.R.C., the agency responsible for the right to university study in the Campania region of Italy. It announces the availability of scholarships, accommodation places, and international mobility grants for the 2025/2026 academic year. The document details eligibility criteria, merit and economic requirements, recipient categories, and procedural rules for applying and managing the benefits.",
   "metadata": {
     "title": "CALL FOR APPLICATIONS for the awarding of SCHOLARSHIPS ACCOMMODATION PLACES INTERNATIONAL MOBILITY GRANTS",
     "source": "explicit",
@@ -1615,7 +1687,7 @@
   "processing_log": [
     {
       "action": "read",
-      "detail": "Read 1700 lines from .\\data\\MinerU_markdown_Bando_di_Concorso_a.a._2025.26_ENG_0_2029918507880611840.md",
+      "detail": "Read 1700 lines from C:\\Projects\\personal\\Miner-MinerU\\data\\MinerU_markdown_Bando_di_Concorso_a.a._2025.26_ENG_0_2029918507880611840.md",
       "line": null
     },
     {
@@ -1630,7 +1702,7 @@
     },
     {
       "action": "classified",
-      "detail": "LLM classified 88 TOC entries",
+      "detail": "LLM classified 92 TOC entries",
       "line": null
     },
     {
@@ -1649,5 +1721,5 @@
       "line": null
     }
   ],
-  "extracted_at": "2026-03-06T13:56:42.547465Z"
+  "extracted_at": "2026-03-09T10:31:02.820500Z"
 }

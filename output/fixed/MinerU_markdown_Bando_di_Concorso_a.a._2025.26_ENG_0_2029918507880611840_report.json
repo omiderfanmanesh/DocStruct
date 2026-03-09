@@ -2,7 +2,7 @@
   "source_file": "C:\\Projects\\personal\\Miner-MinerU\\data\\MinerU_markdown_Bando_di_Concorso_a.a._2025.26_ENG_0_2029918507880611840.md",
   "output_file": "C:\\Projects\\personal\\Miner-MinerU\\output\\fixed\\MinerU_markdown_Bando_di_Concorso_a.a._2025.26_ENG_0_2029918507880611840.md",
   "total_lines": 1700,
-  "lines_changed": 91,
+  "lines_changed": 95,
   "lines_demoted": 4,
   "unmatched_toc_entries": [],
   "corrections": [
@@ -217,6 +217,13 @@
       "match_method": "exact"
     },
     {
+      "line_number": 67,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "ISEE certification omissions or discrepancies",
+      "match_method": "exact"
+    },
+    {
       "line_number": 69,
       "old_level": 1,
       "new_level": 3,
@@ -248,14 +255,21 @@
       "line_number": 77,
       "old_level": null,
       "new_level": 3,
-      "matched_toc_title": "Transfer of application for applicants from other HEIs/AFAM institutes",
+      "matched_toc_title": "Applicant from a particularly poor or developing country",
       "match_method": "exact"
     },
     {
       "line_number": 79,
       "old_level": null,
       "new_level": 3,
-      "matched_toc_title": "Information and Support",
+      "matched_toc_title": "Applicant with citizenship of an EU country (other than Italy) and a non-EU country, as well as coming from particularly poor or developing foreign countries, with a household resident in Italy",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 81,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Applicants enrolled in doctoral research courses",
       "match_method": "exact"
     },
     {
@@ -312,6 +326,20 @@
       "old_level": null,
       "new_level": 3,
       "matched_toc_title": "Applicants who have benefited from bonuses",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 99,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Transfer of application for applicants from other HEIs/AFAM institutes",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 101,
+      "old_level": null,
+      "new_level": 3,
+      "matched_toc_title": "Information and Support",
       "match_method": "exact"
     },
     {
