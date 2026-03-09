@@ -46,7 +46,37 @@ def main():
         help="Optional separate LLM model for heading inference (if not provided, uses same model as TOC extraction)"
     )
 
+    # load subcommand
+    load_parser = subparsers.add_parser("load", help="Load and clean MinerU JSON extraction")
+    load_parser.add_argument("json_file", help="Path to MinerU JSON extraction file")
+    load_parser.add_argument("--output", "-o", help="Output JSON file path (default: stdout)", default=None)
+
     args = parser.parse_args()
+
+    # Handle load subcommand (clean MinerU JSON)
+    if args.command == "load":
+        from miner_mineru.pipeline.json_loader import load_mineru_json, save_cleaned_json
+        try:
+            print(f"INFO: Loading MinerU JSON: {args.json_file}", file=sys.stderr)
+            doc = load_mineru_json(args.json_file)
+            print(f"INFO: Loaded {len(doc.pages)} pages, {len(doc.get_all_blocks())} blocks", file=sys.stderr)
+
+            output_json = json.dumps(doc.to_dict(), indent=2, ensure_ascii=False)
+
+            if args.output:
+                with open(args.output, 'w', encoding='utf-8') as f:
+                    f.write(output_json)
+                print(f"INFO: Cleaned JSON saved to {args.output}", file=sys.stderr)
+            else:
+                print(output_json)
+
+            sys.exit(0)
+        except FileNotFoundError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            sys.exit(1)
+        except Exception as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            sys.exit(1)
 
     # Handle fix subcommand
     if args.command == "fix":
