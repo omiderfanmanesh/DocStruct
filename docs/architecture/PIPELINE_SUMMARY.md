@@ -11,14 +11,14 @@ Successfully implemented and tested a complete pipeline for:
 ## Key Achievements
 
 ### Feature 1: LLM-Based Heading Correction (NEW)
-- **File**: `miner_mineru/agents/heading_corrector_agent.py`
+- **File**: `docstruct/agents/heading_corrector_agent.py`
 - **Approach**: Claude LLM analyzes document structure to determine correct heading levels
 - **Context-Aware**: Uses recent headings and available TOC for intelligent decisions
 - **Confidence Scoring**: Only applies corrections with ≥0.6 confidence
 - **Status**: ✅ Working (verified in tests)
 
 ### Feature 2: Enhanced Markdown Fixer
-- **File**: `miner_mineru/pipeline/md_fixer.py`
+- **File**: `docstruct/pipeline/md_fixer.py`
 - **Integration**: LLM client passed through pipeline for heading inference
 - **Heading Level Mapping**:
   - H1 (`#`) - Section, Annex
@@ -157,11 +157,11 @@ python scripts/run_pipeline_all.py --skip-extract --no-llm
 ### Example 3: Single Document
 ```bash
 # Extract TOC
-python -m miner_mineru extract data/document.md --output output/document.json
+python -m docstruct extract data/document.md --output output/document.json
 
 # Fix markdown (with LLM)
 export ANTHROPIC_API_KEY="sk-ant-..."
-python -m miner_mineru fix data/document.md --toc output/document.json --output-dir output/fixed
+python -m docstruct fix data/document.md --toc output/document.json --output-dir output/fixed
 ```
 
 ## Output Files
@@ -246,7 +246,7 @@ PYTHONNOUSERSITE=1    # Needed for conda agent env (SSL DLL workaround)
 ## Files Created/Modified
 
 ### New Files
-- `miner_mineru/agents/heading_corrector_agent.py` - LLM agent for heading inference
+- `docstruct/agents/heading_corrector_agent.py` - LLM agent for heading inference
 - `scripts/run_pipeline_all.py` - Batch pipeline runner
 - `scripts/run_pipeline_all.sh` - Bash wrapper
 - `docs/architecture/LLM_AGENT_IMPLEMENTATION.md` - Technical details
@@ -254,8 +254,8 @@ PYTHONNOUSERSITE=1    # Needed for conda agent env (SSL DLL workaround)
 - `docs/architecture/PIPELINE_SUMMARY.md` - This file
 
 ### Modified Files
-- `miner_mineru/pipeline/md_fixer.py` - Integrated LLM agent
-- `miner_mineru/cli/main.py` - Updated fix command with client
+- `docstruct/pipeline/md_fixer.py` - Integrated LLM agent
+- `docstruct/cli/main.py` - Updated fix command with client
 - `tests/test_md_fixer.py` - Updated test signatures
 
 ## Verification Checklist

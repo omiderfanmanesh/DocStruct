@@ -7,10 +7,10 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from miner_mineru.models import HeadingEntry
-from miner_mineru.agents.classifier_agent import ClassifierAgent
-from miner_mineru.agents.boundary_agent import BoundaryAgent
-from miner_mineru.pipeline.extractor import extract_toc
+from docstruct.models import HeadingEntry
+from docstruct.agents.classifier_agent import ClassifierAgent
+from docstruct.agents.boundary_agent import BoundaryAgent
+from docstruct.pipeline.extractor import extract_toc
 
 
 def classify_toc_entries(toc_text, client):

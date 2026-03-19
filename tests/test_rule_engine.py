@@ -1,4 +1,4 @@
-from miner_mineru.pipeline.rule_engine import (
+from docstruct.pipeline.rule_engine import (
     ArticleRule,
     Block,
     CapsTopicRule,

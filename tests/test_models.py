@@ -1,5 +1,5 @@
 """Unit tests for model serialization."""
-from miner_mineru.models import (
+from docstruct.models import (
     DocumentMetadata,
     ExtractionResult,
     HeadingEntry,

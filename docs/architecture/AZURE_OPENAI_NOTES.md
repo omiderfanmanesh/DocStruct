@@ -14,7 +14,7 @@ Azure OpenAI models (gpt-4.1-mini) may not strictly follow JSON-only response in
 
 ## Solution Implemented
 
-Updated `miner_mineru/agents/heading_corrector_agent.py` with improved JSON parsing:
+Updated `docstruct/agents/heading_corrector_agent.py` with improved JSON parsing:
 
 1. **Graceful Fallback**: If direct JSON parsing fails, attempts to extract JSON object using regex
 2. **Improved Prompt**: Made instructions more explicit with example format
@@ -64,6 +64,6 @@ If using Azure OpenAI:
 
 ## See Also
 
-- `miner_mineru/agents/heading_corrector_agent.py` - LLM agent implementation
+- `docstruct/agents/heading_corrector_agent.py` - LLM agent implementation
 - `docs/guides/BATCH_PIPELINE.md` - Usage guide
 - `CLAUDE.md` - Provider configuration

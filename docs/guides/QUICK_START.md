@@ -75,5 +75,5 @@ PYTHONNOUSERSITE=1 python scripts/run_pipeline_all.py
 
 - `docs/guides/BATCH_PIPELINE.md` - Full documentation with all options
 - `docs/architecture/PIPELINE_SUMMARY.md` - Architecture and design overview
-- `miner_mineru/cli/main.py` - CLI entry points
+- `docstruct/cli/main.py` - CLI entry points
 - `tests/test_md_fixer.py` - Test examples

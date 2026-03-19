@@ -2,7 +2,7 @@
 from unittest.mock import MagicMock
 import pytest
 
-from miner_mineru.agents.summary_agent import SummaryAgent
+from docstruct.agents.summary_agent import SummaryAgent
 
 
 def generate_summary(pre_toc_text, toc_text, client):

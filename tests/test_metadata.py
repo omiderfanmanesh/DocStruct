@@ -2,8 +2,8 @@
 from unittest.mock import MagicMock
 import pytest
 
-from miner_mineru.agents.metadata_agent import MetadataAgent
-from miner_mineru.models import DocumentMetadata
+from docstruct.agents.metadata_agent import MetadataAgent
+from docstruct.models import DocumentMetadata
 
 
 def extract_metadata(pre_toc_text, client):

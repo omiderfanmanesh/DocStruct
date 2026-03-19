@@ -41,7 +41,7 @@ Key guides:
 ## Project Structure
 
 ```
-miner_mineru/           # Main Python package
+docstruct/           # Main Python package
   agents/               # LLM agents for analysis
   models/               # Data models
   pipeline/             # Core processing pipeline
@@ -78,10 +78,10 @@ python scripts/run_pipeline_all.py --skip-fix                # Extract TOC only
 ### Single Document
 ```bash
 # Extract TOC
-python -m miner_mineru extract data/document.md --output output/document.json
+python -m docstruct extract data/document.md --output output/document.json
 
 # Fix markdown
-python -m miner_mineru fix data/document.md --toc output/document.json --output-dir output/fixed
+python -m docstruct fix data/document.md --toc output/document.json --output-dir output/fixed
 ```
 
 ### Tests

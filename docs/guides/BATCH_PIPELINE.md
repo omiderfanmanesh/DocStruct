@@ -241,9 +241,9 @@ To process documents programmatically:
 
 ```python
 from pathlib import Path
-from miner_mineru.pipeline.extractor import extract_toc
-from miner_mineru.pipeline.md_fixer import fix_markdown
-from miner_mineru.providers.factory import build_client
+from docstruct.pipeline.extractor import extract_toc
+from docstruct.pipeline.md_fixer import fix_markdown
+from docstruct.providers.factory import build_client
 
 # Build client
 client = build_client()
@@ -275,5 +275,5 @@ For issues with the pipeline runner, check:
 ## See Also
 
 - [LLM Agent Implementation](../architecture/LLM_AGENT_IMPLEMENTATION.md)
-- [Markdown Fixer Documentation](../../miner_mineru/pipeline/md_fixer.py)
-- [TOC Extraction Pipeline](../../miner_mineru/pipeline/extractor.py)
+- [Markdown Fixer Documentation](../../docstruct/pipeline/md_fixer.py)
+- [TOC Extraction Pipeline](../../docstruct/pipeline/extractor.py)

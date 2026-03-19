@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from miner_mineru.pipeline.md_fixer import (
+from docstruct.pipeline.md_fixer import (
     TOCEntry,
     SourceLine,
     CorrectionEntry,
@@ -67,7 +67,7 @@ class TestHeadingReleveling:
         toc_entries = [toc_entry]
         matched_pairs = {2: toc_entry}
 
-        corrected, corrections = apply_all_corrections(source_lines, matched_pairs, toc_entries, client=None)
+        corrected, corrections = apply_all_corrections(source_lines, matched_pairs, toc_entries)
 
         # Line 2 should be re-leveled to ##
         assert corrected[1].raw_text == '## Art. 1 - Definitions'
@@ -98,7 +98,7 @@ class TestContentPreservation:
         ]
         matched_pairs = {}
 
-        corrected, _ = apply_all_corrections(source_lines, matched_pairs, [], client=None)
+        corrected, _ = apply_all_corrections(source_lines, matched_pairs, [])
 
         assert corrected[1].raw_text == 'This is a paragraph'
 
@@ -110,7 +110,7 @@ class TestContentPreservation:
         ]
         matched_pairs = {}
 
-        corrected, _ = apply_all_corrections(source_lines, matched_pairs, [], client=None)
+        corrected, _ = apply_all_corrections(source_lines, matched_pairs, [])
 
         assert corrected[1].raw_text == '<table><tr><td>Cell</td></tr></table>'
 
@@ -123,7 +123,7 @@ class TestContentPreservation:
         ]
         matched_pairs = {}
 
-        corrected, _ = apply_all_corrections(source_lines, matched_pairs, [], client=None)
+        corrected, _ = apply_all_corrections(source_lines, matched_pairs, [])
 
         assert corrected[1].raw_text == '1. First item'
         assert corrected[2].raw_text == '2. Second item'

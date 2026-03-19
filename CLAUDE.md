@@ -1,44 +1,54 @@
 ﻿# Miner-MinerU Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-03-06
-
 ## Active Technologies
-- Python 3.11+ (conda `agent` environment) + `json` (stdlib), `difflib` (stdlib for fuzzy matching), `os`/`pathlib` (stdlib) (002-fix-source-markdown)
-- File-based — reads source `.md` + output `.json`, writes corrected `.md` + report `.json` to `output/fixed/` (002-fix-source-markdown)
-
-- Python 3.11+ (conda `agent` environment) + Anthropic Claude API (for LLM-based classification), `json` stdlib (002-markdown-summary-extraction)
+- Python 3.11+ (conda `agent` environment)
+- Anthropic Claude API (LLM-based classification)
+- stdlib only: `json`, `difflib`, `os`, `pathlib`
 
 ## Project Structure
 
 ```text
-miner_mineru/              # Main Python package
-  agents/                  # One LLM agent per concern
-    boundary_agent.py      # Sliding-window TOC boundary detection
+docstruct/              # Unified Python package
+  agents/                  # One agent per concern
+    base.py                # BaseAgent ABC, AgentResult, AgentChain
+    boundary_agent.py      # TOC boundary detection
     classifier_agent.py    # TOC entry classification
     summary_agent.py       # Document summary generation
     metadata_agent.py      # Document metadata extraction
-  models/                  # Pure data models (no LLM calls)
+  models/                  # Pure data models
     document.py            # HeadingEntry, TOCBoundary, DocumentMetadata
     results.py             # ExtractionResult, LogEntry
+  config/                  # Unified configuration
+    __init__.py            # ProcessingConfig, AgentConfig
+  exceptions.py            # MinerUError hierarchy (17 exception classes)
   pipeline/                # Orchestration and utilities
     extractor.py           # extract_toc() — runs all agents in sequence
     reader.py              # File I/O and content slicing
     heading_map.py         # Nested tree builder
     rule_engine.py         # Rule-based heading classifier
-    md_fixer.py            # Markdown fixer: normalize heading levels using extracted TOC
+    md_fixer.py            # Markdown fixer: normalize headings using TOC
   providers/               # LLM backend abstraction
     factory.py             # build_client() — reads LLM_PROVIDER env var
     anthropic.py           # Anthropic Claude client
     azure.py               # Azure OpenAI wrapper
   cli/
-    main.py                # CLI entry point
-  __main__.py              # python -m miner_mineru
+    main.py                # CLI entry point (extract, fix subcommands)
+  __init__.py              # Public API
+  __main__.py              # python -m docstruct
+scripts/                   # Runner scripts
+  run_pipeline.py          # Full pipeline (extract + fix)
+  run_fixer.py             # Fix-only (requires pre-extracted TOC)
+  run_pipeline_all.py      # Batch: process all files in data/
 tests/
-  conftest.py              # Shared fixtures (notice_md_path, disco_md_path, bologna_md_path)
+  conftest.py              # Shared fixtures
+  fixtures/                # Test data (sample_source.md, sample_toc.json)
   golden/                  # Golden JSON fixtures for integration tests
-data/                      # Input documents (one subdir per document)
-output/                    # Agent JSON output (gitignored)
-.specify/                  # Feature specs (speckit workflow)
+docs/
+  architecture/            # Architecture and design docs
+  guides/                  # User guides and quick starts
+data/                      # Input documents
+output/                    # Pipeline output (gitignored)
+specs/                     # Feature specifications
 ```
 
 ## Commands
@@ -47,61 +57,43 @@ output/                    # Agent JSON output (gitignored)
 # Run tests (conda agent env, bypass anyio SSL issue)
 PYTHONNOUSERSITE=1 "/c/Users/ERO8OFO/.conda/envs/agent/python.exe" -m pytest -p no:anyio
 
-# Run CLI agent (extract TOC)
-python -m miner_mineru extract <markdown_file> --output <output.json>
+# Extract TOC from markdown
+python -m docstruct extract <markdown_file> --output <output.json>
 
 # Fix markdown heading levels using extracted TOC
-python -m miner_mineru fix <source.md> --toc <toc.json> --output-dir <output/fixed>
+python -m docstruct fix <source.md> --toc <toc.json> --output-dir <output/fixed>
+
+# Batch pipeline (all files in data/)
+python scripts/run_pipeline_all.py
 ```
 
 ## Code Style
 
-Python 3.11+ (conda `agent` environment): Follow standard conventions
+Python 3.11+: Follow standard conventions. No unnecessary abstractions.
 
 ## File Organization Rules
 
-**IMPORTANT**: Keep root directory clean. Follow these rules strictly:
+**IMPORTANT**: Keep root directory clean.
 
-### ✅ Files Allowed in Root
-- `README.md` - Main project documentation
-- `CLAUDE.md` - Development guidelines (this file)
-- `.gitignore` - Git configuration
-- `pyproject.toml` / `setup.py` - Package configuration
-- `.github/` - GitHub workflows
-
-### ❌ DO NOT Create in Root
-- Documentation files (`.md`, `.txt`) → Must go in `docs/` folder
-- Analysis reports → Must go in `docs/` or `output/`
-- Quick reference guides → Must go in `docs/`
-- Implementation guides → Must go in `docs/`
-- Feature plans → Must go in `.specify/` folder
+### Files Allowed in Root
+- `README.md`, `CLAUDE.md`, `.gitignore`, `requirements.txt`
+- `.env` / `.env.example` — environment configuration
+- `pyproject.toml` / `setup.py` — package configuration
 
 ### Where Things Go
 
 | Type | Location |
 |------|----------|
-| Feature specifications | `.specify/` |
+| Feature specifications | `specs/` |
 | Documentation | `docs/` |
+| Runner scripts | `scripts/` |
 | Test fixtures | `tests/fixtures/` |
 | Data files | `data/` |
 | Output/results | `output/` |
-| Code | `miner_mineru/` |
+| Code | `docstruct/` |
 | Tests | `tests/` |
 
-### Current Root Cleanup
-These files should be moved to `docs/`:
-- `BATCH_INFERENCE_QUICK_START.md` → `docs/`
-- `COST_OPTIMIZATION_SUMMARY.md` → `docs/`
-- `MATCHING_IMPROVEMENTS.md` → `docs/`
-- `NUMBERING_PRIORITY_MATCHING.md` → `docs/`
-- `SESSION_CHANGES_SUMMARY.md` → `docs/`
-- `STRATEGY_CHANGE_DEMOTING.md` → `docs/`
-- `JSON_DOCS.md` → `docs/INDEX.md` (or keep only if it's the main index)
-
-## Recent Changes
-- 002-fix-source-markdown: Added Python 3.11+ (conda `agent` environment) + `json` (stdlib), `difflib` (stdlib for fuzzy matching), `os`/`pathlib` (stdlib)
-
-- 002-markdown-summary-extraction: Added Python 3.11+ (conda `agent` environment) + Anthropic Claude API (for LLM-based classification), `json` stdlib
-
-<!-- MANUAL ADDITIONS START -->
-<!-- MANUAL ADDITIONS END -->
+### DO NOT Create in Root
+- Documentation files (`.md`, `.txt`) — use `docs/`
+- Runner scripts (`.py`, `.sh`, `.bat`) — use `scripts/`
+- Temporary/planning files — delete when done

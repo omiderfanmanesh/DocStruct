@@ -5,7 +5,7 @@ Refactored the markdown fixer from regex-based heading level inference to an int
 
 ## Key Changes
 
-### 1. New Agent Module: `miner_mineru/agents/heading_corrector_agent.py`
+### 1. New Agent Module: `docstruct/agents/heading_corrector_agent.py`
 **Purpose**: Encapsulates LLM-based heading level determination
 
 **Key Functions**:
@@ -21,7 +21,7 @@ Refactored the markdown fixer from regex-based heading level inference to an int
   - Handles JSON parsing errors gracefully
   - Returns None if confidence is too low or response cannot be parsed
 
-### 2. Modified Pipeline: `miner_mineru/pipeline/md_fixer.py`
+### 2. Modified Pipeline: `docstruct/pipeline/md_fixer.py`
 
 **Function Signature Changes**:
 ```python
@@ -43,7 +43,7 @@ Refactored the markdown fixer from regex-based heading level inference to an int
 3. Unmatched headings AFTER first TOC match → use LLM with document context
 4. If LLM returns valid decision → apply it, otherwise preserve as-is
 
-### 3. Updated CLI: `miner_mineru/cli/main.py`
+### 3. Updated CLI: `docstruct/cli/main.py`
 
 **Changes**:
 ```python
@@ -113,7 +113,7 @@ Discussion of Results
 
 **Building Client**:
 ```python
-from miner_mineru.providers.factory import build_client
+from docstruct.providers.factory import build_client
 
 client = build_client()  # Reads LLM_PROVIDER env var
 ```
@@ -173,9 +173,9 @@ All tests pass with the new implementation:
    - Could be optimized with batch requests in future
 
 ## Files Modified
-- `miner_mineru/agents/heading_corrector_agent.py` (NEW)
-- `miner_mineru/pipeline/md_fixer.py` (MODIFIED)
-- `miner_mineru/cli/main.py` (MODIFIED)
+- `docstruct/agents/heading_corrector_agent.py` (NEW)
+- `docstruct/pipeline/md_fixer.py` (MODIFIED)
+- `docstruct/cli/main.py` (MODIFIED)
 - `tests/test_md_fixer.py` (MODIFIED)
 
 ## Verification Commands
@@ -184,8 +184,8 @@ All tests pass with the new implementation:
 PYTHONNOUSERSITE=1 python -m pytest tests/test_md_fixer.py -v -p no:anyio
 
 # Test CLI help
-python -m miner_mineru fix --help
+python -m docstruct fix --help
 
 # Generate test prompt
-python -c "from miner_mineru.agents.heading_corrector_agent import build_heading_correction_prompt; print(build_heading_correction_prompt('Test', [], []))"
+python -c "from docstruct.agents.heading_corrector_agent import build_heading_correction_prompt; print(build_heading_correction_prompt('Test', [], []))"
 ```

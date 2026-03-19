@@ -22,9 +22,9 @@ from datetime import datetime
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from miner_mineru.pipeline.extractor import extract_toc
-from miner_mineru.pipeline.md_fixer import fix_markdown
-from miner_mineru.providers.factory import build_client
+from docstruct.pipeline.extractor import extract_toc
+from docstruct.pipeline.md_fixer import fix_markdown
+from docstruct.providers.factory import build_client
 
 # Setup logging
 logging.basicConfig(
@@ -40,8 +40,6 @@ def run_pipeline(
     skip_extract: bool = False,
     skip_fix: bool = False,
     client=None,
-    fix_client=None,
-    inference_client=None,
     single_file: str = None,
 ):
     """
@@ -52,11 +50,8 @@ def run_pipeline(
         output_dir: Output directory for TOC and fixed markdown
         skip_extract: Skip TOC extraction if True
         skip_fix: Skip markdown fixing if True
-        client: LLM client for TOC extraction (required)
-        fix_client: LLM client for markdown fixing (optional, can be None to skip LLM heading correction)
-        inference_client: Optional separate LLM client for heading inference only
-                         (if provided, overrides fix_client for inference tasks)
-        single_file: If provided, only process this specific file (absolute or relative path)
+        client: LLM client for TOC extraction (required unless skip_extract)
+        single_file: If provided, only process this specific file
     """
     # Find markdown files
     if single_file:
@@ -128,10 +123,7 @@ def run_pipeline(
                 continue
 
             try:
-                llm_status = " with LLM agent" if fix_client else " (without LLM)"
-                if inference_client:
-                    llm_status = " with separate LLM model for inference"
-                logger.info(f"  → Fixing markdown{llm_status}...")
+                logger.info(f"  → Fixing markdown...")
                 fixed_output_dir = output_dir / "fixed"
                 fixed_output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -139,12 +131,9 @@ def run_pipeline(
                     str(md_file),
                     str(toc_file),
                     str(fixed_output_dir),
-                    client=fix_client,
-                    inference_client=inference_client,
                 )
 
                 logger.info(f"  ✓ Markdown fixed")
-                # report is a CorrectionReport object, convert to dict
                 report_dict = report.to_dict() if hasattr(report, 'to_dict') else report
                 lines_changed = report_dict.get('lines_changed', 0)
                 logger.info(f"    Lines corrected: {lines_changed}")
@@ -208,7 +197,7 @@ def main():
     parser.add_argument(
         '--file',
         default=None,
-        help='Process a single markdown file (absolute or relative path). If not specified, processes all files in /data'
+        help='Process a single markdown file (absolute or relative path)'
     )
     parser.add_argument(
         '--skip-extract',
@@ -219,16 +208,6 @@ def main():
         '--skip-fix',
         action='store_true',
         help='Skip markdown fixing (only extract TOC)'
-    )
-    parser.add_argument(
-        '--no-llm',
-        action='store_true',
-        help='Skip LLM-based heading correction in markdown fixer'
-    )
-    parser.add_argument(
-        '--inference-model',
-        default=None,
-        help='Optional separate LLM model for heading inference only (if not provided, uses same model as extraction)'
     )
 
     args = parser.parse_args()
@@ -247,45 +226,18 @@ def main():
             logger.info("✓ LLM client ready for TOC extraction")
         except Exception as e:
             logger.error(f"Could not initialize LLM client: {e}")
-            logger.error("LLM client is required for TOC extraction")
             sys.exit(1)
     else:
         logger.info("Skipping TOC extraction (using existing JSON files)")
 
-    # Build optional separate inference client
-    inference_client = None
-    if args.inference_model and not args.no_llm:
-        try:
-            import os
-            original_model = os.getenv("LLM_MODEL")
-            try:
-                os.environ["LLM_MODEL"] = args.inference_model
-                logger.info(f"Building separate LLM client for heading inference: {args.inference_model}...")
-                inference_client = build_client()
-                logger.info(f"✓ Separate LLM client ready for heading inference")
-            finally:
-                if original_model:
-                    os.environ["LLM_MODEL"] = original_model
-                else:
-                    os.environ.pop("LLM_MODEL", None)
-        except Exception as e:
-            logger.error(f"Could not initialize separate inference client: {e}")
-            logger.warning("Falling back to main client for heading inference")
-
     # Run pipeline
     try:
-        # Client is always needed for TOC extraction
-        # For markdown fixing, use client only if --no-llm is not set
-        fix_client = None if args.no_llm else client
-
         run_pipeline(
             data_dir,
             output_dir,
             skip_extract=args.skip_extract,
             skip_fix=args.skip_fix,
             client=client,
-            fix_client=fix_client,
-            inference_client=inference_client,
             single_file=args.file,
         )
     except KeyboardInterrupt:
