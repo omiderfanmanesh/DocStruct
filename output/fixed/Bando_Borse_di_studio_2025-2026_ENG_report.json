@@ -1,0 +1,150 @@
+{
+  "source_file": "data\\Bando_Borse_di_studio_2025-2026_ENG.md",
+  "output_file": "output/fixed\\Bando_Borse_di_studio_2025-2026_ENG.md",
+  "total_lines": 841,
+  "lines_changed": 3,
+  "lines_demoted": 0,
+  "unmatched_toc_entries": [],
+  "corrections": [
+    {
+      "line_number": 7,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": null,
+      "match_method": "doc_title"
+    },
+    {
+      "line_number": 11,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Definitions",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 87,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Purpose of the call",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 94,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Categories of students who can apply for a Scholarship",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 140,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Deadlines and procedures for submitting applications",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 214,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Definition of student status",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 270,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Loans and amounts",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 401,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "I.S.E.E. and criteria for the evaluation of the financial situation",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 456,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Criteria for determining merit",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 524,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Ranking formation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 560,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Methods of payment of the scholarship",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 578,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Revocation/forfeiture of the scholarship and relative eligibility",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 602,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Supplements and benefits for international mobility",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 631,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Foreign students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 648,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Students with disabilities",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 703,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Part-time students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 783,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Declarations: corrections and verifications",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 800,
+      "old_level": 2,
+      "new_level": 2,
+      "matched_toc_title": "Head of the procedure",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 822,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Information references",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 831,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Regulatory references",
+      "match_method": "llm"
+    }
+  ]
+}

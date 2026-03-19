@@ -11,6 +11,8 @@ class HeadingEntry:
     kind: Literal["section", "article", "subarticle", "annex", "topic"]
     depth: int
     numbering: str | None = None
+    separator: str | None = None  # separator between numbering and title in document body
+    pattern: str | None = None  # canonical heading text to search in the body
     page: int | None = None
     confidence: float | None = None
     children: list[HeadingEntry] = field(default_factory=list)
@@ -21,6 +23,8 @@ class HeadingEntry:
             "kind": self.kind,
             "depth": self.depth,
             "numbering": self.numbering,
+            "separator": self.separator,
+            "pattern": self.pattern,
             "page": self.page,
             "confidence": self.confidence,
             "children": [c.to_dict() for c in self.children],
@@ -34,6 +38,8 @@ class HeadingEntry:
             kind=d["kind"],
             depth=d["depth"],
             numbering=d.get("numbering"),
+            separator=d.get("separator"),
+            pattern=d.get("pattern"),
             page=d.get("page"),
             confidence=d.get("confidence"),
             children=children,

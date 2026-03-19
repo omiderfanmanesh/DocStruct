@@ -24,7 +24,7 @@ def find_markdown_files(data_dir: str = "data") -> list:
     md_files = []
     for root, dirs, files in os.walk(data_path):
         for file in files:
-            if file.endswith('.md') and 'MinerU_markdown' in file:
+            if file.endswith('.md'):
                 md_files.append(os.path.join(root, file))
 
     return sorted(md_files)
@@ -117,13 +117,22 @@ def process_markdown_file(md_path: str) -> bool:
 
 
 def main():
-    """Main pipeline runner."""
+    """Main pipeline runner. Pass a file path as argument to process a single file."""
     print("\n" + "="*80)
     print("MinerU Pipeline Runner - Extract TOC & Fix Heading Levels")
     print("="*80)
 
-    # Find all markdown files
-    md_files = find_markdown_files("data")
+    # If a path is given as argument, process that file directly
+    if len(sys.argv) > 1:
+        target = sys.argv[1]
+        if os.path.isfile(target):
+            md_files = [target]
+        else:
+            print(f"ERROR: File not found: {target}")
+            sys.exit(1)
+    else:
+        # Find all markdown files in data/
+        md_files = find_markdown_files("data")
 
     if not md_files:
         print("No MinerU markdown files found in ./data directory")

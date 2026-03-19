@@ -1,0 +1,475 @@
+{
+  "toc": [
+    {
+      "title": "Definitions",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 1",
+      "separator": " - ",
+      "pattern": "Art. 1 - Definitions",
+      "page": 2,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Purpose of the call",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 2",
+      "separator": " - ",
+      "pattern": "Art. 2 - Purpose of the call",
+      "page": 3,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Categories of students who can apply for a Scholarship",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 3",
+      "separator": " - ",
+      "pattern": "Art. 3 - Categories of students who can apply for a Scholarship",
+      "page": 3,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Deadlines and procedures for submitting applications",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 4",
+      "separator": " - ",
+      "pattern": "Art. 4 - Deadlines and procedures for submitting applications",
+      "page": 4,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Definition of student status",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 5",
+      "separator": " - ",
+      "pattern": "Art. 5 - Definition of student status",
+      "page": 7,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Loans and amounts",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 6",
+      "separator": " - ",
+      "pattern": "Art. 6 - Loans and amounts",
+      "page": 8,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "I.S.E.E. and criteria for the evaluation of the financial situation",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 7",
+      "separator": " – ",
+      "pattern": "Art. 7 – I.S.E.E. and criteria for the evaluation of the financial situation",
+      "page": 12,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Criteria for determining merit",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 8",
+      "separator": " - ",
+      "pattern": "Art. 8 - Criteria for determining merit",
+      "page": 14,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Ranking formation",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 9",
+      "separator": " - ",
+      "pattern": "Art. 9 - Ranking formation",
+      "page": 16,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Methods of payment of the scholarship",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 10",
+      "separator": " - ",
+      "pattern": "Art. 10 - Methods of payment of the scholarship",
+      "page": 16,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Revocation/forfeiture of the scholarship and relative eligibility",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 11",
+      "separator": " - ",
+      "pattern": "Art. 11 - Revocation/forfeiture of the scholarship and relative eligibility",
+      "page": 17,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Supplements and benefits for international mobility",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 12",
+      "separator": " - ",
+      "pattern": "Art. 12 - Supplements and benefits for international mobility",
+      "page": 18,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Foreign students",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 13",
+      "separator": " - ",
+      "pattern": "Art. 13 - Foreign students",
+      "page": 18,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Students with disabilities",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 14",
+      "separator": " - ",
+      "pattern": "Art. 14 - Students with disabilities",
+      "page": 19,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Part-time students",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 15",
+      "separator": " - ",
+      "pattern": "Art. 15 - Part-time students",
+      "page": 20,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Declarations: corrections and verifications",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 16",
+      "separator": " - ",
+      "pattern": "Art. 16 - Declarations: corrections and verifications",
+      "page": 22,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Head of the procedure",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 17",
+      "separator": " - ",
+      "pattern": "Art. 17 - Head of the procedure",
+      "page": 23,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Information references",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 18",
+      "separator": " - ",
+      "pattern": "Art. 18 - Information references",
+      "page": 23,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Regulatory references",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 19",
+      "separator": " - ",
+      "pattern": "Art. 19 - Regulatory references",
+      "page": 24,
+      "confidence": 1.0,
+      "children": []
+    }
+  ],
+  "heading_map": [
+    {
+      "title": "Definitions",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 1",
+      "separator": " - ",
+      "pattern": "Art. 1 - Definitions",
+      "page": 2,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Purpose of the call",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 2",
+      "separator": " - ",
+      "pattern": "Art. 2 - Purpose of the call",
+      "page": 3,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Categories of students who can apply for a Scholarship",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 3",
+      "separator": " - ",
+      "pattern": "Art. 3 - Categories of students who can apply for a Scholarship",
+      "page": 3,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Deadlines and procedures for submitting applications",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 4",
+      "separator": " - ",
+      "pattern": "Art. 4 - Deadlines and procedures for submitting applications",
+      "page": 4,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Definition of student status",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 5",
+      "separator": " - ",
+      "pattern": "Art. 5 - Definition of student status",
+      "page": 7,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Loans and amounts",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 6",
+      "separator": " - ",
+      "pattern": "Art. 6 - Loans and amounts",
+      "page": 8,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "I.S.E.E. and criteria for the evaluation of the financial situation",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 7",
+      "separator": " – ",
+      "pattern": "Art. 7 – I.S.E.E. and criteria for the evaluation of the financial situation",
+      "page": 12,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Criteria for determining merit",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 8",
+      "separator": " - ",
+      "pattern": "Art. 8 - Criteria for determining merit",
+      "page": 14,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Ranking formation",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 9",
+      "separator": " - ",
+      "pattern": "Art. 9 - Ranking formation",
+      "page": 16,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Methods of payment of the scholarship",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 10",
+      "separator": " - ",
+      "pattern": "Art. 10 - Methods of payment of the scholarship",
+      "page": 16,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Revocation/forfeiture of the scholarship and relative eligibility",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 11",
+      "separator": " - ",
+      "pattern": "Art. 11 - Revocation/forfeiture of the scholarship and relative eligibility",
+      "page": 17,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Supplements and benefits for international mobility",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 12",
+      "separator": " - ",
+      "pattern": "Art. 12 - Supplements and benefits for international mobility",
+      "page": 18,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Foreign students",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 13",
+      "separator": " - ",
+      "pattern": "Art. 13 - Foreign students",
+      "page": 18,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Students with disabilities",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 14",
+      "separator": " - ",
+      "pattern": "Art. 14 - Students with disabilities",
+      "page": 19,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Part-time students",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 15",
+      "separator": " - ",
+      "pattern": "Art. 15 - Part-time students",
+      "page": 20,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Declarations: corrections and verifications",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 16",
+      "separator": " - ",
+      "pattern": "Art. 16 - Declarations: corrections and verifications",
+      "page": 22,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Head of the procedure",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 17",
+      "separator": " - ",
+      "pattern": "Art. 17 - Head of the procedure",
+      "page": 23,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Information references",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 18",
+      "separator": " - ",
+      "pattern": "Art. 18 - Information references",
+      "page": 23,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Regulatory references",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "Art. 19",
+      "separator": " - ",
+      "pattern": "Art. 19 - Regulatory references",
+      "page": 24,
+      "confidence": 1.0,
+      "children": []
+    }
+  ],
+  "summary": "This document is an official call for applications issued by an Italian educational authority for the assignment of scholarships related to the right to university education for the academic year 2025/2026. Its main purpose is to establish the rules, eligibility criteria, and procedures for awarding financial support to students based on their financial situation and academic merit. Key topics covered include definitions, eligible student categories, application deadlines and procedures, financial assessment criteria (I.S.E.E.), merit evaluation, ranking formation, payment methods, conditions for scholarship forfeiture, and provisions for international mobility and foreign students.",
+  "metadata": {
+    "title": "CALL FOR THE ASSIGNMENT OF SCHOLARSHIPS FOR THE RIGHT TO UNIVERSITY EDUCATION ACADEMIC YEAR 2025/2026",
+    "source": "explicit",
+    "year": "2025/2026",
+    "document_type": "Call for applications",
+    "organization": null
+  },
+  "toc_boundaries": {
+    "start_line": 8,
+    "end_line": 8,
+    "marker": "(agent-detected)"
+  },
+  "processing_log": [
+    {
+      "action": "read",
+      "detail": "Read 838 lines from data\\Bando_Borse_di_studio_2025-2026_ENG.md",
+      "line": null
+    },
+    {
+      "action": "detected",
+      "detail": "TOC marker '(agent-detected)' at line 8",
+      "line": 8
+    },
+    {
+      "action": "boundary",
+      "detail": "TOC spans lines 8–8",
+      "line": null
+    },
+    {
+      "action": "classified",
+      "detail": "LLM classified 19 TOC entries",
+      "line": null
+    },
+    {
+      "action": "mapped",
+      "detail": "Built heading tree with 19 root nodes",
+      "line": null
+    },
+    {
+      "action": "summarized",
+      "detail": "Generated document summary",
+      "line": null
+    },
+    {
+      "action": "metadata",
+      "detail": "Extracted metadata: title='CALL FOR THE ASSIGNMENT OF SCHOLARSHIPS FOR THE RIGHT TO UNIVERSITY EDUCATION ACADEMIC YEAR 2025/2026', source=explicit",
+      "line": null
+    }
+  ],
+  "extracted_at": "2026-03-19T16:50:27.264162Z"
+}

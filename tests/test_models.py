@@ -14,6 +14,7 @@ def test_heading_entry_round_trip():
         kind="article",
         depth=2,
         numbering="Art. 1",
+        pattern="Art. 1 - General principles",
         page=8,
         confidence=0.95,
     )

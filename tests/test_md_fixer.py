@@ -3,6 +3,7 @@
 import json
 import os
 import tempfile
+from unittest.mock import patch
 from pathlib import Path
 
 import pytest
@@ -287,6 +288,108 @@ class TestIntegration:
 
             report_path = os.path.join(output_dir, 'source_report.json')
             assert os.path.exists(report_path)
+
+    def test_fix_markdown_uses_llm_for_noisy_unmatched_heading(self):
+        """LLM fallback can recover a noisy body heading after exact TOC matching fails."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            source_path = os.path.join(tmpdir, 'source.md')
+            with open(source_path, 'w') as f:
+                f.write('# COVER\n')
+                f.write('Art. 1 - Definitions\n')
+                f.write('Art. 20 - Regulatory references University Statute\n')
+
+            toc_path = os.path.join(tmpdir, 'toc.json')
+            with open(toc_path, 'w') as f:
+                json.dump(
+                    {
+                        'toc': [
+                            {
+                                'title': 'Definitions',
+                                'kind': 'article',
+                                'depth': 2,
+                                'pattern': 'Art. 1 - Definitions',
+                            },
+                            {
+                                'title': 'Regulatory references',
+                                'kind': 'article',
+                                'depth': 2,
+                                'pattern': 'Art. 19 - Regulatory references',
+                            },
+                        ]
+                    },
+                    f,
+                )
+
+            output_dir = os.path.join(tmpdir, 'output')
+            os.makedirs(output_dir)
+
+            with patch('docstruct.providers.factory.build_client', return_value=object()):
+                with patch(
+                    'docstruct.pipeline.llm_heading_matcher.LLMHeadingMatcher.batch_match',
+                    return_value={3: (0, 'Art. 20 - Regulatory references', 'University Statute')},
+                ):
+                    report = fix_markdown(source_path, toc_path, output_dir, use_llm_matching=True)
+
+            corrected_path = os.path.join(output_dir, 'source.md')
+            with open(corrected_path, 'r') as f:
+                corrected_content = f.read()
+
+            assert '## Art. 1 - Definitions' in corrected_content
+            assert '## Art. 20 - Regulatory references' in corrected_content
+            assert 'University Statute' in corrected_content
+            assert report.unmatched_toc_entries == []
+            assert any(c.match_method == 'llm' for c in report.corrections)
+
+    def test_fix_markdown_keeps_trailing_body_text_out_of_headings_after_nested_split(self):
+        """Nested embedded matches should not promote trailing body text into a heading."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            source_path = os.path.join(tmpdir, 'source.md')
+            with open(source_path, 'w', encoding='utf-8') as f:
+                f.write(
+                    '#### ARTICLE 6 - AMOUNT OF THE SCHOLARSHIP. INCREASES AND DECREASES '
+                    '6.1 Amount of scholarship in relation to income '
+                    'The basic amount of the bursary is set at:\n'
+                )
+
+            toc_path = os.path.join(tmpdir, 'toc.json')
+            with open(toc_path, 'w', encoding='utf-8') as f:
+                json.dump(
+                    {
+                        'toc': [
+                            {
+                                'title': 'AMOUNT OF THE SCHOLARSHIP. INCREASES AND DECREASES',
+                                'kind': 'article',
+                                'depth': 2,
+                                'numbering': 'ARTICLE 6',
+                                'separator': ' - ',
+                                'pattern': 'ARTICLE 6 - AMOUNT OF THE SCHOLARSHIP. INCREASES AND DECREASES',
+                            },
+                            {
+                                'title': 'Amount of scholarship in relation to income',
+                                'kind': 'subarticle',
+                                'depth': 3,
+                                'numbering': '6.1',
+                                'separator': ' ',
+                                'pattern': '6.1 Amount of scholarship in relation to income',
+                            },
+                        ]
+                    },
+                    f,
+                )
+
+            output_dir = os.path.join(tmpdir, 'output')
+            os.makedirs(output_dir)
+
+            fix_markdown(source_path, toc_path, output_dir, use_llm_matching=False)
+
+            corrected_path = os.path.join(output_dir, 'source.md')
+            with open(corrected_path, 'r', encoding='utf-8') as f:
+                corrected_content = f.read()
+
+            assert '## ARTICLE 6 - AMOUNT OF THE SCHOLARSHIP. INCREASES AND DECREASES' in corrected_content
+            assert '### 6.1 Amount of scholarship in relation to income' in corrected_content
+            assert '\nThe basic amount of the bursary is set at:\n' in corrected_content
+            assert '## The basic amount of the bursary is set at:' not in corrected_content
 
 
 if __name__ == '__main__':
