@@ -1,0 +1,563 @@
+{
+  "source_file": "data\\Competition-Notice-a.y.-2025_2026.md",
+  "output_file": "output/fixed\\Competition-Notice-a.y.-2025_2026.md",
+  "total_lines": 1586,
+  "lines_changed": 79,
+  "lines_demoted": 1,
+  "unmatched_toc_entries": [],
+  "corrections": [
+    {
+      "line_number": 63,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Benefits of the Competition Notice",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 77,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Eligible students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 94,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Duration of the concession of the benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -94000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Scholarship",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 100,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Accommodation",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 107,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Scholarship for disabled students",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 120,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Accommodation for disabled students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 127,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Clarifications on the duration of the benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 136,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Definitions of the type of students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 142,
+      "old_level": 1,
+      "new_level": 4,
+      "matched_toc_title": "TABLE A",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 151,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Conventional year of first registration, provisions for changes of course or renunciation of studies",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 184,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Method for the submission of on-line applications for the assignment of benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 191,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Exceptions to the use of SPID/CIE (until new regulatory dispositions):",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 203,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "How to apply for benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 230,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Modifying the information in the application form",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 246,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Deadline dates for the online application for benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 290,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Students registered for the 1st year (1st and 2nd level) \u2010 Requirements for merit",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 338,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Requirements of merit for students of all courses enrolled for years after the first",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -338000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Students enrolled in current system courses",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 448,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Bonus credits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 473,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Seventh semester and first year of a master's degree \u2010 admission and merit requirements",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 509,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Last semester \u2013 Access and merit requirements",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 521,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Requirements of merit for students registered for doctorate and specialisation courses",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 527,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Economical requirements",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -527000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "University ISEE/Parified ISEE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 533,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ISEEU - ISEE University Attestation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 545,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ISEEUP - ISEE Parified University Certificate",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 555,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ISEEU or ISEEUP request",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 593,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Economical and income limitations \u2013 ISEEU \u2013 ISEEUP and ISPEU - ISPEUP",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 618,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Non-EU international students without a visa- access to the online application",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 627,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Students from particularly poor and developing countries",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 637,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Stateless and internationally protected students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 646,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Independent family unit",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -646000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Independent student",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 654,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Students who are married or in a de facto cohabitation regime (article 1 paragraph 36 law no. 76/2016) registered with the municipality of residence",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 662,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Separated or divorced student",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 666,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Cases in which the family unit consists of only one student",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 679,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Economic requirements for students enrolled in PhD courses and schools of specialisation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 683,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Supplements to the scholarship",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 716,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Scholarship Integration and Benefits Facilitation for Students with Disabilities (recognition of disability pursuant to Article 3 paragraph 1 of Law No. 104 of February 5, 1992, or with disability of 66% or more)",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 740,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "International mobility contributions for students taking part in mobility programmes",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 781,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Criteria for the assignment of scholarships",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 791,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Criteria for the formulation of scholarship ranking lists",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 819,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Amounts of the scholarship and related services",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -819000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Amounts",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 874,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Payment of the scholarship and provision of the services",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 929,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Clarifications on scholarships and services",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 960,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Accommodation service",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1058,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Criteria for the conferral of accommodation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -1058000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Reserves accommodation places",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1062,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Confirmation of subsequent years and first year master degree",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1072,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "New requests of subsequent years",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1087,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "New requests of first years",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1097,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Accommodation details",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1105,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Method for the assignment of accommodation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -1105000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Manifestation of Interest",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1123,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Accommodation check-in",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1134,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Leaving the accommodation before the summer break",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1140,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Revocation of benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1149,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Methods of payment for accommodation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1159,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Rental contribution",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1167,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "How to Apply",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1179,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Payment",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1192,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Results of the competition and publication of rankings",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1288,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Methods of payment of the scholarship",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1296,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Students enrolled at subsequent years",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1316,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Students enrolled at first years",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1335,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Students registered with specialisation courses and PhD course",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1339,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Grounds for non-admission, exclusion or revocation of benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -1339000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Grounds for non-admission",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1350,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Grounds for exclusion or revocation of benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1396,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Truthfulness checks on the produced declarations",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1406,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Reimbursement of the benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1413,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Reporting of a debt situation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1418,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Reporting obligations and modalities",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1426,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Provisions on privacy protection",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1441,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "Referral rule and safeguard clause",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1484,
+      "old_level": 1,
+      "new_level": 4,
+      "matched_toc_title": "For further information:",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1553,
+      "old_level": 1,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    }
+  ]
+}
