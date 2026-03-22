@@ -5,7 +5,6 @@ import datetime
 import sys
 
 from docstruct.agents.boundary_agent import BoundaryAgent
-from docstruct.agents.classifier_agent import ClassifierAgent
 from docstruct.agents.metadata_agent import MetadataAgent
 from docstruct.agents.summary_agent import SummaryAgent
 from docstruct.models.results import ExtractionResult, LogEntry
@@ -24,7 +23,7 @@ def extract_toc(file_path: str, client) -> ExtractionResult:
     lines = read_markdown_file(file_path)
     log.append(LogEntry(action="read", detail=f"Read {len(lines)} lines from {file_path}"))
 
-    boundary = BoundaryAgent(client).run(lines)
+    boundary, flat_entries = BoundaryAgent(client).run(lines)
     if boundary is None:
         raise ValueError(f"No TOC section found in {file_path}")
 
@@ -41,18 +40,14 @@ def extract_toc(file_path: str, client) -> ExtractionResult:
     toc_text = slice_toc_content(lines, boundary)
     pre_toc_text = extract_pre_toc_content(lines, boundary)
 
-    print(f"INFO: TOC marker found at line {boundary.start_line}: '{boundary.marker}'", file=sys.stderr)
-    print(f"INFO: TOC section spans lines {boundary.start_line}-{boundary.end_line}", file=sys.stderr)
-    print(f"INFO: Sending {boundary.end_line - boundary.start_line + 1} TOC lines to LLM for classification", file=sys.stderr)
-
-    flat_entries = ClassifierAgent(client).run(toc_text)
-    log.append(LogEntry(action="classified", detail=f"LLM classified {len(flat_entries)} TOC entries"))
+    log.append(LogEntry(action="classified", detail=f"LLM extracted {len(flat_entries)} TOC entries"))
 
     kinds: dict[str, int] = {}
     for e in flat_entries:
         kinds[e.kind] = kinds.get(e.kind, 0) + 1
-    kinds_str = ", ".join(f"{v} {k}s" for k, v in kinds.items())
-    print(f"INFO: Classified {len(flat_entries)} entries ({kinds_str})", file=sys.stderr)
+    toc_line_count = boundary.end_line - boundary.start_line + 1
+    kinds_str = ", ".join(f"{v} {k}" + ("s" if v != 1 else "") for k, v in kinds.items())
+    print(f"  TOC: lines {boundary.start_line}–{boundary.end_line} ({toc_line_count} lines), {len(flat_entries)} entries ({kinds_str}) — extracting metadata...", file=sys.stderr)
 
     heading_map = build_heading_map(flat_entries)
     log.append(LogEntry(action="mapped", detail=f"Built heading tree with {len(heading_map)} root nodes"))

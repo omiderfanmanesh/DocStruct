@@ -708,7 +708,7 @@ def fix_markdown(
     toc_json_path: str,
     output_dir: str,
     use_llm_matching: bool = True,
-    verbose: bool = True,
+    verbose: bool = False,
 ) -> CorrectionReport:
     """
     Fix markdown heading levels using extracted TOC patterns.

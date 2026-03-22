@@ -47,10 +47,16 @@ def main():
     if args.command == "fix":
         from docstruct.pipeline.md_fixer import fix_markdown
         try:
-            print(f"INFO: Fixing markdown: {args.markdown_file}", file=sys.stderr)
+            print(f"Fixing: {args.markdown_file}", file=sys.stderr)
             report = fix_markdown(args.markdown_file, args.toc, args.output_dir)
-            print(f"INFO: Lines changed: {report.lines_changed}, Lines demoted: {report.lines_demoted}", file=sys.stderr)
-            print(f"INFO: Output written to {args.output_dir}", file=sys.stderr)
+            unmatched = len(report.unmatched_toc_entries)
+            total_toc = report.lines_changed + report.lines_demoted + unmatched
+            print(
+                f"  Changed {report.lines_changed} headings, demoted {report.lines_demoted}"
+                + (f", {unmatched} TOC entries unmatched" if unmatched else ""),
+                file=sys.stderr,
+            )
+            print(f"  Output: {args.output_dir}", file=sys.stderr)
             print(json.dumps(report.to_dict(), indent=2, ensure_ascii=False))
             sys.exit(0)
         except FileNotFoundError as e:
@@ -72,7 +78,7 @@ def main():
         from docstruct.providers.factory import build_client
         client = build_client()
 
-        print(f"INFO: Reading file: {args.markdown_file}", file=sys.stderr)
+        print(f"Extracting: {args.markdown_file}", file=sys.stderr)
 
         try:
             from docstruct.pipeline.extractor import extract_toc
@@ -92,11 +98,10 @@ def main():
         if args.output:
             with open(args.output, "w", encoding="utf-8") as f:
                 f.write(output_json)
-            print(f"INFO: Output written to {args.output}", file=sys.stderr)
+            print(f"  Output: {args.output}", file=sys.stderr)
         else:
             print(output_json)
 
-        print("INFO: Extraction complete.", file=sys.stderr)
         sys.exit(0)
 
 

@@ -1,0 +1,2206 @@
+{
+  "source_file": "data\\Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1).md",
+  "output_file": "output/fixed\\Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1).md",
+  "total_lines": 5178,
+  "lines_changed": 306,
+  "lines_demoted": 73,
+  "unmatched_toc_entries": [
+    "SECTION II. GENERAL PROVISIONS",
+    "DEFINITIVERANKINGS",
+    "SPECIFIC PROVISIONS FOR DISABLED STUDENTS",
+    "SPECIFIC PROVISIONS FOR INTERNATIONAL STUDENTS",
+    "NON-EU OR EU INTERNATIONAL STUDENTS WITH PART OF THEIR FAMILY INDIFFERENT COUNTRIES (EU/NON-EU, NON-EU/ITALY AND EU/ITALY)",
+    "INTERNATIONAL STUDENTS ENROLLED IN A PHDCOURSE OR SPECIALISATION SCHOOL WHO MUST CALCULATE THE ISEE PARIFICATO",
+    "TION IX. SPECIFIC PROVISIONS FOR THE ACCOMMODATION SERVICE",
+    "\u201cA1\u201d",
+    "\u201cA2\u201d",
+    "\u201cD\u201d",
+    "\u201cE\u201d"
+  ],
+  "corrections": [
+    {
+      "line_number": 3,
+      "old_level": 2,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 5,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 9,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 58,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 97,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 101,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 105,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 111,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 120,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 132,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 138,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 144,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 148,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 154,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 162,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 170,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 177,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 181,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 185,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 189,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 193,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 197,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 201,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 205,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 209,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 213,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 217,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 229,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 237,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 247,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 251,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 261,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 269,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 279,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 289,
+      "old_level": 3,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 329,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 341,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "RECIPIENTS AND AMOUNTS",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 349,
+      "old_level": 6,
+      "new_level": 2,
+      "matched_toc_title": "COURSES AND UNIVERSITIES FOR WHICH BENEFITS ARE GRANTED",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 351,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "COURSES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 372,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "UNIVERSITIES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 378,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "COURSE LOCATIONS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 382,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "DISTRIBUTION OF SCHOLARSHIPS AND ACCOMMODATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 414,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "DURATION OF BENEFITS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 430,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "GROUNDS FOR INELIGIBILITY AND EXCLUSION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 436,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "GROUNDS FORINELIBIGILITY",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 468,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "GROUNDSFOR EXCLUSION",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 508,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "\u201cSTUDENT TYPE\u201d FOR SCHOLARSHIP PURPOSES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 532,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "SCHOLARSHIP AMOUNTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 556,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "STUDENTS ENROLLED FULL-TIME",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 566,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "RESIDENT STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 578,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "COMMUTER STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 598,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "NON-RESIDENT STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 658,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 719,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "ECONOMIC REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 723,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ECONOMIC REQUIREMENTS (ISEE UNIVERSITARIO, ISEE PARIFICATO, ISEE DOTTORATO E ISEE NUCLEO RISTRETTO)",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 756,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 778,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SUBMISSION OF ISEE UNIVERSITARIO OR CALCULATION OF ISEE PARIFICATO",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 805,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "INCOME ACCRUED IN THE 2023 TAX YEAR FOR ISEE CALCULATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 817,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SCHOLARSHIP AMOUNTS RECEIVED IN THE 2023 TAX YEAR FOR ISEE CALCULATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 823,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "HOUSEHOLD FOR ISEE PURPOSES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 849,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "\u201cINDEPENDENT STUDENT\u201d HOUSEHOLD",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 873,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CASES WITH A HOUSEHOLD COMPOSED OF JUST THE STUDENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 881,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "REGISTERED COHABITATION PURSUANT TO ART. 5 OF PRESIDENTIAL DECREE 223/89",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 897,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ECONOMIC REQUIREMENTS WITH SUBMISSION OF ISEE UNIVERSITARIO",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 911,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "NON-ACCEPTANCE OF THE ISEE CERTIFICATE BY EDISU PIEMONTE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 937,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "INPS DATA RECEIPT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 957,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ISEE CORRENTE (CURRENT ISEE)",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 971,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ISEE FOR PHD COURSES",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 983,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ECONOMIC REQUIREMENTS FOR CALCULATION OF ISEE PARIFICATO",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1031,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SPECIFICATIONS FOR STUDENTS WITH ITALIAN CITIZENSHIP WHO NEED TO CALCULATE THE ISEE PARIFICATO",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1033,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 1057,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "HOW TO SUBMIT AN APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1071,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ACCESS CREDENTIALS AND ONLINE PROCEDURE",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1085,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SPID AND CIE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1097,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "TEMPORARY ACCESS CODE 2025/26",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1156,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "RECEIPTS (CONFIRMATIONS)",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1180,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "IBAN",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1190,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "TRANSFER OF APPLICATIONS SUBMITTED TO OTHER BODIES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1210,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "CHANGES TO THE DATA INCLUDED INTHE APPLICATION",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1216,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CHANGES TO DATA AND REQUESTS AFTER SUBMISSION BUT BEFORE THE APPLICATION SUBMISSION DEADLINE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1250,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CHANGES TO DATA AND REQUESTS SENT ONLINE AFTER THE APPLICATION SUBMISSION DEADLINE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1254,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "COMPLAINTS AGAINST PROVISIONAL RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1276,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "COMPLAINTS AGAINST PROVISIONAL RANKINGS RELATING TO ECONOMIC DATA",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1316,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "WAIVER OF BENEFITS 2025/26",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1328,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "PAID ACCOMMODATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1330,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "NON-RESIDENT STUDENTS WHO MUST SUBMIT THE SELF-CERTIFICATION OF PAID ACCOMMODATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1352,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "FOREIGN/EXCHANGE STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1358,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "METHODS AND DEADLINES FOR SUBMITTING THE PAID ACCOMMODATION SELF-CERTIFICATION",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1422,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SPECIFIC PROVISIONS FOR STUDENTS OF COURSES WITH A \"FILTER SEMESTER\".  (CLASSES LM-41, LM-46, LM-42)",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1426,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 1442,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "SECTION III. SPECIFIC PROVISIONS FOR THE FIRST-YEAR STUDENTS",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1446,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "WHO CAN APPLY: ADMISSION REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1462,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "REQUIREMENTS FOR ADMISSION TO THE COMPETITION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1481,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "COURSE TRANSFERS AND TRANSFERS FROM OTHER UNIVERSITIES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1487,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "CREDIT RECOGNITION (SHORTENING OF CAREER, SINGLE COURSES, PREVIOUS CAREERS)",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1526,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "SPECIFIC PROVISIONS FORSTUDENTS OF COURSES WITH A\"FILTER SEMESTER\"  (CLASSES LM-41, LM-46, LM-42)",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1550,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1554,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "METHOD FOR SUBMITTING THE APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1566,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "DEADLINE FOR SUBMITTING THE APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1580,
+      "old_level": 6,
+      "new_level": 2,
+      "matched_toc_title": "SPECIFIC PROVISIONS FOR THE FIRST YEARS OF A MASTER\u2019S DEGREE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1590,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "APPLICATION CONVERSION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1598,
+      "old_level": 6,
+      "new_level": 2,
+      "matched_toc_title": "FAILURE TO ENROL BY 30 NOVEMBER 2025",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1624,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "RANKINGS AND COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1634,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CRITERIA FOR DRAWING UP THE RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1642,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "PROVISIONAL RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1662,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1668,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "FINAL ACCOMMODATION RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1688,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "FINAL SCHOLARSHIP RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1692,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "FIRST DEFINITIVE RANKINGS FOR STUDENTS IN FIRST YEAR OF BACHELOR\u2019S OR SINGLE-CYCLE MASTER\u2019S DEGREE WITH ENROLMENT BY 31 OCTOBER 2025",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1700,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "GENERAL DEFINITIVE RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1715,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "DEFINITIVE RANKINGS FOR STUDENTS SUSPENDED\u201d IN DECEMBER",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1735,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "DEFINITIVE RANKINGS FOR STUDENTS SUSPENDED IN DECEMBER FOR \"ENROLLMENT IN FILTER SEMESTER\" AT A PIEDMONT UNIVERSITY AND STUDENTS APPLYING AFTER FILTER SEMESTER",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1751,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "PUBLICATION DATES FOR RANKINGS AND DEADLINES FOR SUBMITTING COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1794,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "MERIT REQUIREMENTS, SCHOLARSHIP INCREASE FOR ENROLMENT IN SECOND COURSE, DISBURSEMENT PERIOD",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1798,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS FOR SECOND INSTALMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1837,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "20% INCREASE OF GRANT AMOUNT FOR SECOND-COURSE ENROLMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1849,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "MERIT SELF-CERTIFICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1863,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "SCHOLARSHIP DISBURSEMENT PERIODUPDATE",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1905,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "20% INCREASE FOR ENROLMENT IN A SECOND COURSE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1927,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS TO KEEP THE FIRST INSTALMENT ONLY",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1961,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS FOR MAINTAINING ELIGIBILITY",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1983,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ELIGIBLE ASSIGNEES OF A SPOT IN AN EDISU RESIDENCE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1995,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "DEFERRAL OF LAST 30 NOVEMBER 2026 DEADLINE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2001,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "PROVISIONS FOR SUCCESSFUL ASSIGNEES OF A SPOT IN AN EDISU RESIDENCE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2013,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CASES OF SUSPENSION OF PAYMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2019,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "VERIFICATION OF MERIT AND WITHDRAWAL OF BENEFIT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2023,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "REFUND OF REGIONAL TAX",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2048,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "FIRST-YEAR ACCOMMODATION SERVICE ACCEPTANCE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2058,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "SPECIFIC PROVISIONS FOR SUBSEQUENT YEARS",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 2062,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "WHO CAN APPLY: ADMISSION AND MERIT REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2072,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ADMISSION REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2078,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "STANDARD APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2086,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "CONFIRMATION OF MERIT BENEFITS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2109,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SPECIAL CASES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2121,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2148,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS FOR CONFIRMATION OF MERIT-BASED BENEFITS with FULL TIME ENROLMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2152,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS FOR STANDARD APPLICATION with FULL-TIME ENROLMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2164,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS FOR STANDARD APPLICATION with PART-TIME ENROLMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2168,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "BONUS CREDITS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2208,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "TRANSFERS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2244,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "CREDIT RECOGNITION (CAREER SHORTENING, SINGLE COURSES, PREVIOUS CAREERS)",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2296,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "PARTICIPANTS INFOREIGN STUDY/EXCHANGE PROJECTS ACADEMIC YEAR 2024/25",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 2310,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2312,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "METHOD FOR SUBMITTING THE APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2322,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "DEADLINE FOR SUBMITTING THE APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2330,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "APPLICATION CONVERSION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2345,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "RANKINGS AND COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2357,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CRITERIA FOR DRAWING UP THE RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2377,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "MERIT SCORE AND RANKING",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2387,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "PROVISIONAL RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2407,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2413,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "DEFINITIVERANKINGS",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 2433,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "PUBLICATION DATES FOR RANKINGS AND DEADLINES FOR SUBMITTING COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2449,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "20% INCREASE OF SCHOLARSHIP AMOUNT FOR SECOND-COURSE ENROLMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2461,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "SCHOLARSHIP DISBURSEMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2463,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "DISBURSEMENT PERIOD",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2500,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CASES OF SUSPENSION OF PAYMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2506,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "REFUND OF REGIONAL TAX",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2525,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "SUBSEQUENT-YEAR ACCOMMODATION SERVICE ACCEPTANCE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2535,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "DEGREE AWARD",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 2537,
+      "old_level": 1,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 2539,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "ADMISSION REQUIREMENTS AND AMOUNTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2541,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ADMISSION REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2551,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "AMOUNT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2555,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "APPLICATION SUBMISSION: METHODS AND DEADLINE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2559,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 2563,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "RESULTS AND COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2573,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "PROVISIONAL RESULTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2585,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2589,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "FINAL RESULTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2599,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "PUBLICATION DATES FOR RESULTS AND DEADLINES FOR SUBMITTING COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2606,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "PAYMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2624,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "CASES OF SUSPENSION OF PAYMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2634,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "PHDS AND SPECIALISATION SCHOOLS",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 2638,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "WHO CAN APPLY: ADMISSION, MERIT, AND FINANCIAL REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2650,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ADMISSION REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2654,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2660,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "FINANCIAL REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2689,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2691,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "METHOD FOR SUBMITTING THE APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2703,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "DEADLINES FOR SUBMITTING THE APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2707,
+      "old_level": 3,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 2717,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CHANGES TO DATA AND REQUESTS SENT ONLINE BY THE APPLICATION SUBMISSION DEADLINE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2721,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "RANKINGS AND COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2733,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "CRITERIA FOR DRAWING UP THE RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2739,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "PROVISIONAL RANKINGS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2749,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2755,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 2775,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "PUBLICATION DATES FOR RANKINGS AND DEADLINES FOR SUBMITTING COMPLAINTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2784,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "SELF-CERTIFICATION OF PAID ACCOMMODATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2788,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "SCHOLARSHIP DISBURSEMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2790,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "DISBURSEMENT PERIOD",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2808,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CASES OF SUSPENSION OF PAYMENT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2814,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "WITHDRAWAL OF BENEFITS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2818,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "PROVISIONS FOR NON-RESIDENT STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2834,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "SPECIFIC PROVISIONS FOR DISABLED STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2848,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "BENEFIT DURATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2862,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "FINANCIAL REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2866,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2868,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS FOR FIRST-YEAR STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2872,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "MERIT REQUIREMENTS FOR SUBSEQUENT-YEAR STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2895,
+      "old_level": 1,
+      "new_level": 4,
+      "matched_toc_title": "Merit requirements with full-time enrolment",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2901,
+      "old_level": 6,
+      "new_level": 4,
+      "matched_toc_title": "Merit requirements with part-time enrolment",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2905,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "BONUS CREDITS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2909,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CONFIRMATION OF MERIT BENEFITS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2917,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "SCHOLARSHIP AMOUNT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2931,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ACCOMMODATION SERVICE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2947,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "CONSULAR DOCUMENTATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2951,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "INTERNATIONAL STUDENTS WHO DON\u2019T HAVE TO SUBMIT CONSULAR DOCUMENTATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2961,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "INTERNATIONAL STUDENTS WHO HAVE TO SUBMIT CONSULAR DOCUMENTATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 2985,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CONSULAR DOCUMENTATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3032,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Translation and legalisation procedures",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3062,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "STUDENTS FROM PARTICULARLY POOR COUNTRIES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3072,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "STUDENTS HOLDING INTERNATIONAL PROTECTION AND STATELESS PERSONS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3118,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "INTERNATIONAL EU STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3124,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SPECIFICATIONS FOR CONSULAR DOCUMENTATION OF INTERNATIONAL EU STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3141,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3151,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "APPLICATION PROCEDURE FOR INTERNATIONAL STUDENTS (NON-EU OR EU) WITH CONSULAR DOCUMENTATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3169,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "INTERNATIONAL NON-EU STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3173,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "OBTAINING CREDENTIALS TO ACCESS THE ONLINE APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3185,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ONLINE APPLICATION SUBMISSION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3193,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SENDING CONSULAR DOCUMENTATION TO EDISU",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3225,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "DEADLINES FOR SENDING CONSULAR DOCUMENTATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3269,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "INTERNATIONAL EU STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3308,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ASSESSMENT AND POTENTIAL SUPPLEMENTING OF CONSULAR DOCUMENTATION OF NON-EU AND EU INTERNATIONAL STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3312,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ASSESSMENT OF CONSULAR DOCUMENTATION SENT TO EDISU",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3348,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SUPPLEMENTING CONSULAR DOCUMENTATION ASSESSED AS INVALID OR INCOMPLETE BY EDISU PIEMONTE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3385,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ADDRESSES FOR SENDING CONSULAR DOCUMENTATION AND ASSISTANCE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3399,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "CAREER SHORTENING",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3411,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "CHANGES TO DATA SENT VIA WEB",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3415,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "CHANGES TO THE APPLICATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3424,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "RENOUNCING BENEFITS 2025/26",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3428,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ACCEPTANCE OF ACCOMMODATION SERVICE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3434,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ASSIGNMENT OF ACCOMMODATION SERVICE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3438,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "NON-RESIDENT STATUS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3448,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "VERIFICATION OF MERIT AND WITHDRAWAL OF BENEFIT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3460,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "COMPETITION ACCOMMODATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3488,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SPECIFIC PROVISIONS FORSTUDENTS ENROLLED IN THE FILTER SEMESTER ASSIGNED TO ACCOMMODATION SERVICE",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 3492,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "ACCEPTANCE OF THE ACCOMMODATION SERVICE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3516,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "WINNERS: ONLINEACCEPTANCE",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 3547,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ELIGIBLE: EXPRESSION OF INTEREST",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3603,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ELIGIBLE: SINGLESCROLLING RANKINGS",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 3617,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "STUDENTS ACCEPTING ACCOMMODATION ALLOCATED BY SCROLLING RANKING",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3631,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "STUDENTS REFUSING ACCOMMODATION ALLOCATED BY SCROLLING RANKING",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3645,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "FOREIGN STUDY/EXCHANGE STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3649,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "Erasmus Month Option",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3683,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Erasmus Year Option",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3689,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "GUESTS OF THE RENATO EINAUDI COLLEGE: RENATO EINAUDI OPTION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3699,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "ALLOCATION OF ACCOMMODATION AT EDISU RESIDENCES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3703,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ALLOCATION CRITERIA",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3743,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ROOM TYPE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3749,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "TRANSFERS FOR HEALTH OR PERSONAL SAFETY REASONS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3753,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "MOBILITY BETWEEN DIFFERENT RESIDENCES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3759,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ALLOCATION PROCEDURE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3769,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "RULES FOR ASSIGNEES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3792,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ALLOCATION PERIODS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3800,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "SUMMER CLOSURE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3807,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "SPECIAL CASES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3811,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ADDITIONAL SEMESTERS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3824,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "STUDENTS WITH \u201cSUSPENDED\u201d OUTCOME IN THE DEFINITIVE SCHOLARSHIP RANKING OF 16 DECEMBER 2025",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3840,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "STUDENTS WHO MUST LEAVE THEIR RESIDENCE FOR SERIOUS REASONS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3844,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "STUDENTS GRADUATING IN JULY AND WINNERS OF THIRD YEAR OF COURSE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3848,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "REVOCATION OF ACCOMMODATION SERVICE DUE TO RENUNCIATION OR LOSS OF REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3850,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "REVOCATION FORWAIVER OF ACCOMMODATION SERVICE 2025/26",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 3856,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "WITHDRAWAL OF THE ACCOMMODATION SERVICE DUE TO LOSS OF REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3926,
+      "old_level": 1,
+      "new_level": 1,
+      "matched_toc_title": "FINAL PROVISIONS",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 3934,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "POLICY PURSUANT TO ARTICLES 12, 13 AND 14 OF REGULATION (EU) NO. 679 OF 27 APRIL 2016 OF THE EUROPEAN PARLIAMENT AND OF THE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 3938,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3942,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3946,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3966,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3970,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3976,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3980,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3984,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3988,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3992,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 3996,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4014,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "CHECKING THE VERACITY OF SELF-CERTIFIED FINANCIAL CONDITIONS AND SANCTIONS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4016,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "CHECKING FINANCIAL CONDITIONS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4026,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "SANCTIONS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4032,
+      "old_level": 5,
+      "new_level": 2,
+      "matched_toc_title": "WITHDRAWAL OF THE SCHOLARSHIP AND ACCOMMODATION SERVICE FOLLOWING MERIT CHECK, WITHDRAWAL AND LOSS OF ELIGIBILITY",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4034,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ENROLMENT AND MERIT CHECK",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4042,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "BENEFIT WITHDRAWAL",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4048,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "FIRST YEARS LACK OF MERIT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4052,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "FIRST YEARS AND SUBSEQUENT YEARS LOSS OF ELIGIBILITY",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4058,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "REPAYMENT OF BENEFITS: METHODS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4074,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "STUDENT CAREER BLOCKS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4078,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "COMMUNICATION TO THE UNIVERSITY",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4082,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "ENTRY IN TAXPAYERS\u2019 LIST",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4086,
+      "old_level": 6,
+      "new_level": 3,
+      "matched_toc_title": "WITHDRAWAL OF ADDITIONAL SERVICES AND BENEFITS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4136,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4140,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4330,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "COUNCIL ON THE PROTECTION OF INDIVIDUALS WITH REGARD TO PERSONAL DATA PROCESSING AND THE FREE MOVEMENT OF SUCH DATA",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 4351,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4450,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4521,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4566,
+      "old_level": 6,
+      "new_level": 1,
+      "matched_toc_title": "\u201cB\u201d",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4568,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4596,
+      "old_level": 6,
+      "new_level": 1,
+      "matched_toc_title": "\u201cC\u201d",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 4600,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4809,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4908,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 4979,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 5028,
+      "old_level": 6,
+      "new_level": 1,
+      "matched_toc_title": "\u201cC1\u201d",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 5030,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 5092,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 5096,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 5116,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 5131,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 5139,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 5150,
+      "old_level": 6,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    }
+  ]
+}

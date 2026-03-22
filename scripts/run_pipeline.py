@@ -31,23 +31,14 @@ def find_markdown_files(data_dir: str = "data") -> list:
 
 
 def run_command(cmd: list, description: str) -> bool:
-    """Run a shell command and report status."""
+    """Run a shell command, streaming stderr live; return True on success."""
     print(f"\n  > {description}")
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, errors='replace')
+        # stdout → PIPE (captured but unused); stderr → None (streams to terminal live)
+        result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=None, text=True, errors='replace')
         if result.returncode != 0:
-            print(f"    ERROR: Command failed")
-            if result.stderr:
-                print(f"    {result.stderr[:200]}")
+            print(f"    ERROR: Command failed (exit {result.returncode})")
             return False
-        if result.stdout:
-            # Extract key info from stdout
-            for line in result.stdout.split('\n'):
-                if 'INFO:' in line or 'Lines changed' in line:
-                    try:
-                        print(f"    {line.strip()}")
-                    except UnicodeEncodeError:
-                        print(f"    (Output contains Unicode, check file directly)")
         return True
     except Exception as e:
         print(f"    ERROR: {e}")
