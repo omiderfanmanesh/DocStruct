@@ -20,6 +20,21 @@ python -m docstruct index output/02_fixed_markdown --output-dir output/03_pagein
 python -m docstruct ask "What are the application deadlines?" --index-dir output/03_pageindex
 ```
 
+## Docker
+
+The repo now includes a `Dockerfile` and `compose.yaml` so you can run the CLI without a local Python setup.
+Create `.env` from `.env.example`, then run:
+
+```bash
+docker compose build
+docker compose run --rm docstruct extract data/document.md --output output/01_toc/document.json
+docker compose run --rm docstruct fix data/document.md --toc output/01_toc/document.json --output-dir output/02_fixed_markdown --report-dir output/02_fix_reports
+docker compose run --rm docstruct index output/02_fixed_markdown --output-dir output/03_pageindex --toc-dir output/01_toc
+docker compose run --rm docstruct ask "What are the application deadlines?" --index-dir output/03_pageindex
+```
+
+`docker compose` mounts the local `data/` and `output/` folders into the container, so inputs and generated artifacts stay in the repo on your machine.
+
 ## Project Layout
 
 ```text
@@ -59,6 +74,8 @@ python tools/smoke_test.py data/document.md
 Supported provider variables:
 
 - `ANTHROPIC_API_KEY`
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL`
 - `AZURE_OPENAI_API_KEY`
 - `AZURE_OPENAI_ENDPOINT`
 - `AZURE_OPENAI_DEPLOYMENT`
@@ -69,6 +86,8 @@ DocStruct-specific settings use the `DOCSTRUCT_` prefix, for example:
 - `DOCSTRUCT_MIN_CONFIDENCE`
 - `DOCSTRUCT_BATCH_SIZE`
 - `DOCSTRUCT_AGENT_MODEL`
+
+If you use `LLM_PROVIDER=openai`, DocStruct will default the agent model from `OPENAI_MODEL` and fall back to `gpt-4.1-mini` when `DOCSTRUCT_AGENT_MODEL` is not set.
 
 ## PageIndex Workflow
 
@@ -86,7 +105,7 @@ It also performs a HyPE-style retrieval rewrite before document selection: the a
 
 Each indexed document now includes a compact `search_profile` used for low-token document ranking. The profile favors issuer, region, academic year, covered institutions, covered cities, and benefit types over long descriptive summaries.
 
-For best reasoning quality, point `AZURE_OPENAI_DEPLOYMENT` or your Anthropic model setting at the strongest chat/reasoning deployment available in your environment rather than a mini-tier default.
+For best reasoning quality, point `AZURE_OPENAI_DEPLOYMENT`, `OPENAI_MODEL`, or your Anthropic model setting at the strongest chat/reasoning model available in your environment rather than a mini-tier default.
 
 ## Output Layout
 

@@ -6,6 +6,23 @@ from dataclasses import dataclass
 import os
 
 
+def _getenv_nonempty(name: str) -> str | None:
+    value = os.getenv(name)
+    if value is None:
+        return None
+    stripped = value.strip()
+    return stripped or None
+
+
+def _default_agent_model(provider: str) -> str:
+    normalized = provider.lower().strip()
+    if normalized == "azure":
+        return os.getenv("AZURE_OPENAI_DEPLOYMENT", "gpt-4.1-mini")
+    if normalized == "openai":
+        return os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+    return "claude-haiku-4-5-20251001"
+
+
 @dataclass
 class ProcessingConfig:
     min_confidence: float = 0.75
@@ -46,16 +63,21 @@ class AgentConfig:
 
     def __post_init__(self) -> None:
         if not self.api_key:
-            self.api_key = os.getenv("ANTHROPIC_API_KEY") or os.getenv("AZURE_OPENAI_API_KEY")
+            self.api_key = (
+                _getenv_nonempty("ANTHROPIC_API_KEY")
+                or _getenv_nonempty("AZURE_OPENAI_API_KEY")
+                or _getenv_nonempty("OPENAI_API_KEY")
+            )
 
     @classmethod
     def from_env(cls) -> "AgentConfig":
+        provider = _getenv_nonempty("DOCSTRUCT_AGENT_PROVIDER") or os.getenv("LLM_PROVIDER", "anthropic")
         return cls(
-            model=os.getenv("DOCSTRUCT_AGENT_MODEL", "claude-haiku-4-5-20251001"),
+            model=_getenv_nonempty("DOCSTRUCT_AGENT_MODEL") or _default_agent_model(provider),
             max_tokens=int(os.getenv("DOCSTRUCT_AGENT_MAX_TOKENS", "4096")),
             temperature=float(os.getenv("DOCSTRUCT_AGENT_TEMPERATURE", "0.0")),
             timeout=int(os.getenv("DOCSTRUCT_AGENT_TIMEOUT", "30")),
             retry_count=int(os.getenv("DOCSTRUCT_AGENT_RETRY_COUNT", "3")),
             retry_delay=int(os.getenv("DOCSTRUCT_AGENT_RETRY_DELAY", "1")),
-            provider=os.getenv("DOCSTRUCT_AGENT_PROVIDER", "anthropic"),
+            provider=provider,
         )
