@@ -664,3 +664,58 @@ def test_answer_question_searches_multiple_documents_for_comparison_intent(tmp_p
     assert result.needs_clarification is False
     assert result.document_ids == ["venice", "piemonte"]
     assert "Venice: October 31" in result.answer
+
+
+def test_answer_question_falls_back_when_langgraph_is_unavailable(tmp_path):
+    payload = {
+        "document_id": "notice",
+        "title": "Scholarship Notice",
+        "source_path": "output/fixed/notice.md",
+        "summary": "Contains application deadlines and eligibility.",
+        "metadata": {
+            "title": "Scholarship Notice",
+            "source": "explicit",
+            "year": "2025/26",
+            "document_type": "Notice",
+            "organization": "EDISU",
+        },
+        "doc_description": None,
+        "structure": [
+            {
+                "title": "Deadlines",
+                "node_id": "0001",
+                "line_num": 18,
+                "text": "Applications close on April 1.",
+                "nodes": [],
+            }
+        ],
+    }
+    path = tmp_path / "notice.pageindex.json"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+
+    client = MagicMock()
+    client.create_message.side_effect = [
+        json.dumps(
+            {
+                "rewritten_question": "When is the application deadline?",
+                "reasoning": "The original question is already specific enough for retrieval.",
+                "inferred_document_ids": ["notice"],
+            }
+        ),
+        json.dumps({"thinking": "The Deadlines node is directly relevant.", "node_ids": ["0001"]}),
+        json.dumps(
+            {
+                "answer": "The application deadline is April 1.",
+                "citations": [],
+                "clarification_needed": False,
+                "clarifying_question": None,
+            }
+        ),
+    ]
+
+    with patch("docstruct.application.pageindex_workflow.PageIndexSearchGraphRunner", None):
+        result = answer_question("When is the application deadline?", str(tmp_path), client)
+
+    assert result.answer == "The application deadline is April 1."
+    assert result.document_ids == ["notice"]
+    assert any(step.stage == "workflow_runtime" for step in result.trace)

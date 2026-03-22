@@ -2,6 +2,8 @@
 
 TOC extraction and markdown-fixing pipeline for structured document markdown.
 
+The LLM backend uses LangChain chat-model adapters, and the multi-step PageIndex QA flow is orchestrated with LangGraph.
+
 ## Quick Start
 
 ```bash

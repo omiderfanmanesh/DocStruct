@@ -5,6 +5,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+try:
+    from docstruct.application.pageindex_search_graph import PageIndexSearchGraphRunner
+except ImportError:  # pragma: no cover
+    PageIndexSearchGraphRunner = None
+
 from docstruct.application.agents.pageindex_search_agent import PageIndexSearchAgent
 from docstruct.application.ports import LLMPort
 from docstruct.domain.models import DocumentMetadata, SearchAnswer, SearchDocumentIndex, SearchTraceStep
@@ -107,24 +112,6 @@ def load_search_indexes(index_dir: str) -> list[SearchDocumentIndex]:
     ]
 
 
-def _promote_documents(
-    documents: list[SearchDocumentIndex],
-    preferred_ids: list[str],
-    *,
-    limit: int,
-) -> list[SearchDocumentIndex]:
-    by_id = {document.document_id: document for document in documents}
-    ordered: list[SearchDocumentIndex] = []
-    for document_id in preferred_ids:
-        document = by_id.get(document_id)
-        if document is not None and document not in ordered:
-            ordered.append(document)
-    for document in documents:
-        if document not in ordered:
-            ordered.append(document)
-    return ordered[:limit]
-
-
 def _trace_value(value: object) -> object:
     if isinstance(value, Path):
         return str(value)
@@ -152,68 +139,37 @@ def _summarize_documents(documents: list[SearchDocumentIndex], *, limit: int = 4
     return summary
 
 
-def answer_question(
+def _promote_documents(
+    documents: list[SearchDocumentIndex],
+    preferred_ids: list[str],
+    *,
+    limit: int,
+) -> list[SearchDocumentIndex]:
+    by_id = {document.document_id: document for document in documents}
+    ordered: list[SearchDocumentIndex] = []
+    for document_id in preferred_ids:
+        document = by_id.get(document_id)
+        if document is not None and document not in ordered:
+            ordered.append(document)
+    for document in documents:
+        if document not in ordered:
+            ordered.append(document)
+    return ordered[:limit]
+
+
+def _answer_question_without_langgraph(
     question: str,
-    index_dir: str,
+    indexes: list[SearchDocumentIndex],
     client: LLMPort,
+    *,
+    multi_document_intent: bool,
+    trace: list[SearchTraceStep],
+    add_trace,
 ) -> SearchAnswer:
-    indexes = load_search_indexes(index_dir)
-    if not indexes:
-        raise ValueError(f"No PageIndex search indexes found in {index_dir}")
-
-    trace: list[SearchTraceStep] = []
-
-    def add_trace(stage: str, message: str, **details: object) -> None:
-        trace.append(
-            SearchTraceStep(
-                stage=stage,
-                message=message,
-                details={key: _trace_value(value) for key, value in details.items()},
-            )
-        )
-
     add_trace(
-        "load_indexes",
-        "Loaded search indexes.",
-        index_dir=index_dir,
-        count=len(indexes),
-        documents=_summarize_documents(indexes),
+        "workflow_runtime",
+        "LangGraph is not installed in this environment, so the workflow is using the built-in sequential fallback.",
     )
-
-    multi_document_intent = question_requests_multi_document_answer(question)
-    add_trace(
-        "intent_detection",
-        "Detected user intent for document scope.",
-        multi_document_intent=multi_document_intent,
-    )
-
-    initial_candidates = choose_candidate_documents(question, indexes, limit=6)
-    add_trace(
-        "initial_ranking",
-        "Ranked initial candidate documents from the original question.",
-        question=question,
-        candidates=_summarize_documents(initial_candidates, limit=6),
-    )
-    ambiguous_candidates = find_ambiguous_candidate_documents(question, initial_candidates)
-    if ambiguous_candidates and not question_has_scope_or_detail_hint(question):
-        clarification = build_scope_clarification(question, ambiguous_candidates)
-        if clarification:
-            add_trace(
-                "clarification_gate",
-                "Stopped early because the question is too generic across multiple document scopes.",
-                ambiguous_candidates=_summarize_documents(ambiguous_candidates),
-                clarifying_question=clarification,
-            )
-            return SearchAnswer(
-                question=question,
-                answer=clarification,
-                document_ids=[],
-                retrieval_notes="Question is generic and matches multiple document scopes.",
-                needs_clarification=True,
-                clarifying_question=clarification,
-                trace=trace,
-            )
-
     agent = PageIndexSearchAgent(client)
     effective_question = question
     rewrite_note = None
@@ -289,7 +245,6 @@ def answer_question(
 
     selected_document_ids = selection.document_ids if selection else []
     selection_notes = selection.thinking if selection else None
-
     document_map = {document.document_id: document for document in candidate_documents}
     selected_documents = [
         document_map[document_id]
@@ -321,8 +276,7 @@ def answer_question(
                 clarifying_question=heuristic_clarification,
                 trace=trace,
             )
-        if not selected_documents:
-            selected_documents = candidate_documents[: min(3, len(candidate_documents))]
+        selected_documents = candidate_documents[: min(3, len(candidate_documents))]
     add_trace(
         "selected_documents",
         "Prepared the final document set for node retrieval.",
@@ -405,16 +359,6 @@ def answer_question(
         answer.trace = trace
         return answer
     except Exception:
-        if post_selection_clarification:
-            return SearchAnswer(
-                question=question,
-                answer=post_selection_clarification,
-                document_ids=[document.document_id for document in selected_documents],
-                retrieval_notes=retrieval_note_text,
-                needs_clarification=True,
-                clarifying_question=post_selection_clarification,
-                trace=trace,
-            )
         fallback_answer = " ".join(context["text"] for context in contexts[:2] if context.get("text")).strip()
         if not fallback_answer:
             fallback_answer = "I found relevant document nodes, but I could not synthesize a grounded answer."
@@ -430,3 +374,88 @@ def answer_question(
             retrieval_notes=retrieval_note_text,
             trace=trace,
         )
+
+
+def answer_question(
+    question: str,
+    index_dir: str,
+    client: LLMPort,
+) -> SearchAnswer:
+    indexes = load_search_indexes(index_dir)
+    if not indexes:
+        raise ValueError(f"No PageIndex search indexes found in {index_dir}")
+
+    trace: list[SearchTraceStep] = []
+
+    def add_trace(stage: str, message: str, **details: object) -> None:
+        trace.append(
+            SearchTraceStep(
+                stage=stage,
+                message=message,
+                details={key: _trace_value(value) for key, value in details.items()},
+            )
+        )
+
+    add_trace(
+        "load_indexes",
+        "Loaded search indexes.",
+        index_dir=index_dir,
+        count=len(indexes),
+        documents=_summarize_documents(indexes),
+    )
+
+    multi_document_intent = question_requests_multi_document_answer(question)
+    add_trace(
+        "intent_detection",
+        "Detected user intent for document scope.",
+        multi_document_intent=multi_document_intent,
+    )
+
+    initial_candidates = choose_candidate_documents(question, indexes, limit=6)
+    add_trace(
+        "initial_ranking",
+        "Ranked initial candidate documents from the original question.",
+        question=question,
+        candidates=_summarize_documents(initial_candidates, limit=6),
+    )
+    ambiguous_candidates = find_ambiguous_candidate_documents(question, initial_candidates)
+    if ambiguous_candidates and not question_has_scope_or_detail_hint(question):
+        clarification = build_scope_clarification(question, ambiguous_candidates)
+        if clarification:
+            add_trace(
+                "clarification_gate",
+                "Stopped early because the question is too generic across multiple document scopes.",
+                ambiguous_candidates=_summarize_documents(ambiguous_candidates),
+                clarifying_question=clarification,
+            )
+            return SearchAnswer(
+                question=question,
+                answer=clarification,
+                document_ids=[],
+                retrieval_notes="Question is generic and matches multiple document scopes.",
+                needs_clarification=True,
+                clarifying_question=clarification,
+                trace=trace,
+            )
+
+    if PageIndexSearchGraphRunner is None:
+        return _answer_question_without_langgraph(
+            question,
+            indexes,
+            client,
+            multi_document_intent=multi_document_intent,
+            trace=trace,
+            add_trace=add_trace,
+        )
+
+    result = PageIndexSearchGraphRunner(
+        client,
+        add_trace=add_trace,
+        summarize_documents=_summarize_documents,
+    ).run(
+        question=question,
+        indexes=indexes,
+        multi_document_intent=multi_document_intent,
+    )
+    result.trace = trace
+    return result

@@ -2,20 +2,33 @@
 
 from __future__ import annotations
 
-import json
-import re
+from typing import Optional
+
+from pydantic import BaseModel
 
 from docstruct.application.ports import LLMPort
+from docstruct.config import AgentConfig
 from docstruct.domain.models import DocumentMetadata
+from docstruct.infrastructure.llm.structured_output import invoke_structured
+
+
+class _MetadataPayload(BaseModel):
+    title: Optional[str] = None
+    source: Optional[str] = None
+    year: Optional[str] = None
+    document_type: Optional[str] = None
+    organization: Optional[str] = None
 
 
 class MetadataAgent:
     def __init__(self, client: LLMPort):
         self._client = client
+        self._model = AgentConfig.from_env().model
 
     def run(self, pre_toc_text: str) -> DocumentMetadata:
-        raw = self._client.create_message(
-            model="claude-haiku-4-5-20251001",
+        payload = invoke_structured(
+            self._client,
+            model=self._model,
             max_tokens=256,
             messages=[
                 {
@@ -31,16 +44,13 @@ class MetadataAgent:
                     ),
                 }
             ],
-        ).strip()
-        if raw.startswith("```"):
-            raw = re.sub(r"^```[a-z]*\n?", "", raw)
-            raw = re.sub(r"\n?```$", "", raw)
-        data = json.loads(raw)
-        title = (data.get("title") or "").strip() or "Unknown"
-        source = (data.get("source") or "").strip() or "inferred"
-        year = (data.get("year") or "").strip() or None
-        document_type = (data.get("document_type") or "").strip() or None
-        organization = (data.get("organization") or "").strip() or None
+            schema=_MetadataPayload,
+        )
+        title = (payload.title or "").strip() or "Unknown"
+        source = (payload.source or "").strip() or "inferred"
+        year = (payload.year or "").strip() or None
+        document_type = (payload.document_type or "").strip() or None
+        organization = (payload.organization or "").strip() or None
         return DocumentMetadata(
             title=title,
             source=source,

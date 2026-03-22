@@ -3,28 +3,24 @@
 from __future__ import annotations
 
 try:
-    import anthropic
+    from langchain_anthropic import ChatAnthropic
 except ImportError:  # pragma: no cover
-    anthropic = None
+    ChatAnthropic = None
+
+from docstruct.infrastructure.llm.langchain_adapter import LangChainChatAdapter
 
 
-class AnthropicAdapter:
+class AnthropicAdapter(LangChainChatAdapter):
     def __init__(self, api_key: str):
-        if anthropic is None:
-            raise ImportError("anthropic package not installed")
-        self._client = anthropic.Anthropic(api_key=api_key)
+        if ChatAnthropic is None:
+            raise ImportError("langchain-anthropic package not installed")
+        self._api_key = api_key
 
-    def create_message(
-        self,
-        *,
-        model: str,
-        max_tokens: int,
-        messages: list[dict],
-    ) -> str:
-        response = self._client.messages.create(
+    def _build_model(self, *, model: str, max_tokens: int):
+        return ChatAnthropic(
             model=model,
+            anthropic_api_key=self._api_key,
             max_tokens=max_tokens,
-            messages=messages,
+            temperature=0,
         )
-        return response.content[0].text
 

@@ -1,0 +1,222 @@
+{
+  "question": "What are the application deadlines in Piemonte / Torino?",
+  "answer": "For the academic year 2025/26 in Piemonte / Torino, applications for scholarships, accommodation, and degree awards can be submitted starting from 28 October 2025. The deadline for submitting applications is 28 November 2025 at 12:00 p.m. The application procedure closes automatically at this time, and no late submissions are accepted. Additionally, for first-year Bachelor’s or single-cycle Master’s degree students, enrollment must be completed by 31 October 2025 to be included in the first definitive rankings for scholarships.",
+  "citations": [
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0137",
+      "node_title": "Art. 25(1) METHOD FOR SUBMITTING THE APPLICATION",
+      "line_number": 2698
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0138",
+      "node_title": "ART. 25(2) DEADLINES FOR SUBMITTING THE APPLICATION",
+      "line_number": 2710
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0068",
+      "node_title": "Art. 12(5.1) FIRST DEFINITIVE RANKINGS FOR STUDENTS IN FIRST YEAR OF BACHELOR’S OR SINGLECYCLE MASTER’S DEGREE WITH ENROLMENT BY 31 OCTOBER 2025",
+      "line_number": 1697
+    }
+  ],
+  "document_ids": [
+    "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+  ],
+  "retrieval_notes": "Rewrote question for retrieval: What are the application deadlines for scholarships, accommodation, and degree awards in Piemonte / Torino for the academic year 2025/26? | The user's question asks about application deadlines in Piemonte / Torino. The document titled \"Notice of competition – scholarship accommodation and degree award a.y. 2025/26\" specifically covers Piemonte region and Torino city, and includes information on application deadlines for scholarships, accommodation, and degree awards for the academic year 2025/26. This document is the most relevant and appropriate scope for the user's question. | Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1): The user is asking for application deadlines for scholarships, accommodation, and degree awards in Piemonte / Torino for the academic year 2025/26. The document title is \"Notice of competition – scholarship accommodation and degree award a.y. 2025/26\" which suggests it contains relevant information. \n\nI will look for nodes that likely contain deadlines and application procedures. \n\n- Section III seems to have specific provisions for first years and includes articles about application methods and deadlines (ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION, node_id 0056).\n- ART. 8 PAID ACCOMMODATION (node_id 0045) and its subnodes might contain deadlines related to accommodation.\n- ART. 7 HOW TO SUBMIT AN APPLICATION (node_id 0032) likely contains application submission details.\n- ART. 3 GROUNDS FOR INELIGIBILITY AND EXCLUSION (node_id 0007) might mention deadlines as grounds for ineligibility.\n- ART. 12 RANKINGS AND COMPLAINTS (node_id 0062) might have deadlines related to rankings and complaints.\n\nI will select these nodes to cover the deadlines for scholarships, accommodation, and degree awards comprehensively.",
+  "needs_clarification": false,
+  "clarifying_question": null,
+  "trace": [
+    {
+      "stage": "load_indexes",
+      "message": "Loaded search indexes.",
+      "details": {
+        "index_dir": "C:\\Projects\\personal\\DocStruct\\output\\03_pageindex",
+        "count": 4,
+        "documents": [
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          },
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          }
+        ]
+      }
+    },
+    {
+      "stage": "intent_detection",
+      "message": "Detected user intent for document scope.",
+      "details": {
+        "multi_document_intent": false
+      }
+    },
+    {
+      "stage": "initial_ranking",
+      "message": "Ranked initial candidate documents from the original question.",
+      "details": {
+        "question": "What are the application deadlines in Piemonte / Torino?",
+        "candidates": [
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          },
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          },
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "rewrite_question",
+      "message": "Rewrote the question for retrieval.",
+      "details": {
+        "original_question": "What are the application deadlines in Piemonte / Torino?",
+        "rewritten_question": "What are the application deadlines for scholarships, accommodation, and degree awards in Piemonte / Torino for the academic year 2025/26?",
+        "reasoning": "The user's question asks about application deadlines in Piemonte / Torino. The document titled \"Notice of competition – scholarship accommodation and degree award a.y. 2025/26\" specifically covers Piemonte region and Torino city, and includes information on application deadlines for scholarships, accommodation, and degree awards for the academic year 2025/26. This document is the most relevant and appropriate scope for the user's question.",
+        "inferred_document_ids": [
+          "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+        ]
+      }
+    },
+    {
+      "stage": "candidate_ranking",
+      "message": "Ranked candidate documents for the effective retrieval question.",
+      "details": {
+        "effective_question": "What are the application deadlines for scholarships, accommodation, and degree awards in Piemonte / Torino for the academic year 2025/26?",
+        "candidates": [
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          },
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "document_selection",
+      "message": "Selected document scopes for answer generation.",
+      "details": {
+        "effective_question": "What are the application deadlines for scholarships, accommodation, and degree awards in Piemonte / Torino for the academic year 2025/26?",
+        "selected_document_ids": [
+          "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+        ],
+        "needs_clarification": false,
+        "clarifying_question": null,
+        "reasoning": "The user asks for application deadlines for scholarships, accommodation, and degree awards specifically in Piemonte / Torino for the academic year 2025/26. Among the provided documents, only one document explicitly covers Piemonte (Piedmont) and Torino (University of Turin) for the academic year 2025/26 and includes all three benefit types: scholarship, accommodation, and degree award. The other documents cover different regions (Liguria, Campania, Veneto) or do not cover all the requested benefit types. Therefore, I will select the document \"Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)\" as it is the most relevant and precise for the user's query."
+      }
+    },
+    {
+      "stage": "selected_documents",
+      "message": "Prepared the final document set for node retrieval.",
+      "details": {
+        "selected_documents": [
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          }
+        ]
+      }
+    },
+    {
+      "stage": "node_selection",
+      "message": "Selected nodes from the document tree.",
+      "details": {
+        "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+        "node_ids": [],
+        "reasoning": "The user is asking for application deadlines for scholarships, accommodation, and degree awards in Piemonte / Torino for the academic year 2025/26. The document title is \"Notice of competition – scholarship accommodation and degree award a.y. 2025/26\" which suggests it contains relevant information. \n\nI will look for nodes that likely contain deadlines and application procedures. \n\n- Section III seems to have specific provisions for first years and includes articles about application methods and deadlines (ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION, node_id 0056).\n- ART. 8 PAID ACCOMMODATION (node_id 0045) and its subnodes might contain deadlines related to accommodation.\n- ART. 7 HOW TO SUBMIT AN APPLICATION (node_id 0032) likely contains application submission details.\n- ART. 3 GROUNDS FOR INELIGIBILITY AND EXCLUSION (node_id 0007) might mention deadlines as grounds for ineligibility.\n- ART. 12 RANKINGS AND COMPLAINTS (node_id 0062) might have deadlines related to rankings and complaints.\n\nI will select these nodes to cover the deadlines for scholarships, accommodation, and degree awards comprehensively."
+      }
+    },
+    {
+      "stage": "fallback_nodes",
+      "message": "Used heuristic node matching because no node ids were returned.",
+      "details": {
+        "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+        "node_ids": [
+          "0048",
+          "0068",
+          "0138",
+          "0137"
+        ]
+      }
+    },
+    {
+      "stage": "context_building",
+      "message": "Built grounded context snippets for answer synthesis.",
+      "details": {
+        "context_count": 4,
+        "document_ids": [
+          "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+        ]
+      }
+    },
+    {
+      "stage": "answer_synthesis",
+      "message": "Synthesized the final grounded answer from the selected contexts.",
+      "details": {
+        "answer_preview": "For the academic year 2025/26 in Piemonte / Torino, applications for scholarships, accommodation, and degree awards can be submitted starting from 28 October 2025. The deadline for submitting applications is 28 November 2025 at 12:00 p.m. T",
+        "citation_count": 3,
+        "needs_clarification": false
+      }
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import re
 import sys
 
 from docstruct.application.ports import LLMPort
+from docstruct.config import AgentConfig
 from docstruct.domain.models import HeadingEntry
 
 
@@ -21,10 +22,11 @@ _INSTRUCTIONS = (
 class ClassifierAgent:
     def __init__(self, client: LLMPort):
         self._client = client
+        self._model = AgentConfig.from_env().model
 
     def _classify_chunk(self, chunk_text: str) -> list[dict]:
         raw = self._client.create_message(
-            model="claude-haiku-4-5-20251001",
+            model=self._model,
             max_tokens=8192,
             messages=[{"role": "user", "content": _INSTRUCTIONS + f"TOC TEXT:\n{chunk_text}"}],
         ).strip()

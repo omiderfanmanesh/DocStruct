@@ -3,27 +3,35 @@
 from __future__ import annotations
 
 try:
-    from openai import OpenAI
+    from langchain_openai import ChatOpenAI
 except ImportError:  # pragma: no cover
-    OpenAI = None
+    ChatOpenAI = None
+
+from docstruct.infrastructure.llm.langchain_adapter import LangChainChatAdapter
 
 
-class OpenAIAdapter:
+class OpenAIAdapter(LangChainChatAdapter):
     def __init__(self, *, api_key: str):
-        if OpenAI is None:
-            raise ImportError("openai package not installed")
-        self._client = OpenAI(api_key=api_key)
+        if ChatOpenAI is None:
+            raise ImportError("langchain-openai package not installed")
+        self._api_key = api_key
 
-    def create_message(
+    def _build_model(self, *, model: str, max_tokens: int):
+        return ChatOpenAI(
+            model=model,
+            api_key=self._api_key,
+            max_tokens=max_tokens,
+            temperature=0,
+        )
+
+    def create_structured_message(
         self,
         *,
         model: str,
         max_tokens: int,
         messages: list[dict],
-    ) -> str:
-        response = self._client.chat.completions.create(
-            model=model,
-            max_tokens=max_tokens,
-            messages=messages,
-        )
-        return response.choices[0].message.content or ""
+        schema,
+    ):
+        chat_model = self._build_model(model=model, max_tokens=max_tokens)
+        structured_model = chat_model.with_structured_output(schema, method="function_calling")
+        return structured_model.invoke(self._to_langchain_messages(messages))

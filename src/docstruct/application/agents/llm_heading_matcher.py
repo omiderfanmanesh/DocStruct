@@ -7,6 +7,7 @@ import json
 import re
 
 from docstruct.application.ports import LLMPort
+from docstruct.config import AgentConfig
 
 
 @dataclass
@@ -23,6 +24,7 @@ class LLMHeadingMatcher:
 
     def __init__(self, client: LLMPort):
         self._client = client
+        self._model = AgentConfig.from_env().model
 
     @staticmethod
     def _strip_fences(raw: str) -> str:
@@ -73,7 +75,7 @@ class LLMHeadingMatcher:
         )
         candidates_text = "\n".join(f"Line {line_number}: {text}" for line_number, text in unmatched_candidates)
         raw = self._client.create_message(
-            model="claude-haiku-4-5-20251001",
+            model=self._model,
             max_tokens=4096,
             messages=[
                 {

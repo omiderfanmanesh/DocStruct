@@ -31,7 +31,7 @@ def build_client():
                 api_version=api_version,
             )
         except ImportError:
-            print("ERROR: openai package not installed. Run: pip install openai", file=sys.stderr)
+            print("ERROR: LangChain Azure OpenAI dependencies are not installed. Run: pip install langchain-openai", file=sys.stderr)
             sys.exit(3)
 
     if provider == "openai":
@@ -42,7 +42,7 @@ def build_client():
         try:
             return OpenAIAdapter(api_key=api_key)
         except ImportError:
-            print("ERROR: openai package not installed. Run: pip install openai", file=sys.stderr)
+            print("ERROR: LangChain OpenAI dependencies are not installed. Run: pip install langchain-openai", file=sys.stderr)
             sys.exit(3)
 
     if provider == "anthropic":
@@ -53,7 +53,7 @@ def build_client():
         try:
             return AnthropicAdapter(api_key=api_key)
         except ImportError:
-            print("ERROR: anthropic package not installed. Run: pip install anthropic", file=sys.stderr)
+            print("ERROR: LangChain Anthropic dependencies are not installed. Run: pip install langchain-anthropic", file=sys.stderr)
             sys.exit(3)
 
     print(f"ERROR: Unknown LLM_PROVIDER={provider!r}. Must be 'anthropic', 'azure', or 'openai'.", file=sys.stderr)

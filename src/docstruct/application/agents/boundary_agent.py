@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 import json
-import re
 import sys
+from typing import Any, List, Optional
+
+from pydantic import BaseModel, Field
 
 from docstruct.application.ports import LLMPort
+from docstruct.config import AgentConfig
 from docstruct.domain.models import HeadingEntry, TOCBoundary
+from docstruct.infrastructure.llm.structured_output import invoke_structured
 
 
 _CHUNK_SIZE = 50
@@ -55,9 +59,17 @@ LINES:
 """
 
 
+class _BoundaryPayload(BaseModel):
+    status: str = "pre_toc"
+    entries: List[Any] = Field(default_factory=list)
+    toc_start: Optional[int] = None
+    toc_end: Optional[int] = None
+
+
 class BoundaryAgent:
     def __init__(self, client: LLMPort):
         self._client = client
+        self._model = AgentConfig.from_env().model
 
     @staticmethod
     def _coerce_line_number(value) -> int | None:
@@ -116,20 +128,17 @@ class BoundaryAgent:
         while chunk_start < len(scan_lines):
             chunk = scan_lines[chunk_start : chunk_start + _CHUNK_SIZE]
             numbered = "".join(f"[{chunk_start + index}] {line}" for index, line in enumerate(chunk))
-            raw = self._client.create_message(
-                model="claude-haiku-4-5-20251001",
+            result = invoke_structured(
+                self._client,
+                model=self._model,
                 max_tokens=8192,
                 messages=[{"role": "user", "content": _PROMPT + numbered}],
-            ).strip()
-            if raw.startswith("```"):
-                raw = re.sub(r"^```[a-z]*\n?", "", raw)
-                raw = re.sub(r"\n?```$", "", raw)
-
-            result = json.loads(raw)
-            status = result.get("status", "pre_toc")
-            entries = self._normalize_entries(result.get("entries", []))
-            response_start = self._coerce_line_number(result.get("toc_start"))
-            response_end = self._coerce_line_number(result.get("toc_end"))
+                schema=_BoundaryPayload,
+            )
+            status = result.status
+            entries = self._normalize_entries(list(result.entries))
+            response_start = self._coerce_line_number(result.toc_start)
+            response_end = self._coerce_line_number(result.toc_end)
             chunk_end = chunk_start + len(chunk) - 1
             print(
                 f"  Scanning lines {chunk_start}-{chunk_end}: {status}" + (f" ({len(entries)} entries)" if entries else ""),

@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import json
+from typing import Dict, List, Optional
+
+from pydantic import BaseModel, Field
 
 from docstruct.application.ports import LLMPort
 from docstruct.config import AgentConfig
@@ -20,24 +23,32 @@ from docstruct.domain.pageindex_search import (
     build_scope_options,
     build_tree_outline,
 )
+from docstruct.infrastructure.llm.structured_output import invoke_structured
 
 
-def _strip_code_fences(text: str) -> str:
-    stripped = text.strip()
-    if stripped.startswith("```"):
-        stripped = stripped.split("\n", 1)[1] if "\n" in stripped else stripped
-        if stripped.endswith("```"):
-            stripped = stripped[:-3]
-    return stripped.strip()
+class _RewriteQuestionPayload(BaseModel):
+    rewritten_question: Optional[str] = None
+    reasoning: Optional[str] = None
+    inferred_document_ids: List[str] = Field(default_factory=list)
 
 
-def _parse_json_payload(raw: str) -> dict:
-    cleaned = _strip_code_fences(raw)
-    start = cleaned.find("{")
-    end = cleaned.rfind("}")
-    if start != -1 and end != -1:
-        cleaned = cleaned[start : end + 1]
-    return json.loads(cleaned)
+class _DocumentSelectionPayload(BaseModel):
+    thinking: Optional[str] = None
+    document_ids: List[str] = Field(default_factory=list)
+    needs_clarification: bool = False
+    clarifying_question: Optional[str] = None
+
+
+class _NodeSelectionPayload(BaseModel):
+    thinking: Optional[str] = None
+    node_ids: List[str] = Field(default_factory=list)
+
+
+class _AnswerPayload(BaseModel):
+    answer: Optional[str] = None
+    citations: List[Dict] = Field(default_factory=list)
+    clarification_needed: bool = False
+    clarifying_question: Optional[str] = None
 
 
 def _as_bool(value: object) -> bool:
@@ -55,13 +66,14 @@ class PageIndexSearchAgent:
         self._model = config.model
         self._max_tokens = min(config.max_tokens, 4096)
 
-    def _call_json(self, prompt: str, *, max_tokens: int = 900) -> dict:
-        raw = self._client.create_message(
+    def _call_structured(self, prompt: str, *, schema, max_tokens: int = 900):
+        return invoke_structured(
+            self._client,
             model=self._model,
             max_tokens=min(max_tokens, self._max_tokens),
             messages=[{"role": "user", "content": prompt}],
+            schema=schema,
         )
-        return _parse_json_payload(raw)
 
     def rewrite_question(
         self,
@@ -83,7 +95,7 @@ class PageIndexSearchAgent:
             }
             for document in documents[:12]
         ]
-        response = self._call_json(
+        response = self._call_structured(
             (
                 "Rewrite the user's question for retrieval using a HyPE-style expansion.\n"
                 "Your job is to infer the likely intended document scope from the catalog and rewrite the question so retrieval becomes easier.\n"
@@ -99,16 +111,17 @@ class PageIndexSearchAgent:
                 '- "reasoning": string\n'
                 '- "inferred_document_ids": array of strings\n'
             ),
+            schema=_RewriteQuestionPayload,
             max_tokens=1200,
         )
         valid_ids = {document.document_id for document in documents}
         inferred_document_ids = [
             document_id
-            for document_id in response.get("inferred_document_ids", [])
+            for document_id in response.inferred_document_ids
             if document_id in valid_ids
         ][:2]
-        rewritten_question = str(response.get("rewritten_question") or "").strip() or question
-        reasoning = str(response.get("reasoning") or "").strip() or None
+        rewritten_question = str(response.rewritten_question or "").strip() or question
+        reasoning = str(response.reasoning or "").strip() or None
         return rewritten_question, reasoning, inferred_document_ids
 
     def select_documents(
@@ -140,7 +153,7 @@ class PageIndexSearchAgent:
             }
             for document in documents
         ]
-        response = self._call_json(
+        response = self._call_structured(
             (
                 "You are selecting policy documents for grounded QA.\n"
                 "These documents may belong to different universities, regions, or issuing organizations.\n"
@@ -156,17 +169,18 @@ class PageIndexSearchAgent:
                 '- "document_ids": array of strings\n'
                 '- "needs_clarification": boolean\n'
                 '- "clarifying_question": string or null\n'
-            )
+            ),
+            schema=_DocumentSelectionPayload,
         )
         valid_ids = {document.document_id for document in documents}
         selected_ids = [
             document_id
-            for document_id in response.get("document_ids", [])
+            for document_id in response.document_ids
             if document_id in valid_ids
         ][:3]
-        thinking = str(response.get("thinking") or "").strip() or None
-        needs_clarification = _as_bool(response.get("needs_clarification"))
-        clarifying_question = str(response.get("clarifying_question") or "").strip() or None
+        thinking = str(response.thinking or "").strip() or None
+        needs_clarification = _as_bool(response.needs_clarification)
+        clarifying_question = str(response.clarifying_question or "").strip() or None
         if needs_clarification and not clarifying_question:
             options = "; ".join(build_scope_options(documents))
             clarifying_question = f"Which university, region, or issuer should I use: {options}?"
@@ -185,7 +199,7 @@ class PageIndexSearchAgent:
         document: SearchDocumentIndex,
     ) -> tuple[list[str], str | None]:
         outline = build_tree_outline(document.structure, max_nodes=80, preview_chars=160)
-        response = self._call_json(
+        response = self._call_structured(
             (
                 "You are searching a PageIndex-style document tree for the nodes most likely to answer a question.\n"
                 "Pick at most 6 node_ids. Use titles, summaries, and text previews to reason carefully.\n\n"
@@ -194,6 +208,7 @@ class PageIndexSearchAgent:
                 f"Document tree:\n{json.dumps(outline, indent=2, ensure_ascii=False)}\n\n"
                 'Return JSON with keys "thinking" and "node_ids".'
             ),
+            schema=_NodeSelectionPayload,
             max_tokens=1200,
         )
         valid_ids: set[str] = set()
@@ -204,8 +219,8 @@ class PageIndexSearchAgent:
                 collect_valid(list(item.get("nodes", [])))
 
         collect_valid(document.structure)
-        node_ids = [node_id for node_id in response.get("node_ids", []) if node_id in valid_ids][:6]
-        thinking = str(response.get("thinking") or "").strip() or None
+        node_ids = [node_id for node_id in response.node_ids if node_id in valid_ids][:6]
+        thinking = str(response.thinking or "").strip() or None
         return node_ids, thinking
 
     def answer_from_contexts(
@@ -216,7 +231,7 @@ class PageIndexSearchAgent:
         document_ids: list[str],
         retrieval_notes: str | None = None,
     ) -> SearchAnswer:
-        response = self._call_json(
+        response = self._call_structured(
             (
                 "Answer the user's question using only the provided context snippets.\n"
                 "Important guardrails:\n"
@@ -234,18 +249,19 @@ class PageIndexSearchAgent:
                 '- "clarification_needed": boolean\n'
                 '- "clarifying_question": string or null\n'
             ),
+            schema=_AnswerPayload,
             max_tokens=1400,
         )
         citations = []
-        for citation_data in response.get("citations", []):
+        for citation_data in response.citations:
             try:
                 citations.append(SearchCitation.from_dict(citation_data))
             except Exception:
                 continue
 
-        clarification_needed = _as_bool(response.get("clarification_needed"))
-        clarifying_question = str(response.get("clarifying_question") or "").strip() or None
-        answer = str(response.get("answer") or "").strip()
+        clarification_needed = _as_bool(response.clarification_needed)
+        clarifying_question = str(response.clarifying_question or "").strip() or None
+        answer = str(response.answer or "").strip()
         if clarification_needed and not answer:
             answer = clarifying_question or "I need the university, region, or issuing organization before I can answer safely."
         if not answer:

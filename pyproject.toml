@@ -10,7 +10,12 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
   "anthropic",
+  "langchain-anthropic",
+  "langchain-core",
+  "langchain-openai",
+  "langgraph",
   "openai",
+  "pydantic",
   "python-dotenv",
 ]
 
