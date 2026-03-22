@@ -55,3 +55,16 @@ def test_extract_metadata_makes_one_api_call():
 
     extract_metadata("header text", mock_client)
     assert mock_client.create_message.call_count == 1
+
+
+def test_extract_metadata_normalizes_blank_fields():
+    mock_client = MagicMock()
+    mock_client.create_message.return_value = '{"title": "", "source": "", "year": "", "document_type": "", "organization": ""}'
+
+    result = extract_metadata("header text", mock_client)
+
+    assert result.title == "Unknown"
+    assert result.source == "inferred"
+    assert result.year is None
+    assert result.document_type is None
+    assert result.organization is None

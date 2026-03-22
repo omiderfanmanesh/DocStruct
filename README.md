@@ -33,9 +33,13 @@ docs/              # Supporting guides and architecture notes
 ## Helper Scripts
 
 ```bash
+python tools/run_extract.py data/document.md
+python tools/run_extract_all.py
+python tools/run_fix.py data/document.md --toc output/document.json
 python tools/run_pipeline_all.py
 python tools/run_pipeline.py
 python tools/run_fixer.py
+python tools/smoke_test.py data/document.md
 ```
 
 ## Environment

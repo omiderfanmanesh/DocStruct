@@ -1,21 +1,19 @@
 {
   "source_file": "data\\Bando di Concorso a.a. 2025.26_ENG_0.md",
-  "output_file": "output/fixed\\Bando di Concorso a.a. 2025.26_ENG_0.md",
-  "total_lines": 1167,
-  "lines_changed": 92,
-  "lines_demoted": 11,
+  "output_file": "C:\\Projects\\personal\\DocStruct\\output\\fixed\\Bando di Concorso a.a. 2025.26_ENG_0.md",
+  "total_lines": 1176,
+  "lines_changed": 103,
+  "lines_demoted": 12,
   "unmatched_toc_entries": [
-    "Foreign students, stateless persons and refugees",
-    "Applicants whose household qualified in 2021 for IRPEF-exempt income or revenue (welfare, social security, indemnity, etc.) and are previous recipients of university benefits in academic years prior to 2025/2026",
-    "Applicant with political refugee or stateless status"
+    "Participation limits"
   ],
   "corrections": [
     {
       "line_number": 3,
       "old_level": 1,
-      "new_level": 2,
-      "matched_toc_title": "CALL FOR APPLICATIONS \u2013 RECIPIENTS",
-      "match_method": "llm"
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
     },
     {
       "line_number": 7,
@@ -95,7 +93,7 @@
       "match_method": "llm"
     },
     {
-      "line_number": 180,
+      "line_number": 182,
       "old_level": 1,
       "new_level": 3,
       "matched_toc_title": "Students simultaneously enrolled in courses of study and FIT (Education, placement and internship) courses at Universities",
@@ -107,6 +105,13 @@
       "new_level": 3,
       "matched_toc_title": "Compatibility with other benefits",
       "match_method": "exact"
+    },
+    {
+      "line_number": 192,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicants whose household qualified in 2021 for IRPEF-exempt income or revenue (welfare, social security, indemnity, etc.) and are previous recipients of university benefits in academic years prior to 2025/2026",
+      "match_method": "llm"
     },
     {
       "line_number": 194,
@@ -135,6 +140,13 @@
       "new_level": 3,
       "matched_toc_title": "Applicants enrolled in the first year of \"type A\" or \"type B\" courses",
       "match_method": "exact"
+    },
+    {
+      "line_number": 233,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Single ranking reserved for students enrolled for the first time in the first year of all courses of study",
+      "match_method": "llm"
     },
     {
       "line_number": 245,
@@ -200,6 +212,13 @@
       "match_method": "exact"
     },
     {
+      "line_number": 303,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "BONUS FOR ACHIEVING THE MINIMUM MERIT REQUIREMENT",
+      "match_method": "llm"
+    },
+    {
       "line_number": 313,
       "old_level": 4,
       "new_level": 2,
@@ -214,6 +233,13 @@
       "match_method": "exact"
     },
     {
+      "line_number": 319,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "REQUIREMENTS RELATING TO ECONOMIC CONDITION",
+      "match_method": "llm"
+    },
+    {
       "line_number": 327,
       "old_level": 1,
       "new_level": 3,
@@ -221,11 +247,25 @@
       "match_method": "exact"
     },
     {
+      "line_number": 329,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "University ISEE",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 335,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Composition of the family unit",
+      "match_method": "exact"
+    },
+    {
       "line_number": 345,
       "old_level": 1,
       "new_level": 3,
       "matched_toc_title": "Independent student",
-      "match_method": "llm"
+      "match_method": "exact"
     },
     {
       "line_number": 347,
@@ -233,6 +273,13 @@
       "new_level": null,
       "matched_toc_title": null,
       "match_method": "demoted"
+    },
+    {
+      "line_number": 356,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Independent student",
+      "match_method": "llm"
     },
     {
       "line_number": 366,
@@ -247,6 +294,13 @@
       "new_level": 3,
       "matched_toc_title": "Applicant status details",
       "match_method": "exact"
+    },
+    {
+      "line_number": 382,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicant with political refugee or stateless status",
+      "match_method": "llm"
     },
     {
       "line_number": 388,
@@ -389,6 +443,13 @@
       "match_method": "exact"
     },
     {
+      "line_number": 514,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Lease agreement for non-resident applicants not housed at university residences",
+      "match_method": "llm"
+    },
+    {
       "line_number": 522,
       "old_level": 1,
       "new_level": 3,
@@ -398,9 +459,9 @@
     {
       "line_number": 608,
       "old_level": 4,
-      "new_level": 3,
-      "matched_toc_title": "Lease agreement for non-resident applicants not housed at university residences",
-      "match_method": "llm"
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
     },
     {
       "line_number": 621,
@@ -445,6 +506,13 @@
       "match_method": "exact"
     },
     {
+      "line_number": 669,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Foreign students, stateless persons and refugees",
+      "match_method": "llm"
+    },
+    {
       "line_number": 676,
       "old_level": 4,
       "new_level": 3,
@@ -464,13 +532,6 @@
       "new_level": 3,
       "matched_toc_title": "Appeals against the definitive and conclusive rankings",
       "match_method": "exact"
-    },
-    {
-      "line_number": 703,
-      "old_level": 1,
-      "new_level": 3,
-      "matched_toc_title": "Single ranking reserved for students enrolled for the first time in the first year of all courses of study",
-      "match_method": "llm"
     },
     {
       "line_number": 708,
@@ -536,11 +597,25 @@
       "match_method": "exact"
     },
     {
+      "line_number": -813000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Residences",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 834,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Fees and payment methods",
+      "match_method": "exact"
+    },
+    {
       "line_number": 861,
       "old_level": 4,
-      "new_level": null,
-      "matched_toc_title": null,
-      "match_method": "demoted"
+      "new_level": 3,
+      "matched_toc_title": "Catering service and related costs",
+      "match_method": "exact"
     },
     {
       "line_number": 877,

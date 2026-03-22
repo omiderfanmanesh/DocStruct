@@ -130,3 +130,54 @@ def test_toc_spans_two_chunks(monkeypatch):
     assert result is not None
     assert result.start_line == 5
     assert result.end_line == 110
+
+
+def test_stringified_entry_objects_are_normalized():
+    lines = _lines("# Summary\n\nArt. 1 Title 5\n")
+    client = _mock_client([
+        {
+            "toc_start": "0",
+            "toc_end": "2",
+            "status": "done",
+            "entries": [
+                json.dumps(
+                    {
+                        "title": "Title",
+                        "kind": "article",
+                        "depth": 2,
+                        "numbering": "Art. 1",
+                        "pattern": "Art. 1 Title",
+                    }
+                )
+            ],
+        }
+    ])
+
+    boundary, entries = BoundaryAgent(client).run(lines)
+
+    assert boundary is not None
+    assert boundary.start_line == 0
+    assert boundary.end_line == 2
+    assert len(entries) == 1
+    assert entries[0].title == "Title"
+    assert entries[0].kind == "article"
+
+
+def test_plain_string_entries_do_not_crash_and_become_topics():
+    lines = _lines("# Summary\n\nGENERAL PROVISIONS\n")
+    client = _mock_client([
+        {
+            "toc_start": 0,
+            "toc_end": 2,
+            "status": "done",
+            "entries": ["GENERAL PROVISIONS"],
+        }
+    ])
+
+    boundary, entries = BoundaryAgent(client).run(lines)
+
+    assert boundary is not None
+    assert len(entries) == 1
+    assert entries[0].title == "GENERAL PROVISIONS"
+    assert entries[0].kind == "topic"
+    assert entries[0].pattern == "GENERAL PROVISIONS"

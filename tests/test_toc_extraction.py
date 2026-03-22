@@ -171,3 +171,28 @@ def test_llm_api_error_propagates(notice_md_path):
 
     with pytest.raises(FakeAPIError):
         extract_toc(str(notice_md_path), mock_client)
+
+
+def test_extract_toc_handles_string_entries_from_boundary_agent(tmp_path):
+    md = tmp_path / "doc.md"
+    md.write_text("# Summary\n\nGENERAL PROVISIONS\n")
+
+    client = MagicMock()
+    client.create_message.side_effect = [
+        json.dumps(
+            {
+                "toc_start": 0,
+                "toc_end": 2,
+                "status": "done",
+                "entries": ["GENERAL PROVISIONS"],
+            }
+        ),
+        "A short summary.",
+        json.dumps({"title": "General Provisions", "source": "inferred"}),
+    ]
+
+    result = extract_toc(str(md), client)
+
+    assert len(result.toc) == 1
+    assert result.toc[0].title == "GENERAL PROVISIONS"
+    assert result.toc[0].kind == "topic"

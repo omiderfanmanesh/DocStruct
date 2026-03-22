@@ -21,8 +21,12 @@ class MetadataAgent:
                 {
                     "role": "user",
                     "content": (
-                        "Extract metadata from this document header. Return only JSON with "
-                        "title, year, document_type, organization, and source.\n\n"
+                        "Extract metadata from this document header. Return ONLY a JSON object with these keys:\n"
+                        '  "title": the full document title (string)\n'
+                        '  "year": academic year or date if present, else null\n'
+                        '  "document_type": type of document, else null\n'
+                        '  "organization": issuing organization or institution, else null\n'
+                        '  "source": "explicit" if title is clearly stated as a heading, "inferred" if deduced from context\n\n'
                         f"DOCUMENT HEADER:\n{pre_toc_text[:2000]}"
                     ),
                 }
@@ -32,11 +36,15 @@ class MetadataAgent:
             raw = re.sub(r"^```[a-z]*\n?", "", raw)
             raw = re.sub(r"\n?```$", "", raw)
         data = json.loads(raw)
+        title = (data.get("title") or "").strip() or "Unknown"
+        source = (data.get("source") or "").strip() or "inferred"
+        year = (data.get("year") or "").strip() or None
+        document_type = (data.get("document_type") or "").strip() or None
+        organization = (data.get("organization") or "").strip() or None
         return DocumentMetadata(
-            title=data.get("title", "Unknown"),
-            source=data.get("source", "inferred"),
-            year=data.get("year"),
-            document_type=data.get("document_type"),
-            organization=data.get("organization"),
+            title=title,
+            source=source,
+            year=year,
+            document_type=document_type,
+            organization=organization,
         )
-

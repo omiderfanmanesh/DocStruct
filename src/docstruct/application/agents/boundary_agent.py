@@ -27,6 +27,27 @@ Status:
 - "done": the TOC ended in these lines; body text (prose, paragraphs, legal clauses) has started.
           Return only entries found BEFORE the body started.
 
+TOC entries are lines that list document sections, articles, or headings.
+Body text is prose: full sentences, definitions, greetings, legal clauses, or paragraphs.
+
+For each TOC entry return:
+  "title": heading text without numbering or page number
+  "kind": "section" | "article" | "subarticle" | "annex" | "topic"
+  "numbering": prefix like "ART. 1", "SECTION I", "1.2" or null
+  "separator": separator between numbering and title (for example " ", " - ", " – ") or null
+  "pattern": full heading = numbering + separator + title, or just title if no numbering
+  "page": trailing page number as integer or null
+  "depth": 1=section, 2=article, 3+=subarticle
+  "confidence": 0.0-1.0
+
+Classification rules:
+- SECTION / SEZIONE / PART / CHAPTER -> kind=section, depth=1
+- ART. N / Art. N / ARTICLE N -> kind=article, depth=2
+- ART. N(M) / Art. N(M) / Art. N paragraph M -> kind=subarticle, depth=3
+- Decimal headings like 1.2 or 1.2.3 -> kind=subarticle, depth based on nesting
+- ANNEX / ALLEGATO -> kind=annex, depth=1
+- Unnumbered all-caps or title-case headings -> kind=topic, depth=2
+
 Return ONLY this JSON object, no explanation:
 {"status": "pre_toc" | "in_toc" | "done", "entries": [...]}
 
@@ -37,6 +58,53 @@ LINES:
 class BoundaryAgent:
     def __init__(self, client: LLMPort):
         self._client = client
+
+    @staticmethod
+    def _coerce_line_number(value) -> int | None:
+        if isinstance(value, int):
+            return value
+        if isinstance(value, str):
+            stripped = value.strip()
+            if stripped.isdigit():
+                return int(stripped)
+        return None
+
+    @staticmethod
+    def _normalize_entry(item) -> dict:
+        if isinstance(item, dict):
+            return item
+
+        if isinstance(item, str):
+            stripped = item.strip()
+            if not stripped:
+                return {}
+            try:
+                parsed = json.loads(stripped)
+            except json.JSONDecodeError:
+                return {
+                    "title": stripped,
+                    "kind": "topic",
+                    "depth": 2,
+                    "pattern": stripped,
+                }
+            if isinstance(parsed, dict):
+                return parsed
+            if isinstance(parsed, str):
+                return {
+                    "title": parsed,
+                    "kind": "topic",
+                    "depth": 2,
+                    "pattern": parsed,
+                }
+        return {}
+
+    @classmethod
+    def _normalize_entries(cls, entries) -> list[dict]:
+        if isinstance(entries, dict):
+            entries = [entries]
+        if not isinstance(entries, list):
+            return []
+        return [entry for entry in (cls._normalize_entry(item) for item in entries) if entry]
 
     def run(self, lines: list[str]) -> tuple[TOCBoundary | None, list[HeadingEntry]]:
         scan_lines = lines[:_MAX_SCAN_LINES]
@@ -59,9 +127,9 @@ class BoundaryAgent:
 
             result = json.loads(raw)
             status = result.get("status", "pre_toc")
-            entries = result.get("entries", [])
-            response_start = result.get("toc_start")
-            response_end = result.get("toc_end")
+            entries = self._normalize_entries(result.get("entries", []))
+            response_start = self._coerce_line_number(result.get("toc_start"))
+            response_end = self._coerce_line_number(result.get("toc_end"))
             chunk_end = chunk_start + len(chunk) - 1
             print(
                 f"  Scanning lines {chunk_start}-{chunk_end}: {status}" + (f" ({len(entries)} entries)" if entries else ""),
@@ -74,7 +142,7 @@ class BoundaryAgent:
 
             if status in {"in_toc", "done"}:
                 if toc_start_abs is None:
-                    if isinstance(response_start, int) and response_start >= 0:
+                    if response_start is not None and response_start >= 0:
                         toc_start_abs = response_start
                     else:
                         toc_start_abs = chunk_start
@@ -92,7 +160,7 @@ class BoundaryAgent:
                         )
                     )
                 if status == "done":
-                    if isinstance(response_end, int) and response_end >= 0:
+                    if response_end is not None and response_end >= 0:
                         toc_end_abs = response_end
                     else:
                         toc_end_abs = chunk_end

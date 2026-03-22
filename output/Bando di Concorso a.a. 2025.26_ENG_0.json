@@ -19,7 +19,7 @@
       "separator": " ",
       "pattern": "1.1 Purpose of the call",
       "page": 5,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -30,7 +30,7 @@
       "separator": " ",
       "pattern": "1.2 Recipients",
       "page": 5,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -41,7 +41,7 @@
       "separator": " ",
       "pattern": "1.2.1 Courses of study and year of first enrolment",
       "page": 5,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -52,7 +52,7 @@
       "separator": " ",
       "pattern": "1.2.2 Achievement of the degree and duration of the courses of study",
       "page": 6,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -63,7 +63,7 @@
       "separator": " ",
       "pattern": "1.2.3 Deadlines for enrolment in courses of study",
       "page": 7,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -74,7 +74,7 @@
       "separator": " ",
       "pattern": "1.2.4 Career check for candidates enrolled in an additional semester or in the first year",
       "page": 8,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -85,7 +85,7 @@
       "separator": " ",
       "pattern": "1.2.5 Transfers between HEIs",
       "page": null,
-      "confidence": 0.7,
+      "confidence": 0.9,
       "children": []
     },
     {
@@ -96,7 +96,7 @@
       "separator": " ",
       "pattern": "1.2.6 Foreign students, stateless persons and refugees",
       "page": null,
-      "confidence": 0.7,
+      "confidence": 0.9,
       "children": []
     },
     {
@@ -107,7 +107,7 @@
       "separator": " ",
       "pattern": "1.2.7 Students enrolled simultaneously in two courses of study at Universities and AFAM institutes",
       "page": 9,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -118,7 +118,7 @@
       "separator": " ",
       "pattern": "1.2.8 Students simultaneously enrolled in courses of study and FIT (Education, placement and internship) courses at Universities",
       "page": 10,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -129,7 +129,7 @@
       "separator": " ",
       "pattern": "1.3 Compatibility with other benefits",
       "page": 10,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -140,7 +140,7 @@
       "separator": " – ",
       "pattern": "1.4 Publication obligations pursuant to Law 241/1990, Law 190/2012 and Legislative Decree 33/2013 – Reserved Area – Digital address",
       "page": 11,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -173,7 +173,7 @@
       "separator": " ",
       "pattern": "3.1 Applicants enrolled in the first year of \"type A\" or \"type B\" courses",
       "page": 12,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -184,7 +184,7 @@
       "separator": " ",
       "pattern": "3.2 Applicants enrolled in years subsequent to the first of \"type A\" or \"type B\" courses",
       "page": 13,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -195,7 +195,7 @@
       "separator": " ",
       "pattern": "3.3 Applicants enrolled in \"type C\" courses",
       "page": 14,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -206,7 +206,7 @@
       "separator": " ",
       "pattern": "3.4 Diversified merit requirements for students with disabilities",
       "page": 14,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -217,7 +217,7 @@
       "separator": " ",
       "pattern": "3.5 Applicants who have made programme changes with credit recognition",
       "page": 14,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -228,7 +228,7 @@
       "separator": " ",
       "pattern": "3.6 Bonus for achieving the minimum merit requirement",
       "page": 15,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -250,7 +250,7 @@
       "separator": " ",
       "pattern": "4.1 Participation limits",
       "page": 15,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -261,7 +261,7 @@
       "separator": " ",
       "pattern": "4.2 University ISEE",
       "page": 16,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -272,7 +272,7 @@
       "separator": " ",
       "pattern": "4.3 Applicants whose household qualified in 2021 for IRPEF-exempt income or revenue (welfare, social security, indemnity, etc.) and are previous recipients of university benefits in academic years prior to 2025/2026",
       "page": null,
-      "confidence": 0.7,
+      "confidence": 0.9,
       "children": []
     },
     {
@@ -283,7 +283,7 @@
       "separator": " ",
       "pattern": "4.4 ISEE certification omissions or discrepancies",
       "page": 17,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -294,7 +294,7 @@
       "separator": " ",
       "pattern": "4.5 Applicant status details",
       "page": 18,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -305,7 +305,7 @@
       "separator": " ",
       "pattern": "4.5.1 Independent student",
       "page": 16,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -316,7 +316,7 @@
       "separator": " ",
       "pattern": "4.5.2 Applicant with political refugee or stateless status",
       "page": 18,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -327,7 +327,7 @@
       "separator": " ",
       "pattern": "4.5.3 Applicant with citizenship of an EU country (other than Italy) and non-EU country, with household resident abroad",
       "page": 18,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -338,7 +338,7 @@
       "separator": " ",
       "pattern": "4.5.4 Applicant from a particularly poor or developing country",
       "page": 19,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -349,7 +349,7 @@
       "separator": " ",
       "pattern": "4.5.5 Applicant with citizenship of an EU country (other than Italy) and a non-EU country, as well as coming from particularly poor or developing foreign countries, with a household resident in Italy",
       "page": 19,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -360,7 +360,7 @@
       "separator": " ",
       "pattern": "4.5.6 Applicants enrolled in doctoral research courses",
       "page": 20,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -368,7 +368,7 @@
       "kind": "article",
       "depth": 2,
       "numbering": "ARTICLE 5",
-      "separator": " – ",
+      "separator": " ",
       "pattern": "ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION",
       "page": 20,
       "confidence": 1.0,
@@ -382,7 +382,7 @@
       "separator": " – ",
       "pattern": "5.1 General rules – Terms",
       "page": 20,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -393,7 +393,7 @@
       "separator": " ",
       "pattern": "5.2 Submission of documentation",
       "page": 20,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -404,7 +404,7 @@
       "separator": " ",
       "pattern": "5.3 Specific rules for applicants with disabilities, applicants from other HEIs following withdrawal from studies or forfeiture, applicants already holding another degree and bonus usage",
       "page": 21,
-      "confidence": 0.8,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -415,7 +415,7 @@
       "separator": " ",
       "pattern": "5.3.1 Applicants with disabilities",
       "page": 21,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -426,7 +426,7 @@
       "separator": " ",
       "pattern": "5.3.2 Applicants from HEIs other than the one for which they compete in the academic year 2025/2026 following withdrawal from studies or forfeiture",
       "page": 21,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -437,7 +437,7 @@
       "separator": " ",
       "pattern": "5.3.3 Applicants already holding another degree",
       "page": 22,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -448,7 +448,7 @@
       "separator": " ",
       "pattern": "5.3.4 Applicants who have benefited from bonuses",
       "page": 22,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -459,7 +459,7 @@
       "separator": " ",
       "pattern": "5.4 Transfer of application for applicants from other HEIs/AFAM institutes",
       "page": 22,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -470,7 +470,7 @@
       "separator": " ",
       "pattern": "5.5 Information and Support",
       "page": 22,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -492,7 +492,7 @@
       "separator": " ",
       "pattern": "6.1 Amount of scholarship in relation to income",
       "page": 23,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -503,7 +503,7 @@
       "separator": " ",
       "pattern": "6.2 Increases and decreases",
       "page": 23,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -525,7 +525,7 @@
       "separator": " ",
       "pattern": "7.1 General criteria",
       "page": 24,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -536,7 +536,7 @@
       "separator": " ",
       "pattern": "7.2 Indication of venue Municipalities",
       "page": 25,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -547,7 +547,7 @@
       "separator": " ",
       "pattern": "7.3 Lease agreement for non-resident applicants not housed at university residences",
       "page": 28,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -558,7 +558,7 @@
       "separator": " ",
       "pattern": "7.4 Foreign students",
       "page": 28,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -569,7 +569,7 @@
       "separator": " ",
       "pattern": "7.5 Independent Students",
       "page": 28,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -591,7 +591,7 @@
       "separator": " ",
       "pattern": "8.1 Type of rankings",
       "page": 28,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -602,7 +602,7 @@
       "separator": " ",
       "pattern": "8.2 Provisional rankings",
       "page": 29,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -613,7 +613,7 @@
       "separator": " – ",
       "pattern": "8.3 Corrections to the data used for the provisional rankings – Soccorso istruttorio",
       "page": 29,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -624,7 +624,7 @@
       "separator": " ",
       "pattern": "8.4 Definitive rankings",
       "page": 30,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -635,7 +635,7 @@
       "separator": " ",
       "pattern": "8.5 Conclusive rankings",
       "page": 30,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -646,7 +646,7 @@
       "separator": " ",
       "pattern": "8.6 Appeals against the definitive and conclusive rankings",
       "page": 31,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -657,7 +657,7 @@
       "separator": " ",
       "pattern": "8.7 Single ranking reserved for students enrolled for the first time in the first year of all courses of study",
       "page": 31,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -668,7 +668,7 @@
       "separator": " ",
       "pattern": "8.8 Rankings reserved for applicants enrolled in years subsequent to the first",
       "page": 31,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -679,7 +679,7 @@
       "separator": " ",
       "pattern": "8.9 Eligible scholarship recipients",
       "page": 32,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -690,7 +690,7 @@
       "separator": " ",
       "pattern": "8.10 Eligible non-recipients of a scholarship",
       "page": 32,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -701,7 +701,7 @@
       "separator": " ",
       "pattern": "8.11 Tax refund to eligible applicants",
       "page": 32,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -734,7 +734,7 @@
       "separator": " ",
       "pattern": "10.1 Tuition bursary and services bursary",
       "page": 33,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -745,7 +745,7 @@
       "separator": " ",
       "pattern": "10.2 Payment of tuition bursaries",
       "page": 33,
-      "confidence": 0.9,
+      "confidence": 1.0,
       "children": []
     },
     {
@@ -756,18 +756,40 @@
       "separator": " ",
       "pattern": "10.3 Housing service and related costs",
       "page": 35,
+      "confidence": 1.0,
+      "children": []
+    },
+    {
+      "title": "Residences",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "10.3.1",
+      "separator": " ",
+      "pattern": "10.3.1 Residences",
+      "page": 35,
       "confidence": 0.9,
       "children": []
     },
     {
-      "title": "CALL FOR APPLICATIONS – RECIPIENTS",
-      "kind": "article",
-      "depth": 2,
-      "numbering": "ARTICLE 1",
-      "separator": " – ",
-      "pattern": "ARTICLE 1 – CALL FOR APPLICATIONS – RECIPIENTS",
-      "page": null,
-      "confidence": 1.0,
+      "title": "Fees and payment methods",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "10.3.2",
+      "separator": " ",
+      "pattern": "10.3.2 Fees and payment methods",
+      "page": 36,
+      "confidence": 0.9,
+      "children": []
+    },
+    {
+      "title": "Catering service and related costs",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "10.4",
+      "separator": " ",
+      "pattern": "10.4 Catering service and related costs",
+      "page": 37,
+      "confidence": 0.85,
       "children": []
     },
     {
@@ -899,7 +921,7 @@
       "separator": null,
       "pattern": "DEADLINES",
       "page": 45,
-      "confidence": 0.9,
+      "confidence": 0.8,
       "children": []
     },
     {
@@ -910,7 +932,7 @@
       "separator": null,
       "pattern": "List of particularly poor countries based on low human development indicators (Decreto MUR n. 115 del 28 febbraio 2023)",
       "page": 47,
-      "confidence": 0.8,
+      "confidence": 0.7,
       "children": []
     },
     {
@@ -921,7 +943,73 @@
       "separator": " ",
       "pattern": "Allegato Modulo 1",
       "page": 49,
+      "confidence": 0.95,
+      "children": []
+    },
+    {
+      "title": "BONUS FOR ACHIEVING THE MINIMUM MERIT REQUIREMENT",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "3.6",
+      "separator": " ",
+      "pattern": "3.6 Bonus for achieving the minimum merit requirement",
+      "page": null,
+      "confidence": 0.8,
+      "children": []
+    },
+    {
+      "title": "REQUIREMENTS RELATING TO ECONOMIC CONDITION",
+      "kind": "article",
+      "depth": 2,
+      "numbering": "ARTICLE 4",
+      "separator": " – ",
+      "pattern": "ARTICLE 4 – REQUIREMENTS RELATING TO ECONOMIC CONDITION 4.1 Participation limits",
+      "page": null,
       "confidence": 0.9,
+      "children": []
+    },
+    {
+      "title": "Participation limits",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "4.1",
+      "separator": " ",
+      "pattern": "4.1 Participation limits",
+      "page": null,
+      "confidence": 0.9,
+      "children": []
+    },
+    {
+      "title": "University ISEE",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "4.2",
+      "separator": " ",
+      "pattern": "4.2 University ISEE",
+      "page": null,
+      "confidence": 0.95,
+      "children": []
+    },
+    {
+      "title": "Composition of the family unit",
+      "kind": "subarticle",
+      "depth": 3,
+      "numbering": "4.3",
+      "separator": " ",
+      "pattern": "4.3 Composition of the family unit",
+      "page": null,
+      "confidence": 0.95,
+      "children": []
+    },
+    {
+      "title": "Independent student",
+      "kind": "subarticle",
+      "depth": 4,
+      "numbering": "4.3.1",
+      "separator": " ",
+      "pattern": "4.3.1 Independent student",
+      "page": null,
+      "confidence": 0.95,
       "children": []
     }
   ],
@@ -944,7 +1032,7 @@
           "separator": " ",
           "pattern": "1.1 Purpose of the call",
           "page": 5,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -955,7 +1043,7 @@
           "separator": " ",
           "pattern": "1.2 Recipients",
           "page": 5,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": [
             {
               "title": "Courses of study and year of first enrolment",
@@ -965,7 +1053,7 @@
               "separator": " ",
               "pattern": "1.2.1 Courses of study and year of first enrolment",
               "page": 5,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -976,7 +1064,7 @@
               "separator": " ",
               "pattern": "1.2.2 Achievement of the degree and duration of the courses of study",
               "page": 6,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -987,7 +1075,7 @@
               "separator": " ",
               "pattern": "1.2.3 Deadlines for enrolment in courses of study",
               "page": 7,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -998,7 +1086,7 @@
               "separator": " ",
               "pattern": "1.2.4 Career check for candidates enrolled in an additional semester or in the first year",
               "page": 8,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1009,7 +1097,7 @@
               "separator": " ",
               "pattern": "1.2.5 Transfers between HEIs",
               "page": null,
-              "confidence": 0.7,
+              "confidence": 0.9,
               "children": []
             },
             {
@@ -1020,7 +1108,7 @@
               "separator": " ",
               "pattern": "1.2.6 Foreign students, stateless persons and refugees",
               "page": null,
-              "confidence": 0.7,
+              "confidence": 0.9,
               "children": []
             },
             {
@@ -1031,7 +1119,7 @@
               "separator": " ",
               "pattern": "1.2.7 Students enrolled simultaneously in two courses of study at Universities and AFAM institutes",
               "page": 9,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1042,7 +1130,7 @@
               "separator": " ",
               "pattern": "1.2.8 Students simultaneously enrolled in courses of study and FIT (Education, placement and internship) courses at Universities",
               "page": 10,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             }
           ]
@@ -1055,7 +1143,7 @@
           "separator": " ",
           "pattern": "1.3 Compatibility with other benefits",
           "page": 10,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1066,7 +1154,7 @@
           "separator": " – ",
           "pattern": "1.4 Publication obligations pursuant to Law 241/1990, Law 190/2012 and Legislative Decree 33/2013 – Reserved Area – Digital address",
           "page": 11,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         }
       ]
@@ -1100,7 +1188,7 @@
           "separator": " ",
           "pattern": "3.1 Applicants enrolled in the first year of \"type A\" or \"type B\" courses",
           "page": 12,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1111,7 +1199,7 @@
           "separator": " ",
           "pattern": "3.2 Applicants enrolled in years subsequent to the first of \"type A\" or \"type B\" courses",
           "page": 13,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1122,7 +1210,7 @@
           "separator": " ",
           "pattern": "3.3 Applicants enrolled in \"type C\" courses",
           "page": 14,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1133,7 +1221,7 @@
           "separator": " ",
           "pattern": "3.4 Diversified merit requirements for students with disabilities",
           "page": 14,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1144,7 +1232,7 @@
           "separator": " ",
           "pattern": "3.5 Applicants who have made programme changes with credit recognition",
           "page": 14,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1155,7 +1243,7 @@
           "separator": " ",
           "pattern": "3.6 Bonus for achieving the minimum merit requirement",
           "page": 15,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         }
       ]
@@ -1178,7 +1266,7 @@
           "separator": " ",
           "pattern": "4.1 Participation limits",
           "page": 15,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1189,7 +1277,7 @@
           "separator": " ",
           "pattern": "4.2 University ISEE",
           "page": 16,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1200,7 +1288,7 @@
           "separator": " ",
           "pattern": "4.3 Applicants whose household qualified in 2021 for IRPEF-exempt income or revenue (welfare, social security, indemnity, etc.) and are previous recipients of university benefits in academic years prior to 2025/2026",
           "page": null,
-          "confidence": 0.7,
+          "confidence": 0.9,
           "children": []
         },
         {
@@ -1211,7 +1299,7 @@
           "separator": " ",
           "pattern": "4.4 ISEE certification omissions or discrepancies",
           "page": 17,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1222,7 +1310,7 @@
           "separator": " ",
           "pattern": "4.5 Applicant status details",
           "page": 18,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": [
             {
               "title": "Independent student",
@@ -1232,7 +1320,7 @@
               "separator": " ",
               "pattern": "4.5.1 Independent student",
               "page": 16,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1243,7 +1331,7 @@
               "separator": " ",
               "pattern": "4.5.2 Applicant with political refugee or stateless status",
               "page": 18,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1254,7 +1342,7 @@
               "separator": " ",
               "pattern": "4.5.3 Applicant with citizenship of an EU country (other than Italy) and non-EU country, with household resident abroad",
               "page": 18,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1265,7 +1353,7 @@
               "separator": " ",
               "pattern": "4.5.4 Applicant from a particularly poor or developing country",
               "page": 19,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1276,7 +1364,7 @@
               "separator": " ",
               "pattern": "4.5.5 Applicant with citizenship of an EU country (other than Italy) and a non-EU country, as well as coming from particularly poor or developing foreign countries, with a household resident in Italy",
               "page": 19,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1287,7 +1375,7 @@
               "separator": " ",
               "pattern": "4.5.6 Applicants enrolled in doctoral research courses",
               "page": 20,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             }
           ]
@@ -1299,7 +1387,7 @@
       "kind": "article",
       "depth": 2,
       "numbering": "ARTICLE 5",
-      "separator": " – ",
+      "separator": " ",
       "pattern": "ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION",
       "page": 20,
       "confidence": 1.0,
@@ -1312,7 +1400,7 @@
           "separator": " – ",
           "pattern": "5.1 General rules – Terms",
           "page": 20,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1323,7 +1411,7 @@
           "separator": " ",
           "pattern": "5.2 Submission of documentation",
           "page": 20,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1334,7 +1422,7 @@
           "separator": " ",
           "pattern": "5.3 Specific rules for applicants with disabilities, applicants from other HEIs following withdrawal from studies or forfeiture, applicants already holding another degree and bonus usage",
           "page": 21,
-          "confidence": 0.8,
+          "confidence": 1.0,
           "children": [
             {
               "title": "Applicants with disabilities",
@@ -1344,7 +1432,7 @@
               "separator": " ",
               "pattern": "5.3.1 Applicants with disabilities",
               "page": 21,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1355,7 +1443,7 @@
               "separator": " ",
               "pattern": "5.3.2 Applicants from HEIs other than the one for which they compete in the academic year 2025/2026 following withdrawal from studies or forfeiture",
               "page": 21,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1366,7 +1454,7 @@
               "separator": " ",
               "pattern": "5.3.3 Applicants already holding another degree",
               "page": 22,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             },
             {
@@ -1377,7 +1465,7 @@
               "separator": " ",
               "pattern": "5.3.4 Applicants who have benefited from bonuses",
               "page": 22,
-              "confidence": 0.9,
+              "confidence": 1.0,
               "children": []
             }
           ]
@@ -1390,7 +1478,7 @@
           "separator": " ",
           "pattern": "5.4 Transfer of application for applicants from other HEIs/AFAM institutes",
           "page": 22,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1401,7 +1489,7 @@
           "separator": " ",
           "pattern": "5.5 Information and Support",
           "page": 22,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         }
       ]
@@ -1424,7 +1512,7 @@
           "separator": " ",
           "pattern": "6.1 Amount of scholarship in relation to income",
           "page": 23,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1435,7 +1523,7 @@
           "separator": " ",
           "pattern": "6.2 Increases and decreases",
           "page": 23,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         }
       ]
@@ -1458,7 +1546,7 @@
           "separator": " ",
           "pattern": "7.1 General criteria",
           "page": 24,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1469,7 +1557,7 @@
           "separator": " ",
           "pattern": "7.2 Indication of venue Municipalities",
           "page": 25,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1480,7 +1568,7 @@
           "separator": " ",
           "pattern": "7.3 Lease agreement for non-resident applicants not housed at university residences",
           "page": 28,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1491,7 +1579,7 @@
           "separator": " ",
           "pattern": "7.4 Foreign students",
           "page": 28,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1502,7 +1590,7 @@
           "separator": " ",
           "pattern": "7.5 Independent Students",
           "page": 28,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         }
       ]
@@ -1525,7 +1613,7 @@
           "separator": " ",
           "pattern": "8.1 Type of rankings",
           "page": 28,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1536,7 +1624,7 @@
           "separator": " ",
           "pattern": "8.2 Provisional rankings",
           "page": 29,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1547,7 +1635,7 @@
           "separator": " – ",
           "pattern": "8.3 Corrections to the data used for the provisional rankings – Soccorso istruttorio",
           "page": 29,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1558,7 +1646,7 @@
           "separator": " ",
           "pattern": "8.4 Definitive rankings",
           "page": 30,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1569,7 +1657,7 @@
           "separator": " ",
           "pattern": "8.5 Conclusive rankings",
           "page": 30,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1580,7 +1668,7 @@
           "separator": " ",
           "pattern": "8.6 Appeals against the definitive and conclusive rankings",
           "page": 31,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1591,7 +1679,7 @@
           "separator": " ",
           "pattern": "8.7 Single ranking reserved for students enrolled for the first time in the first year of all courses of study",
           "page": 31,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1602,7 +1690,7 @@
           "separator": " ",
           "pattern": "8.8 Rankings reserved for applicants enrolled in years subsequent to the first",
           "page": 31,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1613,7 +1701,7 @@
           "separator": " ",
           "pattern": "8.9 Eligible scholarship recipients",
           "page": 32,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1624,7 +1712,7 @@
           "separator": " ",
           "pattern": "8.10 Eligible non-recipients of a scholarship",
           "page": 32,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1635,7 +1723,7 @@
           "separator": " ",
           "pattern": "8.11 Tax refund to eligible applicants",
           "page": 32,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         }
       ]
@@ -1669,7 +1757,7 @@
           "separator": " ",
           "pattern": "10.1 Tuition bursary and services bursary",
           "page": 33,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1680,7 +1768,7 @@
           "separator": " ",
           "pattern": "10.2 Payment of tuition bursaries",
           "page": 33,
-          "confidence": 0.9,
+          "confidence": 1.0,
           "children": []
         },
         {
@@ -1691,21 +1779,43 @@
           "separator": " ",
           "pattern": "10.3 Housing service and related costs",
           "page": 35,
+          "confidence": 1.0,
+          "children": []
+        },
+        {
+          "title": "Residences",
+          "kind": "subarticle",
+          "depth": 3,
+          "numbering": "10.3.1",
+          "separator": " ",
+          "pattern": "10.3.1 Residences",
+          "page": 35,
           "confidence": 0.9,
+          "children": []
+        },
+        {
+          "title": "Fees and payment methods",
+          "kind": "subarticle",
+          "depth": 3,
+          "numbering": "10.3.2",
+          "separator": " ",
+          "pattern": "10.3.2 Fees and payment methods",
+          "page": 36,
+          "confidence": 0.9,
+          "children": []
+        },
+        {
+          "title": "Catering service and related costs",
+          "kind": "subarticle",
+          "depth": 3,
+          "numbering": "10.4",
+          "separator": " ",
+          "pattern": "10.4 Catering service and related costs",
+          "page": 37,
+          "confidence": 0.85,
           "children": []
         }
       ]
-    },
-    {
-      "title": "CALL FOR APPLICATIONS – RECIPIENTS",
-      "kind": "article",
-      "depth": 2,
-      "numbering": "ARTICLE 1",
-      "separator": " – ",
-      "pattern": "ARTICLE 1 – CALL FOR APPLICATIONS – RECIPIENTS",
-      "page": null,
-      "confidence": 1.0,
-      "children": []
     },
     {
       "title": "INTERNATIONAL MOBILITY GRANT",
@@ -1836,7 +1946,7 @@
       "separator": null,
       "pattern": "DEADLINES",
       "page": 45,
-      "confidence": 0.9,
+      "confidence": 0.8,
       "children": []
     },
     {
@@ -1847,7 +1957,7 @@
       "separator": null,
       "pattern": "List of particularly poor countries based on low human development indicators (Decreto MUR n. 115 del 28 febbraio 2023)",
       "page": 47,
-      "confidence": 0.8,
+      "confidence": 0.7,
       "children": []
     },
     {
@@ -1858,13 +1968,82 @@
       "separator": " ",
       "pattern": "Allegato Modulo 1",
       "page": 49,
-      "confidence": 0.9,
-      "children": []
+      "confidence": 0.95,
+      "children": [
+        {
+          "title": "BONUS FOR ACHIEVING THE MINIMUM MERIT REQUIREMENT",
+          "kind": "article",
+          "depth": 2,
+          "numbering": "3.6",
+          "separator": " ",
+          "pattern": "3.6 Bonus for achieving the minimum merit requirement",
+          "page": null,
+          "confidence": 0.8,
+          "children": []
+        },
+        {
+          "title": "REQUIREMENTS RELATING TO ECONOMIC CONDITION",
+          "kind": "article",
+          "depth": 2,
+          "numbering": "ARTICLE 4",
+          "separator": " – ",
+          "pattern": "ARTICLE 4 – REQUIREMENTS RELATING TO ECONOMIC CONDITION 4.1 Participation limits",
+          "page": null,
+          "confidence": 0.9,
+          "children": [
+            {
+              "title": "Participation limits",
+              "kind": "subarticle",
+              "depth": 3,
+              "numbering": "4.1",
+              "separator": " ",
+              "pattern": "4.1 Participation limits",
+              "page": null,
+              "confidence": 0.9,
+              "children": []
+            },
+            {
+              "title": "University ISEE",
+              "kind": "subarticle",
+              "depth": 3,
+              "numbering": "4.2",
+              "separator": " ",
+              "pattern": "4.2 University ISEE",
+              "page": null,
+              "confidence": 0.95,
+              "children": []
+            },
+            {
+              "title": "Composition of the family unit",
+              "kind": "subarticle",
+              "depth": 3,
+              "numbering": "4.3",
+              "separator": " ",
+              "pattern": "4.3 Composition of the family unit",
+              "page": null,
+              "confidence": 0.95,
+              "children": [
+                {
+                  "title": "Independent student",
+                  "kind": "subarticle",
+                  "depth": 4,
+                  "numbering": "4.3.1",
+                  "separator": " ",
+                  "pattern": "4.3.1 Independent student",
+                  "page": null,
+                  "confidence": 0.95,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
-  "summary": "This document is an official call for applications issued by A.Di.S.U.R.C., the agency responsible for university student support in the Campania region of Italy. Its main purpose is to announce and regulate the awarding of scholarships, accommodation places, and international mobility grants for the 2025/2026 academic year. Key topics covered include eligibility criteria, types of recipients, application deadlines, conditions related to enrollment and academic status, compatibility with other benefits, and legal publication requirements.",
+  "summary": "The document is a call for applications issued by A.Di.S.U.R.C. for scholarships, accommodation places, and international mobility grants for the 2025/2026 academic year. It details the eligibility criteria, target recipients including various student categories, and application deadlines, aiming to support university students in the Campania region.",
   "metadata": {
-    "title": null,
+    "title": "Unknown",
     "source": "inferred",
     "year": null,
     "document_type": null,
@@ -1872,7 +2051,7 @@
   },
   "toc_boundaries": {
     "start_line": 0,
-    "end_line": 99,
+    "end_line": 349,
     "marker": "(agent-detected)"
   },
   "processing_log": [
@@ -1888,17 +2067,17 @@
     },
     {
       "action": "boundary",
-      "detail": "TOC spans lines 0–99",
+      "detail": "TOC spans lines 0-349",
       "line": null
     },
     {
       "action": "classified",
-      "detail": "LLM extracted 84 TOC entries",
+      "detail": "LLM extracted 92 TOC entries",
       "line": null
     },
     {
       "action": "mapped",
-      "detail": "Built heading tree with 25 root nodes",
+      "detail": "Built heading tree with 24 root nodes",
       "line": null
     },
     {
@@ -1908,9 +2087,9 @@
     },
     {
       "action": "metadata",
-      "detail": "Extracted metadata: title='None', source=inferred",
+      "detail": "Extracted metadata: title='Unknown', source=inferred",
       "line": null
     }
   ],
-  "extracted_at": "2026-03-22T16:33:51.156880Z"
+  "extracted_at": "2026-03-22T17:46:15.356996Z"
 }
