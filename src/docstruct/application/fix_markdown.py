@@ -85,6 +85,7 @@ def fix_markdown(
     source_path: str,
     toc_json_path: str,
     output_dir: str,
+    report_dir: str | None = None,
     use_llm_matching: bool = True,
     verbose: bool = False,
 ) -> CorrectionReport:
@@ -131,7 +132,8 @@ def fix_markdown(
 
     source_filename = Path(source_path).name
     corrected_path = str(Path(output_dir) / source_filename)
-    report_path = str(Path(output_dir) / f"{Path(source_filename).stem}_report.json")
+    report_output_dir = Path(report_dir) if report_dir else Path(output_dir)
+    report_path = str(report_output_dir / f"{Path(source_filename).stem}_report.json")
 
     write_corrected_markdown(corrected_lines, corrected_path)
     report = build_correction_report(

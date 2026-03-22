@@ -8,10 +8,16 @@ TOC extraction and markdown-fixing pipeline for structured document markdown.
 python -m pip install -e .
 
 # Extract TOC JSON
-python -m docstruct extract data/document.md --output output/document.json
+python -m docstruct extract data/document.md --output output/01_toc/document.json
 
 # Fix headings using extracted TOC
-python -m docstruct fix data/document.md --toc output/document.json --output-dir output/fixed
+python -m docstruct fix data/document.md --toc output/01_toc/document.json --output-dir output/02_fixed_markdown --report-dir output/02_fix_reports
+
+# Build PageIndex-backed search indexes from fixed markdown
+python -m docstruct index output/02_fixed_markdown --output-dir output/03_pageindex --toc-dir output/01_toc
+
+# Ask grounded questions across indexed documents
+python -m docstruct ask "What are the application deadlines?" --index-dir output/03_pageindex
 ```
 
 ## Project Layout
@@ -35,12 +41,16 @@ docs/              # Supporting guides and architecture notes
 ```bash
 python tools/run_extract.py data/document.md
 python tools/run_extract_all.py
-python tools/run_fix.py data/document.md --toc output/document.json
+python tools/run_fix.py data/document.md --toc output/01_toc/document.json
 python tools/run_pipeline_all.py
 python tools/run_pipeline.py
+python tools/run_pageindex.py
+python tools/run_search_agent.py "What are the deadlines?"
 python tools/run_fixer.py
 python tools/smoke_test.py data/document.md
 ```
+
+`tools/run_pipeline_all.py` now builds PageIndex-backed search indexes in `output/03_pageindex/` after markdown fixing unless `--skip-index` is provided.
 
 ## Environment
 
@@ -59,6 +69,27 @@ DocStruct-specific settings use the `DOCSTRUCT_` prefix, for example:
 - `DOCSTRUCT_MIN_CONFIDENCE`
 - `DOCSTRUCT_BATCH_SIZE`
 - `DOCSTRUCT_AGENT_MODEL`
+
+## PageIndex Workflow
+
+DocStruct now supports a grounded document-QA workflow that uses a vendored, markdown-only PageIndex-compatible tree builder inside the project. No separate PageIndex checkout is required at runtime.
+
+1. Run the normal extract/fix pipeline.
+2. Build indexes with `python -m docstruct index output/02_fixed_markdown --output-dir output/03_pageindex`.
+3. Ask questions with `python tools/run_search_agent.py "..." --index-dir output/03_pageindex`.
+
+The batch runner handles step 2 automatically after `fix`.
+
+## Output Layout
+
+New pipeline artifacts are written into stage-specific folders:
+
+- `output/01_toc/`
+- `output/02_fixed_markdown/`
+- `output/02_fix_reports/`
+- `output/03_pageindex/`
+- `output/04_answers/`
+- `output/00_runs/`
 
 ## Tests
 

@@ -9,9 +9,12 @@ from pathlib import Path
 import subprocess
 import sys
 
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+from docstruct.output_layout import FIXED_MARKDOWN_DIR, FIX_REPORTS_DIR, TOC_DIR
 
 
 def run(cmd: list[str], label: str) -> int:
@@ -33,9 +36,12 @@ def main() -> None:
         print(f"ERROR: File not found: {markdown_file}")
         raise SystemExit(1)
 
-    output_json = PROJECT_ROOT / "output" / f"{markdown_file.stem}.smoke.json"
-    output_dir = PROJECT_ROOT / "output" / "smoke-fixed"
+    output_json = PROJECT_ROOT / TOC_DIR / f"{markdown_file.stem}.smoke.json"
+    output_dir = PROJECT_ROOT / FIXED_MARKDOWN_DIR
+    report_dir = PROJECT_ROOT / FIX_REPORTS_DIR
+    output_json.parent.mkdir(parents=True, exist_ok=True)
     output_dir.mkdir(parents=True, exist_ok=True)
+    report_dir.mkdir(parents=True, exist_ok=True)
 
     checks = [
         (
@@ -61,6 +67,8 @@ def main() -> None:
                 str(output_json),
                 "--output-dir",
                 str(output_dir),
+                "--report-dir",
+                str(report_dir),
             ],
             "CLI fix",
         ),

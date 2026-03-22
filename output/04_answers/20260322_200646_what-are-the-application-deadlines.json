@@ -1,0 +1,40 @@
+{
+  "question": "What are the application deadlines?",
+  "answer": "The main application deadline for benefits (scholarship and accommodation) for enrolled and enrolling students is from June 11, 2025, to July 31, 2025, at 12:00 p.m. For simultaneous enrollment in two courses of study, the application period is from October 1, 2025, until 12:00 noon on October 15, 2025. The deadline for applying for the rentAL contribution is December 31, 2025. Enrollment for the 2025/2026 academic year should be completed by September 20, 2025, to avoid suspension of eligibility. Additionally, certain applicants must submit certification and/or complete applications by March 31, 2026.",
+  "citations": [
+    {
+      "document_id": "Competition-Notice-a.y.-2025_2026",
+      "document_title": "COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026",
+      "node_id": "0015",
+      "node_title": "Article 7 - Deadline dates for the online application for benefits",
+      "line_number": 251
+    },
+    {
+      "document_id": "Competition-Notice-a.y.-2025_2026",
+      "document_title": "COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026",
+      "node_id": "0061",
+      "node_title": "22.1 How to Apply",
+      "line_number": 1184
+    },
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Unknown",
+      "node_id": "0005",
+      "node_title": "1.2.3 Deadlines for enrolment in courses of study",
+      "line_number": 113
+    },
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Unknown",
+      "node_id": "0036",
+      "node_title": "DEADLINES",
+      "line_number": 434
+    }
+  ],
+  "document_ids": [
+    "Competition-Notice-a.y.-2025_2026",
+    "Bando di Concorso a.a. 2025.26_ENG_0",
+    "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+  ],
+  "retrieval_notes": "The question specifically asks about application deadlines. The most relevant documents are those whose summaries explicitly mention application deadlines as a key topic. Documents 'Competition-Notice-a.y.-2025_2026', 'Bando di Concorso a.a. 2025.26_ENG_0', and 'Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)' all mention application deadlines as a main topic. Document 'Bando_Borse_di_studio_2025-2026_ENG' also mentions application deadlines but is less explicit about it compared to the others, and since precision is preferred, it can be omitted to avoid possibly less relevant information. Therefore, the top 3 documents most likely to answer the question about application deadlines are the first three documents listed. | Competition-Notice-a.y.-2025_2026: The user asks about the application deadlines. Scanning the document tree, the most relevant node is Article 7 (node_id 0015), titled \"Deadline dates for the online application for benefits,\" which explicitly references deadline dates. Additionally, Article 6 (node_id 0011) covers the method for submitting applications, which might include some deadlines or timing details. Article 6 has subnodes 6.3 (node_id 0014) about modifying information 'within the deadlines,' which likely contain deadline info. Also, Article 25.1 (node_id 0069) speaks about grounds for non-admission, including failure to meet deadlines, which might give boundaries on deadlines. Article 22.1 (node_id 0061) refers to December 31, 2025 deadline for applying to rental contribution, which is an application deadline related to benefits. For comprehensive coverage, these nodes collectively address the question. Other articles (like Article 5 or 1) do not seem to include specific deadlines. Therefore, I choose up to 6 node_ids: 0015 (main deadline article), 0011 and its subnode 0014 (application submission and modifying info deadlines), 0069 (non-admission grounds including deadlines), 0061 (specific deadline for rental contribution application), and 0012 (exceptions to applying method, might mention different deadlines). | Bando di Concorso a.a. 2025.26_ENG_0: The question asks for application deadlines. From the document tree, the node titled '1.2.3 Deadlines for enrolment in courses of study' (node_id '0005') directly references deadlines related to enrolment, which may include application timelines or constraints prior to enrollment. Additionally, the node under 'Applicant from a particularly poor or developing country' (node '0035') contains a sub-node 'DEADLINES' (node_id '0036') explicitly about deadlines for participation in the competition. Also, the section '5.1 General rules – Terms' (node_id '0040') under Article 5 about participation rules might contain relevant deadline information related to the application process. These three nodes seem the most relevant. Other nodes titled with 'submission', 'rules for participation', or 'publication' (like 0041, 0060) may mention deadlines in context, but the primary nodes above are most likely to have the specific deadlines. Therefore, the most relevant nodes to select are '0005', '0036', and '0040' to cover deadlines for enrolment, participation, and specific competition deadlines. I will select only these three to keep the answer concise and focused. | Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1): The question asks specifically about application deadlines. The document appears lengthy and has several articles. The most directly relevant sections are likely under Section III which mentions \"METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION\" in ART. 10. In particular, Art. 10(2) DEADLINE FOR SUBMITTING THE APPLICATION seems directly relevant to application deadlines. Additionally, Art. 7 HOW TO SUBMIT AN APPLICATION and its subsections might contain practical details on the application process and deadlines or timing information, specifically for all applicants. Art. 3(1) GROUNDS FOR INELIGIBILITY mentions failure to comply with deadlines, which might give some indirect info on deadlines. Art. 8(2) METHODS AND DEADLINES FOR SUBMITTING THE PAID ACCOMMODATION SELF-CERTIFICATION might be relevant if accommodation application deadlines are considered part of the application deadlines. Art. 12(6) PUBLICATION DATES FOR RANKINGS AND DEADLINES FOR SUBMITTING COMPLAINTS might include some timeline info but less likely focused on initial application deadlines. Therefore, the best nodes to answer the question are: 0056 (ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION), 0058 (ART. 10(2) DEADLINE FOR SUBMITTING THE APPLICATION), 0032 (ART. 7 HOW TO SUBMIT AN APPLICATION), 0008 (Art. 3(1) GROUNDS FOR INELIBIGILITY), 0048 (Art. 8(2) METHODS AND DEADLINES FOR SUBMITTING THE PAID ACCOMMODATION SELF-CERTIFICATION), and possibly 0072 (ART. 12(6) PUBLICATION DATES FOR RANKINGS AND DEADLINES FOR SUBMITTING COMPLAINTS) to give complete picture of deadlines related to the whole process."
+}

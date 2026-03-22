@@ -12,6 +12,7 @@ from docstruct.domain.models.heading import (
     TOCBoundary,
 )
 from docstruct.domain.models.results import ExtractionResult, LogEntry
+from docstruct.domain.models.search import SearchAnswer, SearchCitation, SearchDocumentIndex
 
 __all__ = [
     "CorrectionEntry",
@@ -20,6 +21,9 @@ __all__ = [
     "ExtractionResult",
     "HeadingEntry",
     "LogEntry",
+    "SearchAnswer",
+    "SearchCitation",
+    "SearchDocumentIndex",
     "SourceLine",
     "TOCBoundary",
     "TOCEntry",

@@ -9,9 +9,12 @@ from pathlib import Path
 import subprocess
 import sys
 
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+from docstruct.output_layout import TOC_DIR
 
 
 def main() -> None:
@@ -32,7 +35,7 @@ def main() -> None:
         print(f"ERROR: File not found: {markdown_file}")
         raise SystemExit(1)
 
-    output_path = Path(args.output) if args.output else PROJECT_ROOT / "output" / f"{markdown_file.stem}.json"
+    output_path = Path(args.output) if args.output else PROJECT_ROOT / TOC_DIR / f"{markdown_file.stem}.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     env = dict(os.environ)

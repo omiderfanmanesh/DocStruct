@@ -396,6 +396,39 @@ class TestIntegration:
             assert '\nThe basic amount of the bursary is set at:\n' in corrected_content
             assert '## The basic amount of the bursary is set at:' not in corrected_content
 
+    def test_fix_markdown_can_write_report_to_separate_directory(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            source_path = os.path.join(tmpdir, 'source.md')
+            with open(source_path, 'w', encoding='utf-8') as f:
+                f.write('# COVER\n')
+                f.write('# Art. 1 - Definitions\n')
+
+            toc_path = os.path.join(tmpdir, 'toc.json')
+            with open(toc_path, 'w', encoding='utf-8') as f:
+                json.dump(
+                    {
+                        'toc': [
+                            {
+                                'title': 'Definitions',
+                                'kind': 'article',
+                                'depth': 2,
+                                'numbering': 'Art. 1',
+                            }
+                        ]
+                    },
+                    f,
+                )
+
+            markdown_dir = os.path.join(tmpdir, 'markdown')
+            report_dir = os.path.join(tmpdir, 'reports')
+            os.makedirs(markdown_dir)
+            os.makedirs(report_dir)
+
+            fix_markdown(source_path, toc_path, markdown_dir, report_dir=report_dir, use_llm_matching=False)
+
+            assert os.path.exists(os.path.join(markdown_dir, 'source.md'))
+            assert os.path.exists(os.path.join(report_dir, 'source_report.json'))
+
 
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])

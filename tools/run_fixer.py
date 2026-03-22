@@ -9,9 +9,12 @@ from pathlib import Path
 import subprocess
 import sys
 
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+from docstruct.output_layout import FIXED_MARKDOWN_DIR, FIX_REPORTS_DIR, TOC_DIR
 
 
 def find_markdown_files(data_dir: str = "data") -> list[str]:
@@ -22,7 +25,7 @@ def find_markdown_files(data_dir: str = "data") -> list[str]:
     return sorted(str(path) for path in data_path.glob("*.md"))
 
 
-def find_matching_toc(md_path: str, output_dir: str = "output") -> str | None:
+def find_matching_toc(md_path: str, output_dir: str = str(TOC_DIR)) -> str | None:
     output_path = PROJECT_ROOT / output_dir
     md_name = Path(md_path).stem
     exact_match = output_path / f"{md_name}.json"
@@ -61,12 +64,14 @@ def process_markdown_file(md_path: str, toc_path: str) -> bool:
     print(f"TOC:  {Path(toc_path).name}")
     print(f"{'=' * 80}")
 
-    output_dir = PROJECT_ROOT / "output" / "fixed"
+    output_dir = PROJECT_ROOT / FIXED_MARKDOWN_DIR
+    report_dir = PROJECT_ROOT / FIX_REPORTS_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
-    if not run_command([sys.executable, "-m", "docstruct", "fix", md_path, "--toc", toc_path, "--output-dir", str(output_dir)], "Running markdown fixer"):
+    report_dir.mkdir(parents=True, exist_ok=True)
+    if not run_command([sys.executable, "-m", "docstruct", "fix", md_path, "--toc", toc_path, "--output-dir", str(output_dir), "--report-dir", str(report_dir)], "Running markdown fixer"):
         return False
 
-    report_path = output_dir / f"{Path(md_path).stem}_report.json"
+    report_path = report_dir / f"{Path(md_path).stem}_report.json"
     if report_path.exists():
         try:
             report = json.loads(report_path.read_text(encoding="utf-8"))
@@ -75,7 +80,8 @@ def process_markdown_file(md_path: str, toc_path: str) -> bool:
             print(f"    Lines changed:       {report.get('lines_changed', 'N/A')}")
             print(f"    Lines demoted:       {report.get('lines_demoted', 'N/A')}")
             print(f"    Unmatched TOC items: {len(report.get('unmatched_toc_entries', []))}")
-            print(f"    Output file:         output/fixed/{Path(md_path).name}")
+            print(f"    Output file:         {FIXED_MARKDOWN_DIR / Path(md_path).name}")
+            print(f"    Report file:         {FIX_REPORTS_DIR / report_path.name}")
         except (json.JSONDecodeError, UnicodeDecodeError):
             print(f"  Report generated (check {report_path})")
     return True
@@ -129,7 +135,8 @@ def main() -> None:
     print("=" * 80)
     print(f"Successful: {successful}/{len(pairs)}")
     print(f"Failed:     {failed}/{len(pairs)}")
-    print(f"Output directory: {PROJECT_ROOT / 'output' / 'fixed'}")
+    print(f"Markdown output: {PROJECT_ROOT / FIXED_MARKDOWN_DIR}")
+    print(f"Report output:   {PROJECT_ROOT / FIX_REPORTS_DIR}")
     if failed > 0:
         raise SystemExit(1)
 

@@ -9,9 +9,12 @@ from pathlib import Path
 import subprocess
 import sys
 
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+from docstruct.output_layout import TOC_DIR
 
 
 def find_markdown_files(data_dir: Path) -> list[Path]:
@@ -21,7 +24,7 @@ def find_markdown_files(data_dir: Path) -> list[Path]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Extract TOC JSON for all markdown files in a directory")
     parser.add_argument("--data-dir", default="data", help="Directory containing markdown files")
-    parser.add_argument("--output-dir", default="output", help="Directory where extraction JSON files are written")
+    parser.add_argument("--output-dir", default=str(TOC_DIR), help="Directory where extraction JSON files are written")
     args = parser.parse_args()
 
     data_dir = PROJECT_ROOT / args.data_dir

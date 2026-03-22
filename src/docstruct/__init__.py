@@ -16,6 +16,9 @@ from docstruct.domain.models import (
     ExtractionResult,
     HeadingEntry,
     LogEntry,
+    SearchAnswer,
+    SearchCitation,
+    SearchDocumentIndex,
     TOCBoundary,
 )
 
@@ -33,6 +36,9 @@ __all__ = [
     "LogEntry",
     "MetadataAgent",
     "ProcessingConfig",
+    "SearchAnswer",
+    "SearchCitation",
+    "SearchDocumentIndex",
     "SummaryAgent",
     "TOCBoundary",
 ]

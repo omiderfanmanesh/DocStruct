@@ -9,9 +9,12 @@ from pathlib import Path
 import subprocess
 import sys
 
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+from docstruct.output_layout import FIXED_MARKDOWN_DIR, FIX_REPORTS_DIR
 
 
 def main() -> None:
@@ -21,9 +24,10 @@ def main() -> None:
     parser.add_argument(
         "--output-dir",
         "-o",
-        default="output/fixed",
-        help="Directory where corrected markdown and report will be written",
+        default=str(FIXED_MARKDOWN_DIR),
+        help="Directory where corrected markdown will be written",
     )
+    parser.add_argument("--report-dir", default=str(FIX_REPORTS_DIR), help="Directory where correction reports will be written")
     args = parser.parse_args()
 
     markdown_file = Path(args.markdown_file)
@@ -42,6 +46,8 @@ def main() -> None:
 
     output_dir = (PROJECT_ROOT / args.output_dir).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
+    report_dir = (PROJECT_ROOT / args.report_dir).resolve()
+    report_dir.mkdir(parents=True, exist_ok=True)
 
     env = dict(os.environ)
     env["PYTHONPATH"] = str(SRC_DIR) + os.pathsep + env.get("PYTHONPATH", "")
@@ -56,6 +62,8 @@ def main() -> None:
         str(toc_file),
         "--output-dir",
         str(output_dir),
+        "--report-dir",
+        str(report_dir),
     ]
 
     print(f"Fixing: {markdown_file}")
