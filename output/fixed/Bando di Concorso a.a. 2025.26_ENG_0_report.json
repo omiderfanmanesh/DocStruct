@@ -1,0 +1,658 @@
+{
+  "source_file": "data\\Bando di Concorso a.a. 2025.26_ENG_0.md",
+  "output_file": "output/fixed\\Bando di Concorso a.a. 2025.26_ENG_0.md",
+  "total_lines": 1167,
+  "lines_changed": 92,
+  "lines_demoted": 11,
+  "unmatched_toc_entries": [
+    "Foreign students, stateless persons and refugees",
+    "Applicants whose household qualified in 2021 for IRPEF-exempt income or revenue (welfare, social security, indemnity, etc.) and are previous recipients of university benefits in academic years prior to 2025/2026",
+    "Applicant with political refugee or stateless status"
+  ],
+  "corrections": [
+    {
+      "line_number": 3,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "CALL FOR APPLICATIONS \u2013 RECIPIENTS",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 7,
+      "old_level": 2,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 9,
+      "old_level": 3,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 60,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "CALL FOR APPLICATIONS \u2013 RECIPIENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -60000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Purpose of the call",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 64,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Recipients",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -64000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Courses of study and year of first enrolment",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 83,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Achievement of the degree and duration of the courses of study",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 110,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Deadlines for enrolment in courses of study",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 118,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Career check for candidates enrolled in an additional semester or in the first year",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 131,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Transfers between HEIs",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 156,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Students enrolled simultaneously in two courses of study at Universities and AFAM institutes",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 180,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Students simultaneously enrolled in courses of study and FIT (Education, placement and internship) courses at Universities",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 190,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Compatibility with other benefits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 194,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Publication obligations pursuant to Law 241/1990, Law 190/2012 and Legislative Decree 33/2013 \u2013 Reserved Area \u2013 Digital address",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 213,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "ELIGIBILITY REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 231,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "MERIT REQUIREMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -231000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicants enrolled in the first year of \"type A\" or \"type B\" courses",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 245,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Applicants enrolled in years subsequent to the first of \"type A\" or \"type B\" courses",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 251,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 257,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 271,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Applicants enrolled in \"type C\" courses",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 275,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Diversified merit requirements for students with disabilities",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 283,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicants who have made programme changes with credit recognition",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 295,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 297,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 301,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Bonus for achieving the minimum merit requirement",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 313,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "REQUIREMENTS RELATING TO ECONOMIC CONDITION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -313000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Participation limits",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 327,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "University ISEE",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 345,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Independent student",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 347,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 366,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "ISEE certification omissions or discrepancies",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 380,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicant status details",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 388,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicant with citizenship of an EU country (other than Italy) and non-EU country, with household resident abroad",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 400,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicant from a particularly poor or developing country",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 402,
+      "old_level": 1,
+      "new_level": 4,
+      "matched_toc_title": "DEADLINES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 410,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicant with citizenship of an EU country (other than Italy) and a non-EU country, as well as coming from particularly poor or developing foreign countries, with a household resident in Italy",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 422,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicants enrolled in doctoral research courses",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 424,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "RULES FOR PARTICIPATION IN THE COMPETITION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -424000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "General rules \u2013 Terms",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 428,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Submission of documentation",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 444,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Specific rules for applicants with disabilities, applicants from other HEIs following withdrawal from studies or forfeiture, applicants already holding another degree and bonus usage",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 446,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicants with disabilities",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 450,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicants from HEIs other than the one for which they compete in the academic year 2025/2026 following withdrawal from studies or forfeiture",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 456,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicants already holding another degree",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 458,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Applicants who have benefited from bonuses",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 461,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Transfer of application for applicants from other HEIs/AFAM institutes",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 462,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Information and Support",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 476,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "AMOUNT OF THE SCHOLARSHIP. INCREASES AND DECREASES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -476000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Amount of scholarship in relation to income",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 493,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Increases and decreases",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 509,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "\"RESIDENT\", \"COMMUTER\" AND \"NON-RESIDENT\" STUDENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -509000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "General criteria",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 522,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Indication of venue Municipalities",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 608,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Lease agreement for non-resident applicants not housed at university residences",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 621,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Foreign students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 625,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Independent Students",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 629,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "COMPILATION AND PUBLICATION OF RANKING LISTS, ALLOCATION OF FUNDS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 631,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Type of rankings",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 641,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Provisional rankings",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 657,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Corrections to the data used for the provisional rankings \u2013 Soccorso istruttorio",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 676,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Definitive rankings",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 695,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Conclusive rankings",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 702,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Appeals against the definitive and conclusive rankings",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 703,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Single ranking reserved for students enrolled for the first time in the first year of all courses of study",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 708,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Rankings reserved for applicants enrolled in years subsequent to the first",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 722,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Eligible scholarship recipients",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 735,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Eligible non-recipients of a scholarship",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 742,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Tax refund to eligible applicants",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 753,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "FINANCING OF THE COMPETITION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 766,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "PROCEDURES FOR THE USE OF SCHOLARSHIPS AND SERVICES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": -766000002,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Tuition bursary and services bursary",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 774,
+      "old_level": 1,
+      "new_level": 3,
+      "matched_toc_title": "Payment of tuition bursaries",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 813,
+      "old_level": 4,
+      "new_level": 3,
+      "matched_toc_title": "Housing service and related costs",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 861,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 877,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "INTERNATIONAL MOBILITY GRANT",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 881,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "INCOME STATEMENT ASSESSMENTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 902,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "VERIFICATION OF MERIT. RESTITUTION OF UNDUE BURSARY OR OTHER AMOUNTS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 908,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "SUMMARY OF GROUNDS FOR EXCLUSION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 927,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "CASES OF DISQUALIFICATION AND WITHDRAWAL",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 951,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "PROTECTION OF PERSONAL DATA \u2013 INFORMATION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 967,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "REFERENCE REGULATIONS",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 986,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "PROCEDURE MANAGER",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 987,
+      "old_level": 1,
+      "new_level": 2,
+      "matched_toc_title": "PROCEDURE DEADLINES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 994,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "JURISDICTION",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 998,
+      "old_level": 4,
+      "new_level": 2,
+      "matched_toc_title": "ANNEXES",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1001,
+      "old_level": 1,
+      "new_level": 4,
+      "matched_toc_title": "List of particularly poor countries based on low human development indicators (Decreto MUR n. 115 del 28 febbraio 2023)",
+      "match_method": "llm"
+    },
+    {
+      "line_number": 1005,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 1032,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    },
+    {
+      "line_number": 1087,
+      "old_level": 4,
+      "new_level": 1,
+      "matched_toc_title": "Modulo 1",
+      "match_method": "exact"
+    },
+    {
+      "line_number": 1091,
+      "old_level": 4,
+      "new_level": null,
+      "matched_toc_title": null,
+      "match_method": "demoted"
+    }
+  ]
+}

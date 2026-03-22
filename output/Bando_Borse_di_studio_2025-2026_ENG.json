@@ -421,17 +421,17 @@
       "children": []
     }
   ],
-  "summary": "This document is an official call for applications issued by an Italian educational authority for the assignment of scholarships related to the right to university education for the academic year 2025/2026. Its main purpose is to establish the rules, eligibility criteria, and procedures for awarding financial support to students based on their financial situation and academic merit. Key topics covered include definitions, eligible student categories, application deadlines and procedures, financial assessment criteria (I.S.E.E.), merit evaluation, ranking formation, payment methods, conditions for scholarship forfeiture, and provisions for international mobility and foreign students.",
+  "summary": "This document is an official call for applications, issued by an Italian public authority, for scholarships supporting the right to university education for the academic year 2025/2026. Its main purpose is to outline the criteria, procedures, and requirements for students seeking financial aid to pursue higher education. Key topics covered include eligibility categories, application deadlines, financial evaluation through I.S.E.E., merit criteria, scholarship amounts, payment methods, and conditions for revocation or forfeiture.",
   "metadata": {
-    "title": "CALL FOR THE ASSIGNMENT OF SCHOLARSHIPS FOR THE RIGHT TO UNIVERSITY EDUCATION ACADEMIC YEAR 2025/2026",
-    "source": "explicit",
-    "year": "2025/2026",
-    "document_type": "Call for applications",
+    "title": null,
+    "source": "inferred",
+    "year": null,
+    "document_type": null,
     "organization": null
   },
   "toc_boundaries": {
-    "start_line": 8,
-    "end_line": 8,
+    "start_line": 0,
+    "end_line": 49,
     "marker": "(agent-detected)"
   },
   "processing_log": [
@@ -442,17 +442,17 @@
     },
     {
       "action": "detected",
-      "detail": "TOC marker '(agent-detected)' at line 8",
-      "line": 8
+      "detail": "TOC marker '(agent-detected)' at line 0",
+      "line": 0
     },
     {
       "action": "boundary",
-      "detail": "TOC spans lines 8–8",
+      "detail": "TOC spans lines 0–49",
       "line": null
     },
     {
       "action": "classified",
-      "detail": "LLM classified 19 TOC entries",
+      "detail": "LLM extracted 19 TOC entries",
       "line": null
     },
     {
@@ -467,9 +467,9 @@
     },
     {
       "action": "metadata",
-      "detail": "Extracted metadata: title='CALL FOR THE ASSIGNMENT OF SCHOLARSHIPS FOR THE RIGHT TO UNIVERSITY EDUCATION ACADEMIC YEAR 2025/2026', source=explicit",
+      "detail": "Extracted metadata: title='None', source=inferred",
       "line": null
     }
   ],
-  "extracted_at": "2026-03-19T16:50:27.264162Z"
+  "extracted_at": "2026-03-22T16:36:56.595282Z"
 }

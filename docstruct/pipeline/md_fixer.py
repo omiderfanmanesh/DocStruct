@@ -23,8 +23,10 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-# Detect TOC listing lines: lots of dots followed by a page number at line end.
-_TOC_LISTING_RE = re.compile(r"(?:\.{3,}|Errore\.)\s*\S*\s*\d*\s*$")
+# Detect TOC listing lines: lots of dots (leader dots) anywhere in the line,
+# or "Errore." markers from broken PDF links.  Matching anywhere (no $ anchor)
+# handles MinerU lines that concatenate multiple TOC entries on one line.
+_TOC_LISTING_RE = re.compile(r"\.{3,}|Errore\.")
 
 # A small signal set for unresolved heading candidates.
 _ARTICLE_SIGNAL_RE = re.compile(
@@ -198,8 +200,10 @@ def _should_skip_source_line(
     source_line: SourceLine,
     toc_section_range: Optional[Tuple[int, int]],
 ) -> bool:
-    if _is_within_toc_section(source_line, toc_section_range):
-        return True
+    # Skip lines that look like TOC listings (dots/page numbers pattern).
+    # Do NOT blindly skip all lines within the TOC boundary range — noisy PDF
+    # extractions often place body headings (#### ARTICLE 1 ...) inside the
+    # detected TOC region.  The dots regex is the reliable signal.
     return bool(_TOC_LISTING_RE.search(source_line.raw_text))
 
 
