@@ -10,11 +10,11 @@ ENV/
 build/
 dist/
 *.egg-info/
+src/docstruct.egg-info/
 .idea/
 .env
 
-.codex
-.claude
+
 
 
 

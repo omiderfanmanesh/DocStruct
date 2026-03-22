@@ -2,11 +2,12 @@
 import json
 import pytest
 from unittest.mock import MagicMock
-from docstruct.agents.boundary_agent import BoundaryAgent
+from docstruct.application.agents.boundary_agent import BoundaryAgent
 
 
 def find_toc_boundaries(lines, client):
-    return BoundaryAgent(client).run(lines)
+    boundary, _ = BoundaryAgent(client).run(lines)
+    return boundary
 
 
 def _lines(text: str) -> list[str]:
@@ -21,12 +22,10 @@ def _mock_client(responses: list[dict]):
         n = calls[0]
         calls[0] += 1
         resp = responses[n] if n < len(responses) else {"toc_start": -1, "toc_end": -1, "status": "searching"}
-        msg = MagicMock()
-        msg.content = [MagicMock(text=json.dumps(resp))]
-        return msg
+        return json.dumps(resp)
 
     client = MagicMock()
-    client.messages.create.side_effect = side_effect
+    client.create_message.side_effect = side_effect
     return client
 
 
@@ -121,7 +120,7 @@ def test_toc_spans_two_chunks(monkeypatch):
         {"toc_start": -1, "toc_end": 110, "status": "done"},   # chunk 100-149
     ])
     # patch chunk size to 100 for this test
-    import docstruct.agents.boundary_agent as mod
+    import docstruct.application.agents.boundary_agent as mod
     original = mod._CHUNK_SIZE
     mod._CHUNK_SIZE = 100
     try:

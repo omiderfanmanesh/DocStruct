@@ -1,33 +1,32 @@
 """Shared pytest fixtures for TOC extraction tests."""
+
 import pathlib
+import sys
+
 import pytest
 
-DATA_DIR = pathlib.Path(__file__).parent.parent / "data"
+ROOT_DIR = pathlib.Path(__file__).parent.parent
+SRC_DIR = ROOT_DIR / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+DATA_DIR = ROOT_DIR / "data"
 GOLDEN_DIR = pathlib.Path(__file__).parent / "golden"
-
-
-def _find_md(subdir: str) -> pathlib.Path:
-    folder = DATA_DIR / subdir
-    matches = list(folder.glob("MinerU_markdown_*.md"))
-    assert matches, f"No MinerU markdown found in {folder}"
-    return matches[0]
 
 
 @pytest.fixture(scope="session")
 def notice_md_path() -> pathlib.Path:
-    return _find_md(
-        "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26_2026"
-    )
+    return DATA_DIR / "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1).md"
 
 
 @pytest.fixture(scope="session")
 def disco_md_path() -> pathlib.Path:
-    return _find_md("BANDO-DIRITTO-ALLO-STUDIO-25-26_ENG-compresso-alta")
+    return DATA_DIR / "Bando_Borse_di_studio_2025-2026_ENG.md"
 
 
 @pytest.fixture(scope="session")
 def bologna_md_path() -> pathlib.Path:
-    return _find_md("bando-di-concorso-benefici-dsu-a-a-2025_26")
+    return DATA_DIR / "Bando di Concorso a.a. 2025.26_ENG_0.md"
 
 
 @pytest.fixture(scope="session")

@@ -113,7 +113,7 @@ Discussion of Results
 
 **Building Client**:
 ```python
-from docstruct.providers.factory import build_client
+from docstruct.infrastructure.llm.factory import build_client
 
 client = build_client()  # Reads LLM_PROVIDER env var
 ```

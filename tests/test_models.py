@@ -1,5 +1,5 @@
 """Unit tests for model serialization."""
-from docstruct.models import (
+from docstruct.domain.models import (
     DocumentMetadata,
     ExtractionResult,
     HeadingEntry,

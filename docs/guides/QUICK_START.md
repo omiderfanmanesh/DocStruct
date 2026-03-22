@@ -5,18 +5,18 @@
 ### Process All Documents (with LLM heading correction)
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-..."
-python scripts/run_pipeline_all.py
+python tools/run_pipeline_all.py
 ```
 
 ### Fast Processing (no API calls, no LLM)
 ```bash
-python scripts/run_pipeline_all.py --skip-extract --no-llm
+python tools/run_pipeline_all.py --skip-extract
 ```
 
 ### Extract TOC Only
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-..."
-python scripts/run_pipeline_all.py --skip-fix
+python tools/run_pipeline_all.py --skip-fix
 ```
 
 ## What It Does
@@ -48,7 +48,7 @@ Bando_benefici_DSU (904K)          → (needs TOC extraction)
 
 ## Files
 
-- **Script**: `scripts/run_pipeline_all.py` - Main batch processor
+- **Script**: `tools/run_pipeline_all.py` - Main batch processor
 - **Docs**:
   - `docs/guides/BATCH_PIPELINE.md` - Comprehensive guide
   - `docs/architecture/PIPELINE_SUMMARY.md` - Complete overview
@@ -68,7 +68,7 @@ export ANTHROPIC_API_KEY="your-key-here"
 
 **SSL Error (DLL load failed)**
 ```bash
-PYTHONNOUSERSITE=1 python scripts/run_pipeline_all.py
+PYTHONNOUSERSITE=1 python tools/run_pipeline_all.py
 ```
 
 ## See Also

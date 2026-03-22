@@ -1,44 +1,41 @@
-"""docstruct — LLM-based TOC extraction and markdown fixing pipeline."""
+"""DocStruct public API."""
 
-from docstruct.agents import (
-    BaseAgent,
-    AgentResult,
+from docstruct.application.agents import (
     AgentChain,
+    AgentResult,
+    BaseAgent,
     BoundaryAgent,
     ClassifierAgent,
-    SummaryAgent,
     MetadataAgent,
+    SummaryAgent,
 )
-from docstruct.models import (
-    HeadingEntry,
-    TOCBoundary,
+from docstruct.config import AgentConfig, ProcessingConfig
+from docstruct.domain.exceptions import DocStructError
+from docstruct.domain.models import (
     DocumentMetadata,
     ExtractionResult,
+    HeadingEntry,
     LogEntry,
+    TOCBoundary,
 )
-from docstruct.config import ProcessingConfig, AgentConfig
-from docstruct.exceptions import DocStructError
 
 __all__ = [
-    # Agents
-    "BaseAgent",
-    "AgentResult",
     "AgentChain",
+    "AgentConfig",
+    "AgentResult",
+    "BaseAgent",
     "BoundaryAgent",
     "ClassifierAgent",
-    "SummaryAgent",
-    "MetadataAgent",
-    # Models
-    "HeadingEntry",
-    "TOCBoundary",
+    "DocStructError",
     "DocumentMetadata",
     "ExtractionResult",
+    "HeadingEntry",
     "LogEntry",
-    # Configuration
+    "MetadataAgent",
     "ProcessingConfig",
-    "AgentConfig",
-    # Exceptions
-    "DocStructError",
+    "SummaryAgent",
+    "TOCBoundary",
 ]
 
 __version__ = "0.1.0"
+

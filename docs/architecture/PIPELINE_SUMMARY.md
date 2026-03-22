@@ -1,8 +1,8 @@
-# Miner-MinerU Pipeline: Complete Implementation Summary
+# DocStruct Pipeline: Complete Implementation Summary
 
 ## Overview
 Successfully implemented and tested a complete pipeline for:
-1. **TOC Extraction** - Extract table of contents from MinerU-generated markdown documents
+1. **TOC Extraction** - Extract table of contents from markdown documents
 2. **Markdown Fixing** - Normalize heading levels using LLM agent for intelligent analysis
 3. **Batch Processing** - Run full pipeline across all documents in `/data`
 
@@ -29,7 +29,7 @@ Successfully implemented and tested a complete pipeline for:
 - **Tests**: All 16 tests passing ✅
 
 ### Feature 3: Batch Pipeline Runner
-- **File**: `scripts/run_pipeline_all.py`
+- **File**: `tools/run_pipeline_all.py`
 - **Capability**: Process all documents in `/data` with single command
 - **Flexibility**: Options to skip extraction, skip fixing, or skip LLM
 - **Output**: Per-file reports + batch summary with timestamps
@@ -70,7 +70,7 @@ TestIntegration (1):
 
 ### Batch Processing Results
 
-**Command**: `python scripts/run_pipeline_all.py --skip-extract --no-llm`
+**Command**: `python tools/run_pipeline_all.py --skip-extract`
 
 **Results**:
 ```
@@ -137,7 +137,7 @@ fix_markdown(
 
 **Batch Pipeline**:
 ```bash
-python scripts/run_pipeline_all.py [--skip-extract] [--skip-fix] [--no-llm]
+python tools/run_pipeline_all.py [--skip-extract] [--skip-fix]
 ```
 
 ## Usage Examples
@@ -145,13 +145,13 @@ python scripts/run_pipeline_all.py [--skip-extract] [--skip-fix] [--no-llm]
 ### Example 1: Full Pipeline with LLM
 ```bash
 # Extract TOC + fix markdown with intelligent heading analysis
-python scripts/run_pipeline_all.py
+python tools/run_pipeline_all.py
 ```
 
 ### Example 2: Fast Batch Fix (No API Calls)
 ```bash
 # Use existing TOC files, no LLM heading correction
-python scripts/run_pipeline_all.py --skip-extract --no-llm
+python tools/run_pipeline_all.py --skip-extract
 ```
 
 ### Example 3: Single Document
@@ -247,8 +247,7 @@ PYTHONNOUSERSITE=1    # Needed for conda agent env (SSL DLL workaround)
 
 ### New Files
 - `docstruct/agents/heading_corrector_agent.py` - LLM agent for heading inference
-- `scripts/run_pipeline_all.py` - Batch pipeline runner
-- `scripts/run_pipeline_all.sh` - Bash wrapper
+- `tools/run_pipeline_all.py` - Batch pipeline runner
 - `docs/architecture/LLM_AGENT_IMPLEMENTATION.md` - Technical details
 - `docs/guides/BATCH_PIPELINE.md` - User documentation
 - `docs/architecture/PIPELINE_SUMMARY.md` - This file

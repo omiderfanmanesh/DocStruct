@@ -8,16 +8,16 @@ Automate TOC extraction and markdown fixing for all documents in the `/data` dir
 
 ```bash
 # Using Python directly (requires ANTHROPIC_API_KEY set)
-PYTHONNOUSERSITE=1 python scripts/run_pipeline_all.py
+PYTHONNOUSERSITE=1 python tools/run_pipeline_all.py
 
 # Using bash wrapper
-bash scripts/run_pipeline_all.sh
+python tools/run_pipeline_all.py
 ```
 
 ### Only Extract TOC (Skip Markdown Fixing)
 
 ```bash
-python scripts/run_pipeline_all.py --skip-fix
+python tools/run_pipeline_all.py --skip-fix
 ```
 
 ### Only Fix Markdown (Skip TOC Extraction)
@@ -25,7 +25,7 @@ python scripts/run_pipeline_all.py --skip-fix
 Use existing TOC files to fix markdown:
 
 ```bash
-python scripts/run_pipeline_all.py --skip-extract --no-llm
+python tools/run_pipeline_all.py --skip-extract
 ```
 
 ### Fix Markdown with LLM-Based Heading Correction
@@ -33,7 +33,7 @@ python scripts/run_pipeline_all.py --skip-extract --no-llm
 Use LLM agent for intelligent heading level determination (requires ANTHROPIC_API_KEY):
 
 ```bash
-python scripts/run_pipeline_all.py --skip-extract
+python tools/run_pipeline_all.py --skip-extract
 ```
 
 ## Command Options
@@ -77,7 +77,7 @@ export AZURE_OPENAI_API_VERSION=2024-02-15-preview
 
 ```bash
 # Extract TOC for all documents + fix markdown with LLM
-python scripts/run_pipeline_all.py
+python tools/run_pipeline_all.py
 ```
 
 **Output**:
@@ -91,7 +91,7 @@ Use previously extracted TOC files to fix markdown without API calls:
 
 ```bash
 # Skip extraction, use existing TOC files, no LLM for heading correction
-python scripts/run_pipeline_all.py --skip-extract --no-llm
+python tools/run_pipeline_all.py --skip-extract
 ```
 
 This is fast and doesn't require API calls.
@@ -99,14 +99,14 @@ This is fast and doesn't require API calls.
 ### Example 3: Only Extract TOC
 
 ```bash
-python scripts/run_pipeline_all.py --skip-fix
+python tools/run_pipeline_all.py --skip-fix
 ```
 
 ### Example 4: Fix with Different Configuration
 
 ```bash
 # Extract TOC with API, then fix markdown without LLM
-python scripts/run_pipeline_all.py --no-llm
+python tools/run_pipeline_all.py --skip-extract
 ```
 
 ## Output Structure
@@ -180,7 +180,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 Use the workaround flag:
 
 ```bash
-PYTHONNOUSERSITE=1 python scripts/run_pipeline_all.py
+PYTHONNOUSERSITE=1 python tools/run_pipeline_all.py
 ```
 
 ### Error: "TOC file not found and extraction skipped"
@@ -189,10 +189,10 @@ When using `--skip-extract`, TOC files must already exist in `output/`:
 
 ```bash
 # First, extract TOC
-python scripts/run_pipeline_all.py --skip-fix
+python tools/run_pipeline_all.py --skip-fix
 
 # Then, fix markdown without extraction
-python scripts/run_pipeline_all.py --skip-extract --no-llm
+python tools/run_pipeline_all.py --skip-extract
 ```
 
 ## Integration Examples
@@ -241,9 +241,9 @@ To process documents programmatically:
 
 ```python
 from pathlib import Path
-from docstruct.pipeline.extractor import extract_toc
-from docstruct.pipeline.md_fixer import fix_markdown
-from docstruct.providers.factory import build_client
+from docstruct.application.extract_toc import extract_toc
+from docstruct.application.fix_markdown import fix_markdown
+from docstruct.infrastructure.llm.factory import build_client
 
 # Build client
 client = build_client()

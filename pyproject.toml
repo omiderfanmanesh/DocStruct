@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docstruct"
+version = "0.1.0"
+description = "TOC extraction and markdown fixing pipeline for structured documents"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "anthropic",
+  "openai",
+  "python-dotenv",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -2,8 +2,8 @@
 from unittest.mock import MagicMock
 import pytest
 
-from docstruct.agents.metadata_agent import MetadataAgent
-from docstruct.models import DocumentMetadata
+from docstruct.application.agents.metadata_agent import MetadataAgent
+from docstruct.domain.models import DocumentMetadata
 
 
 def extract_metadata(pre_toc_text, client):
@@ -17,9 +17,7 @@ def extract_metadata(pre_toc_text, client):
 def test_extract_metadata_returns_document_metadata():
     """extract_metadata() with mocked client returns a DocumentMetadata object."""
     mock_client = MagicMock()
-    mock_client.messages.create.return_value.content = [
-        MagicMock(text='{"title": "Notice of competition", "source": "explicit", "year": "2025/26", "document_type": "Notice", "organization": "EDISU"}')
-    ]
+    mock_client.create_message.return_value = '{"title": "Notice of competition", "source": "explicit", "year": "2025/26", "document_type": "Notice", "organization": "EDISU"}'
 
     result = extract_metadata("Header text", mock_client)
     assert isinstance(result, DocumentMetadata)
@@ -30,9 +28,7 @@ def test_extract_metadata_returns_document_metadata():
 def test_extract_metadata_handles_minimal_response():
     """extract_metadata() works with only title and source in response."""
     mock_client = MagicMock()
-    mock_client.messages.create.return_value.content = [
-        MagicMock(text='{"title": "Test Document", "source": "inferred"}')
-    ]
+    mock_client.create_message.return_value = '{"title": "Test Document", "source": "inferred"}'
 
     result = extract_metadata("Some header", mock_client)
     assert isinstance(result, DocumentMetadata)
@@ -46,9 +42,7 @@ def test_extract_metadata_handles_minimal_response():
 def test_extract_metadata_handles_markdown_fenced_response():
     """extract_metadata() strips markdown code fences from response."""
     mock_client = MagicMock()
-    mock_client.messages.create.return_value.content = [
-        MagicMock(text='```json\n{"title": "My Doc", "source": "explicit"}\n```')
-    ]
+    mock_client.create_message.return_value = '```json\n{"title": "My Doc", "source": "explicit"}\n```'
 
     result = extract_metadata("Header", mock_client)
     assert result.title == "My Doc"
@@ -57,9 +51,7 @@ def test_extract_metadata_handles_markdown_fenced_response():
 def test_extract_metadata_makes_one_api_call():
     """extract_metadata() makes exactly one API call."""
     mock_client = MagicMock()
-    mock_client.messages.create.return_value.content = [
-        MagicMock(text='{"title": "Doc", "source": "inferred"}')
-    ]
+    mock_client.create_message.return_value = '{"title": "Doc", "source": "inferred"}'
 
     extract_metadata("header text", mock_client)
-    assert mock_client.messages.create.call_count == 1
+    assert mock_client.create_message.call_count == 1

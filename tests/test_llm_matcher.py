@@ -8,8 +8,8 @@ This demonstrates the LLM matcher handling:
 - Separator variations
 """
 
-from docstruct.pipeline.llm_heading_matcher import LLMHeadingMatcher
-from docstruct.providers.factory import build_client
+from docstruct.application.agents.llm_heading_matcher import LLMHeadingMatcher
+from docstruct.infrastructure.llm.factory import build_client
 
 # Sample noisy data
 TOC_ENTRIES = [

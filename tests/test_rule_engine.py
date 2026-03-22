@@ -1,4 +1,4 @@
-from docstruct.pipeline.rule_engine import (
+from docstruct.domain.heading_classifier import (
     ArticleRule,
     Block,
     CapsTopicRule,

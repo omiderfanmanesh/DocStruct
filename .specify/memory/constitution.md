@@ -18,7 +18,7 @@ Sync Impact Report
 	- RATIFICATION_DATE: TODO (confirm original adoption date)
 -->
 
-# Miner-MinerU Constitution
+# DocStruct Constitution
 
 ## Core Principles
 

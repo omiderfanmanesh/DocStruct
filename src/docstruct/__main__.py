@@ -1,3 +1,3 @@
-from docstruct.cli.main import main
+from docstruct.interfaces.cli import main
 
 main()

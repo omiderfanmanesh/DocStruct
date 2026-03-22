@@ -4,25 +4,30 @@ import json
 import os
 import tempfile
 from unittest.mock import patch
-from pathlib import Path
 
 import pytest
 
-from docstruct.pipeline.md_fixer import (
-    TOCEntry,
-    SourceLine,
+from docstruct.application.fix_markdown import (
+    build_correction_report,
+    fix_markdown,
+    load_toc_from_json,
+    match_toc_to_source,
+)
+from docstruct.domain.level_mapper import (
+    apply_all_corrections,
+    apply_heading_level,
+    kind_to_heading_level,
+)
+from docstruct.domain.models import (
     CorrectionEntry,
     CorrectionReport,
-    load_toc_from_json,
+    SourceLine,
+    TOCEntry,
+)
+from docstruct.infrastructure.file_io import (
     parse_source_markdown,
-    match_toc_to_source,
-    kind_to_heading_level,
-    apply_heading_level,
-    apply_all_corrections,
-    write_corrected_markdown,
-    build_correction_report,
     write_correction_report,
-    fix_markdown,
+    write_corrected_markdown,
 )
 
 
@@ -323,9 +328,9 @@ class TestIntegration:
             output_dir = os.path.join(tmpdir, 'output')
             os.makedirs(output_dir)
 
-            with patch('docstruct.providers.factory.build_client', return_value=object()):
+            with patch('docstruct.application.fix_markdown.build_client', return_value=object()):
                 with patch(
-                    'docstruct.pipeline.llm_heading_matcher.LLMHeadingMatcher.batch_match',
+                    'docstruct.application.agents.llm_heading_matcher.LLMHeadingMatcher.batch_match',
                     return_value={3: (0, 'Art. 20 - Regulatory references', 'University Statute')},
                 ):
                     report = fix_markdown(source_path, toc_path, output_dir, use_llm_matching=True)
