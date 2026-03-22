@@ -80,6 +80,12 @@ DocStruct now supports a grounded document-QA workflow that uses a vendored, mar
 
 The batch runner handles step 2 automatically after `fix`.
 
+The search agent now applies document-scope guardrails for multi-document collections. If a question could match different universities, regions, or issuers, it will ask for clarification instead of guessing across conflicting scholarship notices.
+
+It also performs a HyPE-style retrieval rewrite before document selection: the agent expands short or vague user questions into a more explicit search query using only scope evidence found in the indexed documents, not from hardcoded region or university aliases.
+
+For best reasoning quality, point `AZURE_OPENAI_DEPLOYMENT` or your Anthropic model setting at the strongest chat/reasoning deployment available in your environment rather than a mini-tier default.
+
 ## Output Layout
 
 New pipeline artifacts are written into stage-specific folders:

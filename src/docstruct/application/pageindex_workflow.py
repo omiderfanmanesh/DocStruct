@@ -10,6 +10,9 @@ from docstruct.application.ports import LLMPort
 from docstruct.domain.models import DocumentMetadata, SearchAnswer, SearchDocumentIndex
 from docstruct.domain.pageindex_search import (
     build_context_blocks,
+    build_document_identity_terms,
+    build_document_scope_label,
+    build_scope_clarification,
     choose_candidate_documents,
     fallback_node_matches,
 )
@@ -44,6 +47,8 @@ def build_search_index(
         doc_description=tree.get("doc_description"),
         structure=list(tree.get("structure", [])),
     )
+    index.scope_label = build_document_scope_label(index)
+    index.identity_terms = build_document_identity_terms(index)
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(index.to_dict(), indent=2, ensure_ascii=False), encoding="utf-8")
@@ -86,6 +91,24 @@ def load_search_indexes(index_dir: str) -> list[SearchDocumentIndex]:
     ]
 
 
+def _promote_documents(
+    documents: list[SearchDocumentIndex],
+    preferred_ids: list[str],
+    *,
+    limit: int,
+) -> list[SearchDocumentIndex]:
+    by_id = {document.document_id: document for document in documents}
+    ordered: list[SearchDocumentIndex] = []
+    for document_id in preferred_ids:
+        document = by_id.get(document_id)
+        if document is not None and document not in ordered:
+            ordered.append(document)
+    for document in documents:
+        if document not in ordered:
+            ordered.append(document)
+    return ordered[:limit]
+
+
 def answer_question(
     question: str,
     index_dir: str,
@@ -95,13 +118,47 @@ def answer_question(
     if not indexes:
         raise ValueError(f"No PageIndex search indexes found in {index_dir}")
 
-    candidate_documents = choose_candidate_documents(question, indexes, limit=6)
     agent = PageIndexSearchAgent(client)
+    effective_question = question
+    rewrite_note = None
+    inferred_document_ids: list[str] = []
+    try:
+        effective_question, rewrite_note, inferred_document_ids = agent.rewrite_question(question, indexes)
+    except Exception:
+        effective_question, rewrite_note, inferred_document_ids = question, None, []
+    if effective_question != question:
+        rewrite_note = " | ".join(
+            note
+            for note in [
+                f"Rewrote question for retrieval: {effective_question}",
+                rewrite_note,
+            ]
+            if note
+        )
+
+    candidate_documents = choose_candidate_documents(effective_question, indexes, limit=6)
+    if inferred_document_ids:
+        candidate_documents = _promote_documents(candidate_documents, inferred_document_ids, limit=6)
+    heuristic_clarification = build_scope_clarification(effective_question, candidate_documents[:4])
 
     try:
-        selected_document_ids, selection_notes = agent.select_documents(question, candidate_documents)
+        selection = agent.select_documents(effective_question, candidate_documents)
     except Exception:
-        selected_document_ids, selection_notes = [], None
+        selection = None
+
+    if selection and selection.needs_clarification:
+        clarifying_question = selection.clarifying_question or heuristic_clarification
+        return SearchAnswer(
+            question=question,
+            answer=clarifying_question or "I need the university, region, or issuing organization before I can answer safely.",
+            document_ids=[],
+            retrieval_notes=" | ".join(note for note in [rewrite_note, selection.thinking] if note) or None,
+            needs_clarification=True,
+            clarifying_question=clarifying_question,
+        )
+
+    selected_document_ids = selection.document_ids if selection else []
+    selection_notes = selection.thinking if selection else None
 
     document_map = {document.document_id: document for document in candidate_documents}
     selected_documents = [
@@ -110,17 +167,44 @@ def answer_question(
         if document_id in document_map
     ]
     if not selected_documents:
-        selected_documents = candidate_documents[: min(3, len(candidate_documents))]
+        if inferred_document_ids:
+            selected_documents = [
+                document_map[document_id]
+                for document_id in inferred_document_ids
+                if document_id in document_map
+            ]
+        if heuristic_clarification:
+            return SearchAnswer(
+                question=question,
+                answer=heuristic_clarification,
+                document_ids=[],
+                retrieval_notes=" | ".join(note for note in [rewrite_note, selection_notes] if note) or None,
+                needs_clarification=True,
+                clarifying_question=heuristic_clarification,
+            )
+        if not selected_documents:
+            selected_documents = candidate_documents[: min(3, len(candidate_documents))]
+
+    post_selection_clarification = build_scope_clarification(effective_question, selected_documents)
+    if post_selection_clarification:
+        return SearchAnswer(
+            question=question,
+            answer=post_selection_clarification,
+            document_ids=[document.document_id for document in selected_documents],
+            retrieval_notes=" | ".join(note for note in [rewrite_note, selection_notes] if note) or None,
+            needs_clarification=True,
+            clarifying_question=post_selection_clarification,
+        )
 
     contexts: list[dict] = []
-    retrieval_notes: list[str] = [selection_notes] if selection_notes else []
+    retrieval_notes: list[str] = [note for note in [rewrite_note, selection_notes] if note]
     for document in selected_documents:
         try:
-            node_ids, node_notes = agent.select_nodes(question, document)
+            node_ids, node_notes = agent.select_nodes(effective_question, document)
         except Exception:
             node_ids, node_notes = [], None
         if not node_ids:
-            node_ids = fallback_node_matches(question, document, limit=4)
+            node_ids = fallback_node_matches(effective_question, document, limit=4)
         if node_notes:
             retrieval_notes.append(f"{document.document_id}: {node_notes}")
         contexts.extend(build_context_blocks(document, node_ids, max_chars=1600))
@@ -137,6 +221,15 @@ def answer_question(
             retrieval_notes=retrieval_note_text,
         )
     except Exception:
+        if post_selection_clarification:
+            return SearchAnswer(
+                question=question,
+                answer=post_selection_clarification,
+                document_ids=[document.document_id for document in selected_documents],
+                retrieval_notes=retrieval_note_text,
+                needs_clarification=True,
+                clarifying_question=post_selection_clarification,
+            )
         fallback_answer = " ".join(context["text"] for context in contexts[:2] if context.get("text")).strip()
         if not fallback_answer:
             fallback_answer = "I found relevant document nodes, but I could not synthesize a grounded answer."

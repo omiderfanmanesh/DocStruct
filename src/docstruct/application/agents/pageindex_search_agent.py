@@ -6,8 +6,19 @@ import json
 
 from docstruct.application.ports import LLMPort
 from docstruct.config import AgentConfig
-from docstruct.domain.models import SearchAnswer, SearchCitation, SearchDocumentIndex
-from docstruct.domain.pageindex_search import build_tree_outline
+from docstruct.domain.models import (
+    SearchAnswer,
+    SearchCitation,
+    SearchDocumentIndex,
+    SearchSelectionDecision,
+)
+from docstruct.domain.pageindex_search import (
+    build_document_scope_clues,
+    build_document_identity_terms,
+    build_document_scope_label,
+    build_scope_options,
+    build_tree_outline,
+)
 
 
 def _strip_code_fences(text: str) -> str:
@@ -28,6 +39,14 @@ def _parse_json_payload(raw: str) -> dict:
     return json.loads(cleaned)
 
 
+def _as_bool(value: object) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"true", "yes", "1"}
+    return bool(value)
+
+
 class PageIndexSearchAgent:
     def __init__(self, client: LLMPort):
         config = AgentConfig.from_env()
@@ -43,20 +62,73 @@ class PageIndexSearchAgent:
         )
         return _parse_json_payload(raw)
 
-    def select_documents(
+    def rewrite_question(
         self,
         question: str,
         documents: list[SearchDocumentIndex],
-    ) -> tuple[list[str], str | None]:
+    ) -> tuple[str, str | None, list[str]]:
         if not documents:
-            return [], None
-        if len(documents) == 1:
-            return [documents[0].document_id], "Single indexed document available."
+            return question, None, []
 
         catalog = [
             {
                 "document_id": document.document_id,
                 "title": document.title,
+                "scope_label": build_document_scope_label(document),
+                "identity_terms": build_document_identity_terms(document)[:6],
+                "scope_clues": build_document_scope_clues(document)[:6],
+                "summary": document.summary,
+            }
+            for document in documents[:12]
+        ]
+        response = self._call_json(
+            (
+                "Rewrite the user's question for retrieval using a HyPE-style expansion.\n"
+                "Your job is to infer the likely intended document scope from the catalog and rewrite the question so retrieval becomes easier.\n"
+                "Rules:\n"
+                "- Use only scope hints supported by the catalog.\n"
+                "- Do not invent dates, requirements, or facts.\n"
+                "- If the user wording already has enough scope, keep the rewrite very close to the original.\n"
+                "- If the intended scope is still ambiguous, keep the question close to the original instead of forcing a guess.\n\n"
+                f"Original question: {question}\n\n"
+                f"Document catalog:\n{json.dumps(catalog, indent=2, ensure_ascii=False)}\n\n"
+                "Return JSON with keys:\n"
+                '- "rewritten_question": string\n'
+                '- "reasoning": string\n'
+                '- "inferred_document_ids": array of strings\n'
+            ),
+            max_tokens=1200,
+        )
+        valid_ids = {document.document_id for document in documents}
+        inferred_document_ids = [
+            document_id
+            for document_id in response.get("inferred_document_ids", [])
+            if document_id in valid_ids
+        ][:2]
+        rewritten_question = str(response.get("rewritten_question") or "").strip() or question
+        reasoning = str(response.get("reasoning") or "").strip() or None
+        return rewritten_question, reasoning, inferred_document_ids
+
+    def select_documents(
+        self,
+        question: str,
+        documents: list[SearchDocumentIndex],
+    ) -> SearchSelectionDecision:
+        if not documents:
+            return SearchSelectionDecision()
+        if len(documents) == 1:
+            return SearchSelectionDecision(
+                document_ids=[documents[0].document_id],
+                thinking="Single indexed document available.",
+            )
+
+        catalog = [
+            {
+                "document_id": document.document_id,
+                "title": document.title,
+                "scope_label": build_document_scope_label(document),
+                "identity_terms": build_document_identity_terms(document)[:6],
+                "scope_clues": build_document_scope_clues(document)[:6],
                 "summary": document.summary,
                 "document_type": document.metadata.document_type if document.metadata else None,
                 "organization": document.metadata.organization if document.metadata else None,
@@ -67,12 +139,20 @@ class PageIndexSearchAgent:
         ]
         response = self._call_json(
             (
-                "You are selecting the most relevant documents for a grounded QA task.\n"
-                "Choose at most 3 document_ids that are most likely to answer the question.\n"
+                "You are selecting policy documents for grounded QA.\n"
+                "These documents may belong to different universities, regions, or issuing organizations.\n"
+                "Treat each document scope as separate unless the user explicitly asks for a comparison.\n"
+                "If the question is ambiguous and could refer to multiple scopes, do not guess.\n"
+                "Instead, set needs_clarification=true and ask a short clarifying question.\n"
+                "Choose at most 3 document_ids only when you can justify them confidently.\n"
                 "Prefer precision over recall.\n\n"
                 f"Question: {question}\n\n"
                 f"Documents:\n{json.dumps(catalog, indent=2, ensure_ascii=False)}\n\n"
-                'Return JSON with keys "thinking" and "document_ids".'
+                "Return JSON with keys:\n"
+                '- "thinking": string\n'
+                '- "document_ids": array of strings\n'
+                '- "needs_clarification": boolean\n'
+                '- "clarifying_question": string or null\n'
             )
         )
         valid_ids = {document.document_id for document in documents}
@@ -82,7 +162,19 @@ class PageIndexSearchAgent:
             if document_id in valid_ids
         ][:3]
         thinking = str(response.get("thinking") or "").strip() or None
-        return selected_ids, thinking
+        needs_clarification = _as_bool(response.get("needs_clarification"))
+        clarifying_question = str(response.get("clarifying_question") or "").strip() or None
+        if needs_clarification and not clarifying_question:
+            options = "; ".join(build_scope_options(documents))
+            clarifying_question = f"Which university, region, or issuer should I use: {options}?"
+        if needs_clarification:
+            selected_ids = []
+        return SearchSelectionDecision(
+            document_ids=selected_ids,
+            thinking=thinking,
+            needs_clarification=needs_clarification,
+            clarifying_question=clarifying_question,
+        )
 
     def select_nodes(
         self,
@@ -124,14 +216,20 @@ class PageIndexSearchAgent:
         response = self._call_json(
             (
                 "Answer the user's question using only the provided context snippets.\n"
-                "If the context is insufficient, say so clearly.\n"
-                "Keep the answer concise and factual.\n\n"
+                "Important guardrails:\n"
+                "- The snippets may come from different universities, regions, or issuing organizations.\n"
+                "- Never merge policies across different scopes into one answer unless the user explicitly asked for a comparison.\n"
+                "- If the question is underspecified for the provided scopes, return clarification_needed=true.\n"
+                "- If the context is insufficient, say so clearly and do not invent facts.\n"
+                "Keep the answer concise, factual, and grounded.\n\n"
                 f"Question: {question}\n"
                 f"Retrieval notes: {retrieval_notes or 'n/a'}\n\n"
                 f"Context snippets:\n{json.dumps(contexts, indent=2, ensure_ascii=False)}\n\n"
                 "Return JSON with keys:\n"
                 '- "answer": string\n'
                 '- "citations": list of objects with document_id, document_title, node_id, node_title, line_number\n'
+                '- "clarification_needed": boolean\n'
+                '- "clarifying_question": string or null\n'
             ),
             max_tokens=1400,
         )
@@ -142,7 +240,11 @@ class PageIndexSearchAgent:
             except Exception:
                 continue
 
+        clarification_needed = _as_bool(response.get("clarification_needed"))
+        clarifying_question = str(response.get("clarifying_question") or "").strip() or None
         answer = str(response.get("answer") or "").strip()
+        if clarification_needed and not answer:
+            answer = clarifying_question or "I need the university, region, or issuing organization before I can answer safely."
         if not answer:
             answer = "I could not find enough grounded context to answer confidently."
         return SearchAnswer(
@@ -151,4 +253,6 @@ class PageIndexSearchAgent:
             citations=citations,
             document_ids=document_ids,
             retrieval_notes=retrieval_notes,
+            needs_clarification=clarification_needed,
+            clarifying_question=clarifying_question,
         )

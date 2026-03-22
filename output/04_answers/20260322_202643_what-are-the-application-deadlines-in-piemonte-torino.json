@@ -1,0 +1,9 @@
+{
+  "question": "What are the application deadlines in Piemonte / Torino ?",
+  "answer": "Could you please specify which university or organization in Piemonte / Torino you want the application deadlines from?",
+  "citations": [],
+  "document_ids": [],
+  "retrieval_notes": "The user is asking for application deadlines specific to Piemonte / Torino. None of the document summaries explicitly mention Piemonte or Torino. One document refers to Campania region, so it is not relevant. The others have unknown scopes or do not specify regions. Since the query is about a specific region and no document clearly covers it, I cannot confidently choose any documents. Therefore, it is needed to clarify whether the user wants data from any specific university or issuing organization in Piemonte / Torino or if they want information across multiple institutions in that region.",
+  "needs_clarification": true,
+  "clarifying_question": "Could you please specify which university or organization in Piemonte / Torino you want the application deadlines from?"
+}

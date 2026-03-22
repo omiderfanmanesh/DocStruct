@@ -4,6 +4,8 @@ from docstruct.domain.models import (
     ExtractionResult,
     HeadingEntry,
     LogEntry,
+    SearchAnswer,
+    SearchDocumentIndex,
     TOCBoundary,
 )
 
@@ -44,6 +46,39 @@ def test_document_metadata_round_trip():
         organization="EDISU",
     )
     assert DocumentMetadata.from_dict(m.to_dict()) == m
+
+
+def test_search_document_index_round_trip_with_scope_fields():
+    index = SearchDocumentIndex(
+        document_id="doc",
+        title="Scholarship Notice",
+        source_path="output/fixed/doc.md",
+        summary="Deadlines and eligibility.",
+        metadata=DocumentMetadata(title="Scholarship Notice", source="explicit", organization="EDISU"),
+        doc_description="Call for applications",
+        scope_label="EDISU | Scholarship Notice",
+        identity_terms=["EDISU", "Scholarship Notice"],
+        structure=[{"node_id": "0001", "title": "Deadlines"}],
+    )
+
+    restored = SearchDocumentIndex.from_dict(index.to_dict())
+
+    assert restored == index
+
+
+def test_search_answer_to_dict_includes_guardrail_fields():
+    answer = SearchAnswer(
+        question="What are the deadlines?",
+        answer="Which university do you mean?",
+        document_ids=["doc"],
+        needs_clarification=True,
+        clarifying_question="Which university do you mean?",
+    )
+
+    payload = answer.to_dict()
+
+    assert payload["needs_clarification"] is True
+    assert payload["clarifying_question"] == "Which university do you mean?"
 
 
 def test_extraction_result_to_dict_has_required_keys():

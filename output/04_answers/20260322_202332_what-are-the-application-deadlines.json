@@ -1,0 +1,9 @@
+{
+  "question": "What are the application deadlines?",
+  "answer": "Which university, region, or issuing organization do you want the application deadlines for?",
+  "citations": [],
+  "document_ids": [],
+  "retrieval_notes": "The user asks for 'application deadlines' but does not specify the scope (which university, region, or issuing organization). Multiple documents mention deadlines related to applications for scholarships or benefits for the 2025/2026 academic year, but each belongs to different organizations or regions. Without clarifying which institution or region the user refers to, selecting documents could lead to confusion or mixing scopes. Therefore, clarification is needed before providing specific deadlines from any document.",
+  "needs_clarification": true,
+  "clarifying_question": "Which university, region, or issuing organization do you want the application deadlines for?"
+}

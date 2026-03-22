@@ -1,0 +1,9 @@
+{
+  "question": "What are the application deadlines in Piemonte?",
+  "answer": "Which university or organization in Piemonte are you referring to for the application deadlines?",
+  "citations": [],
+  "document_ids": [],
+  "retrieval_notes": "The question asks for application deadlines in Piemonte. Among the provided documents, only one has a clear association with a specific region: document 'Bando di Concorso a.a. 2025.26_ENG_0' is linked to Campania region, so it is not relevant. The other documents do not specify a geographic scope, except that the document 'Competition-Notice-a.y.-2025_2026' and 'Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)' are generic and their scopes cannot be confirmed as Piemonte without further detail. Document 'Bando_Borse_di_studio_2025-2026_ENG' also does not specify regional scope. Since no document explicitly mentions Piemonte, the answer requires clarification from the user about which institution or issuing body in Piemonte the user refers to in order to select the appropriate document.",
+  "needs_clarification": true,
+  "clarifying_question": "Which university or organization in Piemonte are you referring to for the application deadlines?"
+}
