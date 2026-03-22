@@ -6,6 +6,8 @@ from docstruct.domain.models import (
     LogEntry,
     SearchAnswer,
     SearchDocumentIndex,
+    SearchProfile,
+    SearchTraceStep,
     TOCBoundary,
 )
 
@@ -56,6 +58,14 @@ def test_search_document_index_round_trip_with_scope_fields():
         summary="Deadlines and eligibility.",
         metadata=DocumentMetadata(title="Scholarship Notice", source="explicit", organization="EDISU"),
         doc_description="Call for applications",
+        search_profile=SearchProfile(
+            issuer="EDISU",
+            region="Piedmont",
+            covered_institutions=["University of Turin"],
+            covered_cities=["Turin"],
+            academic_year="2025/26",
+            benefit_types=["scholarship", "accommodation"],
+        ),
         scope_label="EDISU | Scholarship Notice",
         identity_terms=["EDISU", "Scholarship Notice"],
         structure=[{"node_id": "0001", "title": "Deadlines"}],
@@ -73,12 +83,20 @@ def test_search_answer_to_dict_includes_guardrail_fields():
         document_ids=["doc"],
         needs_clarification=True,
         clarifying_question="Which university do you mean?",
+        trace=[
+            SearchTraceStep(
+                stage="clarification_gate",
+                message="Asked for clarification.",
+                details={"options": ["EDISU Piemonte", "Venice"]},
+            )
+        ],
     )
 
     payload = answer.to_dict()
 
     assert payload["needs_clarification"] is True
     assert payload["clarifying_question"] == "Which university do you mean?"
+    assert payload["trace"][0]["stage"] == "clarification_gate"
 
 
 def test_extraction_result_to_dict_has_required_keys():

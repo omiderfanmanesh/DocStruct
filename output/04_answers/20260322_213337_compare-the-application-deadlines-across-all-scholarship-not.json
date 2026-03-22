@@ -1,0 +1,49 @@
+{
+  "question": "Compare the application deadlines across all scholarship notices.",
+  "answer": "The application deadlines for the academic year 2025/2026 scholarships differ across the notices as follows:\n\n1. A.Di.S.U.R.C (Campania region) - University of Sannio, University of Naples Federico II, University of Naples, University of Salerno:\n- Online application must be submitted by 18 September 2025 (12 am deadline).\n- Enrollment for courses of study should be completed by 20 September 2025 to avoid suspension in rankings.\n- For applicants from particularly poor or developing countries submitting certain certifications, the EQUIVALENT ISEE must be sent by 31 March 2026.\n\n2. I.S.E.E (Veneto region) - University of Venice, Ca' Foscari University:\n- Scholarship applications must be submitted by 30 September 2025 at 12:30.\n- Students must be enrolled or intending to enroll for the 2025/2026 academic year.\n\n3. University of Genoa:\n- Applications for scholarships and accommodation services must be submitted from 11 June 2025 to 31 July 2025 at 12:00 p.m.\n- An additional application period for scholarship supplements (for simultaneous enrollment in two courses) is from 1 October 2025 to 15 October 2025 at noon.\n\nThese deadlines reflect different institutions' schedules and procedures for submitting scholarship applications for 2025/2026.",
+  "citations": [
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "node_id": "0040",
+      "node_title": "5.1 General rules – Terms",
+      "line_number": 462
+    },
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "node_id": "0005",
+      "node_title": "1.2.3 Deadlines for enrolment in courses of study",
+      "line_number": 113
+    },
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "node_id": "0036",
+      "node_title": "DEADLINES",
+      "line_number": 434
+    },
+    {
+      "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+      "document_title": "Bando_Borse_di_studio_2025-2026_ENG",
+      "node_id": "0004",
+      "node_title": "Art. 4 - Deadlines and procedures for submitting applications",
+      "line_number": 140
+    },
+    {
+      "document_id": "Competition-Notice-a.y.-2025_2026",
+      "document_title": "COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026",
+      "node_id": "0015",
+      "node_title": "Article 7 - Deadline dates for the online application for benefits",
+      "line_number": 251
+    }
+  ],
+  "document_ids": [
+    "Bando di Concorso a.a. 2025.26_ENG_0",
+    "Bando_Borse_di_studio_2025-2026_ENG",
+    "Competition-Notice-a.y.-2025_2026"
+  ],
+  "retrieval_notes": "Rewrote question for retrieval: Compare the application deadlines across all scholarship notices for the academic year 2025/2026 in the available scholarship calls. | The original question requests a comparison of application deadlines across all scholarship notices. The document catalog includes multiple scholarship calls for the academic year 2025/2026 issued by different authorities and covering different regions and universities. Since the academic year 2025/2026 is common across these documents and they are all scholarship notices, explicitly referencing the academic year 2025/2026 and 'scholarship notices' helps target relevant documents without inventing facts or narrowing scope improperly. | The question requests a comparison of application deadlines across all scholarship calls for academic year 2025/2026. Four documents are available, all covering the same academic year and scholarship calls from different issuers and regions. Since the scope of the question explicitly asks for a comparison across all scholarship notices available, selecting all four documents is justified to provide a comprehensive comparison. No ambiguity is present because the user explicitly wants a comparison across all available scholarship documents for that academic year. | Bando di Concorso a.a. 2025.26_ENG_0: The question requests a comparison of application deadlines across all scholarship notices for the academic year 2025/2026. From the given document tree and previews, the clearest relevant section for deadlines appears within the subsection under node_id '0035' related to 'Applicants from a particularly poor or developing country', which contains a nested node '0036' specifically titled 'DEADLINES'. Since the question concerns deadlines across all scholarships, it is essential to check if other sections mention deadlines for the application process or scholarship calls. However, no other nodes explicitly mention deadlines or application periods in their titles or previews. Generally, application deadline info would be under the 'CALL FOR APPLICATIONS' or 'RULES FOR PARTICIPATION' sections. Node '0005' (1.2.3 Deadlines for enrolment in courses of study) may have some relevant deadline data, though it appears more about course enrolment deadlines than scholarship application deadlines. Similarly, 'ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION' (especially node '0040') might mention timing or terms related to application submission. To cover all bases and compare deadlines from possible multiple notices, I will select these nodes: '0005' (deadlines for enrolment), '0036' (DEADLINES section nested under 'Applicant from a particularly poor or developing country' which explicitly mentions deadlines), and '0040' (rules and terms on participation potentially including deadlines). To ensure no other relevant deadlines exist in the call for applications and eligibility articles, I will also include main call section '0000' (to check overall call conditions), '0001' (Purpose of the call might mention timing), and '0039' (ARTICLE 5 main node for rules). This gives a balanced view on all possible deadline mentions. No other nodes seem to deal with deadlines specifically, so choosing more might add redundancy. Thus, the 6 nodes are '0000', '0001', '0005', '0036', '0039', '0040'. | Bando_Borse_di_studio_2025-2026_ENG: The question asks to compare the application deadlines across all scholarship notices for the academic year 2025/2026. The document is a call for scholarships for this exact academic year, and the best place to find information specifically about application deadlines and procedures would be the article that explicitly addresses these topics. In the document tree, 'Art. 4 - Deadlines and procedures for submitting applications' (node_id '0004') is the most relevant node for deadline comparison since it focuses solely on deadlines and application procedures. Other articles deal with related but distinct topics such as definitions, eligibility, evaluation criteria, payments, and revocations, which are unlikely to provide a comprehensive overview of all deadlines. Since the question specifically requests a comparison across all scholarship notices available within this call, and no other scholarship calls or notices are explicitly indicated in the tree, node '0004' is sufficient. If additional scholarship calls were present, their deadlines would likely be under similarly titled articles or sections. No other nodes suggest containing multiple deadlines or different scholarship notices. Thus, only node '0004' is selected for answer completeness and focus. | Competition-Notice-a.y.-2025_2026: The question asks to compare application deadlines across all scholarship notices available in the academic year 2025/2026. Deadlines would be detailed primarily where the application process and key dates are described. The most relevant node is Article 7 (node_id 0015) which directly addresses \"Deadline dates for the online application for benefits\", obviously crucial. The online application method and possible exceptions or modifications might also mention deadlines, making Article 6 (node_id 0011) and its subsections (0012, 0013, 0014) relevant. Article 22 (node_id 0060) contains a subsection (0061) explaining deadline for rental contribution application (December 31, 2025), which is related to benefits deadlines. Article 25 (0068) discusses grounds for non-admission, including failure to comply with deadlines indicating important deadline consequences. Article 1 (0000) contains general info on benefits but unlikely to have deadline details. To focus on deadlines comparison, best choice is Article 7 (0015), Article 6 and subsections (0011-0014), Article 22.1 (0061), and Article 25 (0068). Thus, I select nodes 0015, 0011, 0012, 0013, 0014, and 0061.",
+  "needs_clarification": false,
+  "clarifying_question": null
+}

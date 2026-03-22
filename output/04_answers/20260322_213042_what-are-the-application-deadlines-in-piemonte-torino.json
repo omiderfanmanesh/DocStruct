@@ -1,0 +1,33 @@
+{
+  "question": "What are the application deadlines in Piemonte / Torino ?",
+  "answer": "For the academic year 2025/26 at the University of Turin and related Piemonte institutions, the deadline to submit applications for scholarships and accommodation services is by 12:00 p.m. on 9 September 2025. The paid accommodation self-certification must be submitted within the specific time frames indicated in the Online Helpdesk, as detailed in the notice. Regarding degree award conditions, first-year Master's students must enrol by 30 November 2025; failure to enrol by then results in suspension from the final scholarship rankings, with a possible late enrolment deadline of 3 April 2026 to be included in provisional rankings and subsequent processes.",
+  "citations": [
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0058",
+      "node_title": "ART. 10(2) DEADLINE FOR SUBMITTING THE APPLICATION",
+      "line_number": 1571
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0048",
+      "node_title": "Art. 8(2) METHODS AND DEADLINES FOR SUBMITTING THE PAID ACCOMMODATION SELF-CERTIFICATION",
+      "line_number": 1362
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0061",
+      "node_title": "Art. 11(2) FAILURE TO ENROL BY 30 NOVEMBER 2025",
+      "line_number": 1603
+    }
+  ],
+  "document_ids": [
+    "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+  ],
+  "retrieval_notes": "Rewrote question for retrieval: What are the application deadlines for scholarships, accommodation, and degree awards in Piemonte, specifically for the University of Turin and related institutions, for the academic year 2025/26? | The user's question about application deadlines in Piemonte / Torino likely refers to academic or financial benefits for university students. Among the documents, only the 'Notice of competition – scholarship accommodation and degree award a.y. 2025/26' covers Piemonte / Turin and includes relevant details about application deadlines for scholarships, accommodation, and degree awards. Thus, the rewritten question includes the scope of academic year 2025/26 scholarships and benefits specific to the University of Turin and related universities, improving retrieval precision. | The question specifically asks for application deadlines related to scholarships, accommodation, and degree awards in Piemonte for the University of Turin and related institutions for academic year 2025/26. Only one document clearly matches this scope and topic: 'Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)'. This document covers the University of Turin and several other Piedmont institutions, and explicitly deals with these three benefit types and the 2025/26 academic year. Other documents are outside Piemonte or related to other universities/regions. Therefore, I select only that document for the answer. | Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1): The question specifically asks for application deadlines related to scholarships, accommodation, and degree awards for the 2025/26 academic year at the University of Turin and related institutions in Piemonte. \n\nBased on the document titles and summaries, the sections that most likely contain these deadlines are:\n- Section I (general conditions and details about recipients, courses, universities, and benefits), but specifically, the application deadlines are typically covered under submission or procedural articles.\n- Art. 7 (HOW TO SUBMIT AN APPLICATION) - this section seems essential as it covers the application submission process, which should include deadlines or timing details.\n- Section III specifically addresses provisions for first years and application submission deadlines:\n  - ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION (node 0056) along with its subsections (0057 and 0058) should provide concrete deadlines.\n  - ART. 8 PAID ACCOMMODATION (node 0045) and its subsections (0048 especially - METHODS AND DEADLINES FOR SUBMITTING THE PAID ACCOMMODATION SELF-CERTIFICATION) are relevant for accommodation deadlines.\n- Possibly ART. 11(2) FAILURE TO ENROL BY 30 NOVEMBER 2025 (node 0061) is relevant for degree award conditions.\n\nNodes covering rankings and complaints (ART. 12) or merit requirements (ART. 13) seem less likely to specify deadlines for application submission, but more about outcomes after application.\n\nTherefore, the nodes chosen are:\n- 0032 (ART. 7 HOW TO SUBMIT AN APPLICATION)\n- 0048 (Art. 8(2) METHODS AND DEADLINES FOR SUBMITTING THE PAID ACCOMMODATION SELF-CERTIFICATION)\n- 0056 (ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION)\n- 0058 (ART. 10(2) DEADLINE FOR SUBMITTING THE APPLICATION)\n- 0061 (Art. 11(2) FAILURE TO ENROL BY 30 NOVEMBER 2025)\n- 0005 (Art. 1(4) DISTRIBUTION OF SCHOLARSHIPS AND ACCOMMODATION) - to contextualize the distribution and link to the institutions\n\nThis combination should cover all deadlines pertaining to scholarships, accommodation and any degree award conditions relevant to Piemonte universities including the University of Turin.",
+  "needs_clarification": false,
+  "clarifying_question": null
+}

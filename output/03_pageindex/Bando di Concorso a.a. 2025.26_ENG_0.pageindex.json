@@ -1,6 +1,6 @@
 {
   "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
-  "title": "Unknown",
+  "title": "Bando di Concorso a.a. 2025.26_ENG_0",
   "source_path": "C:\\Projects\\personal\\DocStruct\\output\\02_fixed_markdown\\Bando di Concorso a.a. 2025.26_ENG_0.md",
   "summary": "The document is a call for applications issued by A.Di.S.U.R.C. for scholarships, accommodation places, and international mobility grants for the 2025/2026 academic year. It details the eligibility criteria, target recipients including various student categories, and application deadlines, aiming to support university students in the Campania region.",
   "metadata": {
@@ -11,6 +11,50 @@
     "organization": null
   },
   "doc_description": null,
+  "search_profile": {
+    "issuer": "A.Di.S.U.R.C",
+    "region": "Campania",
+    "covered_institutions": [
+      "University of Sannio",
+      "University of Naples Federico II",
+      "University of Naples",
+      "University of Salerno",
+      "University of Campania Luigi Vanvitelli"
+    ],
+    "covered_cities": [
+      "Sannio",
+      "Naples Federico II",
+      "Naples",
+      "Salerno"
+    ],
+    "academic_year": "2025",
+    "benefit_types": [
+      "scholarship",
+      "accommodation",
+      "mobility"
+    ]
+  },
+  "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+  "identity_terms": [
+    "Unknown",
+    "Bando di Concorso a.a. 2025.26_ENG_0",
+    "Bando di Concorso a.a. 2025.26 ENG 0",
+    "A.Di.S.U.R.C",
+    "Campania",
+    "2025",
+    "University of Sannio",
+    "University of Naples Federico II",
+    "University of Naples",
+    "University of Salerno",
+    "University of Campania Luigi Vanvitelli",
+    "Sannio",
+    "Naples Federico II",
+    "Naples",
+    "Salerno",
+    "scholarship",
+    "accommodation",
+    "mobility"
+  ],
   "structure": [
     {
       "title": "ARTICLE 1 – CALL FOR APPLICATIONS – RECIPIENTS",

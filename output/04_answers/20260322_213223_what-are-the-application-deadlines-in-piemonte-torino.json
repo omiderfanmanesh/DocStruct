@@ -1,0 +1,33 @@
+{
+  "question": "What are the application deadlines in Piemonte / Torino?",
+  "answer": "For the academic year 2025/26 in Piemonte (including Torino), the deadline for submitting applications for scholarships and accommodation services is 9 September 2025 at 12:00 p.m. The application submission opens on 25 July 2025. Regarding paid accommodation self-certification, students must submit it within the time frames indicated on their personal Online Helpdesk page (exact dates not specified in the provided context). No explicit deadline for degree award applications is specified in the provided excerpts.",
+  "citations": [
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0057",
+      "node_title": "Art. 10(1) METHOD FOR SUBMITTING THE APPLICATION",
+      "line_number": 1559
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0058",
+      "node_title": "ART. 10(2) DEADLINE FOR SUBMITTING THE APPLICATION",
+      "line_number": 1571
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0048",
+      "node_title": "Art. 8(2) METHODS AND DEADLINES FOR SUBMITTING THE PAID ACCOMMODATION SELF-CERTIFICATION",
+      "line_number": 1362
+    }
+  ],
+  "document_ids": [
+    "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+  ],
+  "retrieval_notes": "Rewrote question for retrieval: What are the application deadlines for scholarships, accommodation, and degree awards for the academic year 2025/26 in Piemonte, specifically in Torino? | The user asks about application deadlines in Piemonte / Torino, which aligns directly with the document titled \"Notice of competition – scholarship accommodation and degree award a.y. 2025/26\" that covers the Piemonte region and cities including Turin for academic year 2025/26. This document includes application deadlines specifically for scholarships, accommodation, and degree awards, matching the likely user intent. The other documents relate to different regions or do not cover Piemonte/Torino and thus are not relevant. | The question asks specifically for application deadlines for scholarships, accommodation, and degree awards for 2025/26 in Piemonte, particularly in Torino. Among the documents, only 'Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)' clearly covers Piemonte region and includes institutions in Torino such as the University of Turin. Other documents concern different regions (e.g., Campania, Veneto, Liguria) and cities (e.g., Genoa, Venice) and thus are not relevant. Therefore, only this one document is appropriate to answer the question precisely. | Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1): The question specifically asks for application deadlines for scholarships, accommodation, and degree awards for academic year 2025/26 in Piemonte, focused on Torino. \n\nLooking for sections relating to deadlines and application procedures, the most relevant nodes seem to be:\n- Section I largely contains general provisions about beneficiaries, amounts, eligibility, economic requirements, and how to submit applications (ART. 7), which likely includes deadlines.\n- ART. 7 (node_id 0032 and children) details how to submit an application, which likely includes timing.\n- In SECTION III, specifically ART. 10 (node_ids 0056, 0057, 0058) is directly titled \"METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION\", very likely central for deadlines.\n- ART. 12 (node_id 0062 and children) talks about rankings and complaints, which may mention deadlines for complaints and ranking publications, important timelines.\n- ART. 8 (0045 and children) is about paid accommodation and its deadlines for submitting self-certifications, probably critical for accommodation deadlines.\n\nNo single node explicitly mentions degree award deadlines, but the entire notice is about scholarship, accommodation, and degree award. \n\nThus, to cover application deadlines for the relevant benefits, I select:\n- 0032 (ART. 7 HOW TO SUBMIT AN APPLICATION) and key children (especially 0033-0044) for application procedure and implied deadlines.\n- 0056-0058 (ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION) for explicit submission deadlines.\n- 0045-0048 (ART. 8 PAID ACCOMMODATION and submission deadlines for self-certification) for accommodation deadline details.\n- 0062 (ART. 12 RANKINGS AND COMPLAINTS) to understand any deadlines related to rankings complaints that might affect award timing.\n\nI pick node_ids 0032, 0048, 0056, 0057, 0058, and 0062 to comprehensively cover deadlines relevant to scholarships, accommodation, and degree awards applications.",
+  "needs_clarification": false,
+  "clarifying_question": null
+}

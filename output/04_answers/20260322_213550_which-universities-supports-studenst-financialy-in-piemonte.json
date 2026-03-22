@@ -1,0 +1,40 @@
+{
+  "question": "Which universities supports studenst financialy in piemonte region?",
+  "answer": "For the academic year 2025/26, the following universities in the Piedmont region offer financial support to students, including scholarships and accommodation services: University of Turin, University of Eastern Piedmont, University of Gastronomic Sciences, and Turin Polytechnic. Additionally, several higher education and artistic institutions in Piedmont are included, such as the Academy of Fine Arts of Turin and Giuseppe Verdi Conservatory of Turin, among others. These institutions participate in the regional scholarship and accommodation programs managed by EDISU Piedmont.",
+  "citations": [
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0003",
+      "node_title": "Art. 1(2) UNIVERSITIES",
+      "line_number": 372
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0005",
+      "node_title": "Art. 1(4) DISTRIBUTION OF SCHOLARSHIPS AND ACCOMMODATION",
+      "line_number": 382
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0045",
+      "node_title": "ART. 8 PAID ACCOMMODATION",
+      "line_number": 1331
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0046",
+      "node_title": "ART. 8(1) NON-RESIDENT STUDENTS WHO MUST SUBMIT THE SELF-CERTIFICATION OF PAID ACCOMMODATION",
+      "line_number": 1333
+    }
+  ],
+  "document_ids": [
+    "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+  ],
+  "retrieval_notes": "Rewrote question for retrieval: Which universities in the Piedmont region offer student financial support such as scholarships and accommodation for the academic year 2025/26? | The user's original question asks about financial support for students in the Piemonte (Piedmont) region. Among the documents, only the \"Notice of competition – scholarship accommodation and degree award a.y. 2025/26\" covers universities in Piedmont and includes financial support types such as scholarships and accommodation for the 2025/26 academic year. The rewrite adds the academic year and benefit types to better align with the document's scope and improve retrieval accuracy without adding unsupported facts. | The question asks for universities in the Piedmont region offering student financial support such as scholarships and accommodation for academic year 2025/26. Among the documents, only 'Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)' explicitly covers multiple universities in the Piedmont region and specifies scholarships and accommodation for 2025/26. Other documents either cover different regions like Veneto or Campania or focus on a single university outside Piedmont. Therefore, only this document is relevant and sufficient to answer the question precisely. | Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1): The question asks specifically about which universities in the Piedmont region offer financial support such as scholarships and accommodation for academic year 2025/26. To answer this, I need information on the universities involved and details about the scholarships and accommodations offered for that year in Piedmont. \n\n- Node 0003 (Art. 1(2) UNIVERSITIES) should provide the list of Piedmont universities covered by the benefits.\n- Node 0005 (Art. 1(4) DISTRIBUTION OF SCHOLARSHIPS AND ACCOMMODATION) should have details on how scholarships and accommodation are distributed.\n- Node 0045 (ART. 8 PAID ACCOMMODATION) and its children give specific rules about accommodation for non-resident and foreign students, relevant to accommodation support.\n- Node 0011 (ART. 5 SCHOLARSHIP AMOUNTS) with its subnodes could detail the financial support amounts.\n- Possibly also node 0002 (Art. 1(1) COURSES) for the courses supporting scholarships, to understand coverage.\n\nThese nodes collectively provide: which universities are covered, what benefits (scholarship and accommodation) are given for the year, and probably the conditions and amounts. This should fully answer the question. Other nodes mostly describe procedures, economic requirements, or application methods, less relevant for the question of 'which universities offer support'.\n\nI will select up to 6: 0003, 0005, 0002, 0011, 0045, and 0046 (a subnode of 0045 specific to non-resident students and foreign/exchange students).",
+  "needs_clarification": false,
+  "clarifying_question": null
+}

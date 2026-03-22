@@ -1,0 +1,26 @@
+{
+  "question": "What are the application deadlines?",
+  "answer": "The application deadline for the A.Di.S.U.R.C. competition, which includes scholarships, accommodation, and mobility benefits for the 2025/2026 academic year in Campania, is to complete and confirm the online application form by 12 am on 18 September 2025. Additionally, applicants with a household abroad must submit a copy of the equivalent ISEE certificate by 31 March 2026.",
+  "citations": [
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "node_id": "0040",
+      "node_title": "5.1 General rules – Terms",
+      "line_number": 462
+    },
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "node_id": "0036",
+      "node_title": "DEADLINES",
+      "line_number": 434
+    }
+  ],
+  "document_ids": [
+    "Bando di Concorso a.a. 2025.26_ENG_0"
+  ],
+  "retrieval_notes": "Rewrote question for retrieval: What are the application deadlines for scholarships, accommodation, and mobility benefits in the A.Di.S.U.R.C. Bando di Concorso for the 2025/2026 academic year in Campania? | The original question 'What are the application deadlines?' is ambiguous without context. Considering the document catalog, the query most likely refers to application deadlines for student benefits. Since several documents cover application deadlines for scholarships and accommodation but vary significantly by region and issuer, specifying the A.Di.S.U.R.C. call for 2025/26 (document covering Campania region universities and multiple benefit types) helps focus retrieval on a detailed, relevant call. This rewrite includes the academic year, issuer, region, and types of benefits to guide retrieval effectively. | The question specifically asks for application deadlines for scholarships, accommodation, and mobility benefits in the A.Di.S.U.R.C. Bando di Concorso for the 2025/2026 academic year in Campania. Among the listed documents, only 'Bando di Concorso a.a. 2025.26_ENG_0' is explicitly issued by A.Di.S.U.R.C. and related to Campania for the 2025/2026 academic year covering these benefit types. Other documents are from different regions, universities, or organizations and do not match the requested scope. Therefore, only this document is relevant and selected. | Bando di Concorso a.a. 2025.26_ENG_0: The question asks specifically about application deadlines for scholarships, accommodation, and mobility benefits in the A.Di.S.U.R.C. Bando di Concorso for the 2025/2026 academic year in Campania. The key information is likely to be under sections discussing deadlines or terms for participation or applications. \n\nReviewing the document tree, the node 0036 titled 'DEADLINES' under the 'Applicant from a particularly poor or developing country' subsection (0035) is promising because it explicitly references deadlines and is likely to summarize or include important dates. Additionally, 'ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION' (0039) and its first subnode (0040) about 'General rules – Terms' will likely contain general deadlines or application period details.\n\nFurther, 'ARTICLE 11 – INTERNATIONAL MOBILITY GRANT' (0078) is relevant specifically for mobility benefits, which might include deadlines for that particular grant.\n\nAccommodations are likely under Article 10, with 10.3 (0074), 10.3.1 Residences (0075) and 10.3.2 Fees and payment methods (0076) potentially containing information on accommodation application deadlines or procedures.\n\nTherefore, the following nodes are selected to find deadline information for scholarships, accommodation, and mobility benefits:\n- 0036 (DEADLINES)\n- 0040 (5.1 General rules – Terms)\n- 0039 (ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION) for broader context\n- 0078 (ARTICLE 11 – INTERNATIONAL MOBILITY GRANT) for mobility grant deadlines\n- 0074 (10.3 Housing service and related costs) and 0075 (10.3.1 Residences) specifically for accommodation\n\nThis covers application deadlines potentially scattered across scholarship, accommodation, and mobility grant sections.",
+  "needs_clarification": false,
+  "clarifying_question": null
+}

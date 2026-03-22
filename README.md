@@ -84,6 +84,8 @@ The search agent now applies document-scope guardrails for multi-document collec
 
 It also performs a HyPE-style retrieval rewrite before document selection: the agent expands short or vague user questions into a more explicit search query using only scope evidence found in the indexed documents, not from hardcoded region or university aliases.
 
+Each indexed document now includes a compact `search_profile` used for low-token document ranking. The profile favors issuer, region, academic year, covered institutions, covered cities, and benefit types over long descriptive summaries.
+
 For best reasoning quality, point `AZURE_OPENAI_DEPLOYMENT` or your Anthropic model setting at the strongest chat/reasoning deployment available in your environment rather than a mini-tier default.
 
 ## Output Layout

@@ -1,0 +1,9 @@
+{
+  "question": "What are the application deadlines in Piemonte / Torino ?",
+  "answer": "Could you please specify which university or issuing organization in Piemonte / Torino you want the deadlines for?",
+  "citations": [],
+  "document_ids": [],
+  "retrieval_notes": "Rewrote question for retrieval: What are the application deadlines for scholarships and accommodation benefits for students in Piemonte / Torino for the academic year 2025/2026? | The original question asks about application deadlines in Piemonte / Torino. The catalog contains documents primarily focused on other regions (Campania, Venice, Genoa) or general procedures without specific mention of Piemonte or Torino. Since none of the documents explicitly cover Piemonte / Torino, the question has been slightly expanded to focus on application deadlines related to scholarships and accommodation benefits for the academic year 2025/2026, which aligns with the general theme of the documents. This phrasing will help to retrieve any relevant comparable or general information on application deadlines, even if region-specific data for Piemonte / Torino is not present. | The user asks about application deadlines for scholarships and accommodation benefits specifically for students in Piemonte / Torino for academic year 2025/2026. The provided documents cover different regions and universities: Campania, Venice, Genoa, and an unspecified university or student support authority. None explicitly covers Piemonte or Torino or represents institutions from that region. Therefore, no document here matches the specified scope. Since the question targets a region not covered by any given document, I cannot answer precisely without guessing. Hence, needs_clarification is set to true.",
+  "needs_clarification": true,
+  "clarifying_question": "Could you please specify which university or issuing organization in Piemonte / Torino you want the deadlines for?"
+}

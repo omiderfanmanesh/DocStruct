@@ -11,6 +11,35 @@
     "organization": null
   },
   "doc_description": null,
+  "search_profile": {
+    "issuer": "I.S.E.E",
+    "region": "Veneto",
+    "covered_institutions": [
+      "University of Venice",
+      "Ca' Foscari University",
+      "The University"
+    ],
+    "covered_cities": [
+      "Venice"
+    ],
+    "academic_year": "2025/2026",
+    "benefit_types": [
+      "scholarship"
+    ]
+  },
+  "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+  "identity_terms": [
+    "Bando_Borse_di_studio_2025-2026_ENG",
+    "Bando Borse di studio 2025 2026 ENG",
+    "I.S.E.E",
+    "Veneto",
+    "2025/2026",
+    "University of Venice",
+    "Ca' Foscari University",
+    "The University",
+    "Venice",
+    "scholarship"
+  ],
   "structure": [
     {
       "title": "CALL FOR THE ASSIGNMENT OF SCHOLARSHIPS FOR THE RIGHT TO UNIVERSITY EDUCATION ACADEMIC YEAR 2025/2026",

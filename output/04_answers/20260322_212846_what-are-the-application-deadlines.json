@@ -1,0 +1,40 @@
+{
+  "question": "What are the application deadlines?",
+  "answer": "The online application form for scholarships, accommodation, and mobility benefits in the A.Di.S.U.R.C Bando di Concorso for the 2025/2026 academic year in Campania must be completed and confirmed by 18 September 2025 (12 am) under penalty of exclusion. Enrollment in the university for the academic year 2025/2026 should be completed by 20 September 2025 to avoid suspension in rankings and to remain eligible for accommodation assignments. For applicants with households abroad, the EQUIVALENT ISEE certification and online application must be submitted by 31 March 2026. Documentation certifying specific statuses must be submitted by the same deadlines, or the applicant risks exclusion from the competition.",
+  "citations": [
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "node_id": "0040",
+      "node_title": "5.1 General rules – Terms",
+      "line_number": 462
+    },
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "node_id": "0005",
+      "node_title": "1.2.3 Deadlines for enrolment in courses of study",
+      "line_number": 113
+    },
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "node_id": "0036",
+      "node_title": "DEADLINES",
+      "line_number": 434
+    },
+    {
+      "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+      "node_id": "0041",
+      "node_title": "5.2 Submission of documentation",
+      "line_number": 466
+    }
+  ],
+  "document_ids": [
+    "Bando di Concorso a.a. 2025.26_ENG_0"
+  ],
+  "retrieval_notes": "Rewrote question for retrieval: What are the application deadlines for scholarships, accommodation, and mobility benefits in the A.Di.S.U.R.C Bando di Concorso for the academic year 2025/2026 in Campania? | The original question asks broadly about application deadlines but lacks context. Given the catalog documents relate mostly to academic calls for scholarships and related benefits across different regions and universities, the best match for acquiring precise application deadlines is the A.Di.S.U.R.C Bando di Concorso 2025/26 document, which specifically covers scholarships, accommodation, and mobility for multiple universities in Campania. Including the issuer, document title, academic year, and region in the query helps constrain retrieval to the relevant document about application deadlines for these benefits. | The question specifically asks for application deadlines for scholarships, accommodation, and mobility benefits in the A.Di.S.U.R.C Bando di Concorso for academic year 2025/2026 in Campania. Among the provided documents, only the document with ID 'Bando di Concorso a.a. 2025.26_ENG_0' matches exactly this scope (A.Di.S.U.R.C, Campania, academic year 2025/2026, and includes scholarship, accommodation, and mobility benefits). The other documents relate to different regions or universities and do not cover Campania or A.Di.S.U.R.C specifically. Therefore, only this document will be selected to answer the question precisely. | Bando di Concorso a.a. 2025.26_ENG_0: The question asks specifically about application deadlines for scholarships, accommodation, and mobility benefits within the A.Di.S.U.R.C Bando di Concorso for the 2025/2026 academic year in Campania. \n\nFrom the provided document tree, the main relevant sections would be those that discuss the application procedures or deadlines. The most relevant node for deadlines appears to be under applicant economic condition \"Applicant from a particularly poor or developing country\" with a subnode titled \"DEADLINES\" (node_id 0036). This likely contains specific deadlines for participation in the competition.\n\nAdditionally, Article 5 (node_id 0039) is about rules for participation, including terms and submission of documentation (nodes 0040 and 0041), which may detail deadlines. \n\nArticle 10 (node_id 0071) is about procedures for using scholarships and services including housing (relevant for accommodation deadlines).\n\nArticle 11 (node_id 0078) concerns the International Mobility Grant, which may contain deadlines related to mobility benefits.\n\nTo ensure coverage of all three types of benefits (scholarships, accommodation, mobility), I select these nodes:\n- 0036 (Deadlines in economic conditions - best visible place for application deadlines)\n- 0040 and 0041 (General rules and documentation submission under participation in the competition)\n- 0071 (Procedures for the use of scholarships and services, including accommodation)\n- 0078 (International mobility grant section)\n\nAlso, node 0005 under ARTICLE 1 (Deadlines for enrolment in courses of study) might provide some important timeline context just before application deadlines.\n\nHence the selected node_ids: 0005, 0036, 0040, 0041, 0071, 0078.",
+  "needs_clarification": false,
+  "clarifying_question": null
+}

@@ -16,7 +16,9 @@ from docstruct.domain.models.search import (
     SearchAnswer,
     SearchCitation,
     SearchDocumentIndex,
+    SearchProfile,
     SearchSelectionDecision,
+    SearchTraceStep,
 )
 
 __all__ = [
@@ -29,7 +31,9 @@ __all__ = [
     "SearchAnswer",
     "SearchCitation",
     "SearchDocumentIndex",
+    "SearchProfile",
     "SearchSelectionDecision",
+    "SearchTraceStep",
     "SourceLine",
     "TOCBoundary",
     "TOCEntry",

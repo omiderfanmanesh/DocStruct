@@ -16,6 +16,7 @@ from docstruct.domain.pageindex_search import (
     build_document_scope_clues,
     build_document_identity_terms,
     build_document_scope_label,
+    build_search_profile,
     build_scope_options,
     build_tree_outline,
 )
@@ -75,6 +76,7 @@ class PageIndexSearchAgent:
                 "document_id": document.document_id,
                 "title": document.title,
                 "scope_label": build_document_scope_label(document),
+                "search_profile": build_search_profile(document).to_dict(),
                 "identity_terms": build_document_identity_terms(document)[:6],
                 "scope_clues": build_document_scope_clues(document)[:6],
                 "summary": document.summary,
@@ -127,6 +129,7 @@ class PageIndexSearchAgent:
                 "document_id": document.document_id,
                 "title": document.title,
                 "scope_label": build_document_scope_label(document),
+                "search_profile": build_search_profile(document).to_dict(),
                 "identity_terms": build_document_identity_terms(document)[:6],
                 "scope_clues": build_document_scope_clues(document)[:6],
                 "summary": document.summary,

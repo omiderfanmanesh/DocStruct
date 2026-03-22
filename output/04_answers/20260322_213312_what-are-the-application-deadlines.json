@@ -1,0 +1,9 @@
+{
+  "question": "What are the application deadlines?",
+  "answer": "I found matching policy documents for different universities or regions. Please specify the university, region, or issuing organization. Options: Genoa | University of Genoa | 2025/2026; Piedmont | Turin / Eastern Piedmont | University of Turin, University of Eastern Piedmont | 2025/26; Campania | Sannio / Naples Federico II | University of Sannio, University of Naples Federico II | 2025; Veneto | Venice | University of Venice, Ca' Foscari University | 2025/2026.",
+  "citations": [],
+  "document_ids": [],
+  "retrieval_notes": "Question is generic and matches multiple document scopes.",
+  "needs_clarification": true,
+  "clarifying_question": "I found matching policy documents for different universities or regions. Please specify the university, region, or issuing organization. Options: Genoa | University of Genoa | 2025/2026; Piedmont | Turin / Eastern Piedmont | University of Turin, University of Eastern Piedmont | 2025/26; Campania | Sannio / Naples Federico II | University of Sannio, University of Naples Federico II | 2025; Veneto | Venice | University of Venice, Ca' Foscari University | 2025/2026."
+}

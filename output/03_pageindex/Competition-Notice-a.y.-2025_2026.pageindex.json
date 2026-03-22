@@ -11,6 +11,35 @@
     "organization": null
   },
   "doc_description": null,
+  "search_profile": {
+    "issuer": "NOTICE",
+    "region": null,
+    "covered_institutions": [
+      "University of Genoa"
+    ],
+    "covered_cities": [
+      "Genoa"
+    ],
+    "academic_year": "2025/2026",
+    "benefit_types": [
+      "scholarship",
+      "accommodation",
+      "rental contribution"
+    ]
+  },
+  "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+  "identity_terms": [
+    "COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026",
+    "2025/2026",
+    "Competition Notice",
+    "Competition Notice a.y. 2025 2026",
+    "NOTICE",
+    "University of Genoa",
+    "Genoa",
+    "scholarship",
+    "accommodation",
+    "rental contribution"
+  ],
   "structure": [
     {
       "title": "Article 1 – Benefits of the Competition Notice",

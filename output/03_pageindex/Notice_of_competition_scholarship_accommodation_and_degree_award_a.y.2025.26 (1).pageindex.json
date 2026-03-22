@@ -11,6 +11,47 @@
     "organization": null
   },
   "doc_description": null,
+  "search_profile": {
+    "issuer": null,
+    "region": "Piedmont",
+    "covered_institutions": [
+      "University of Turin",
+      "University of Eastern Piedmont",
+      "University of Gastronomic Sciences",
+      "Turin Polytechnic",
+      "Giuseppe Verdi Conservatory of Turin"
+    ],
+    "covered_cities": [
+      "Turin",
+      "Eastern Piedmont",
+      "Gastronomic Sciences"
+    ],
+    "academic_year": "2025/26",
+    "benefit_types": [
+      "scholarship",
+      "accommodation",
+      "degree award"
+    ]
+  },
+  "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+  "identity_terms": [
+    "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+    "2025/26",
+    "Notice of competition",
+    "Notice of competition scholarship accommodation and degree award a.y.2025.26 (1)",
+    "Piedmont",
+    "University of Turin",
+    "University of Eastern Piedmont",
+    "University of Gastronomic Sciences",
+    "Turin Polytechnic",
+    "Giuseppe Verdi Conservatory of Turin",
+    "Turin",
+    "Eastern Piedmont",
+    "Gastronomic Sciences",
+    "scholarship",
+    "accommodation",
+    "degree award"
+  ],
   "structure": [
     {
       "title": "SECTION I",
