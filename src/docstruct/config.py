@@ -81,3 +81,105 @@ class AgentConfig:
             retry_delay=int(os.getenv("DOCSTRUCT_AGENT_RETRY_DELAY", "1")),
             provider=provider,
         )
+
+
+@dataclass
+class Neo4jConfig:
+    """Configuration for Neo4j connection and behavior."""
+
+    uri: str
+    auth: str | tuple[str, str]  # "none" or "user/password"
+    max_pool_size: int = 50
+    readiness_retries: int = 30
+    readiness_backoff_base: float = 1.0
+
+    @classmethod
+    def from_env(cls) -> "Neo4jConfig":
+        uri = _getenv_nonempty("NEO4J_URI")
+        if not uri:
+            raise ValueError("NEO4J_URI environment variable is required")
+
+        auth = _getenv_nonempty("NEO4J_AUTH")
+        if not auth:
+            raise ValueError("NEO4J_AUTH environment variable is required (set to 'none' or 'user/password')")
+
+        # Parse auth: if "none", keep as string; if "user/password", split into tuple
+        if auth.lower() == "none":
+            auth_value: str | tuple[str, str] = auth
+        elif "/" in auth:
+            parts = auth.split("/", 1)
+            auth_value = (parts[0], parts[1])
+        else:
+            raise ValueError("NEO4J_AUTH must be 'none' or 'user/password' format")
+
+        return cls(
+            uri=uri,
+            auth=auth_value,
+            max_pool_size=int(os.getenv("NEO4J_MAX_POOL_SIZE", "50")),
+            readiness_retries=int(os.getenv("NEO4J_READINESS_RETRIES", "30")),
+            readiness_backoff_base=float(os.getenv("NEO4J_READINESS_BACKOFF_BASE", "1.0")),
+        )
+
+
+@dataclass
+class EmbeddingConfig:
+    """Configuration for embedding generation and providers."""
+
+    provider: str  # "openai" or "cohere"
+    model: str
+    dimensions: int | None = None
+
+    @classmethod
+    def from_env(cls) -> "EmbeddingConfig":
+        provider = _getenv_nonempty("EMBEDDING_PROVIDER") or "openai"
+        model = _getenv_nonempty("EMBEDDING_MODEL") or "text-embedding-3-small"
+
+        # Auto-detect dimensions based on provider and model
+        dimensions: int | None = None
+        dimensions_env = _getenv_nonempty("EMBEDDING_DIMENSIONS")
+        if dimensions_env:
+            dimensions = int(dimensions_env)
+        else:
+            # Default dimensions for common models
+            if provider.lower() == "openai":
+                if "3-small" in model:
+                    dimensions = 1536
+                elif "3-large" in model:
+                    dimensions = 3072
+            elif provider.lower() == "cohere":
+                if "v3" in model:
+                    dimensions = 1024
+
+        if not dimensions:
+            raise ValueError(
+                f"Could not determine embedding dimensions for provider={provider}, model={model}. "
+                "Set EMBEDDING_DIMENSIONS explicitly."
+            )
+
+        return cls(provider=provider, model=model, dimensions=dimensions)
+
+
+@dataclass
+class RetrievalConfig:
+    """Configuration for Neo4j-backed retrieval modes."""
+
+    max_candidates: int = 6
+    enable_graph: bool = True
+    enable_fulltext: bool = True
+    enable_vector: bool = True
+
+    @classmethod
+    def from_env(cls) -> "RetrievalConfig":
+        enable_graph = os.getenv("RETRIEVAL_ENABLE_GRAPH", "true").lower() == "true"
+        enable_fulltext = os.getenv("RETRIEVAL_ENABLE_FULLTEXT", "true").lower() == "true"
+        enable_vector = os.getenv("RETRIEVAL_ENABLE_VECTOR", "true").lower() == "true"
+
+        if not (enable_graph or enable_fulltext or enable_vector):
+            raise ValueError("At least one retrieval mode (graph, fulltext, or vector) must be enabled")
+
+        return cls(
+            max_candidates=int(os.getenv("RETRIEVAL_MAX_CANDIDATES", "6")),
+            enable_graph=enable_graph,
+            enable_fulltext=enable_fulltext,
+            enable_vector=enable_vector,
+        )

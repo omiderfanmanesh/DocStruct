@@ -10,10 +10,12 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
   "anthropic",
+  "cohere>=5.0",
   "langchain-anthropic",
   "langchain-core",
   "langchain-openai",
   "langgraph",
+  "neo4j>=5.11",
   "openai",
   "pydantic",
   "python-dotenv",

@@ -1,6 +1,8 @@
-# DocStruct Development Guidelines
+﻿# DocStruct Development Guidelines
 
 ## Active Technologies
+- Python 3.9+ (env: `py_latest`, Python 3.13) + `neo4j>=5.11`, `openai` (existing), `cohere>=5.0` (new), `python-dotenv` (existing), `langgraph` (existing), `pytest` (existing) (005-neo4j-hybrid-search)
+- Neo4j 5.x (graph + full-text + vector indexes); `.pageindex.json` files remain source of truth (005-neo4j-hybrid-search)
 
 - Python 3.9+
 - `anthropic`, `openai`, `python-dotenv`
