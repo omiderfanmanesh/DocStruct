@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Callable, List, Optional, TypedDict
+from typing import TYPE_CHECKING, Callable, List, Optional, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
@@ -14,6 +14,9 @@ from docstruct.domain.pageindex_search import (
     choose_candidate_documents,
     fallback_node_matches,
 )
+
+if TYPE_CHECKING:
+    from docstruct.application.ports import Neo4jRetrievalPort
 
 
 class SearchGraphState(TypedDict, total=False):
@@ -39,10 +42,12 @@ class PageIndexSearchGraphRunner:
         client,
         add_trace: Callable[..., None],
         summarize_documents: Callable[..., list[dict[str, str | None]]],
+        neo4j_retrieval: Optional[Neo4jRetrievalPort] = None,
     ) -> None:
         self._agent = PageIndexSearchAgent(client)
         self._add_trace = add_trace
         self._summarize_documents = summarize_documents
+        self._neo4j_retrieval = neo4j_retrieval
         self._graph = self._build_graph()
 
     @staticmethod
@@ -175,7 +180,26 @@ class PageIndexSearchGraphRunner:
 
     def _rank_candidates(self, state: SearchGraphState) -> SearchGraphState:
         effective_question = state["effective_question"]
-        candidate_documents = choose_candidate_documents(effective_question, state["indexes"], limit=6)
+
+        # Use Neo4j retrieval if available, otherwise fall back to in-memory method
+        if self._neo4j_retrieval:
+            # Retrieve candidates from Neo4j
+            retrieval_candidates = self._neo4j_retrieval.retrieve_candidates(
+                question=effective_question,
+                query_embedding=None,  # Vector mode not enabled by default
+                limit=6,
+            )
+
+            # Convert RetrievalCandidate objects to SearchDocumentIndex objects
+            candidate_documents: list[SearchDocumentIndex] = []
+            for candidate in retrieval_candidates:
+                doc_index = self._neo4j_retrieval.get_document_index(candidate.document_id)
+                if doc_index:
+                    candidate_documents.append(doc_index)
+        else:
+            # Fall back to in-memory candidate selection (original behavior)
+            candidate_documents = choose_candidate_documents(effective_question, state["indexes"], limit=6)
+
         inferred_document_ids = state.get("inferred_document_ids", [])
         if inferred_document_ids:
             candidate_documents = self._promote_documents(candidate_documents, inferred_document_ids, limit=6)

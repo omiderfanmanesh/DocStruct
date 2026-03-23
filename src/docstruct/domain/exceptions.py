@@ -69,6 +69,14 @@ class ProviderAuthError(ProviderError):
     """Error authenticating with LLM provider."""
 
 
+class EmbeddingError(DocStructError):
+    """Error with embedding generation."""
+
+
+class EmbeddingDimensionError(EmbeddingError):
+    """Error: embedding vector dimension mismatch with index."""
+
+
 __all__ = [
     "BlockExtractionError",
     "BoundaryDetectionError",
@@ -76,6 +84,8 @@ __all__ = [
     "ConfigError",
     "ConfigValidationError",
     "DocStructError",
+    "EmbeddingDimensionError",
+    "EmbeddingError",
     "HeadingCorrectionError",
     "JSONError",
     "JSONParsingError",

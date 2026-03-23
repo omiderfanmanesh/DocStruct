@@ -75,6 +75,52 @@ class EmbeddingPort(Protocol):
         ...
 
 
+class EmbeddingPort(Protocol):
+    """Port for embedding generation with provider abstraction.
+
+    Implementations must support specific input_type semantics (search_document vs search_query)
+    as required by embeddings services like Cohere.
+    """
+
+    @property
+    def dimensionality(self) -> int:
+        """Embedding vector dimension (e.g., 1536 for OpenAI, 1024 for Cohere)."""
+        ...
+
+    @property
+    def provider_name(self) -> str:
+        """Provider name (e.g., 'openai', 'cohere')."""
+        ...
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        """Generate embeddings for a batch of documents.
+
+        Args:
+            texts: List of document texts.
+
+        Returns:
+            List of embedding vectors (one per input text). Empty list if input is empty.
+
+        Raises:
+            EmbeddingDimensionError: If returned vector dimension doesn't match dimensionality property.
+        """
+        ...
+
+    def embed_query(self, text: str) -> list[float]:
+        """Generate embedding for a query.
+
+        Args:
+            text: Query text.
+
+        Returns:
+            Embedding vector.
+
+        Raises:
+            EmbeddingDimensionError: If returned vector dimension doesn't match dimensionality property.
+        """
+        ...
+
+
 class Neo4jRetrievalPort(Protocol):
     """Port for Neo4j-backed hybrid retrieval (graph + full-text + vector modes)."""
 

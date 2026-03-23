@@ -10,8 +10,10 @@ from typing import Any
 
 from neo4j import Driver
 
-from ...domain.models.search import SearchDocumentIndex, SearchProfile
+from ...application.ports import EmbeddingPort
+from ...domain.models.search import SearchDocumentIndex, SearchProfile, EmbeddingPayload
 from ...config import EmbeddingConfig
+from ...infrastructure.embeddings.factory import build_embedder
 
 
 def _log(message: str, level: str = "INFO") -> None:
@@ -39,6 +41,15 @@ class PageIndexLoader:
         self.driver = driver
         self.embedding_config = embedding_config
         self.dry_run = dry_run
+        self.embedder: EmbeddingPort | None = None
+
+        # Build embedder if configured and vector mode is enabled
+        if embedding_config and embedding_config.enable_vector:
+            try:
+                self.embedder = build_embedder(embedding_config)
+                _log(f"Loaded {embedding_config.provider} embedder (model: {embedding_config.model})")
+            except ValueError as e:
+                _log(f"Failed to load embedder: {e}", "WARNING")
 
     def load_all(self, pageindex_dir: str | Path) -> dict[str, Any]:
         """Load all .pageindex.json files from a directory.
@@ -93,6 +104,9 @@ class PageIndexLoader:
                 # Load into Neo4j
                 if not self.dry_run:
                     nodes_created, nodes_updated, rels_created = self._load_document(doc_index, relative_path)
+                    # Generate embeddings if enabled
+                    if self.embedder:
+                        self._generate_and_store_embeddings(doc_index)
                 else:
                     nodes_created = nodes_updated = rels_created = 0
 
@@ -332,6 +346,66 @@ class PageIndexLoader:
             self._merge_section(session, document_id, subsection, parent_id=node_id)
 
         return node_id
+
+    def _generate_and_store_embeddings(self, doc_index: SearchDocumentIndex) -> None:
+        """Generate embeddings for all sections and store them in Neo4j.
+
+        Args:
+            doc_index: SearchDocumentIndex with document and sections.
+        """
+        if not self.embedder:
+            return
+
+        # Collect all sections with their text
+        sections_to_embed: list[tuple[str, str, str]] = []  # (node_id, text, section_title)
+
+        def collect_sections(section: dict[str, Any]) -> None:
+            """Recursively collect sections for embedding."""
+            node_id = section.get("node_id")
+            text = section.get("text", "")
+            node_title = section.get("node_title", "")
+
+            if node_id and text:
+                sections_to_embed.append((node_id, text, node_title))
+
+            for subsection in section.get("subsections", []):
+                collect_sections(subsection)
+
+        # Collect all sections
+        for section in doc_index.structure or []:
+            collect_sections(section)
+
+        if not sections_to_embed:
+            return
+
+        try:
+            # Prepare embedding payloads
+            embedding_texts = [text for _, text, _ in sections_to_embed]
+
+            # Generate embeddings in batches
+            embeddings = self.embedder.embed_documents(embedding_texts)
+
+            # Store embeddings on Section nodes
+            with self.driver.session() as session:
+                for (node_id, text, node_title), embedding in zip(sections_to_embed, embeddings):
+                    session.run(
+                        """
+                        MATCH (s:Section {node_id: $node_id})
+                        SET
+                            s.embedding = $embedding,
+                            s.embedding_provider = $provider,
+                            s.embedding_model = $model
+                        """,
+                        node_id=node_id,
+                        embedding=embedding,
+                        provider=self.embedder.provider_name,
+                        model=self.embedding_config.model if self.embedding_config else None,
+                    )
+
+            _log(f"Generated and stored {len(embeddings)} embeddings for document {doc_index.document_id}")
+
+        except Exception as e:
+            _log(f"Failed to generate embeddings for {doc_index.document_id}: {e}", "WARNING")
 
     def _deactivate_removed(self, known_paths: set[str]) -> int:
         """Mark documents as inactive if their source file is no longer present.

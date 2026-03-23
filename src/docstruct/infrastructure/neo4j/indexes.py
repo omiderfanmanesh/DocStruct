@@ -5,12 +5,7 @@ from __future__ import annotations
 from neo4j import Driver
 
 from ...config import EmbeddingConfig
-
-
-class EmbeddingDimensionError(Exception):
-    """Raised when vector index dimension does not match embedding provider dimension."""
-
-    pass
+from ...domain.exceptions import EmbeddingDimensionError
 
 
 def create_indexes(driver: Driver, embedding_config: EmbeddingConfig | None = None, skip_vector: bool = False) -> None:
