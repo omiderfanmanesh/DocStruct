@@ -173,3 +173,108 @@ class TestCohereEmbedder:
             embedder = CohereEmbedder(api_key="test_key", model="embed-english-v3.0")
             with pytest.raises(EmbeddingDimensionError):
                 embedder.embed_documents(["text"])
+
+
+class TestAzureOpenAIEmbedder:
+    """Test Azure OpenAI embedding adapter."""
+
+    def test_dimensionality(self):
+        """Test that AzureOpenAIEmbedder has correct dimensionality."""
+        from docstruct.infrastructure.embeddings.azure_openai_embedder import AzureOpenAIEmbedder
+
+        with patch("docstruct.infrastructure.embeddings.azure_openai_embedder.AzureOpenAI"):
+            embedder = AzureOpenAIEmbedder(
+                api_key="test_key",
+                api_endpoint="https://test.openai.azure.com/",
+                model="text-embedding-3-small",
+            )
+            assert embedder.dimensionality == 1536
+
+    def test_provider_name(self):
+        """Test that AzureOpenAIEmbedder has correct provider name."""
+        from docstruct.infrastructure.embeddings.azure_openai_embedder import AzureOpenAIEmbedder
+
+        with patch("docstruct.infrastructure.embeddings.azure_openai_embedder.AzureOpenAI"):
+            embedder = AzureOpenAIEmbedder(
+                api_key="test_key",
+                api_endpoint="https://test.openai.azure.com/",
+                model="text-embedding-3-small",
+            )
+            assert embedder.provider_name == "azure-openai"
+
+    def test_embed_documents_empty(self):
+        """Test that embed_documents returns empty list for empty input."""
+        from docstruct.infrastructure.embeddings.azure_openai_embedder import AzureOpenAIEmbedder
+
+        with patch("docstruct.infrastructure.embeddings.azure_openai_embedder.AzureOpenAI"):
+            embedder = AzureOpenAIEmbedder(
+                api_key="test_key",
+                api_endpoint="https://test.openai.azure.com/",
+                model="text-embedding-3-small",
+            )
+            result = embedder.embed_documents([])
+            assert result == []
+
+    def test_embed_documents_batching(self):
+        """Test that embed_documents batches at 2048 texts per call."""
+        from docstruct.infrastructure.embeddings.azure_openai_embedder import AzureOpenAIEmbedder
+
+        mock_client = Mock()
+        mock_response = Mock()
+        # Create proper mock data structure
+        mock_data = [Mock(embedding=[0.1] * 1536) for _ in range(10)]
+        mock_response.data = mock_data
+        mock_client.embeddings.create.return_value = mock_response
+
+        with patch("docstruct.infrastructure.embeddings.azure_openai_embedder.AzureOpenAI", return_value=mock_client):
+            embedder = AzureOpenAIEmbedder(
+                api_key="test_key",
+                api_endpoint="https://test.openai.azure.com/",
+                model="text-embedding-3-small",
+            )
+            texts = ["text1", "text2", "text3"] + ["text"] * 2045  # 2048 total
+            result = embedder.embed_documents(texts)
+
+            # Should have made 1 call for batch of 2048 + 1 call for remaining 3
+            assert mock_client.embeddings.create.call_count == 2
+
+    def test_embed_query(self):
+        """Test embed_query calls client with single query."""
+        from docstruct.infrastructure.embeddings.azure_openai_embedder import AzureOpenAIEmbedder
+
+        mock_client = Mock()
+        mock_response = Mock()
+        mock_data = [Mock(embedding=[0.1] * 1536)]
+        mock_response.data = mock_data
+        mock_client.embeddings.create.return_value = mock_response
+
+        with patch("docstruct.infrastructure.embeddings.azure_openai_embedder.AzureOpenAI", return_value=mock_client):
+            embedder = AzureOpenAIEmbedder(
+                api_key="test_key",
+                api_endpoint="https://test.openai.azure.com/",
+                model="text-embedding-3-small",
+            )
+            result = embedder.embed_query("test query")
+
+            assert len(result) == 1536
+            mock_client.embeddings.create.assert_called()
+
+    def test_embed_documents_dimension_mismatch(self):
+        """Test that EmbeddingDimensionError is raised on dimension mismatch."""
+        from docstruct.infrastructure.embeddings.azure_openai_embedder import AzureOpenAIEmbedder
+        from docstruct.domain.exceptions import EmbeddingDimensionError
+
+        mock_client = Mock()
+        mock_response = Mock()
+        mock_data = [Mock(embedding=[0.1] * 1024)]  # Wrong dimension
+        mock_response.data = mock_data
+        mock_client.embeddings.create.return_value = mock_response
+
+        with patch("docstruct.infrastructure.embeddings.azure_openai_embedder.AzureOpenAI", return_value=mock_client):
+            embedder = AzureOpenAIEmbedder(
+                api_key="test_key",
+                api_endpoint="https://test.openai.azure.com/",
+                model="text-embedding-3-small",
+            )
+            with pytest.raises(EmbeddingDimensionError):
+                embedder.embed_documents(["text"])

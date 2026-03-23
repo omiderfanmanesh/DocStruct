@@ -6,6 +6,7 @@ from ...application.ports import EmbeddingPort
 from ...config import EmbeddingConfig
 from .openai_embedder import OpenAIEmbedder
 from .cohere_embedder import CohereEmbedder
+from .azure_openai_embedder import AzureOpenAIEmbedder
 
 
 def build_embedder(config: EmbeddingConfig) -> EmbeddingPort:
@@ -15,7 +16,7 @@ def build_embedder(config: EmbeddingConfig) -> EmbeddingPort:
         config: EmbeddingConfig with provider and model specifications.
 
     Returns:
-        EmbeddingPort implementation (OpenAIEmbedder or CohereEmbedder).
+        EmbeddingPort implementation (OpenAIEmbedder, CohereEmbedder, or AzureOpenAIEmbedder).
 
     Raises:
         ValueError: If provider is unsupported or configuration is invalid.
@@ -44,9 +45,27 @@ def build_embedder(config: EmbeddingConfig) -> EmbeddingPort:
             model=config.model,
         )
 
+    elif provider == "azure-openai":
+        if not config.api_key:
+            raise ValueError(
+                "AZURE_OPENAI_API_KEY environment variable is required for Azure OpenAI embeddings. "
+                "Please set it and ensure your API key is valid."
+            )
+        if not config.api_endpoint:
+            raise ValueError(
+                "AZURE_OPENAI_ENDPOINT environment variable is required for Azure OpenAI embeddings. "
+                "Example: https://{resource}.openai.azure.com/"
+            )
+        return AzureOpenAIEmbedder(
+            api_key=config.api_key,
+            api_endpoint=config.api_endpoint,
+            model=config.model,
+            api_version=config.api_version or "2024-02-15-preview",
+        )
+
     else:
         raise ValueError(
             f"Unsupported embedding provider: {provider}. "
-            f"Supported providers: openai, cohere. "
+            f"Supported providers: openai, cohere, azure-openai. "
             f"Set EMBEDDING_PROVIDER to one of these values."
         )

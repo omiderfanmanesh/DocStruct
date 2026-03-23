@@ -2,6 +2,7 @@
 
 ## Active Technologies
 - Python 3.9+ (env: `py_latest`, Python 3.13) + `neo4j>=5.11`, `openai` (existing), `cohere>=5.0` (new), `python-dotenv` (existing), `langgraph` (existing), `pytest` (existing) (005-neo4j-hybrid-search)
+- Embedding providers: OpenAI (text-embedding-3-small/large), Cohere (embed-english-v3.0), Azure OpenAI (deployment-based)
 - Neo4j 5.x (graph + full-text + vector indexes); `.pageindex.json` files remain source of truth (005-neo4j-hybrid-search)
 
 - Python 3.9+

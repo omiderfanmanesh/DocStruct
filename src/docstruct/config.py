@@ -125,14 +125,33 @@ class Neo4jConfig:
 class EmbeddingConfig:
     """Configuration for embedding generation and providers."""
 
-    provider: str  # "openai" or "cohere"
+    provider: str  # "openai", "cohere", or "azure-openai"
     model: str
     dimensions: int | None = None
+    api_key: str | None = None
+    api_endpoint: str | None = None  # Azure-specific
+    api_version: str | None = None  # Azure-specific
 
     @classmethod
     def from_env(cls) -> "EmbeddingConfig":
         provider = _getenv_nonempty("EMBEDDING_PROVIDER") or "openai"
         model = _getenv_nonempty("EMBEDDING_MODEL") or "text-embedding-3-small"
+
+        # Get API credentials based on provider
+        api_key: str | None = None
+        api_endpoint: str | None = None
+        api_version: str | None = None
+
+        provider_lower = provider.lower()
+
+        if provider_lower == "openai":
+            api_key = _getenv_nonempty("OPENAI_API_KEY")
+        elif provider_lower == "cohere":
+            api_key = _getenv_nonempty("COHERE_API_KEY")
+        elif provider_lower == "azure-openai":
+            api_key = _getenv_nonempty("AZURE_OPENAI_API_KEY")
+            api_endpoint = _getenv_nonempty("AZURE_OPENAI_ENDPOINT")
+            api_version = _getenv_nonempty("AZURE_OPENAI_API_VERSION") or "2024-02-15-preview"
 
         # Auto-detect dimensions based on provider and model
         dimensions: int | None = None
@@ -141,12 +160,12 @@ class EmbeddingConfig:
             dimensions = int(dimensions_env)
         else:
             # Default dimensions for common models
-            if provider.lower() == "openai":
-                if "3-small" in model:
+            if provider_lower == "openai" or provider_lower == "azure-openai":
+                if "3-small" in model or "text-embedding-3-small" in model:
                     dimensions = 1536
-                elif "3-large" in model:
+                elif "3-large" in model or "text-embedding-3-large" in model:
                     dimensions = 3072
-            elif provider.lower() == "cohere":
+            elif provider_lower == "cohere":
                 if "v3" in model:
                     dimensions = 1024
 
@@ -156,7 +175,14 @@ class EmbeddingConfig:
                 "Set EMBEDDING_DIMENSIONS explicitly."
             )
 
-        return cls(provider=provider, model=model, dimensions=dimensions)
+        return cls(
+            provider=provider,
+            model=model,
+            dimensions=dimensions,
+            api_key=api_key,
+            api_endpoint=api_endpoint,
+            api_version=api_version,
+        )
 
 
 @dataclass
