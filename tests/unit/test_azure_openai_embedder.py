@@ -28,6 +28,7 @@ class TestAzureOpenAIEmbedderFactory:
             from docstruct.infrastructure.embeddings.azure_openai_embedder import AzureOpenAIEmbedder
             assert isinstance(embedder, AzureOpenAIEmbedder)
             assert embedder.provider_name == "azure-openai"
+            assert embedder.dimensionality == 1536
 
     def test_factory_requires_azure_api_key(self):
         """Test that factory raises error when Azure API key is missing."""
@@ -82,6 +83,25 @@ class TestAzureOpenAIEmbedderFactory:
             mock_azure.assert_called_once()
             call_kwargs = mock_azure.call_args[1]
             assert call_kwargs["api_version"] == "2024-02-15-preview"
+            assert embedder.dimensionality == 1536
+
+    def test_factory_passes_large_embedding_dimensions(self):
+        """Test that factory preserves configured dimensions for larger Azure deployments."""
+        from docstruct.infrastructure.embeddings.factory import build_embedder
+        from docstruct.config import EmbeddingConfig
+
+        config = EmbeddingConfig(
+            provider="azure-openai",
+            model="text-embedding-3-large",
+            dimensions=3072,
+            api_key="test_key",
+            api_endpoint="https://test.openai.azure.com/",
+            api_version="2024-02-15-preview",
+        )
+
+        with patch("docstruct.infrastructure.embeddings.azure_openai_embedder.AzureOpenAI"):
+            embedder = build_embedder(config)
+            assert embedder.dimensionality == 3072
 
 
 class TestAzureOpenAIConfig:

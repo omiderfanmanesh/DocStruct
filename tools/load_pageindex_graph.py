@@ -35,7 +35,7 @@ from docstruct.infrastructure.neo4j.loader import PageIndexLoader
 def main() -> int:
     """Main entry point."""
     if load_dotenv is not None:
-        load_dotenv()
+        load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env", override=True)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if hasattr(sys.stderr, "reconfigure"):

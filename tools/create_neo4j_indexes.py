@@ -29,7 +29,7 @@ from docstruct.infrastructure.neo4j.indexes import EmbeddingDimensionError, crea
 def main() -> int:
     """Main entry point."""
     if load_dotenv is not None:
-        load_dotenv()
+        load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env", override=True)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if hasattr(sys.stderr, "reconfigure"):
@@ -72,7 +72,8 @@ def main() -> int:
                     return 1
 
             print("\nCreated constraint: document_source_path_unique")
-            print("Created constraint: section_node_id_unique")
+            print("Created constraint: document_id_unique")
+            print("Created constraint: section_key_unique")
             print("Created constraint: org_name_unique")
             print("Created constraint: region_name_unique")
             print("Created constraint: city_name_unique")

@@ -60,6 +60,7 @@ def build_embedder(config: EmbeddingConfig) -> EmbeddingPort:
             api_key=config.api_key,
             api_endpoint=config.api_endpoint,
             model=config.model,
+            dimensions=config.dimensions or 1536,
             api_version=config.api_version or "2024-02-15-preview",
         )
 

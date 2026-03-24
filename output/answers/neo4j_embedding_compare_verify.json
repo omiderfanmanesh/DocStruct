@@ -1,0 +1,427 @@
+{
+  "question": "What are the necesssary document for apply for scvholarshipd of Edisu?",
+  "pageindex": {
+    "question": "What are the necesssary document for apply for scvholarshipd of Edisu?",
+    "answer": "To apply for scholarships from A.Di.S.U.R.C. (Edisu Campania) for the academic year 2025/2026, applicants must submit an online application form containing personal details, payment details, qualifications, and income details. They must declare their certified email (PEC) address. The form is self-certified and must be accompanied by self-certification Form 1 and a copy of a valid ID or equivalent. Specific documentation is required for certain circumstances such as applicants from particularly poor or developing countries, applicants with disabilities, and applicants with household residents abroad. All required documentation must be valid and submitted by the deadline, or the applicant will be excluded from the competition.",
+    "citations": [
+      {
+        "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+        "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+        "node_id": "0041",
+        "node_title": "5.2 Submission of documentation",
+        "line_number": 466
+      }
+    ],
+    "document_ids": [
+      "Bando di Concorso a.a. 2025.26_ENG_0"
+    ],
+    "retrieval_notes": "Rewrote question for retrieval: What are the necessary documents to apply for scholarships from A.Di.S.U.R.C. for the academic year 2025/2026? | The user's question about necessary documents for applying for scholarships from 'Edisu' likely refers to A.Di.S.U.R.C., which is the student support authority in Campania region, Italy, commonly known as Edisu Campania. The document 'Bando di Concorso a.a. 2025.26_ENG_0' specifically covers scholarships for the academic year 2025/2026 issued by A.Di.S.U.R.C. This document is the most relevant source for the user's question about scholarship application requirements. | Bando di Concorso a.a. 2025.26_ENG_0: The question asks for the necessary documents to apply for scholarships from A.Di.S.U.R.C. for the academic year 2025/2026. The relevant information is likely to be found in sections related to application procedures, submission of documentation, and eligibility requirements. Based on the document tree, the most relevant nodes appear to be under ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION, especially 5.2 Submission of documentation, as well as possibly ARTICLE 2 – ELIGIBILITY REQUIREMENTS and ARTICLE 4 – REQUIREMENTS RELATING TO ECONOMIC CONDITION, which might mention required documents for economic status verification. I will select nodes 0039 (ARTICLE 5), 0041 (5.2 Submission of documentation), 0013 (ARTICLE 2), 0023 (ARTICLE 4), and 0025 (REQUIREMENTS RELATING TO ECONOMIC CONDITION) to cover these aspects comprehensively.",
+    "needs_clarification": false,
+    "clarifying_question": null,
+    "trace": [
+      {
+        "stage": "load_indexes",
+        "message": "Loaded search indexes.",
+        "details": {
+          "index_dir": "C:\\Projects\\personal\\DocStruct\\output\\03_pageindex",
+          "count": 4,
+          "documents": [
+            {
+              "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+              "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+              "region": "Campania",
+              "issuer": "A.Di.S.U.R.C"
+            },
+            {
+              "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+              "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+              "region": "Veneto",
+              "issuer": "I.S.E.E"
+            },
+            {
+              "document_id": "Competition-Notice-a.y.-2025_2026",
+              "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+              "region": null,
+              "issuer": "NOTICE"
+            },
+            {
+              "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+              "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+              "region": "Piedmont",
+              "issuer": null
+            }
+          ],
+          "requested_retrieval_backend": "pageindex",
+          "retrieval_backend": "pageindex"
+        }
+      },
+      {
+        "stage": "intent_detection",
+        "message": "Detected user intent for document scope.",
+        "details": {
+          "multi_document_intent": false
+        }
+      },
+      {
+        "stage": "initial_ranking",
+        "message": "Ranked initial candidate documents from the original question.",
+        "details": {
+          "question": "What are the necesssary document for apply for scvholarshipd of Edisu?",
+          "candidates": [
+            {
+              "document_id": "Competition-Notice-a.y.-2025_2026",
+              "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+              "region": null,
+              "issuer": "NOTICE"
+            },
+            {
+              "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+              "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+              "region": "Piedmont",
+              "issuer": null
+            },
+            {
+              "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+              "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+              "region": "Veneto",
+              "issuer": "I.S.E.E"
+            },
+            {
+              "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+              "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+              "region": "Campania",
+              "issuer": "A.Di.S.U.R.C"
+            }
+          ],
+          "retrieval_backend": "pageindex"
+        }
+      },
+      {
+        "stage": "rewrite_question",
+        "message": "Rewrote the question for retrieval.",
+        "details": {
+          "original_question": "What are the necesssary document for apply for scvholarshipd of Edisu?",
+          "rewritten_question": "What are the necessary documents to apply for scholarships from A.Di.S.U.R.C. for the academic year 2025/2026?",
+          "reasoning": "The user's question about necessary documents for applying for scholarships from 'Edisu' likely refers to A.Di.S.U.R.C., which is the student support authority in Campania region, Italy, commonly known as Edisu Campania. The document 'Bando di Concorso a.a. 2025.26_ENG_0' specifically covers scholarships for the academic year 2025/2026 issued by A.Di.S.U.R.C. This document is the most relevant source for the user's question about scholarship application requirements.",
+          "inferred_document_ids": [
+            "Bando di Concorso a.a. 2025.26_ENG_0"
+          ]
+        }
+      },
+      {
+        "stage": "candidate_ranking",
+        "message": "Ranked candidate documents for the effective retrieval question.",
+        "details": {
+          "effective_question": "What are the necessary documents to apply for scholarships from A.Di.S.U.R.C. for the academic year 2025/2026?",
+          "candidates": [
+            {
+              "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+              "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+              "region": "Campania",
+              "issuer": "A.Di.S.U.R.C"
+            },
+            {
+              "document_id": "Competition-Notice-a.y.-2025_2026",
+              "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+              "region": null,
+              "issuer": "NOTICE"
+            },
+            {
+              "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+              "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+              "region": "Veneto",
+              "issuer": "I.S.E.E"
+            },
+            {
+              "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+              "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+              "region": "Piedmont",
+              "issuer": null
+            }
+          ],
+          "retrieval_backend": "pageindex"
+        }
+      },
+      {
+        "stage": "document_selection",
+        "message": "Selected document scopes for answer generation.",
+        "details": {
+          "effective_question": "What are the necessary documents to apply for scholarships from A.Di.S.U.R.C. for the academic year 2025/2026?",
+          "selected_document_ids": [
+            "Bando di Concorso a.a. 2025.26_ENG_0"
+          ],
+          "needs_clarification": false,
+          "clarifying_question": null,
+          "reasoning": "The question specifically asks for the necessary documents to apply for scholarships from A.Di.S.U.R.C. for the academic year 2025/2026. Among the provided documents, only one is issued by A.Di.S.U.R.C. and covers the academic year 2025/2026: \"Bando di Concorso a.a. 2025.26_ENG_0\". This document is a call for applications for scholarships and other benefits for the 2025/2026 academic year by A.Di.S.U.R.C. Therefore, this document is the most relevant and sufficient to answer the question. Other documents pertain to different issuers or universities and are not relevant to A.Di.S.U.R.C."
+        }
+      },
+      {
+        "stage": "selected_documents",
+        "message": "Prepared the final document set for node retrieval.",
+        "details": {
+          "selected_documents": [
+            {
+              "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+              "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+              "region": "Campania",
+              "issuer": "A.Di.S.U.R.C"
+            }
+          ]
+        }
+      },
+      {
+        "stage": "node_selection",
+        "message": "Selected nodes from the document tree.",
+        "details": {
+          "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+          "node_ids": [],
+          "reasoning": "The question asks for the necessary documents to apply for scholarships from A.Di.S.U.R.C. for the academic year 2025/2026. The relevant information is likely to be found in sections related to application procedures, submission of documentation, and eligibility requirements. Based on the document tree, the most relevant nodes appear to be under ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION, especially 5.2 Submission of documentation, as well as possibly ARTICLE 2 – ELIGIBILITY REQUIREMENTS and ARTICLE 4 – REQUIREMENTS RELATING TO ECONOMIC CONDITION, which might mention required documents for economic status verification. I will select nodes 0039 (ARTICLE 5), 0041 (5.2 Submission of documentation), 0013 (ARTICLE 2), 0023 (ARTICLE 4), and 0025 (REQUIREMENTS RELATING TO ECONOMIC CONDITION) to cover these aspects comprehensively."
+        }
+      },
+      {
+        "stage": "fallback_nodes",
+        "message": "Used heuristic node matching because no node ids were returned.",
+        "details": {
+          "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+          "node_ids": [
+            "0041",
+            "0044",
+            "0061",
+            "0075"
+          ]
+        }
+      },
+      {
+        "stage": "context_building",
+        "message": "Built grounded context snippets for answer synthesis.",
+        "details": {
+          "context_count": 4,
+          "document_ids": [
+            "Bando di Concorso a.a. 2025.26_ENG_0"
+          ]
+        }
+      },
+      {
+        "stage": "answer_synthesis",
+        "message": "Synthesized the final grounded answer from the selected contexts.",
+        "details": {
+          "answer_preview": "To apply for scholarships from A.Di.S.U.R.C. (Edisu Campania) for the academic year 2025/2026, applicants must submit an online application form containing personal details, payment details, qualifications, and income details. They must dec",
+          "citation_count": 1,
+          "needs_clarification": false
+        }
+      }
+    ]
+  },
+  "neo4j": {
+    "question": "What are the necesssary document for apply for scvholarshipd of Edisu?",
+    "answer": "To apply for scholarships offered by A.Di.S.U.R.C. for the academic year 2025/2026, applicants must submit an online application form containing personal details, payment details, qualifications, and income details. They must declare their certified email (PEC) address. The form is self-certified and must include a self-certification Form 1 and a copy of a valid ID or equivalent. Specific documentation is required for applicants from particularly poor or developing countries, applicants with disabilities, and applicants with household residents abroad. All required documentation must be valid by the application deadline to avoid exclusion.",
+    "citations": [
+      {
+        "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+        "document_title": "Bando di Concorso a.a. 2025.26_ENG_0",
+        "node_id": "0041",
+        "node_title": "5.2 Submission of documentation",
+        "line_number": 466
+      }
+    ],
+    "document_ids": [
+      "Bando di Concorso a.a. 2025.26_ENG_0"
+    ],
+    "retrieval_notes": "Rewrote question for retrieval: What are the necessary documents to apply for scholarships offered by A.Di.S.U.R.C. for the academic year 2025/2026? | The user's question asks about the necessary documents to apply for scholarships of 'Edisu', which is likely a misspelling or shorthand for A.Di.S.U.R.C., a known student support authority in Campania. The document 'Bando di Concorso a.a. 2025.26_ENG_0' is the relevant official call for applications for scholarships by A.Di.S.U.R.C. for the 2025/2026 academic year. This document covers eligibility, application requirements, and necessary documents for scholarship applications, making it the best match for the user's query. | Bando di Concorso a.a. 2025.26_ENG_0: The question asks for the necessary documents to apply for scholarships offered by A.Di.S.u.R.C. for the academic year 2025/2026. The document tree contains several articles related to the scholarship call. The most relevant sections for application documents are likely under ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION, specifically 5.2 Submission of documentation, as it directly mentions documentation submission. Other articles like ARTICLE 1 (CALL FOR APPLICATIONS – RECIPIENTS) and ARTICLE 2 (ELIGIBILITY REQUIREMENTS) might provide context but are less likely to list specific documents. Therefore, I will select node 0041 for the submission of documentation and also consider nodes 0000 and 0013 for context on recipients and eligibility requirements.",
+    "needs_clarification": false,
+    "clarifying_question": null,
+    "trace": [
+      {
+        "stage": "load_indexes",
+        "message": "Loaded search indexes.",
+        "details": {
+          "index_dir": "C:\\Projects\\personal\\DocStruct\\output\\03_pageindex",
+          "count": 4,
+          "documents": [
+            {
+              "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+              "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+              "region": "Campania",
+              "issuer": "A.Di.S.U.R.C"
+            },
+            {
+              "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+              "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+              "region": "Veneto",
+              "issuer": "I.S.E.E"
+            },
+            {
+              "document_id": "Competition-Notice-a.y.-2025_2026",
+              "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+              "region": null,
+              "issuer": "NOTICE"
+            },
+            {
+              "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+              "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+              "region": "Piedmont",
+              "issuer": null
+            }
+          ],
+          "requested_retrieval_backend": "neo4j",
+          "retrieval_backend": "neo4j"
+        }
+      },
+      {
+        "stage": "intent_detection",
+        "message": "Detected user intent for document scope.",
+        "details": {
+          "multi_document_intent": false
+        }
+      },
+      {
+        "stage": "initial_ranking",
+        "message": "Ranked initial candidate documents from the original question.",
+        "details": {
+          "question": "What are the necesssary document for apply for scvholarshipd of Edisu?",
+          "candidates": [
+            {
+              "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+              "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+              "region": "Piedmont",
+              "issuer": null
+            },
+            {
+              "document_id": "Competition-Notice-a.y.-2025_2026",
+              "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+              "region": null,
+              "issuer": "NOTICE"
+            },
+            {
+              "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+              "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+              "region": "Campania",
+              "issuer": "A.Di.S.U.R.C"
+            },
+            {
+              "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+              "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+              "region": "Veneto",
+              "issuer": "I.S.E.E"
+            }
+          ],
+          "retrieval_backend": "neo4j"
+        }
+      },
+      {
+        "stage": "rewrite_question",
+        "message": "Rewrote the question for retrieval.",
+        "details": {
+          "original_question": "What are the necesssary document for apply for scvholarshipd of Edisu?",
+          "rewritten_question": "What are the necessary documents to apply for scholarships offered by A.Di.S.U.R.C. for the academic year 2025/2026?",
+          "reasoning": "The user's question asks about the necessary documents to apply for scholarships of 'Edisu', which is likely a misspelling or shorthand for A.Di.S.U.R.C., a known student support authority in Campania. The document 'Bando di Concorso a.a. 2025.26_ENG_0' is the relevant official call for applications for scholarships by A.Di.S.U.R.C. for the 2025/2026 academic year. This document covers eligibility, application requirements, and necessary documents for scholarship applications, making it the best match for the user's query.",
+          "inferred_document_ids": [
+            "Bando di Concorso a.a. 2025.26_ENG_0"
+          ]
+        }
+      },
+      {
+        "stage": "candidate_ranking",
+        "message": "Ranked candidate documents for the effective retrieval question.",
+        "details": {
+          "effective_question": "What are the necessary documents to apply for scholarships offered by A.Di.S.U.R.C. for the academic year 2025/2026?",
+          "candidates": [
+            {
+              "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+              "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+              "region": "Campania",
+              "issuer": "A.Di.S.U.R.C"
+            },
+            {
+              "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+              "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+              "region": "Veneto",
+              "issuer": "I.S.E.E"
+            },
+            {
+              "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+              "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+              "region": "Piedmont",
+              "issuer": null
+            },
+            {
+              "document_id": "Competition-Notice-a.y.-2025_2026",
+              "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+              "region": null,
+              "issuer": "NOTICE"
+            }
+          ],
+          "retrieval_backend": "neo4j"
+        }
+      },
+      {
+        "stage": "document_selection",
+        "message": "Selected document scopes for answer generation.",
+        "details": {
+          "effective_question": "What are the necessary documents to apply for scholarships offered by A.Di.S.U.R.C. for the academic year 2025/2026?",
+          "selected_document_ids": [
+            "Bando di Concorso a.a. 2025.26_ENG_0"
+          ],
+          "needs_clarification": false,
+          "clarifying_question": null,
+          "reasoning": "The question specifically asks for the necessary documents to apply for scholarships offered by A.Di.S.U.R.C. for the academic year 2025/2026. Among the provided documents, only one is issued by A.Di.S.U.R.C. and covers the academic year 2025/2026: \"Bando di Concorso a.a. 2025.26_ENG_0\". This document is directly relevant as it details the call for applications for scholarships by A.Di.S.U.R.C. for the specified academic year. Other documents pertain to different issuers or regions and are not relevant to the question. Therefore, I will select this document only for precise and relevant information."
+        }
+      },
+      {
+        "stage": "selected_documents",
+        "message": "Prepared the final document set for node retrieval.",
+        "details": {
+          "selected_documents": [
+            {
+              "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+              "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+              "region": "Campania",
+              "issuer": "A.Di.S.U.R.C"
+            }
+          ]
+        }
+      },
+      {
+        "stage": "node_selection",
+        "message": "Selected nodes from the document tree.",
+        "details": {
+          "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+          "node_ids": [],
+          "reasoning": "The question asks for the necessary documents to apply for scholarships offered by A.Di.S.u.R.C. for the academic year 2025/2026. The document tree contains several articles related to the scholarship call. The most relevant sections for application documents are likely under ARTICLE 5 – RULES FOR PARTICIPATION IN THE COMPETITION, specifically 5.2 Submission of documentation, as it directly mentions documentation submission. Other articles like ARTICLE 1 (CALL FOR APPLICATIONS – RECIPIENTS) and ARTICLE 2 (ELIGIBILITY REQUIREMENTS) might provide context but are less likely to list specific documents. Therefore, I will select node 0041 for the submission of documentation and also consider nodes 0000 and 0013 for context on recipients and eligibility requirements."
+        }
+      },
+      {
+        "stage": "fallback_nodes",
+        "message": "Used heuristic node matching because no node ids were returned.",
+        "details": {
+          "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+          "node_ids": [
+            "0041",
+            "0061",
+            "0075",
+            "0081"
+          ]
+        }
+      },
+      {
+        "stage": "context_building",
+        "message": "Built grounded context snippets for answer synthesis.",
+        "details": {
+          "context_count": 4,
+          "document_ids": [
+            "Bando di Concorso a.a. 2025.26_ENG_0"
+          ]
+        }
+      },
+      {
+        "stage": "answer_synthesis",
+        "message": "Synthesized the final grounded answer from the selected contexts.",
+        "details": {
+          "answer_preview": "To apply for scholarships offered by A.Di.S.U.R.C. for the academic year 2025/2026, applicants must submit an online application form containing personal details, payment details, qualifications, and income details. They must declare their ",
+          "citation_count": 1,
+          "needs_clarification": false
+        }
+      }
+    ]
+  }
+}

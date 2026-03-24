@@ -236,6 +236,32 @@ def _load_search_indexes_from_neo4j(neo4j_retrieval: Neo4jRetrieval) -> list[Sea
     return indexes
 
 
+def _neo4j_seed_node_ids(
+    neo4j_retrieval: Neo4jRetrieval | None,
+    question: str,
+    document_ids: list[str],
+    *,
+    limit: int = 8,
+) -> dict[str, list[str]]:
+    if neo4j_retrieval is None or not document_ids:
+        return {}
+
+    seed_nodes: dict[str, list[str]] = {}
+    for candidate in neo4j_retrieval.retrieve_candidates(question, limit=max(limit, len(document_ids) * 2)):
+        if candidate.document_id not in document_ids:
+            continue
+        candidate_seed_node_ids = list(candidate.source_node.get("seed_node_ids", []))
+        if candidate.node_id and candidate.node_id not in candidate_seed_node_ids:
+            candidate_seed_node_ids.insert(0, candidate.node_id)
+        for node_id in candidate_seed_node_ids:
+            if not node_id:
+                continue
+            seed_nodes.setdefault(candidate.document_id, [])
+            if node_id not in seed_nodes[candidate.document_id]:
+                seed_nodes[candidate.document_id].append(node_id)
+    return seed_nodes
+
+
 def _answer_question_without_langgraph(
     question: str,
     indexes: list[SearchDocumentIndex],
@@ -292,7 +318,7 @@ def _answer_question_without_langgraph(
         "Ranked candidate documents for the effective retrieval question.",
         effective_question=effective_question,
         candidates=_summarize_documents(candidate_documents, limit=6),
-        retrieval_backend="neo4j" if neo4j_retrieval is not None else "pageindex-files",
+        retrieval_backend="neo4j" if neo4j_retrieval is not None else "pageindex",
     )
     heuristic_clarification = build_scope_clarification(effective_question, candidate_documents[:4])
 
@@ -387,7 +413,13 @@ def _answer_question_without_langgraph(
 
     contexts: list[dict] = []
     retrieval_notes: list[str] = [note for note in [rewrite_note, selection_notes] if note]
+    seed_nodes_by_document = _neo4j_seed_node_ids(
+        neo4j_retrieval,
+        effective_question,
+        [document.document_id for document in selected_documents],
+    )
     for document in selected_documents:
+        preferred_node_ids = list(seed_nodes_by_document.get(document.document_id, []))
         try:
             node_ids, node_notes = agent.select_nodes(effective_question, document)
             add_trace(
@@ -403,6 +435,19 @@ def _answer_question_without_langgraph(
                 "node_selection",
                 "Node selection failed, so heuristic node matching will be used.",
                 document_id=document.document_id,
+            )
+        if preferred_node_ids:
+            node_ids = [*preferred_node_ids, *node_ids]
+            deduped_node_ids: list[str] = []
+            for node_id in node_ids:
+                if node_id and node_id not in deduped_node_ids:
+                    deduped_node_ids.append(node_id)
+            node_ids = deduped_node_ids[:6]
+            add_trace(
+                "neo4j_seed_nodes",
+                "Promoted Neo4j section hits into the node-selection stage.",
+                document_id=document.document_id,
+                node_ids=node_ids,
             )
         if not node_ids:
             node_ids = fallback_node_matches(effective_question, document, limit=4)
@@ -432,6 +477,7 @@ def _answer_question_without_langgraph(
             contexts[:8],
             document_ids=[document.document_id for document in selected_documents],
             retrieval_notes=retrieval_note_text,
+            retrieval_backend="neo4j" if neo4j_retrieval is not None else "pageindex",
         )
         add_trace(
             "answer_synthesis",
@@ -464,11 +510,26 @@ def answer_question(
     question: str,
     index_dir: str,
     client: LLMPort,
+    *,
+    retrieval_backend: str = "auto",
 ) -> SearchAnswer:
-    neo4j_retrieval, neo4j_driver = _build_neo4j_retrieval()
+    if retrieval_backend not in {"auto", "pageindex", "neo4j"}:
+        raise ValueError(
+            "retrieval_backend must be one of: auto, pageindex, neo4j"
+        )
+
+    use_neo4j = retrieval_backend in {"auto", "neo4j"}
+    neo4j_retrieval = None
+    neo4j_driver = None
+    if use_neo4j:
+        neo4j_retrieval, neo4j_driver = _build_neo4j_retrieval()
+    if retrieval_backend == "neo4j" and neo4j_retrieval is None:
+        raise ValueError("Neo4j retrieval was requested, but Neo4j is not available.")
+
+    active_retrieval_backend = "neo4j" if neo4j_retrieval is not None else "pageindex"
     try:
         indexes = load_search_indexes(index_dir)
-        if not indexes and neo4j_retrieval is not None:
+        if not indexes and retrieval_backend == "auto" and neo4j_retrieval is not None:
             indexes = _load_search_indexes_from_neo4j(neo4j_retrieval)
         if not indexes:
             raise ValueError(f"No PageIndex search indexes found in {index_dir}")
@@ -490,7 +551,8 @@ def answer_question(
             index_dir=index_dir,
             count=len(indexes),
             documents=_summarize_documents(indexes),
-            retrieval_backend="neo4j" if neo4j_retrieval is not None else "pageindex-files",
+            requested_retrieval_backend=retrieval_backend,
+            retrieval_backend=active_retrieval_backend,
         )
 
         multi_document_intent = question_requests_multi_document_answer(question)
@@ -511,7 +573,7 @@ def answer_question(
             "Ranked initial candidate documents from the original question.",
             question=question,
             candidates=_summarize_documents(initial_candidates, limit=6),
-            retrieval_backend="neo4j" if neo4j_retrieval is not None else "pageindex-files",
+            retrieval_backend=active_retrieval_backend,
         )
         ambiguous_candidates = find_ambiguous_candidate_documents(question, initial_candidates)
         if ambiguous_candidates and not question_has_scope_or_detail_hint(question):

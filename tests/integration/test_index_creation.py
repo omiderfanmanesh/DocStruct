@@ -31,7 +31,8 @@ def test_create_indexes_idempotent(neo4j_driver: Driver) -> None:
         constraint_names = [c.get("name") for c in constraints]
 
         assert "document_source_path_unique" in constraint_names
-        assert "section_node_id_unique" in constraint_names
+        assert "document_id_unique" in constraint_names
+        assert "section_key_unique" in constraint_names
 
         # Check fulltext indexes
         result = session.run("SHOW INDEXES WHERE type = 'FULLTEXT'")
@@ -61,7 +62,7 @@ def test_vector_index_created(neo4j_driver: Driver) -> None:
         )
         assert embedding_idx is not None
         options = embedding_idx.get("options", {})
-        actual_dims = options.get("vector.dimensions")
+        actual_dims = options.get("indexConfig", options).get("vector.dimensions")
         assert actual_dims == embedding_config.dimensions
 
 

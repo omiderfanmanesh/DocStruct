@@ -15,6 +15,8 @@ from ...domain.models.search import SearchDocumentIndex, SearchProfile, Embeddin
 from ...config import EmbeddingConfig
 from ...infrastructure.embeddings.factory import build_embedder
 
+_MAX_EMBEDDING_TEXT_CHARS = 12000
+
 
 def _log(message: str, level: str = "INFO") -> None:
     """Log a message to stderr with a timestamp and level prefix.
@@ -185,8 +187,9 @@ class PageIndexLoader:
             # MERGE Document node
             session.run(
                 """
-                MERGE (d:Document {source_path: $source_path})
+                MERGE (d:Document {document_id: $document_id})
                 SET
+                    d.source_path = $source_path,
                     d.document_id = $document_id,
                     d.title = $title,
                     d.summary = $summary,
@@ -303,6 +306,7 @@ class PageIndexLoader:
         node_id = section.get("node_id")
         if not node_id:
             raise ValueError("Section missing node_id")
+        section_key = self._section_key(document_id, str(node_id))
 
         node_title = section.get("node_title") or section.get("title")
         line_number = section.get("line_number")
@@ -317,9 +321,11 @@ class PageIndexLoader:
         # MERGE Section node
         session.run(
             """
-            MERGE (s:Section {node_id: $node_id})
+            MERGE (s:Section {section_key: $section_key})
             SET
+                s.section_key = $section_key,
                 s.document_id = $document_id,
+                s.node_id = $node_id,
                 s.node_title = $node_title,
                 s.path = $path,
                 s.text = $text,
@@ -327,6 +333,7 @@ class PageIndexLoader:
                 s.line_number = $line_number,
                 s.depth = $depth
             """,
+            section_key=section_key,
             node_id=node_id,
             document_id=document_id,
             node_title=node_title,
@@ -340,24 +347,25 @@ class PageIndexLoader:
         # MERGE HAS_SECTION relationship (Document -> Section)
         session.run(
             """
-            MERGE (d:Document {document_id: $document_id})
-            MERGE (s:Section {node_id: $node_id})
+            MATCH (d:Document {document_id: $document_id})
+            MERGE (s:Section {section_key: $section_key})
             MERGE (d)-[:HAS_SECTION]->(s)
             """,
             document_id=document_id,
-            node_id=node_id,
+            section_key=section_key,
         )
 
         # MERGE PARENT_OF relationship if this is a subsection
         if parent_id:
+            parent_section_key = self._section_key(document_id, parent_id)
             session.run(
                 """
-                MERGE (parent:Section {node_id: $parent_id})
-                MERGE (child:Section {node_id: $node_id})
+                MERGE (parent:Section {section_key: $parent_section_key})
+                MERGE (child:Section {section_key: $section_key})
                 MERGE (parent)-[:PARENT_OF {order: $order}]->(child)
                 """,
-                parent_id=parent_id,
-                node_id=node_id,
+                parent_section_key=parent_section_key,
+                section_key=section_key,
                 order=section.get("order", order),
             )
 
@@ -407,7 +415,10 @@ class PageIndexLoader:
 
         try:
             # Prepare embedding payloads
-            embedding_texts = [text for _, text, _ in sections_to_embed]
+            embedding_texts = [
+                self._prepare_embedding_text(node_title, text)
+                for _, text, node_title in sections_to_embed
+            ]
 
             # Generate embeddings in batches
             embeddings = self.embedder.embed_documents(embedding_texts)
@@ -417,13 +428,13 @@ class PageIndexLoader:
                 for (node_id, text, node_title), embedding in zip(sections_to_embed, embeddings):
                     session.run(
                         """
-                        MATCH (s:Section {node_id: $node_id})
+                        MATCH (s:Section {section_key: $section_key})
                         SET
                             s.embedding = $embedding,
                             s.embedding_provider = $provider,
                             s.embedding_model = $model
                         """,
-                        node_id=node_id,
+                        section_key=self._section_key(doc_index.document_id, node_id),
                         embedding=embedding,
                         provider=self.embedder.provider_name,
                         model=self.embedding_config.model if self.embedding_config else None,
@@ -433,6 +444,31 @@ class PageIndexLoader:
 
         except Exception as e:
             _log(f"Failed to generate embeddings for {doc_index.document_id}: {e}", "WARNING")
+
+    @staticmethod
+    def _prepare_embedding_text(node_title: str, text: str) -> str:
+        """Prepare section text for embeddings while keeping requests under model limits."""
+        title = (node_title or "").strip()
+        body = (text or "").strip()
+
+        if title and not body.lower().startswith(title.lower()):
+            combined = f"{title}\n\n{body}"
+        else:
+            combined = body or title
+
+        if len(combined) <= _MAX_EMBEDDING_TEXT_CHARS:
+            return combined
+
+        if not title:
+            return combined[:_MAX_EMBEDDING_TEXT_CHARS]
+
+        available_body_chars = max(0, _MAX_EMBEDDING_TEXT_CHARS - len(title) - 2)
+        return f"{title}\n\n{body[:available_body_chars]}"
+
+    @staticmethod
+    def _section_key(document_id: str, node_id: str) -> str:
+        """Build a document-scoped unique key for a section node."""
+        return f"{document_id}:{node_id}"
 
     def _deactivate_removed(self, known_paths: set[str]) -> int:
         """Mark documents as inactive if their source file is no longer present.

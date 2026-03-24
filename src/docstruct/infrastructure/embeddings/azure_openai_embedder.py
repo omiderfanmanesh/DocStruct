@@ -20,6 +20,7 @@ class AzureOpenAIEmbedder:
         api_key: str,
         api_endpoint: str,
         model: str,
+        dimensions: int = 1536,
         api_version: str = "2024-02-15-preview",
     ):
         """Initialize Azure OpenAI embedder.
@@ -28,6 +29,7 @@ class AzureOpenAIEmbedder:
             api_key: Azure OpenAI API key.
             api_endpoint: Azure OpenAI endpoint URL (e.g., https://{resource}.openai.azure.com/).
             model: Deployment name in Azure (not the model ID).
+            dimensions: Expected embedding dimensionality for the deployment.
             api_version: Azure OpenAI API version (default: 2024-02-15-preview).
         """
         self.client = AzureOpenAI(
@@ -36,15 +38,12 @@ class AzureOpenAIEmbedder:
             azure_endpoint=api_endpoint,
         )
         self.model = model
+        self._dimensions = dimensions
 
     @property
     def dimensionality(self) -> int:
-        """Embedding vector dimension for text-embedding-3-small (1536) or text-embedding-3-large (3072).
-
-        Defaults to 1536 for Azure text-embedding-3-small deployments.
-        Override by setting EMBEDDING_DIMENSIONS environment variable if using text-embedding-3-large.
-        """
-        return 1536
+        """Embedding vector dimension configured for the Azure deployment."""
+        return self._dimensions
 
     @property
     def provider_name(self) -> str:

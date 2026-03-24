@@ -9,6 +9,7 @@ from typing import Any
 from neo4j import Driver
 
 from ...domain.models.search import RetrievalCandidate, SearchDocumentIndex, SearchProfile
+from ...domain.pageindex_search import question_targets_documentation
 from ...domain.rrf import reciprocal_rank_fusion
 from ...config import RetrievalConfig, EmbeddingConfig
 from ..embeddings.factory import build_embedder
@@ -63,6 +64,8 @@ class Neo4jRetrieval:
             - If only one mode enabled: returns that mode's results sorted by its rank
             - If multiple modes enabled: returns fused results with rrf_score populated
         """
+        expanded_question = self._expand_question_for_retrieval(question)
+
         # Collect ranked lists from enabled modes
         ranked_lists: list[list[str]] = []
 
@@ -74,7 +77,7 @@ class Neo4jRetrieval:
 
         # Full-text mode
         if self.retrieval_config.enable_fulltext:
-            fulltext_results = self._fulltext_retrieve(question, limit)
+            fulltext_results = self._fulltext_retrieve(expanded_question, limit)
             if fulltext_results:
                 ranked_lists.append([cand.document_id for cand in fulltext_results])
 
@@ -85,16 +88,25 @@ class Neo4jRetrieval:
             if query_embedding is None:
                 try:
                     embedder = build_embedder(self.embedding_config)
-                    query_embedding = embedder.embed_query(question)
+                    query_embedding = embedder.embed_query(expanded_question)
                 except Exception as e:
                     sys.stderr.write(f"Warning: Failed to generate query embedding: {e}\n")
                     query_embedding = None
 
             # Run vector search if we have embedding
             if query_embedding:
-                vector_results = self._vector_retrieve(question, query_embedding, limit)
+                vector_results = self._vector_retrieve(expanded_question, query_embedding, limit)
                 if vector_results:
                     ranked_lists.append([cand.document_id for cand in vector_results])
+
+        seed_node_ids_by_doc: dict[str, list[str]] = {}
+        for results in (fulltext_results, vector_results):
+            for candidate in results:
+                if candidate.node_id is None:
+                    continue
+                seed_node_ids_by_doc.setdefault(candidate.document_id, [])
+                if candidate.node_id not in seed_node_ids_by_doc[candidate.document_id]:
+                    seed_node_ids_by_doc[candidate.document_id].append(candidate.node_id)
 
         # Fuse rankings using RRF
         fused_scores = reciprocal_rank_fusion(ranked_lists, k=60, limit=limit)
@@ -102,11 +114,13 @@ class Neo4jRetrieval:
         # Build final candidate list with fused scores
         candidates: list[RetrievalCandidate] = []
         for doc_id, rrf_score in fused_scores:
+            seed_node_ids = seed_node_ids_by_doc.get(doc_id, [])
             candidate = RetrievalCandidate(
                 document_id=doc_id,
-                node_id=None,  # Document-level for now
-                node_type="document",
+                node_id=seed_node_ids[0] if seed_node_ids else None,
+                node_type="section" if seed_node_ids else "document",
                 rrf_score=rrf_score,
+                source_node={"seed_node_ids": seed_node_ids},
             )
             candidates.append(candidate)
 
@@ -480,7 +494,7 @@ class Neo4jRetrieval:
                 YIELD node, score
                 MATCH (d:Document)-[:HAS_SECTION]->(node)
                 WHERE d.active = true
-                RETURN d.document_id as id, 'document' as type, score
+                RETURN d.document_id as id, node.node_id as section_id, 'section' as type, score
                 LIMIT $limit
                 """,
                 queryVector=query_embedding,
@@ -491,7 +505,7 @@ class Neo4jRetrieval:
             for rank, rec in enumerate(result, 1):
                 candidate = RetrievalCandidate(
                     document_id=rec["id"],
-                    node_id=None,
+                    node_id=rec["section_id"],
                     node_type=rec["type"],
                     vector_rank=rank,
                 )
@@ -505,3 +519,19 @@ class Neo4jRetrieval:
         sanitized = re.sub(r'[+\-!(){}\[\]^"~*?:\\/|&]+', " ", question)
         sanitized = re.sub(r"\s+", " ", sanitized).strip()
         return sanitized
+
+    @staticmethod
+    def _expand_question_for_retrieval(question: str) -> str:
+        if not question_targets_documentation(question):
+            return question
+        additions = (
+            "required documents",
+            "submission of documentation",
+            "supporting documents",
+            "form 1",
+            "valid id",
+            "certificate",
+            "certification",
+            "isee",
+        )
+        return f"{question} {' '.join(additions)}"

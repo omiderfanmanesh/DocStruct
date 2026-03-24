@@ -113,6 +113,33 @@ _BENEFIT_KEYWORDS = (
     ("canteen", "canteen"),
     ("housing", "accommodation"),
 )
+_DOCUMENTATION_HINTS = (
+    "document",
+    "documents",
+    "documentation",
+    "certificate",
+    "certificates",
+    "certification",
+    "certifications",
+    "attach",
+    "attachment",
+    "attachments",
+    "required",
+    "requirement",
+    "requirements",
+    "necessary",
+    "form",
+    "id",
+    "identity",
+)
+_DEADLINE_HINTS = (
+    "deadline",
+    "deadlines",
+    "when",
+    "date",
+    "dates",
+    "closing",
+)
 
 
 def tokenize(text: str | None) -> set[str]:
@@ -150,6 +177,16 @@ def _normalize_titleish(value: str) -> str:
 
 def _looks_unknown(value: str | None) -> bool:
     return (value or "").strip().lower() in {"", "unknown", "none", "null", "n/a"}
+
+
+def question_targets_documentation(question: str | None) -> bool:
+    lowered = (question or "").lower()
+    return any(hint in lowered for hint in _DOCUMENTATION_HINTS)
+
+
+def question_targets_deadlines(question: str | None) -> bool:
+    lowered = (question or "").lower()
+    return any(hint in lowered for hint in _DEADLINE_HINTS)
 
 
 def _scope_seed_texts(
@@ -652,6 +689,8 @@ def fallback_node_matches(
 ) -> list[str]:
     question_tokens = tokenize(question)
     lowered_question = question.lower()
+    documentation_query = question_targets_documentation(question)
+    deadline_query = question_targets_deadlines(question)
     nodes = flatten_pageindex_nodes(document.structure, document_id=document.document_id, document_title=document.title)
 
     def score(node: dict[str, Any]) -> int:
@@ -666,16 +705,36 @@ def fallback_node_matches(
         overlap += len(question_tokens & tokenize(summary)) * 2
         overlap += min(len(question_tokens & tokenize(text)), 6)
 
-        if "deadline for submitting the application" in haystack:
-            overlap += 20
-        if "methods and deadlines for submitting the application" in haystack:
-            overlap += 14
+        if documentation_query:
+            if "submission of documentation" in haystack:
+                overlap += 26
+            if "documentation" in haystack or "supporting documents" in haystack:
+                overlap += 18
+            if "document" in haystack or "documents" in haystack:
+                overlap += 12
+            if "certificate" in haystack or "certification" in haystack:
+                overlap += 10
+            if "form 1" in haystack or "valid id" in haystack or "identity" in haystack:
+                overlap += 10
+            if "attach" in haystack or "attachment" in haystack or "scanned documents" in haystack:
+                overlap += 8
+            if "application" in haystack and ("submit" in haystack or "submission" in haystack):
+                overlap += 6
+            if "deadline" in haystack and "documentation" not in haystack and "document" not in haystack:
+                overlap -= 8
+
+        if deadline_query:
+            if "deadline for submitting the application" in haystack:
+                overlap += 20
+            if "methods and deadlines for submitting the application" in haystack:
+                overlap += 14
+            if "scholarship and accommodation service" in haystack and "deadline" in haystack:
+                overlap += 10
+            if "application" in haystack and "deadline" in haystack:
+                overlap += 8
+
         if "paid accommodation self-certification" in haystack:
             overlap += 12
-        if "scholarship and accommodation service" in haystack and "deadline" in haystack:
-            overlap += 10
-        if "application" in haystack and "deadline" in haystack:
-            overlap += 8
         if "accommodation" in lowered_question and ("accommodation" in haystack or "residence" in haystack):
             overlap += 6
 
@@ -721,6 +780,7 @@ def build_context_blocks(
     max_chars: int = 1600,
 ) -> list[dict[str, Any]]:
     question_tokens = tokenize(question)
+    documentation_query = question_targets_documentation(question)
     contexts: list[dict[str, Any]] = []
     seen_node_ids: set[str] = set()
 
@@ -751,6 +811,19 @@ def build_context_blocks(
                 overlap += 8
             if "application" in focus_haystack or "submit" in focus_haystack:
                 overlap += 5
+            if documentation_query:
+                if "submission of documentation" in focus_haystack:
+                    overlap += 18
+                if "documentation" in focus_haystack or "supporting documents" in focus_haystack:
+                    overlap += 14
+                if "document" in focus_haystack or "documents" in focus_haystack:
+                    overlap += 10
+                if "certificate" in focus_haystack or "certification" in focus_haystack:
+                    overlap += 8
+                if "form 1" in focus_haystack or "valid id" in focus_haystack or "attach" in focus_haystack:
+                    overlap += 8
+                if "deadline" in focus_haystack and "documentation" not in focus_haystack and "document" not in focus_haystack:
+                    overlap -= 6
             if "accommodation" in focus_haystack or "residence" in focus_haystack or "housing" in focus_haystack:
                 overlap += 4
             if "ranking" in focus_haystack or "complaint" in focus_haystack:

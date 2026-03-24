@@ -32,11 +32,18 @@ def create_indexes(driver: Driver, embedding_config: EmbeddingConfig | None = No
             "CREATE CONSTRAINT document_source_path_unique IF NOT EXISTS "
             "FOR (d:Document) REQUIRE d.source_path IS UNIQUE"
         )
-
-        # Section unique constraint on node_id
         session.run(
-            "CREATE CONSTRAINT section_node_id_unique IF NOT EXISTS "
-            "FOR (s:Section) REQUIRE s.node_id IS UNIQUE"
+            "CREATE CONSTRAINT document_id_unique IF NOT EXISTS "
+            "FOR (d:Document) REQUIRE d.document_id IS UNIQUE"
+        )
+
+        # Remove legacy global node_id uniqueness; section ids repeat across documents.
+        session.run("DROP CONSTRAINT section_node_id_unique IF EXISTS")
+
+        # Section unique constraint on document-scoped section_key
+        session.run(
+            "CREATE CONSTRAINT section_key_unique IF NOT EXISTS "
+            "FOR (s:Section) REQUIRE s.section_key IS UNIQUE"
         )
 
         # Organization unique constraint on name
@@ -96,7 +103,7 @@ def create_indexes(driver: Driver, embedding_config: EmbeddingConfig | None = No
             session.run(
                 f"CREATE VECTOR INDEX section_embedding IF NOT EXISTS "
                 f"FOR (s:Section) ON s.embedding "
-                f"OPTIONS {{ vector.dimensions: {vector_dims}, vector.similarity_function: 'cosine' }}"
+                f"OPTIONS {{ indexConfig: {{ `vector.dimensions`: {vector_dims}, `vector.similarity_function`: 'cosine' }} }}"
             )
 
 
@@ -119,9 +126,10 @@ def validate_vector_dimension(driver: Driver, expected_dims: int) -> None:
             index_name = record.get("name")
             if "embedding" in index_name.lower():
                 # Extract dimensionality from options
-                # The options are returned as a map with 'vector.dimensions' key
+                # The options may be returned directly or nested under indexConfig.
                 options = record.get("options", {})
-                actual_dims = options.get("vector.dimensions")
+                index_config = options.get("indexConfig", options)
+                actual_dims = index_config.get("vector.dimensions")
 
                 if actual_dims and actual_dims != expected_dims:
                     raise EmbeddingDimensionError(

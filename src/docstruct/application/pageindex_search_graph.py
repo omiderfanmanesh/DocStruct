@@ -50,6 +50,31 @@ class PageIndexSearchGraphRunner:
         self._neo4j_retrieval = neo4j_retrieval
         self._graph = self._build_graph()
 
+    def _neo4j_seed_node_ids(
+        self,
+        question: str,
+        document_ids: list[str],
+        *,
+        limit: int = 8,
+    ) -> dict[str, list[str]]:
+        if self._neo4j_retrieval is None or not document_ids:
+            return {}
+
+        seed_nodes: dict[str, list[str]] = {}
+        for candidate in self._neo4j_retrieval.retrieve_candidates(question, limit=max(limit, len(document_ids) * 2)):
+            if candidate.document_id not in document_ids:
+                continue
+            candidate_seed_node_ids = list(candidate.source_node.get("seed_node_ids", []))
+            if candidate.node_id and candidate.node_id not in candidate_seed_node_ids:
+                candidate_seed_node_ids.insert(0, candidate.node_id)
+            for node_id in candidate_seed_node_ids:
+                if not node_id:
+                    continue
+                seed_nodes.setdefault(candidate.document_id, [])
+                if node_id not in seed_nodes[candidate.document_id]:
+                    seed_nodes[candidate.document_id].append(node_id)
+        return seed_nodes
+
     @staticmethod
     def _promote_documents(
         documents: list[SearchDocumentIndex],
@@ -208,6 +233,7 @@ class PageIndexSearchGraphRunner:
             "Ranked candidate documents for the effective retrieval question.",
             effective_question=effective_question,
             candidates=self._summarize_documents(candidate_documents, limit=6),
+            retrieval_backend="neo4j" if self._neo4j_retrieval is not None else "pageindex",
         )
         heuristic_clarification = build_scope_clarification(effective_question, candidate_documents[:4])
         return {
@@ -338,8 +364,13 @@ class PageIndexSearchGraphRunner:
         selected_documents = state["selected_documents"]
         contexts: list[dict] = []
         retrieval_notes = list(state.get("retrieval_notes", []))
+        seed_nodes_by_document = self._neo4j_seed_node_ids(
+            effective_question,
+            [document.document_id for document in selected_documents],
+        )
 
         for document in selected_documents:
+            preferred_node_ids = list(seed_nodes_by_document.get(document.document_id, []))
             try:
                 node_ids, node_notes = self._agent.select_nodes(effective_question, document)
                 self._add_trace(
@@ -355,6 +386,19 @@ class PageIndexSearchGraphRunner:
                     "node_selection",
                     "Node selection failed, so heuristic node matching will be used.",
                     document_id=document.document_id,
+                )
+            if preferred_node_ids:
+                node_ids = [*preferred_node_ids, *node_ids]
+                deduped_node_ids: list[str] = []
+                for node_id in node_ids:
+                    if node_id and node_id not in deduped_node_ids:
+                        deduped_node_ids.append(node_id)
+                node_ids = deduped_node_ids[:6]
+                self._add_trace(
+                    "neo4j_seed_nodes",
+                    "Promoted Neo4j section hits into the node-selection stage.",
+                    document_id=document.document_id,
+                    node_ids=node_ids,
                 )
             if not node_ids:
                 node_ids = fallback_node_matches(effective_question, document, limit=4)
@@ -392,6 +436,7 @@ class PageIndexSearchGraphRunner:
                 contexts[:8],
                 document_ids=[document.document_id for document in selected_documents],
                 retrieval_notes=retrieval_note_text,
+                retrieval_backend="neo4j" if self._neo4j_retrieval is not None else "pageindex",
             )
             self._add_trace(
                 "answer_synthesis",
