@@ -1,0 +1,198 @@
+{
+  "question": "What are the application deadlines in Turin for acoomodation?",
+  "answer": "Applications for accommodation in Turin for the academic year 2025/26 can be submitted starting from 25 July 2025. The specific deadlines for submitting the application are detailed in the notice, but the exact final deadline date is not explicitly provided in the extracted context. Students must submit their applications within the deadlines specified in the official table of the notice, even if they are not yet enrolled at the time of application submission.",
+  "citations": [
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0057",
+      "node_title": "Art. 10(1) METHOD FOR SUBMITTING THE APPLICATION",
+      "line_number": 1559
+    }
+  ],
+  "document_ids": [
+    "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+  ],
+  "retrieval_notes": "Rewrote question for retrieval: What are the application deadlines for accommodation in Turin for the academic year 2025/26? | The user is asking about application deadlines for accommodation specifically in Turin. The document catalog includes a relevant document titled 'Notice of competition – scholarship accommodation and degree award a.y. 2025/26' which covers accommodation benefits in Turin for the academic year 2025/26. This document is the most appropriate source for the user's query based on location (Turin) and topic (accommodation deadlines). | Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1): The question is about the application deadlines for accommodation in Turin for the academic year 2025/26. The document title is about scholarship, accommodation, and degree award for the academic year 2025/26. The document tree has a section called ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION (node_id 0056) and a related node ART. 10(2) DEADLINE FOR SUBMITTING THE APPLICATION (node_id 0058). These nodes are very likely to contain the information about application deadlines. Also, ART. 8(2) METHODS AND DEADLINES FOR SUBMITTING THE PAID ACCOMMODATION SELF-CERTIFICATION (node_id 0048) might be relevant as it mentions deadlines related to accommodation. I will select these nodes for the answer.",
+  "needs_clarification": true,
+  "clarifying_question": "What is the exact final deadline date for submitting accommodation applications in Turin for the academic year 2025/26?",
+  "trace": [
+    {
+      "stage": "load_indexes",
+      "message": "Loaded search indexes.",
+      "details": {
+        "index_dir": "C:\\Projects\\personal\\DocStruct\\output\\03_pageindex",
+        "count": 4,
+        "documents": [
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          },
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          }
+        ],
+        "retrieval_backend": "neo4j"
+      }
+    },
+    {
+      "stage": "intent_detection",
+      "message": "Detected user intent for document scope.",
+      "details": {
+        "multi_document_intent": false
+      }
+    },
+    {
+      "stage": "initial_ranking",
+      "message": "Ranked initial candidate documents from the original question.",
+      "details": {
+        "question": "What are the application deadlines in Turin for acoomodation?",
+        "candidates": [
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          },
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          }
+        ],
+        "retrieval_backend": "neo4j"
+      }
+    },
+    {
+      "stage": "rewrite_question",
+      "message": "Rewrote the question for retrieval.",
+      "details": {
+        "original_question": "What are the application deadlines in Turin for acoomodation?",
+        "rewritten_question": "What are the application deadlines for accommodation in Turin for the academic year 2025/26?",
+        "reasoning": "The user is asking about application deadlines for accommodation specifically in Turin. The document catalog includes a relevant document titled 'Notice of competition – scholarship accommodation and degree award a.y. 2025/26' which covers accommodation benefits in Turin for the academic year 2025/26. This document is the most appropriate source for the user's query based on location (Turin) and topic (accommodation deadlines).",
+        "inferred_document_ids": [
+          "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+        ]
+      }
+    },
+    {
+      "stage": "candidate_ranking",
+      "message": "Ranked candidate documents for the effective retrieval question.",
+      "details": {
+        "effective_question": "What are the application deadlines for accommodation in Turin for the academic year 2025/26?",
+        "candidates": [
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          },
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          }
+        ]
+      }
+    },
+    {
+      "stage": "document_selection",
+      "message": "Selected document scopes for answer generation.",
+      "details": {
+        "effective_question": "What are the application deadlines for accommodation in Turin for the academic year 2025/26?",
+        "selected_document_ids": [
+          "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+        ],
+        "needs_clarification": false,
+        "clarifying_question": null,
+        "reasoning": "The user is asking for application deadlines for accommodation specifically in Turin for the academic year 2025/26. Among the provided documents, only one document explicitly covers Turin and the academic year 2025/26, which is the \"Notice of competition – scholarship accommodation and degree award a.y. 2025/26\". The other documents cover different regions (Campania and Genoa) and are not relevant to Turin. Therefore, I will select the document related to Turin for the user's query."
+      }
+    },
+    {
+      "stage": "selected_documents",
+      "message": "Prepared the final document set for node retrieval.",
+      "details": {
+        "selected_documents": [
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          }
+        ]
+      }
+    },
+    {
+      "stage": "node_selection",
+      "message": "Selected nodes from the document tree.",
+      "details": {
+        "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+        "node_ids": [],
+        "reasoning": "The question is about the application deadlines for accommodation in Turin for the academic year 2025/26. The document title is about scholarship, accommodation, and degree award for the academic year 2025/26. The document tree has a section called ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION (node_id 0056) and a related node ART. 10(2) DEADLINE FOR SUBMITTING THE APPLICATION (node_id 0058). These nodes are very likely to contain the information about application deadlines. Also, ART. 8(2) METHODS AND DEADLINES FOR SUBMITTING THE PAID ACCOMMODATION SELF-CERTIFICATION (node_id 0048) might be relevant as it mentions deadlines related to accommodation. I will select these nodes for the answer."
+      }
+    },
+    {
+      "stage": "fallback_nodes",
+      "message": "Used heuristic node matching because no node ids were returned.",
+      "details": {
+        "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+        "node_ids": [
+          "0068",
+          "0070",
+          "0048",
+          "0087"
+        ]
+      }
+    },
+    {
+      "stage": "context_building",
+      "message": "Built grounded context snippets for answer synthesis.",
+      "details": {
+        "context_count": 5,
+        "document_ids": [
+          "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+        ]
+      }
+    },
+    {
+      "stage": "answer_synthesis",
+      "message": "Synthesized the final grounded answer from the selected contexts.",
+      "details": {
+        "answer_preview": "Applications for accommodation in Turin for the academic year 2025/26 can be submitted starting from 25 July 2025. The specific deadlines for submitting the application are detailed in the notice, but the exact final deadline date is not ex",
+        "citation_count": 1,
+        "needs_clarification": true
+      }
+    }
+  ]
+}

@@ -366,7 +366,7 @@ class PageIndexSearchGraphRunner:
                 )
             if node_notes:
                 retrieval_notes.append(f"{document.document_id}: {node_notes}")
-            contexts.extend(build_context_blocks(document, node_ids, max_chars=1600))
+            contexts.extend(build_context_blocks(document, node_ids, question=effective_question, max_chars=1600))
 
         if not contexts:
             raise ValueError("No relevant indexed nodes were found for the question.")

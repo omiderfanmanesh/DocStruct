@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import sys
 from typing import Any
 
@@ -10,7 +11,7 @@ from neo4j import Driver
 from ...domain.models.search import RetrievalCandidate, SearchDocumentIndex, SearchProfile
 from ...domain.rrf import reciprocal_rank_fusion
 from ...config import RetrievalConfig, EmbeddingConfig
-from .factory import build_embedder
+from ..embeddings.factory import build_embedder
 
 
 class Neo4jRetrieval:
@@ -152,37 +153,33 @@ class Neo4jRetrieval:
                 node_id = section_props["node_id"]
                 sections_map[node_id] = {
                     "node_id": node_id,
-                    "node_title": section_props.get("node_title"),
+                    "title": section_props.get("node_title"),
                     "path": section_props.get("path"),
                     "text": section_props.get("text"),
                     "summary": section_props.get("summary"),
-                    "line_number": section_props.get("line_number"),
+                    "line_num": section_props.get("line_number"),
                     "depth": section_props.get("depth", 0),
-                    "subsections": [],
+                    "nodes": [],
                 }
 
-            # Query parent-child relationships to rebuild tree
-            result = session.run(
-                """
-                MATCH (parent:Section)-[:PARENT_OF {order: $order}]->(child:Section)
-                WHERE parent.document_id = $document_id AND child.document_id = $document_id
-                RETURN parent.node_id as parent_id, child.node_id as child_id, $order as order
-                """,
-                document_id=document_id,
-                order=None,  # Will retrieve all orders
-            )
-            # Rebuild tree structure - try a simpler approach
-            result = session.run(
-                """
-                MATCH (parent:Section)-[:PARENT_OF]->(child:Section)
-                WHERE parent.document_id = $document_id AND child.document_id = $document_id
-                RETURN parent.node_id as parent_id, child.node_id as child_id
-                """,
-                document_id=document_id,
-            )
             parent_map: dict[str, str] = {}  # child_id -> parent_id
-            for rec in result:
-                parent_map[rec["child_id"]] = rec["parent_id"]
+            rel_types_result = session.run(
+                "CALL db.relationshipTypes() YIELD relationshipType RETURN collect(relationshipType) as types"
+            )
+            rel_types_record = rel_types_result.single()
+            relationship_types = set(rel_types_record["types"]) if rel_types_record else set()
+
+            if "PARENT_OF" in relationship_types:
+                result = session.run(
+                    """
+                    MATCH (parent:Section)-[:PARENT_OF]->(child:Section)
+                    WHERE parent.document_id = $document_id AND child.document_id = $document_id
+                    RETURN parent.node_id as parent_id, child.node_id as child_id
+                    """,
+                    document_id=document_id,
+                )
+                for rec in result:
+                    parent_map[rec["child_id"]] = rec["parent_id"]
 
             # Build hierarchical structure
             root_sections = []
@@ -301,13 +298,13 @@ class Neo4jRetrieval:
             Section dict with subsections populated.
         """
         section_dict = sections_map[node_id].copy()
-        section_dict["subsections"] = []
+        section_dict["nodes"] = []
 
         # Find all children of this node
         for child_id, parent_id in parent_map.items():
             if parent_id == node_id:
                 child_section = self._build_section_tree(child_id, sections_map, parent_map)
-                section_dict["subsections"].append(child_section)
+                section_dict["nodes"].append(child_section)
 
         return section_dict
 
@@ -325,44 +322,31 @@ class Neo4jRetrieval:
             List of RetrievalCandidate from graph matches.
         """
         with self.driver.session() as session:
-            # Convert question to lowercase for case-insensitive matching
-            question_lower = question.lower()
-
-            # Query for documents connected to metadata nodes
             result = session.run(
                 """
                 MATCH (d:Document {active: true})
-                WHERE (
-                    // Organization match
-                    EXISTS((d)-[:ISSUED_BY]->(org:Organization))
-                    OR
-                    // Region match
-                    EXISTS((d)-[:COVERS_REGION]->(r:Region))
-                    OR
-                    // City match
-                    EXISTS((d)-[:COVERS_CITY]->(c:City))
-                    OR
-                    // Institution match
-                    EXISTS((d)-[:COVERS_INSTITUTION]->(i:Institution))
-                    OR
-                    // Academic year match
-                    EXISTS((d)-[:FOR_ACADEMIC_YEAR]->(ay:AcademicYear))
-                    OR
-                    // Benefit match
-                    EXISTS((d)-[:OFFERS_BENEFIT]->(b:BenefitType))
-                )
-                RETURN d.document_id as id, d.title as title
+                WITH d,
+                     [(d)-[:ISSUED_BY]->(org:Organization) | toLower(org.name)] +
+                     [(d)-[:COVERS_REGION]->(r:Region) | toLower(r.name)] +
+                     [(d)-[:COVERS_CITY]->(c:City) | toLower(c.name)] +
+                     [(d)-[:COVERS_INSTITUTION]->(i:Institution) | toLower(i.name)] +
+                     [(d)-[:FOR_ACADEMIC_YEAR]->(ay:AcademicYear) | toLower(ay.label)] +
+                     [(d)-[:OFFERS_BENEFIT]->(b:BenefitType) | toLower(b.name)] AS metadata_terms
+                WITH d, [term IN metadata_terms
+                         WHERE term IS NOT NULL
+                           AND term <> ''
+                           AND $question_lower CONTAINS term] AS matched_terms
+                WHERE size(matched_terms) > 0
+                RETURN d.document_id as id, d.title as title, size(matched_terms) as score
+                ORDER BY score DESC, title ASC
                 LIMIT $limit
                 """,
-                limit=limit * 2,  # Over-fetch for filtering
+                question_lower=question.lower(),
+                limit=limit * 2,
             )
 
             candidates: list[RetrievalCandidate] = []
             for rank, rec in enumerate(result, 1):
-                # Simple relevance: check if any metadata words appear in the question
-                title_lower = (rec.get("title") or "").lower()
-                relevance_score = 1.0 / (rank + 1)  # Basic score based on rank
-
                 if rank <= limit:
                     candidate = RetrievalCandidate(
                         document_id=rec["id"],
@@ -386,6 +370,10 @@ class Neo4jRetrieval:
         Returns:
             List of RetrievalCandidate from full-text search (documents and sections).
         """
+        lucene_query = self._sanitize_fulltext_query(question)
+        if not lucene_query:
+            return []
+
         with self.driver.session() as session:
             # Query document full-text index
             doc_results = []
@@ -396,7 +384,7 @@ class Neo4jRetrieval:
                 WHERE node.active = true
                 RETURN node.document_id as id, score, 'document' as type, null as section_id
                 """,
-                q=question,
+                q=lucene_query,
             )
             for rec in result:
                 doc_results.append({
@@ -416,7 +404,7 @@ class Neo4jRetrieval:
                 WHERE d.active = true
                 RETURN d.document_id as id, score, 'section' as type, node.node_id as section_id
                 """,
-                q=question,
+                q=lucene_query,
             )
             for rec in result:
                 section_results.append({
@@ -510,3 +498,10 @@ class Neo4jRetrieval:
                 candidates.append(candidate)
 
             return candidates
+
+    @staticmethod
+    def _sanitize_fulltext_query(question: str) -> str:
+        """Normalize raw user text into a safer Lucene full-text query."""
+        sanitized = re.sub(r'[+\-!(){}\[\]^"~*?:\\/|&]+', " ", question)
+        sanitized = re.sub(r"\s+", " ", sanitized).strip()
+        return sanitized

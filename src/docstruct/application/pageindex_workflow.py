@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
+import sys
 
 try:
     from docstruct.application.pageindex_search_graph import PageIndexSearchGraphRunner
@@ -12,6 +14,7 @@ except ImportError:  # pragma: no cover
 
 from docstruct.application.agents.pageindex_search_agent import PageIndexSearchAgent
 from docstruct.application.ports import LLMPort
+from docstruct.config import EmbeddingConfig, Neo4jConfig, RetrievalConfig
 from docstruct.domain.models import DocumentMetadata, SearchAnswer, SearchDocumentIndex, SearchTraceStep
 from docstruct.domain.pageindex_search import (
     build_context_blocks,
@@ -25,6 +28,8 @@ from docstruct.domain.pageindex_search import (
     question_has_scope_or_detail_hint,
     question_requests_multi_document_answer,
 )
+from docstruct.infrastructure.neo4j.driver import build_driver, wait_for_neo4j
+from docstruct.infrastructure.neo4j.retrieval import Neo4jRetrieval
 from docstruct.infrastructure.pageindex_adapter import build_markdown_tree
 
 
@@ -157,6 +162,80 @@ def _promote_documents(
     return ordered[:limit]
 
 
+def _build_neo4j_retrieval() -> tuple[Neo4jRetrieval | None, object | None]:
+    """Build a Neo4j retrieval adapter from environment configuration.
+
+    Returns:
+        Tuple of (retrieval_adapter, driver). Both values are None when Neo4j
+        retrieval is not configured or cannot be initialized.
+    """
+    if not os.getenv("NEO4J_URI") or not os.getenv("NEO4J_AUTH"):
+        return None, None
+
+    driver = None
+    try:
+        neo4j_config = Neo4jConfig.from_env()
+        retrieval_config = RetrievalConfig.from_env()
+
+        embedding_config = None
+        if retrieval_config.enable_vector:
+            try:
+                embedding_config = EmbeddingConfig.from_env()
+            except ValueError as exc:
+                print(
+                    f"Warning: Neo4j vector retrieval disabled because embedding config is incomplete: {exc}",
+                    file=sys.stderr,
+                )
+
+        driver = build_driver(neo4j_config)
+        wait_for_neo4j(
+            driver,
+            max_retries=neo4j_config.readiness_retries,
+            backoff_base=neo4j_config.readiness_backoff_base,
+        )
+        return Neo4jRetrieval(driver, retrieval_config, embedding_config=embedding_config), driver
+    except Exception as exc:
+        if driver is not None:
+            driver.close()
+        print(
+            f"Warning: Neo4j retrieval unavailable, falling back to file-based indexes: {exc}",
+            file=sys.stderr,
+        )
+        return None, None
+
+
+def _candidate_documents_from_neo4j(
+    neo4j_retrieval: Neo4jRetrieval,
+    question: str,
+    *,
+    limit: int,
+) -> list[SearchDocumentIndex]:
+    """Resolve Neo4j retrieval candidates to SearchDocumentIndex objects."""
+    documents: list[SearchDocumentIndex] = []
+    seen_document_ids: set[str] = set()
+
+    for candidate in neo4j_retrieval.retrieve_candidates(question, limit=limit):
+        document_id = candidate.document_id
+        if document_id in seen_document_ids:
+            continue
+        document = neo4j_retrieval.get_document_index(document_id)
+        if document is not None:
+            documents.append(document)
+            seen_document_ids.add(document_id)
+
+    return documents
+
+
+def _load_search_indexes_from_neo4j(neo4j_retrieval: Neo4jRetrieval) -> list[SearchDocumentIndex]:
+    """Load all active documents from Neo4j as SearchDocumentIndex objects."""
+    indexes: list[SearchDocumentIndex] = []
+    for document_id in neo4j_retrieval.list_active_document_ids():
+        document = neo4j_retrieval.get_document_index(document_id)
+        if document is not None:
+            indexes.append(document)
+    return indexes
+
+
 def _answer_question_without_langgraph(
     question: str,
     indexes: list[SearchDocumentIndex],
@@ -165,6 +244,7 @@ def _answer_question_without_langgraph(
     multi_document_intent: bool,
     trace: list[SearchTraceStep],
     add_trace,
+    neo4j_retrieval: Neo4jRetrieval | None = None,
 ) -> SearchAnswer:
     add_trace(
         "workflow_runtime",
@@ -201,7 +281,10 @@ def _answer_question_without_langgraph(
             if note
         )
 
-    candidate_documents = choose_candidate_documents(effective_question, indexes, limit=6)
+    if neo4j_retrieval is not None:
+        candidate_documents = _candidate_documents_from_neo4j(neo4j_retrieval, effective_question, limit=6)
+    else:
+        candidate_documents = choose_candidate_documents(effective_question, indexes, limit=6)
     if inferred_document_ids:
         candidate_documents = _promote_documents(candidate_documents, inferred_document_ids, limit=6)
     add_trace(
@@ -209,6 +292,7 @@ def _answer_question_without_langgraph(
         "Ranked candidate documents for the effective retrieval question.",
         effective_question=effective_question,
         candidates=_summarize_documents(candidate_documents, limit=6),
+        retrieval_backend="neo4j" if neo4j_retrieval is not None else "pageindex-files",
     )
     heuristic_clarification = build_scope_clarification(effective_question, candidate_documents[:4])
 
@@ -330,7 +414,7 @@ def _answer_question_without_langgraph(
             )
         if node_notes:
             retrieval_notes.append(f"{document.document_id}: {node_notes}")
-        contexts.extend(build_context_blocks(document, node_ids, max_chars=1600))
+        contexts.extend(build_context_blocks(document, node_ids, question=effective_question, max_chars=1600))
 
     if not contexts:
         raise ValueError("No relevant indexed nodes were found for the question.")
@@ -381,81 +465,97 @@ def answer_question(
     index_dir: str,
     client: LLMPort,
 ) -> SearchAnswer:
-    indexes = load_search_indexes(index_dir)
-    if not indexes:
-        raise ValueError(f"No PageIndex search indexes found in {index_dir}")
+    neo4j_retrieval, neo4j_driver = _build_neo4j_retrieval()
+    try:
+        indexes = load_search_indexes(index_dir)
+        if not indexes and neo4j_retrieval is not None:
+            indexes = _load_search_indexes_from_neo4j(neo4j_retrieval)
+        if not indexes:
+            raise ValueError(f"No PageIndex search indexes found in {index_dir}")
 
-    trace: list[SearchTraceStep] = []
+        trace: list[SearchTraceStep] = []
 
-    def add_trace(stage: str, message: str, **details: object) -> None:
-        trace.append(
-            SearchTraceStep(
-                stage=stage,
-                message=message,
-                details={key: _trace_value(value) for key, value in details.items()},
+        def add_trace(stage: str, message: str, **details: object) -> None:
+            trace.append(
+                SearchTraceStep(
+                    stage=stage,
+                    message=message,
+                    details={key: _trace_value(value) for key, value in details.items()},
+                )
             )
+
+        add_trace(
+            "load_indexes",
+            "Loaded search indexes.",
+            index_dir=index_dir,
+            count=len(indexes),
+            documents=_summarize_documents(indexes),
+            retrieval_backend="neo4j" if neo4j_retrieval is not None else "pageindex-files",
         )
 
-    add_trace(
-        "load_indexes",
-        "Loaded search indexes.",
-        index_dir=index_dir,
-        count=len(indexes),
-        documents=_summarize_documents(indexes),
-    )
-
-    multi_document_intent = question_requests_multi_document_answer(question)
-    add_trace(
-        "intent_detection",
-        "Detected user intent for document scope.",
-        multi_document_intent=multi_document_intent,
-    )
-
-    initial_candidates = choose_candidate_documents(question, indexes, limit=6)
-    add_trace(
-        "initial_ranking",
-        "Ranked initial candidate documents from the original question.",
-        question=question,
-        candidates=_summarize_documents(initial_candidates, limit=6),
-    )
-    ambiguous_candidates = find_ambiguous_candidate_documents(question, initial_candidates)
-    if ambiguous_candidates and not question_has_scope_or_detail_hint(question):
-        clarification = build_scope_clarification(question, ambiguous_candidates)
-        if clarification:
-            add_trace(
-                "clarification_gate",
-                "Stopped early because the question is too generic across multiple document scopes.",
-                ambiguous_candidates=_summarize_documents(ambiguous_candidates),
-                clarifying_question=clarification,
-            )
-            return SearchAnswer(
-                question=question,
-                answer=clarification,
-                document_ids=[],
-                retrieval_notes="Question is generic and matches multiple document scopes.",
-                needs_clarification=True,
-                clarifying_question=clarification,
-                trace=trace,
-            )
-
-    if PageIndexSearchGraphRunner is None:
-        return _answer_question_without_langgraph(
-            question,
-            indexes,
-            client,
+        multi_document_intent = question_requests_multi_document_answer(question)
+        add_trace(
+            "intent_detection",
+            "Detected user intent for document scope.",
             multi_document_intent=multi_document_intent,
-            trace=trace,
-            add_trace=add_trace,
         )
 
-    result = PageIndexSearchGraphRunner(
-        client,
-        add_trace=add_trace,
-        summarize_documents=_summarize_documents,
-    ).run(
-        question=question,
-        indexes=indexes,
-        multi_document_intent=multi_document_intent,
-    )
-    result.trace = trace
-    return result
+        if neo4j_retrieval is not None:
+            initial_candidates = _candidate_documents_from_neo4j(neo4j_retrieval, question, limit=6)
+            if not initial_candidates:
+                initial_candidates = choose_candidate_documents(question, indexes, limit=6)
+        else:
+            initial_candidates = choose_candidate_documents(question, indexes, limit=6)
+        add_trace(
+            "initial_ranking",
+            "Ranked initial candidate documents from the original question.",
+            question=question,
+            candidates=_summarize_documents(initial_candidates, limit=6),
+            retrieval_backend="neo4j" if neo4j_retrieval is not None else "pageindex-files",
+        )
+        ambiguous_candidates = find_ambiguous_candidate_documents(question, initial_candidates)
+        if ambiguous_candidates and not question_has_scope_or_detail_hint(question):
+            clarification = build_scope_clarification(question, ambiguous_candidates)
+            if clarification:
+                add_trace(
+                    "clarification_gate",
+                    "Stopped early because the question is too generic across multiple document scopes.",
+                    ambiguous_candidates=_summarize_documents(ambiguous_candidates),
+                    clarifying_question=clarification,
+                )
+                return SearchAnswer(
+                    question=question,
+                    answer=clarification,
+                    document_ids=[],
+                    retrieval_notes="Question is generic and matches multiple document scopes.",
+                    needs_clarification=True,
+                    clarifying_question=clarification,
+                    trace=trace,
+                )
+
+        if PageIndexSearchGraphRunner is None:
+            return _answer_question_without_langgraph(
+                question,
+                indexes,
+                client,
+                multi_document_intent=multi_document_intent,
+                trace=trace,
+                add_trace=add_trace,
+                neo4j_retrieval=neo4j_retrieval,
+            )
+
+        result = PageIndexSearchGraphRunner(
+            client,
+            add_trace=add_trace,
+            summarize_documents=_summarize_documents,
+            neo4j_retrieval=neo4j_retrieval,
+        ).run(
+            question=question,
+            indexes=indexes,
+            multi_document_intent=multi_document_intent,
+        )
+        result.trace = trace
+        return result
+    finally:
+        if neo4j_driver is not None:
+            neo4j_driver.close()

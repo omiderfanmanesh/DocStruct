@@ -279,7 +279,16 @@ class PageIndexLoader:
         # Return dummy counts for now (could be enhanced with actual counts from MERGE results)
         return (1, 0, 0)
 
-    def _merge_section(self, session: Any, document_id: str, section: dict[str, Any], parent_id: str | None) -> str:
+    def _merge_section(
+        self,
+        session: Any,
+        document_id: str,
+        section: dict[str, Any],
+        parent_id: str | None,
+        *,
+        parent_path: str = "",
+        order: int = 0,
+    ) -> str:
         """Recursively merge a section and its subsections.
 
         Args:
@@ -294,6 +303,16 @@ class PageIndexLoader:
         node_id = section.get("node_id")
         if not node_id:
             raise ValueError("Section missing node_id")
+
+        node_title = section.get("node_title") or section.get("title")
+        line_number = section.get("line_number")
+        if line_number is None:
+            line_number = section.get("line_num")
+        children = list(section.get("subsections", []) or section.get("nodes", []))
+        current_path = section.get("path") or " > ".join(part for part in [parent_path, str(node_title or "").strip()] if part)
+        depth = section.get("depth")
+        if depth is None:
+            depth = current_path.count(" > ")
 
         # MERGE Section node
         session.run(
@@ -310,12 +329,12 @@ class PageIndexLoader:
             """,
             node_id=node_id,
             document_id=document_id,
-            node_title=section.get("node_title"),
-            path=section.get("path"),
+            node_title=node_title,
+            path=current_path,
             text=section.get("text"),
             summary=section.get("summary"),
-            line_number=section.get("line_number"),
-            depth=section.get("depth", 0),
+            line_number=line_number,
+            depth=depth,
         )
 
         # MERGE HAS_SECTION relationship (Document -> Section)
@@ -339,12 +358,19 @@ class PageIndexLoader:
                 """,
                 parent_id=parent_id,
                 node_id=node_id,
-                order=section.get("order", 0),
+                order=section.get("order", order),
             )
 
         # Recursively merge subsections
-        for subsection in section.get("subsections", []):
-            self._merge_section(session, document_id, subsection, parent_id=node_id)
+        for child_order, subsection in enumerate(children):
+            self._merge_section(
+                session,
+                document_id,
+                subsection,
+                parent_id=node_id,
+                parent_path=current_path,
+                order=child_order,
+            )
 
         return node_id
 
@@ -364,12 +390,12 @@ class PageIndexLoader:
             """Recursively collect sections for embedding."""
             node_id = section.get("node_id")
             text = section.get("text", "")
-            node_title = section.get("node_title", "")
+            node_title = section.get("node_title") or section.get("title", "")
 
             if node_id and text:
                 sections_to_embed.append((node_id, text, node_title))
 
-            for subsection in section.get("subsections", []):
+            for subsection in list(section.get("subsections", []) or section.get("nodes", [])):
                 collect_sections(subsection)
 
         # Collect all sections
