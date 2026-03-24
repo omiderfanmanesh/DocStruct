@@ -16,51 +16,61 @@ from pathlib import Path
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from docstruct.config import Neo4jConfig, EmbeddingConfig
+try:
+    from dotenv import load_dotenv
+except ImportError:  # pragma: no cover
+    load_dotenv = None
+
+from docstruct.config import EmbeddingConfig, Neo4jConfig
 from docstruct.infrastructure.neo4j.driver import build_driver, wait_for_neo4j
-from docstruct.infrastructure.neo4j.indexes import create_indexes, EmbeddingDimensionError
+from docstruct.infrastructure.neo4j.indexes import EmbeddingDimensionError, create_indexes
 
 
 def main() -> int:
     """Main entry point."""
+    if load_dotenv is not None:
+        load_dotenv()
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
     parser = argparse.ArgumentParser(
         description="Create Neo4j indexes and constraints for hybrid search"
     )
     parser.add_argument(
         "--skip-vector",
         action="store_true",
-        help="Skip vector index creation (use when embeddings are disabled)"
+        help="Skip vector index creation (use when embeddings are disabled)",
     )
     args = parser.parse_args()
 
     try:
-        # Load config
         neo4j_config = Neo4jConfig.from_env()
         embedding_config = EmbeddingConfig.from_env() if not args.skip_vector else None
-
-        # Build driver
         driver = build_driver(neo4j_config)
 
         try:
-            # Wait for readiness
             print(f"Connecting to Neo4j at {neo4j_config.uri}...", file=sys.stderr)
-            wait_for_neo4j(driver, max_retries=neo4j_config.readiness_retries)
-            print("✓ Connected to Neo4j", file=sys.stderr)
+            wait_for_neo4j(
+                driver,
+                max_retries=neo4j_config.readiness_retries,
+                backoff_base=neo4j_config.readiness_backoff_base,
+            )
+            print("Connected to Neo4j", file=sys.stderr)
 
-            # Create indexes
             print("Creating indexes and constraints...", file=sys.stderr)
             create_indexes(driver, embedding_config, skip_vector=args.skip_vector)
 
-            # Validate vector dimension if embedding config present
             if embedding_config:
                 try:
                     from docstruct.infrastructure.neo4j.indexes import validate_vector_dimension
+
                     validate_vector_dimension(driver, embedding_config.dimensions)
-                except EmbeddingDimensionError as e:
-                    print(f"ERROR: {e}", file=sys.stderr)
+                except EmbeddingDimensionError as exc:
+                    print(f"ERROR: {exc}", file=sys.stderr)
                     return 1
 
-            # Print success output
             print("\nCreated constraint: document_source_path_unique")
             print("Created constraint: section_node_id_unique")
             print("Created constraint: org_name_unique")
@@ -77,23 +87,22 @@ def main() -> int:
                 provider = embedding_config.provider
                 print(f"Created index: section_embedding (dimensions={dims}, provider={provider})")
 
-            print("\n✓ All indexes verified.")
+            print("\nAll indexes verified.")
             return 0
-
         finally:
             driver.close()
 
-    except ValueError as e:
-        print(f"Configuration error: {e}", file=sys.stderr)
+    except ValueError as exc:
+        print(f"Configuration error: {exc}", file=sys.stderr)
         return 1
-    except EmbeddingDimensionError as e:
-        print(f"Dimension mismatch error: {e}", file=sys.stderr)
+    except EmbeddingDimensionError as exc:
+        print(f"Dimension mismatch error: {exc}", file=sys.stderr)
         return 1
-    except RuntimeError as e:
-        print(f"Neo4j connection error: {e}", file=sys.stderr)
+    except RuntimeError as exc:
+        print(f"Neo4j connection error: {exc}", file=sys.stderr)
         return 1
-    except Exception as e:
-        print(f"Unexpected error: {e}", file=sys.stderr)
+    except Exception as exc:
+        print(f"Unexpected error: {exc}", file=sys.stderr)
         return 1
 
 

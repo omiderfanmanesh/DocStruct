@@ -16,7 +16,7 @@ services:
     volumes:
       - neo4j_data:/var/lib/neo4j/data
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7474"]
+      test: ["CMD", "wget", "--spider", "http://localhost:7474"]
       interval: 10s
       timeout: 5s
       retries: 10

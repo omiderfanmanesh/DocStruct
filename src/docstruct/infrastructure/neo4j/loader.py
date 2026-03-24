@@ -43,8 +43,9 @@ class PageIndexLoader:
         self.dry_run = dry_run
         self.embedder: EmbeddingPort | None = None
 
-        # Build embedder if configured and vector mode is enabled
-        if embedding_config and embedding_config.enable_vector:
+        # Build embedder when embedding configuration is present.
+        # Vector-mode gating happens before the loader is constructed.
+        if embedding_config is not None:
             try:
                 self.embedder = build_embedder(embedding_config)
                 _log(f"Loaded {embedding_config.provider} embedder (model: {embedding_config.model})")
