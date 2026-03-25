@@ -7,6 +7,8 @@ from typing import TYPE_CHECKING, Callable, List, Optional, TypedDict
 from langgraph.graph import END, START, StateGraph
 
 from docstruct.application.agents.pageindex_search_agent import PageIndexSearchAgent
+from docstruct.config import ContextConfig
+from docstruct.domain.answer_quality import guard_empty_context
 from docstruct.domain.models import SearchAnswer, SearchDocumentIndex, SearchSelectionDecision
 from docstruct.domain.pageindex_search import (
     build_context_blocks,
@@ -14,6 +16,8 @@ from docstruct.domain.pageindex_search import (
     choose_candidate_documents,
     fallback_node_matches,
 )
+from docstruct.infrastructure.logging import log_stage
+from docstruct.infrastructure.metrics import Timer, get_metrics
 
 if TYPE_CHECKING:
     from docstruct.application.ports import Neo4jRetrievalPort
@@ -369,10 +373,16 @@ class PageIndexSearchGraphRunner:
             [document.document_id for document in selected_documents],
         )
 
+        # Dynamic context sizing
+        context_config = ContextConfig.from_env()
+        total_node_count = 0
+
         for document in selected_documents:
             preferred_node_ids = list(seed_nodes_by_document.get(document.document_id, []))
             try:
-                node_ids, node_notes = self._agent.select_nodes(effective_question, document)
+                with log_stage("node_selection", document_id=document.document_id):
+                    node_ids, node_notes = self._agent.select_nodes(effective_question, document)
+                    get_metrics().record_llm_call()
                 self._add_trace(
                     "node_selection",
                     "Selected nodes from the document tree.",
@@ -408,12 +418,37 @@ class PageIndexSearchGraphRunner:
                     document_id=document.document_id,
                     node_ids=node_ids,
                 )
+            total_node_count += len(node_ids)
             if node_notes:
                 retrieval_notes.append(f"{document.document_id}: {node_notes}")
-            contexts.extend(build_context_blocks(document, node_ids, question=effective_question, max_chars=1600))
 
-        if not contexts:
-            raise ValueError("No relevant indexed nodes were found for the question.")
+            # Use dynamic context sizing
+            effective_max_chars = context_config.effective_max_chars(total_node_count)
+            contexts.extend(build_context_blocks(
+                document, node_ids, question=effective_question, max_chars=effective_max_chars,
+            ))
+
+        # Empty context guard
+        empty_guard_msg = guard_empty_context(contexts)
+        if empty_guard_msg is not None:
+            self._add_trace(
+                "context_building",
+                "Empty context guard triggered.",
+                message=empty_guard_msg,
+            )
+            return {
+                "contexts": [],
+                "retrieval_notes": retrieval_notes,
+                "final_answer": SearchAnswer(
+                    question=state["question"],
+                    answer=empty_guard_msg,
+                    document_ids=[document.document_id for document in selected_documents],
+                    retrieval_notes=" | ".join(retrieval_notes) if retrieval_notes else None,
+                ),
+            }
+
+        # Trim to max blocks
+        contexts = contexts[:context_config.max_context_blocks]
 
         self._add_trace(
             "context_building",
@@ -430,14 +465,18 @@ class PageIndexSearchGraphRunner:
         selected_documents = state["selected_documents"]
         contexts = state["contexts"]
         retrieval_note_text = " | ".join(note for note in state.get("retrieval_notes", []) if note) or None
+        timer = Timer().start()
         try:
-            answer = self._agent.answer_from_contexts(
-                state["question"],
-                contexts[:8],
-                document_ids=[document.document_id for document in selected_documents],
-                retrieval_notes=retrieval_note_text,
-                retrieval_backend="neo4j" if self._neo4j_retrieval is not None else "pageindex",
-            )
+            with log_stage("answer_synthesis"):
+                answer = self._agent.answer_from_contexts(
+                    state["question"],
+                    contexts[:8],
+                    document_ids=[document.document_id for document in selected_documents],
+                    retrieval_notes=retrieval_note_text,
+                    retrieval_backend="neo4j" if self._neo4j_retrieval is not None else "pageindex",
+                )
+                get_metrics().record_llm_call()
+            get_metrics().record_stage("answer_synthesis", timer.stop())
             self._add_trace(
                 "answer_synthesis",
                 "Synthesized the final grounded answer from the selected contexts.",
@@ -447,6 +486,7 @@ class PageIndexSearchGraphRunner:
             )
             return {"final_answer": answer}
         except Exception:
+            get_metrics().record_stage("answer_synthesis", timer.stop(), error=True)
             fallback_answer = " ".join(context["text"] for context in contexts[:2] if context.get("text")).strip()
             if not fallback_answer:
                 fallback_answer = "I found relevant document nodes, but I could not synthesize a grounded answer."

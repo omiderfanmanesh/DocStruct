@@ -12,6 +12,7 @@ from ...domain.models.search import RetrievalCandidate, SearchDocumentIndex, Sea
 from ...domain.pageindex_search import question_targets_documentation
 from ...domain.rrf import reciprocal_rank_fusion
 from ...config import RetrievalConfig, EmbeddingConfig
+from ..cache import cache_document, cache_embedding, get_cached_document, get_cached_embedding
 from ..embeddings.factory import build_embedder
 
 
@@ -87,8 +88,23 @@ class Neo4jRetrieval:
             # Generate embedding if not provided
             if query_embedding is None:
                 try:
-                    embedder = build_embedder(self.embedding_config)
-                    query_embedding = embedder.embed_query(expanded_question)
+                    # Check embedding cache first
+                    cached_emb = get_cached_embedding(
+                        expanded_question,
+                        self.embedding_config.provider,
+                        self.embedding_config.model,
+                    )
+                    if cached_emb is not None:
+                        query_embedding = cached_emb
+                    else:
+                        embedder = build_embedder(self.embedding_config)
+                        query_embedding = embedder.embed_query(expanded_question)
+                        cache_embedding(
+                            expanded_question,
+                            self.embedding_config.provider,
+                            self.embedding_config.model,
+                            query_embedding,
+                        )
                 except Exception as e:
                     sys.stderr.write(f"Warning: Failed to generate query embedding: {e}\n")
                     query_embedding = None
@@ -129,12 +145,25 @@ class Neo4jRetrieval:
     def get_document_index(self, document_id: str) -> SearchDocumentIndex | None:
         """Retrieve and reconstruct a full SearchDocumentIndex from Neo4j.
 
+        Uses document tree cache to avoid repeated Neo4j roundtrips.
+
         Args:
             document_id: The document ID.
 
         Returns:
             SearchDocumentIndex instance, or None if not found or inactive.
         """
+        cached = get_cached_document(document_id)
+        if cached is not None:
+            return cached
+
+        result = self._get_document_index_from_neo4j(document_id)
+        if result is not None:
+            cache_document(document_id, result)
+        return result
+
+    def _get_document_index_from_neo4j(self, document_id: str) -> SearchDocumentIndex | None:
+        """Actual Neo4j retrieval for a document index."""
         with self.driver.session() as session:
             # Query document
             result = session.run(

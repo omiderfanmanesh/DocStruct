@@ -209,3 +209,98 @@ class RetrievalConfig:
             enable_fulltext=enable_fulltext,
             enable_vector=enable_vector,
         )
+
+
+@dataclass
+class ScoringConfig:
+    """Configurable weights for heuristic scoring.
+
+    All weights can be tuned via environment variables for A/B testing
+    and per-deployment calibration.
+    """
+
+    # Document-level scoring
+    scope_mention_bonus: int = 8
+    title_overlap_weight: int = 2  # extra weight for title token overlap
+
+    # Node-level scoring
+    node_title_weight: int = 4
+    node_path_weight: int = 3
+    node_summary_weight: int = 2
+    node_text_max_overlap: int = 6
+
+    # Documentation query bonuses
+    doc_submission_bonus: int = 26
+    doc_documentation_bonus: int = 18
+    doc_document_bonus: int = 12
+    doc_certificate_bonus: int = 10
+    doc_form_bonus: int = 10
+    doc_attach_bonus: int = 8
+    doc_app_submit_bonus: int = 6
+
+    # Deadline query bonuses
+    deadline_full_match_bonus: int = 20
+    deadline_methods_bonus: int = 14
+    deadline_service_bonus: int = 10
+    deadline_app_bonus: int = 8
+
+    # Penalty weights
+    ranking_penalty: int = -8
+    complaint_penalty: int = -6
+    provisional_penalty: int = -4
+
+    # Context building
+    descendant_title_weight: int = 5
+    descendant_path_weight: int = 4
+    descendant_summary_weight: int = 3
+    descendant_text_max_overlap: int = 8
+    max_descendants_per_node: int = 2
+
+    @classmethod
+    def from_env(cls) -> "ScoringConfig":
+        return cls(
+            scope_mention_bonus=int(os.getenv("SCORING_SCOPE_MENTION_BONUS", "8")),
+            node_title_weight=int(os.getenv("SCORING_NODE_TITLE_WEIGHT", "4")),
+            node_path_weight=int(os.getenv("SCORING_NODE_PATH_WEIGHT", "3")),
+            node_summary_weight=int(os.getenv("SCORING_NODE_SUMMARY_WEIGHT", "2")),
+            doc_submission_bonus=int(os.getenv("SCORING_DOC_SUBMISSION_BONUS", "26")),
+            doc_documentation_bonus=int(os.getenv("SCORING_DOC_DOCUMENTATION_BONUS", "18")),
+        )
+
+
+@dataclass
+class ContextConfig:
+    """Configuration for dynamic context window management."""
+
+    # Per-block character limit
+    max_chars_per_block: int = 1600
+    # Total context budget for the LLM prompt
+    total_context_budget: int = 12000
+    # Maximum context blocks to send to the LLM
+    max_context_blocks: int = 8
+    # Whether to dynamically adjust block size based on selected node count
+    dynamic_sizing: bool = True
+
+    @classmethod
+    def from_env(cls) -> "ContextConfig":
+        return cls(
+            max_chars_per_block=int(os.getenv("CONTEXT_MAX_CHARS_PER_BLOCK", "1600")),
+            total_context_budget=int(os.getenv("CONTEXT_TOTAL_BUDGET", "12000")),
+            max_context_blocks=int(os.getenv("CONTEXT_MAX_BLOCKS", "8")),
+            dynamic_sizing=os.getenv("CONTEXT_DYNAMIC_SIZING", "true").lower() == "true",
+        )
+
+    def effective_max_chars(self, selected_node_count: int) -> int:
+        """Calculate the per-block max chars based on total budget and node count.
+
+        When dynamic_sizing is enabled, the per-block limit is adjusted so that
+        the total context fits within the budget.
+        """
+        if not self.dynamic_sizing or selected_node_count <= 0:
+            return self.max_chars_per_block
+        # Each node may produce ~2 context blocks (node + best descendant)
+        estimated_blocks = min(selected_node_count * 2, self.max_context_blocks)
+        if estimated_blocks <= 0:
+            return self.max_chars_per_block
+        dynamic_limit = self.total_context_budget // estimated_blocks
+        return min(dynamic_limit, self.max_chars_per_block)

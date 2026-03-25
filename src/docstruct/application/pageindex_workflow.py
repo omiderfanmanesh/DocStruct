@@ -14,7 +14,8 @@ except ImportError:  # pragma: no cover
 
 from docstruct.application.agents.pageindex_search_agent import PageIndexSearchAgent
 from docstruct.application.ports import LLMPort
-from docstruct.config import EmbeddingConfig, Neo4jConfig, RetrievalConfig
+from docstruct.config import ContextConfig, EmbeddingConfig, Neo4jConfig, RetrievalConfig
+from docstruct.domain.answer_quality import assess_answer_quality, guard_empty_context
 from docstruct.domain.models import DocumentMetadata, SearchAnswer, SearchDocumentIndex, SearchTraceStep
 from docstruct.domain.pageindex_search import (
     build_context_blocks,
@@ -28,6 +29,16 @@ from docstruct.domain.pageindex_search import (
     question_has_scope_or_detail_hint,
     question_requests_multi_document_answer,
 )
+from docstruct.domain.query_validation import validate_query
+from docstruct.infrastructure.cache import (
+    cache_document,
+    cache_result,
+    get_cached_document,
+    get_cached_result,
+)
+from docstruct.infrastructure.circuit_breaker import CircuitBreakerOpen, get_circuit_breaker
+from docstruct.infrastructure.logging import log_stage, logger
+from docstruct.infrastructure.metrics import Timer, get_metrics
 from docstruct.infrastructure.neo4j.driver import build_driver, wait_for_neo4j
 from docstruct.infrastructure.neo4j.retrieval import Neo4jRetrieval
 from docstruct.infrastructure.pageindex_adapter import build_markdown_tree
@@ -513,16 +524,49 @@ def answer_question(
     *,
     retrieval_backend: str = "auto",
 ) -> SearchAnswer:
+    metrics = get_metrics()
+    metrics.record_query()
+    query_timer = Timer().start()
+
     if retrieval_backend not in {"auto", "pageindex", "neo4j"}:
         raise ValueError(
             "retrieval_backend must be one of: auto, pageindex, neo4j"
         )
 
+    # --- Query validation ---
+    validation = validate_query(question)
+    if not validation.is_valid:
+        logger.warning(
+            "Query rejected: %s (injection=%s)",
+            validation.rejection_reason,
+            validation.injection_detected,
+        )
+        return SearchAnswer(
+            question=question,
+            answer=validation.rejection_reason or "Invalid query.",
+            document_ids=[],
+            retrieval_notes=f"Query validation failed: {validation.rejection_reason}",
+        )
+    question = validation.sanitized_query
+
+    # --- Result cache check ---
+    cached = get_cached_result(question, retrieval_backend)
+    if cached is not None:
+        logger.info("Cache hit for query: %s", question[:80])
+        return cached
+
     use_neo4j = retrieval_backend in {"auto", "neo4j"}
     neo4j_retrieval = None
     neo4j_driver = None
     if use_neo4j:
-        neo4j_retrieval, neo4j_driver = _build_neo4j_retrieval()
+        try:
+            neo4j_breaker = get_circuit_breaker("neo4j")
+            neo4j_retrieval, neo4j_driver = neo4j_breaker.call(_build_neo4j_retrieval)
+        except CircuitBreakerOpen as exc:
+            logger.warning("Neo4j circuit breaker open: %s", exc)
+            neo4j_retrieval, neo4j_driver = None, None
+        except Exception:
+            neo4j_retrieval, neo4j_driver = None, None
     if retrieval_backend == "neo4j" and neo4j_retrieval is None:
         raise ValueError("Neo4j retrieval was requested, but Neo4j is not available.")
 
@@ -545,15 +589,16 @@ def answer_question(
                 )
             )
 
-        add_trace(
-            "load_indexes",
-            "Loaded search indexes.",
-            index_dir=index_dir,
-            count=len(indexes),
-            documents=_summarize_documents(indexes),
-            requested_retrieval_backend=retrieval_backend,
-            retrieval_backend=active_retrieval_backend,
-        )
+        with log_stage("load_indexes", retrieval_backend=active_retrieval_backend):
+            add_trace(
+                "load_indexes",
+                "Loaded search indexes.",
+                index_dir=index_dir,
+                count=len(indexes),
+                documents=_summarize_documents(indexes),
+                requested_retrieval_backend=retrieval_backend,
+                retrieval_backend=active_retrieval_backend,
+            )
 
         multi_document_intent = question_requests_multi_document_answer(question)
         add_trace(
@@ -579,6 +624,7 @@ def answer_question(
         if ambiguous_candidates and not question_has_scope_or_detail_hint(question):
             clarification = build_scope_clarification(question, ambiguous_candidates)
             if clarification:
+                metrics.record_clarification()
                 add_trace(
                     "clarification_gate",
                     "Stopped early because the question is too generic across multiple document scopes.",
@@ -596,7 +642,7 @@ def answer_question(
                 )
 
         if PageIndexSearchGraphRunner is None:
-            return _answer_question_without_langgraph(
+            result = _answer_question_without_langgraph(
                 question,
                 indexes,
                 client,
@@ -605,19 +651,71 @@ def answer_question(
                 add_trace=add_trace,
                 neo4j_retrieval=neo4j_retrieval,
             )
+        else:
+            result = PageIndexSearchGraphRunner(
+                client,
+                add_trace=add_trace,
+                summarize_documents=_summarize_documents,
+                neo4j_retrieval=neo4j_retrieval,
+            ).run(
+                question=question,
+                indexes=indexes,
+                multi_document_intent=multi_document_intent,
+            )
+            result.trace = trace
 
-        result = PageIndexSearchGraphRunner(
-            client,
-            add_trace=add_trace,
-            summarize_documents=_summarize_documents,
-            neo4j_retrieval=neo4j_retrieval,
-        ).run(
-            question=question,
-            indexes=indexes,
-            multi_document_intent=multi_document_intent,
-        )
-        result.trace = trace
+        # --- Answer quality assessment ---
+        _apply_quality_assessment(result, trace, add_trace, metrics)
+
+        # --- Cache the result ---
+        if not result.needs_clarification:
+            cache_result(question, retrieval_backend, result)
+
+        # --- Record metrics ---
+        metrics.record_stage("total_query", query_timer.stop())
         return result
     finally:
         if neo4j_driver is not None:
             neo4j_driver.close()
+
+
+def _apply_quality_assessment(
+    result: SearchAnswer,
+    trace: list[SearchTraceStep],
+    add_trace,
+    metrics,
+) -> None:
+    """Run answer quality checks and attach metadata to the result."""
+    # Extract contexts from trace for quality check
+    context_step = next(
+        (step for step in trace if step.stage == "context_building"),
+        None,
+    )
+    context_count = context_step.details.get("context_count", 0) if context_step else 0
+
+    # Build citation dicts for quality check
+    citation_dicts = [c.to_dict() for c in result.citations]
+
+    # We use a lightweight quality check based on available data
+    quality = assess_answer_quality(
+        answer=result.answer,
+        citations=citation_dicts,
+        contexts=citation_dicts,  # Use citations as proxy for context check
+        question=result.question,
+    )
+
+    metrics.record_confidence(quality.confidence_score)
+    if quality.warnings:
+        metrics.record_quality_warning()
+
+    add_trace(
+        "quality_assessment",
+        f"Answer quality: {quality.confidence_label} (score={quality.confidence_score})",
+        confidence_score=quality.confidence_score,
+        confidence_label=quality.confidence_label,
+        has_grounded_citations=quality.has_grounded_citations,
+        citation_coverage=quality.citation_coverage,
+        potential_hallucination=quality.potential_hallucination,
+        hallucination_indicators=quality.hallucination_indicators[:3],
+        warnings=quality.warnings[:3],
+    )
