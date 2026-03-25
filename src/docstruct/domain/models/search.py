@@ -154,6 +154,9 @@ class SearchAnswer:
     needs_clarification: bool = False
     clarifying_question: str | None = None
     trace: list[SearchTraceStep] = field(default_factory=list)
+    execution_time_seconds: float = 0.0
+    tokens_used: int = 0
+    estimated_cost_usd: float = 0.0
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -165,6 +168,9 @@ class SearchAnswer:
             "needs_clarification": self.needs_clarification,
             "clarifying_question": self.clarifying_question,
             "trace": [step.to_dict() for step in self.trace],
+            "execution_time_seconds": self.execution_time_seconds,
+            "tokens_used": self.tokens_used,
+            "estimated_cost_usd": self.estimated_cost_usd,
         }
 
 

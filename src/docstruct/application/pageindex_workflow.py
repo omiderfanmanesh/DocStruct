@@ -38,7 +38,7 @@ from docstruct.infrastructure.cache import (
 )
 from docstruct.infrastructure.circuit_breaker import CircuitBreakerOpen, get_circuit_breaker
 from docstruct.infrastructure.logging import log_stage, logger
-from docstruct.infrastructure.metrics import Timer, get_metrics
+from docstruct.infrastructure.metrics import Timer, calculate_cost, estimate_tokens, get_metrics
 from docstruct.infrastructure.neo4j.driver import build_driver, wait_for_neo4j
 from docstruct.infrastructure.neo4j.retrieval import Neo4jRetrieval
 from docstruct.infrastructure.pageindex_adapter import build_markdown_tree
@@ -273,6 +273,22 @@ def _neo4j_seed_node_ids(
     return seed_nodes
 
 
+def _populate_answer_metrics(
+    answer: SearchAnswer,
+    question: str,
+    query_timer: Timer | None,
+) -> SearchAnswer:
+    """Add execution metrics to a SearchAnswer."""
+    if query_timer is None:
+        return answer
+    # Use elapsed_ms property instead of stop() to avoid multiple stops
+    query_time_ms = query_timer.elapsed_ms
+    answer.execution_time_seconds = query_time_ms / 1000.0
+    answer.tokens_used = estimate_tokens(len(question), len(answer.answer))
+    answer.estimated_cost_usd = calculate_cost(answer.tokens_used)
+    return answer
+
+
 def _answer_question_without_langgraph(
     question: str,
     indexes: list[SearchDocumentIndex],
@@ -282,6 +298,7 @@ def _answer_question_without_langgraph(
     trace: list[SearchTraceStep],
     add_trace,
     neo4j_retrieval: Neo4jRetrieval | None = None,
+    query_timer: Timer | None = None,
 ) -> SearchAnswer:
     add_trace(
         "workflow_runtime",
@@ -354,7 +371,7 @@ def _answer_question_without_langgraph(
 
     if selection and selection.needs_clarification:
         clarifying_question = selection.clarifying_question or heuristic_clarification
-        return SearchAnswer(
+        answer = SearchAnswer(
             question=question,
             answer=clarifying_question or "I need the university, region, or issuing organization before I can answer safely.",
             document_ids=[],
@@ -363,6 +380,7 @@ def _answer_question_without_langgraph(
             clarifying_question=clarifying_question,
             trace=trace,
         )
+        return _populate_answer_metrics(answer, question, query_timer)
 
     selected_document_ids = selection.document_ids if selection else []
     selection_notes = selection.thinking if selection else None
@@ -388,7 +406,7 @@ def _answer_question_without_langgraph(
                 selected_documents=_summarize_documents(candidate_documents[:4]),
                 clarifying_question=heuristic_clarification,
             )
-            return SearchAnswer(
+            answer = SearchAnswer(
                 question=question,
                 answer=heuristic_clarification,
                 document_ids=[],
@@ -397,6 +415,7 @@ def _answer_question_without_langgraph(
                 clarifying_question=heuristic_clarification,
                 trace=trace,
             )
+            return _populate_answer_metrics(answer, question, query_timer)
         selected_documents = candidate_documents[: min(3, len(candidate_documents))]
     add_trace(
         "selected_documents",
@@ -412,7 +431,7 @@ def _answer_question_without_langgraph(
             selected_documents=_summarize_documents(selected_documents, limit=6),
             clarifying_question=post_selection_clarification,
         )
-        return SearchAnswer(
+        answer = SearchAnswer(
             question=question,
             answer=post_selection_clarification,
             document_ids=[document.document_id for document in selected_documents],
@@ -421,6 +440,7 @@ def _answer_question_without_langgraph(
             clarifying_question=post_selection_clarification,
             trace=trace,
         )
+        return _populate_answer_metrics(answer, question, query_timer)
 
     contexts: list[dict] = []
     retrieval_notes: list[str] = [note for note in [rewrite_note, selection_notes] if note]
@@ -508,13 +528,14 @@ def _answer_question_without_langgraph(
             "Fell back to raw context because final answer synthesis failed.",
             answer_preview=fallback_answer[:240],
         )
-        return SearchAnswer(
+        answer = SearchAnswer(
             question=question,
             answer=fallback_answer,
             document_ids=[document.document_id for document in selected_documents],
             retrieval_notes=retrieval_note_text,
             trace=trace,
         )
+        return _populate_answer_metrics(answer, question, query_timer)
 
 
 def answer_question(
@@ -541,19 +562,22 @@ def answer_question(
             validation.rejection_reason,
             validation.injection_detected,
         )
-        return SearchAnswer(
+        rejection_answer = validation.rejection_reason or "Invalid query."
+        answer = SearchAnswer(
             question=question,
-            answer=validation.rejection_reason or "Invalid query.",
+            answer=rejection_answer,
             document_ids=[],
             retrieval_notes=f"Query validation failed: {validation.rejection_reason}",
         )
+        return _populate_answer_metrics(answer, question, query_timer)
     question = validation.sanitized_query
 
     # --- Result cache check ---
     cached = get_cached_result(question, retrieval_backend)
     if cached is not None:
         logger.info("Cache hit for query: %s", question[:80])
-        return cached
+        # Update execution time for cache hit (should be minimal)
+        return _populate_answer_metrics(cached, question, query_timer)
 
     use_neo4j = retrieval_backend in {"auto", "neo4j"}
     neo4j_retrieval = None
@@ -631,7 +655,7 @@ def answer_question(
                     ambiguous_candidates=_summarize_documents(ambiguous_candidates),
                     clarifying_question=clarification,
                 )
-                return SearchAnswer(
+                answer = SearchAnswer(
                     question=question,
                     answer=clarification,
                     document_ids=[],
@@ -640,6 +664,7 @@ def answer_question(
                     clarifying_question=clarification,
                     trace=trace,
                 )
+                return _populate_answer_metrics(answer, question, query_timer)
 
         if PageIndexSearchGraphRunner is None:
             result = _answer_question_without_langgraph(
@@ -650,6 +675,7 @@ def answer_question(
                 trace=trace,
                 add_trace=add_trace,
                 neo4j_retrieval=neo4j_retrieval,
+                query_timer=query_timer,
             )
         else:
             result = PageIndexSearchGraphRunner(
@@ -672,7 +698,12 @@ def answer_question(
             cache_result(question, retrieval_backend, result)
 
         # --- Record metrics ---
-        metrics.record_stage("total_query", query_timer.stop())
+        query_time_ms = query_timer.stop()
+        metrics.record_stage("total_query", query_time_ms)
+
+        # --- Populate execution metrics on the result ---
+        result = _populate_answer_metrics(result, question, query_timer)
+
         return result
     finally:
         if neo4j_driver is not None:

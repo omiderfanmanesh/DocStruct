@@ -31,7 +31,33 @@ PYTHONNOUSERSITE=1 python -m pytest -p no:anyio
 python -m docstruct extract <markdown_file> --output <output.json>
 python -m docstruct fix <source.md> --toc <toc.json> --output-dir <output/fixed>
 python tools/run_pipeline_all.py
+python tools/response_metrics.py
 ```
+
+## Response Metrics
+
+All SearchAnswer responses include execution metrics:
+- **execution_time_seconds**: Actual time in seconds to process the query
+- **tokens_used**: Estimated token count (~1 token ≈ 4 characters, with 1.2x overhead multiplier)
+- **estimated_cost_usd**: Approximate USD cost based on Claude Haiku pricing:
+  - Input: $0.80 per million tokens
+  - Output: $4.00 per million tokens
+
+**Example response with metrics:**
+```json
+{
+  "question": "What documents are needed?",
+  "answer": "Required documents are...",
+  "citations": [...],
+  "document_ids": [...],
+  "execution_time_seconds": 2.34,
+  "tokens_used": 3200,
+  "estimated_cost_usd": 0.0089,
+  ...
+}
+```
+
+Metrics are calculated using `estimate_tokens()` and `calculate_cost()` from `infrastructure/metrics.py`.
 
 ## Rules
 
@@ -39,8 +65,14 @@ Detailed coding standards live in `.claude/rules.md`.
 
 ## File Organization
 
+**STRICT RULE: Do NOT create files in the root directory. Always respect folder structure.**
+
 - Code belongs under `src/`
 - Runner scripts belong under `tools/`
 - Documentation belongs under `docs/`
 - Specs belong under `specs/`
-- Keep root-level files limited to core project metadata and entry docs
+- Unit tests belong under `tests/unit/`
+- Integration tests belong under `tests/integration/`
+- Test fixtures/data belong under `tests/fixtures/`
+- Keep root-level files limited to core project metadata and entry docs (README, LICENSE, pyproject.toml, etc.)
+- **Before creating any new file, verify the correct subdirectory exists. If unsure about placement, ask first.**

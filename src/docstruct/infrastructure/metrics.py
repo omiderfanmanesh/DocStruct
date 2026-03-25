@@ -202,3 +202,47 @@ def get_metrics() -> MetricsCollector:
 def reset_metrics() -> None:
     """Reset the global metrics collector."""
     _global_metrics.reset()
+
+
+def estimate_tokens(input_chars: int, output_chars: int) -> int:
+    """Estimate token count from character counts.
+
+    Rough estimate: 1 token ≈ 4 characters for English text.
+    Includes overhead multiplier for JSON, tool calls, etc.
+
+    Args:
+        input_chars: Characters in input (question, context)
+        output_chars: Characters in output (answer, citations)
+
+    Returns:
+        Estimated token count
+    """
+    overhead_multiplier = 1.2
+    return int((input_chars + output_chars) / 4 * overhead_multiplier)
+
+
+def calculate_cost(tokens_used: int) -> float:
+    """Calculate approximate cost in USD using Claude Haiku pricing.
+
+    Claude Haiku pricing (as of March 2025):
+    - Input: $0.80 per million tokens
+    - Output: $4.00 per million tokens
+
+    Assumes 70% input, 30% output split.
+
+    Args:
+        tokens_used: Total estimated tokens
+
+    Returns:
+        Approximate cost in USD
+    """
+    INPUT_TOKENS_PER_MILLION = 0.80
+    OUTPUT_TOKENS_PER_MILLION = 4.00
+
+    input_tokens = int(tokens_used * 0.7)
+    output_tokens = tokens_used - input_tokens
+
+    input_cost = (input_tokens / 1_000_000) * INPUT_TOKENS_PER_MILLION
+    output_cost = (output_tokens / 1_000_000) * OUTPUT_TOKENS_PER_MILLION
+
+    return input_cost + output_cost
