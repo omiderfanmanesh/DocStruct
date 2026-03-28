@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field
@@ -320,7 +321,14 @@ class PageIndexSearchAgent:
         for citation_data in citation_data_list:
             try:
                 citations.append(SearchCitation.from_dict(citation_data))
-            except Exception:
+            except Exception as exc:
+                # Defensive parsing: skip malformed citations and use fallback extraction.
+                # This is not logged as a pipeline error since it's expected for some LLM outputs.
+                logging.debug(
+                    "Failed to parse citation: %s",
+                    exc,
+                    extra={"stage": "citation_parsing", "error_type": type(exc).__name__},
+                )
                 continue
         if citations:
             return citations

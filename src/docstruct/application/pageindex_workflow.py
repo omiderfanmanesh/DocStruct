@@ -318,7 +318,14 @@ def _answer_question_without_langgraph(
             reasoning=rewrite_note,
             inferred_document_ids=inferred_document_ids,
         )
-    except Exception:
+    except Exception as exc:
+        log_pipeline_error(
+            logger,
+            "rewrite_question",
+            question,
+            exc,
+            fallback_strategy="use original question",
+        )
         effective_question, rewrite_note, inferred_document_ids = question, None, []
         add_trace(
             "rewrite_question",
@@ -361,7 +368,14 @@ def _answer_question_without_langgraph(
             clarifying_question=selection.clarifying_question,
             reasoning=selection.thinking,
         )
-    except Exception:
+    except Exception as exc:
+        log_pipeline_error(
+            logger,
+            "document_selection",
+            effective_question,
+            exc,
+            fallback_strategy="use all candidate documents",
+        )
         selection = None
         add_trace(
             "document_selection",
@@ -460,7 +474,14 @@ def _answer_question_without_langgraph(
                 node_ids=node_ids,
                 reasoning=node_notes,
             )
-        except Exception:
+        except Exception as exc:
+            log_pipeline_error(
+                logger,
+                "node_selection",
+                effective_question,
+                exc,
+                fallback_strategy="use heuristic node matching",
+            )
             node_ids, node_notes = [], None
             add_trace(
                 "node_selection",
@@ -519,7 +540,14 @@ def _answer_question_without_langgraph(
         )
         answer.trace = trace
         return answer
-    except Exception:
+    except Exception as exc:
+        log_pipeline_error(
+            logger,
+            "answer_synthesis",
+            question,
+            exc,
+            fallback_strategy="use raw context from selected documents",
+        )
         fallback_answer = " ".join(context["text"] for context in contexts[:2] if context.get("text")).strip()
         if not fallback_answer:
             fallback_answer = "I found relevant document nodes, but I could not synthesize a grounded answer."

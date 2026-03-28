@@ -57,6 +57,49 @@ def configure_logging(*, level: int = logging.INFO, structured: bool = True) -> 
         search_logger.addHandler(handler)
 
 
+def log_pipeline_error(
+    log: logging.Logger,
+    stage: str,
+    question: str,
+    exc: Exception,
+    fallback_strategy: str | None = None,
+) -> None:
+    """Log a pipeline error with structured fields for production observability.
+
+    Sanitizes the question, captures the exception type and traceback, and logs
+    the fallback strategy if available.
+
+    Args:
+        log: The logger instance to use.
+        stage: Pipeline stage name (e.g., "rewrite_question", "document_selection").
+        question: The user's question (will be truncated to 240 chars).
+        exc: The exception that occurred.
+        fallback_strategy: Optional description of the fallback strategy applied.
+    """
+    # Sanitize question to 240 characters
+    sanitized_question = question[:240] if question else ""
+
+    # Build extra fields
+    extra: dict[str, Any] = {
+        "stage": stage,
+        "question_preview": sanitized_question,
+        "error_type": type(exc).__name__,
+        "error_message": str(exc),
+    }
+    if fallback_strategy:
+        extra["fallback_strategy"] = fallback_strategy
+
+    # Log with exception context (includes traceback)
+    log.exception(
+        "Pipeline error in %s: %s - %s (fallback: %s)",
+        stage,
+        type(exc).__name__,
+        str(exc),
+        fallback_strategy or "none",
+        extra=extra,
+    )
+
+
 @contextmanager
 def log_stage(stage: str, **extra: Any) -> Generator[dict[str, Any], None, None]:
     """Context manager that logs stage entry and exit with duration.
