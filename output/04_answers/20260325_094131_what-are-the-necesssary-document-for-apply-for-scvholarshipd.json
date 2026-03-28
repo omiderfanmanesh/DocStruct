@@ -1,0 +1,255 @@
+{
+  "question": "What are the necesssary document for apply for scvholarshipd of Turni?",
+  "answer": "Required items:\n- ISEE Universitario certificate or DSU receipt\n- Consular documentation on household composition, income, and assets (for ISEE Parificato and international EU students)\n- Translated and legalised consular documents (if applicable)\n- High school diploma (for bachelor's and single-cycle master's degree applicants)\n- Proof of enrollment by deadlines\n\nTo apply for scholarships at the University of Turin for the academic year 2025/26, the necessary documents include: 1. ISEE Universitario certificate (or receipt of DSU submission) for economic requirements. 2. For students with Italian citizenship needing ISEE Parificato, consular documentation on household composition, foreign income, and assets, legalised and translated if in a foreign language. 3. For international EU students residing abroad, translated and legalised consular documentation relating to household composition, income, and assets must be uploaded. 4. High school diploma for bachelor's and single-cycle master's degree applicants. 5. Enrollment proof in the course by specified deadlines. Additional documents may be required to prove the correctness of DSU contents if there are observations on the ISEE Universitario. These documents must be submitted online by the application deadline.",
+  "citations": [
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0025",
+      "node_title": "Art. 6(2) ECONOMIC REQUIREMENTS WITH SUBMISSION OF ISEE UNIVERSITARIO",
+      "line_number": 899
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0031",
+      "node_title": "Art. 6 paragraph 5.1 SPECIFICATIONS FOR STUDENTS WITH ITALIAN CITIZENSHIP WHO NEED TO CALCULATE THE ISEE PARIFICATO",
+      "line_number": 1033
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0178",
+      "node_title": "Art. 31(2) INTERNATIONAL EU STUDENTS",
+      "line_number": 3276
+    },
+    {
+      "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+      "document_title": "Notice of competition – scholarship accommodation and degree award a.y. 2025/26",
+      "node_id": "0052",
+      "node_title": "Art. 9(1) REQUIREMENTS FOR ADMISSION TO THE COMPETITION",
+      "line_number": 1467
+    }
+  ],
+  "document_ids": [
+    "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+  ],
+  "retrieval_notes": "Rewrote question for retrieval: What are the necessary documents to apply for scholarships at the University of Turin for the academic year 2025/26? | The user's question mentions scholarships and 'Turni', which is likely a typo for 'Turin'. The document catalog includes a relevant document titled 'Notice of competition – scholarship accommodation and degree award a.y. 2025/26' specifically for the University of Turin and related institutions. This document covers scholarships for the academic year 2025/26, matching the user's likely intent. Therefore, the question is rewritten to explicitly target scholarship application documents for the University of Turin for the 2025/26 academic year, aligning with the scope of the identified document. | Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1): The user wants to know the necessary documents to apply for scholarships at the University of Turin for the academic year 2025/26. The document tree is from the Notice of competition – scholarship accommodation and degree award a.y. 2025/26. Relevant sections for application documents are likely under sections about application submission, requirements, and possibly economic requirements. \n\nKey sections to consider:\n- SECTION I, especially ART. 6 ECONOMIC REQUIREMENTS (node_id 0016) which might mention required economic documents.\n- ART. 7 HOW TO SUBMIT AN APPLICATION (node_id 0032) which likely details the application process and required documents.\n- SECTION III SPECIFIC PROVISIONS FOR FIRST YEARS (node_id 0050) might have additional details for first-year applicants.\n- ART. 9 WHO CAN APPLY: ADMISSION REQUIREMENTS (node_id 0051) might mention documents for eligibility.\n- ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION (node_id 0056) might also mention documents.\n\nI will select these nodes to cover the necessary documents for scholarship application comprehensively.",
+  "needs_clarification": false,
+  "clarifying_question": null,
+  "trace": [
+    {
+      "stage": "load_indexes",
+      "message": "Loaded search indexes.",
+      "details": {
+        "index_dir": "C:\\Projects\\personal\\DocStruct\\output\\03_pageindex",
+        "count": 4,
+        "documents": [
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          },
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          }
+        ],
+        "requested_retrieval_backend": "auto",
+        "retrieval_backend": "neo4j"
+      }
+    },
+    {
+      "stage": "intent_detection",
+      "message": "Detected user intent for document scope.",
+      "details": {
+        "multi_document_intent": false
+      }
+    },
+    {
+      "stage": "initial_ranking",
+      "message": "Ranked initial candidate documents from the original question.",
+      "details": {
+        "question": "What are the necesssary document for apply for scvholarshipd of Turni?",
+        "candidates": [
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          },
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          }
+        ],
+        "retrieval_backend": "neo4j"
+      }
+    },
+    {
+      "stage": "rewrite_question",
+      "message": "Rewrote the question for retrieval.",
+      "details": {
+        "original_question": "What are the necesssary document for apply for scvholarshipd of Turni?",
+        "rewritten_question": "What are the necessary documents to apply for scholarships at the University of Turin for the academic year 2025/26?",
+        "reasoning": "The user's question mentions scholarships and 'Turni', which is likely a typo for 'Turin'. The document catalog includes a relevant document titled 'Notice of competition – scholarship accommodation and degree award a.y. 2025/26' specifically for the University of Turin and related institutions. This document covers scholarships for the academic year 2025/26, matching the user's likely intent. Therefore, the question is rewritten to explicitly target scholarship application documents for the University of Turin for the 2025/26 academic year, aligning with the scope of the identified document.",
+        "inferred_document_ids": [
+          "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+        ]
+      }
+    },
+    {
+      "stage": "candidate_ranking",
+      "message": "Ranked candidate documents for the effective retrieval question.",
+      "details": {
+        "effective_question": "What are the necessary documents to apply for scholarships at the University of Turin for the academic year 2025/26?",
+        "candidates": [
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          },
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          }
+        ],
+        "retrieval_backend": "neo4j"
+      }
+    },
+    {
+      "stage": "document_selection",
+      "message": "Selected document scopes for answer generation.",
+      "details": {
+        "effective_question": "What are the necessary documents to apply for scholarships at the University of Turin for the academic year 2025/26?",
+        "selected_document_ids": [
+          "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+        ],
+        "needs_clarification": false,
+        "clarifying_question": null,
+        "reasoning": "The user asks specifically about the necessary documents to apply for scholarships at the University of Turin for the academic year 2025/26. Among the provided documents, only one clearly matches this scope: \"Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)\" which is explicitly for the University of Turin and covers scholarships for the academic year 2025/26. Other documents pertain to different universities or regions and are not relevant to the user's query. Therefore, I select this single document for precision and relevance."
+      }
+    },
+    {
+      "stage": "selected_documents",
+      "message": "Prepared the final document set for node retrieval.",
+      "details": {
+        "selected_documents": [
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          }
+        ]
+      }
+    },
+    {
+      "stage": "node_selection",
+      "message": "Selected nodes from the document tree.",
+      "details": {
+        "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+        "node_ids": [],
+        "reasoning": "The user wants to know the necessary documents to apply for scholarships at the University of Turin for the academic year 2025/26. The document tree is from the Notice of competition – scholarship accommodation and degree award a.y. 2025/26. Relevant sections for application documents are likely under sections about application submission, requirements, and possibly economic requirements. \n\nKey sections to consider:\n- SECTION I, especially ART. 6 ECONOMIC REQUIREMENTS (node_id 0016) which might mention required economic documents.\n- ART. 7 HOW TO SUBMIT AN APPLICATION (node_id 0032) which likely details the application process and required documents.\n- SECTION III SPECIFIC PROVISIONS FOR FIRST YEARS (node_id 0050) might have additional details for first-year applicants.\n- ART. 9 WHO CAN APPLY: ADMISSION REQUIREMENTS (node_id 0051) might mention documents for eligibility.\n- ART. 10 METHODS AND DEADLINES FOR SUBMITTING AN APPLICATION (node_id 0056) might also mention documents.\n\nI will select these nodes to cover the necessary documents for scholarship application comprehensively."
+      }
+    },
+    {
+      "stage": "neo4j_seed_nodes",
+      "message": "Promoted Neo4j section hits into the node-selection stage.",
+      "details": {
+        "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+        "node_ids": [
+          "0040",
+          "0025",
+          "0178",
+          "0031",
+          "0017",
+          "0052"
+        ]
+      }
+    },
+    {
+      "stage": "context_building",
+      "message": "Built grounded context snippets for answer synthesis.",
+      "details": {
+        "context_count": 6,
+        "document_ids": [
+          "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)"
+        ]
+      }
+    },
+    {
+      "stage": "answer_synthesis",
+      "message": "Synthesized the final grounded answer from the selected contexts.",
+      "details": {
+        "answer_preview": "Required items:\n- ISEE Universitario certificate or DSU receipt\n- Consular documentation on household composition, income, and assets (for ISEE Parificato and international EU students)\n- Translated and legalised consular documents (if appl",
+        "citation_count": 4,
+        "needs_clarification": false
+      }
+    },
+    {
+      "stage": "quality_assessment",
+      "message": "Answer quality: medium (score=0.65)",
+      "details": {
+        "confidence_score": 0.65,
+        "confidence_label": "medium",
+        "has_grounded_citations": true,
+        "citation_coverage": 1.0,
+        "potential_hallucination": true,
+        "hallucination_indicators": [
+          "University name 'University of Turin for the academic' in answer not found in provided context."
+        ],
+        "warnings": [
+          "Context blocks contain very little text."
+        ]
+      }
+    }
+  ],
+  "execution_time_seconds": 24.863260200014338,
+  "tokens_used": 405,
+  "estimated_cost_usd": 0.0007144
+}

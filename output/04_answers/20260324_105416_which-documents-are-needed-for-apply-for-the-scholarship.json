@@ -1,0 +1,144 @@
+{
+  "question": "Which documents are needed for apply for the scholarship?",
+  "answer": "Could you please specify the region or university for which you want the scholarship application documents for the academic year 2025/2026?",
+  "citations": [],
+  "document_ids": [],
+  "retrieval_notes": "Rewrote question for retrieval: Which documents are needed to apply for the scholarship according to the scholarship application notices for the academic year 2025/2026? | The user's question is about the documents needed to apply for a scholarship. The catalog contains multiple documents related to scholarship applications for the academic year 2025/2026 from different regions and universities. To cover the likely intended scope without assuming a specific region or university, the question is rewritten to explicitly target scholarship application notices for the academic year 2025/2026, which matches the scope of all listed documents. | The user asks for documents needed to apply for scholarships according to the scholarship application notices for the academic year 2025/2026. There are four documents related to scholarship application notices for the academic year 2025/2026, each from different regions and universities: Campania region (A.Di.S.U.R.C), Veneto region (I.S.E.E), University of Genoa, and Piedmont region (University of Turin and others). Since the question does not specify a region or university, it is ambiguous which specific scholarship application notices the user is referring to. To provide precise and relevant documents, I need to clarify which region or university the user is interested in for the scholarship application notices for the academic year 2025/2026.",
+  "needs_clarification": true,
+  "clarifying_question": "Could you please specify the region or university for which you want the scholarship application documents for the academic year 2025/2026?",
+  "trace": [
+    {
+      "stage": "load_indexes",
+      "message": "Loaded search indexes.",
+      "details": {
+        "index_dir": "C:\\Projects\\personal\\DocStruct\\output\\03_pageindex",
+        "count": 4,
+        "documents": [
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          },
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          }
+        ],
+        "retrieval_backend": "neo4j"
+      }
+    },
+    {
+      "stage": "intent_detection",
+      "message": "Detected user intent for document scope.",
+      "details": {
+        "multi_document_intent": false
+      }
+    },
+    {
+      "stage": "initial_ranking",
+      "message": "Ranked initial candidate documents from the original question.",
+      "details": {
+        "question": "Which documents are needed for apply for the scholarship?",
+        "candidates": [
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          },
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          }
+        ],
+        "retrieval_backend": "neo4j"
+      }
+    },
+    {
+      "stage": "rewrite_question",
+      "message": "Rewrote the question for retrieval.",
+      "details": {
+        "original_question": "Which documents are needed for apply for the scholarship?",
+        "rewritten_question": "Which documents are needed to apply for the scholarship according to the scholarship application notices for the academic year 2025/2026?",
+        "reasoning": "The user's question is about the documents needed to apply for a scholarship. The catalog contains multiple documents related to scholarship applications for the academic year 2025/2026 from different regions and universities. To cover the likely intended scope without assuming a specific region or university, the question is rewritten to explicitly target scholarship application notices for the academic year 2025/2026, which matches the scope of all listed documents.",
+        "inferred_document_ids": [
+          "Bando di Concorso a.a. 2025.26_ENG_0",
+          "Bando_Borse_di_studio_2025-2026_ENG"
+        ]
+      }
+    },
+    {
+      "stage": "candidate_ranking",
+      "message": "Ranked candidate documents for the effective retrieval question.",
+      "details": {
+        "effective_question": "Which documents are needed to apply for the scholarship according to the scholarship application notices for the academic year 2025/2026?",
+        "candidates": [
+          {
+            "document_id": "Bando di Concorso a.a. 2025.26_ENG_0",
+            "scope_label": "A.Di.S.U.R.C | Bando di Concorso a.a. 2025.26_ENG_0 | 2025",
+            "region": "Campania",
+            "issuer": "A.Di.S.U.R.C"
+          },
+          {
+            "document_id": "Bando_Borse_di_studio_2025-2026_ENG",
+            "scope_label": "I.S.E.E | Bando_Borse_di_studio_2025-2026_ENG | 2025/2026",
+            "region": "Veneto",
+            "issuer": "I.S.E.E"
+          },
+          {
+            "document_id": "Competition-Notice-a.y.-2025_2026",
+            "scope_label": "NOTICE | COMPETITION NOTICE FOR THE ASSIGNMENT OF BENEFITS ACADEMIC YEAR 2025/2026 | 2025/2026",
+            "region": null,
+            "issuer": "NOTICE"
+          },
+          {
+            "document_id": "Notice_of_competition_scholarship_accommodation_and_degree_award_a.y.2025.26 (1)",
+            "scope_label": "University of Turin | Notice of competition – scholarship accommodation and degree award a.y. 2025/26 | 2025/26",
+            "region": "Piedmont",
+            "issuer": null
+          }
+        ]
+      }
+    },
+    {
+      "stage": "document_selection",
+      "message": "Selected document scopes for answer generation.",
+      "details": {
+        "effective_question": "Which documents are needed to apply for the scholarship according to the scholarship application notices for the academic year 2025/2026?",
+        "selected_document_ids": [],
+        "needs_clarification": true,
+        "clarifying_question": "Could you please specify the region or university for which you want the scholarship application documents for the academic year 2025/2026?",
+        "reasoning": "The user asks for documents needed to apply for scholarships according to the scholarship application notices for the academic year 2025/2026. There are four documents related to scholarship application notices for the academic year 2025/2026, each from different regions and universities: Campania region (A.Di.S.U.R.C), Veneto region (I.S.E.E), University of Genoa, and Piedmont region (University of Turin and others). Since the question does not specify a region or university, it is ambiguous which specific scholarship application notices the user is referring to. To provide precise and relevant documents, I need to clarify which region or university the user is interested in for the scholarship application notices for the academic year 2025/2026."
+      }
+    }
+  ]
+}

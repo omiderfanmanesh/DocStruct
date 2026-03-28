@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Callable, List, Optional, TypedDict
+from typing import TYPE_CHECKING, Callable, List, Optional, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
 from docstruct.application.agents.pageindex_search_agent import PageIndexSearchAgent
+from docstruct.config import ContextConfig
+from docstruct.domain.answer_quality import guard_empty_context
 from docstruct.domain.models import SearchAnswer, SearchDocumentIndex, SearchSelectionDecision
 from docstruct.domain.pageindex_search import (
     build_context_blocks,
@@ -14,6 +16,11 @@ from docstruct.domain.pageindex_search import (
     choose_candidate_documents,
     fallback_node_matches,
 )
+from docstruct.infrastructure.logging import log_stage
+from docstruct.infrastructure.metrics import Timer, get_metrics
+
+if TYPE_CHECKING:
+    from docstruct.application.ports import Neo4jRetrievalPort
 
 
 class SearchGraphState(TypedDict, total=False):
@@ -39,11 +46,38 @@ class PageIndexSearchGraphRunner:
         client,
         add_trace: Callable[..., None],
         summarize_documents: Callable[..., list[dict[str, str | None]]],
+        neo4j_retrieval: Optional[Neo4jRetrievalPort] = None,
     ) -> None:
         self._agent = PageIndexSearchAgent(client)
         self._add_trace = add_trace
         self._summarize_documents = summarize_documents
+        self._neo4j_retrieval = neo4j_retrieval
         self._graph = self._build_graph()
+
+    def _neo4j_seed_node_ids(
+        self,
+        question: str,
+        document_ids: list[str],
+        *,
+        limit: int = 8,
+    ) -> dict[str, list[str]]:
+        if self._neo4j_retrieval is None or not document_ids:
+            return {}
+
+        seed_nodes: dict[str, list[str]] = {}
+        for candidate in self._neo4j_retrieval.retrieve_candidates(question, limit=max(limit, len(document_ids) * 2)):
+            if candidate.document_id not in document_ids:
+                continue
+            candidate_seed_node_ids = list(candidate.source_node.get("seed_node_ids", []))
+            if candidate.node_id and candidate.node_id not in candidate_seed_node_ids:
+                candidate_seed_node_ids.insert(0, candidate.node_id)
+            for node_id in candidate_seed_node_ids:
+                if not node_id:
+                    continue
+                seed_nodes.setdefault(candidate.document_id, [])
+                if node_id not in seed_nodes[candidate.document_id]:
+                    seed_nodes[candidate.document_id].append(node_id)
+        return seed_nodes
 
     @staticmethod
     def _promote_documents(
@@ -175,7 +209,26 @@ class PageIndexSearchGraphRunner:
 
     def _rank_candidates(self, state: SearchGraphState) -> SearchGraphState:
         effective_question = state["effective_question"]
-        candidate_documents = choose_candidate_documents(effective_question, state["indexes"], limit=6)
+
+        # Use Neo4j retrieval if available, otherwise fall back to in-memory method
+        if self._neo4j_retrieval:
+            # Retrieve candidates from Neo4j
+            retrieval_candidates = self._neo4j_retrieval.retrieve_candidates(
+                question=effective_question,
+                query_embedding=None,  # Vector mode not enabled by default
+                limit=6,
+            )
+
+            # Convert RetrievalCandidate objects to SearchDocumentIndex objects
+            candidate_documents: list[SearchDocumentIndex] = []
+            for candidate in retrieval_candidates:
+                doc_index = self._neo4j_retrieval.get_document_index(candidate.document_id)
+                if doc_index:
+                    candidate_documents.append(doc_index)
+        else:
+            # Fall back to in-memory candidate selection (original behavior)
+            candidate_documents = choose_candidate_documents(effective_question, state["indexes"], limit=6)
+
         inferred_document_ids = state.get("inferred_document_ids", [])
         if inferred_document_ids:
             candidate_documents = self._promote_documents(candidate_documents, inferred_document_ids, limit=6)
@@ -184,6 +237,7 @@ class PageIndexSearchGraphRunner:
             "Ranked candidate documents for the effective retrieval question.",
             effective_question=effective_question,
             candidates=self._summarize_documents(candidate_documents, limit=6),
+            retrieval_backend="neo4j" if self._neo4j_retrieval is not None else "pageindex",
         )
         heuristic_clarification = build_scope_clarification(effective_question, candidate_documents[:4])
         return {
@@ -314,10 +368,21 @@ class PageIndexSearchGraphRunner:
         selected_documents = state["selected_documents"]
         contexts: list[dict] = []
         retrieval_notes = list(state.get("retrieval_notes", []))
+        seed_nodes_by_document = self._neo4j_seed_node_ids(
+            effective_question,
+            [document.document_id for document in selected_documents],
+        )
+
+        # Dynamic context sizing
+        context_config = ContextConfig.from_env()
+        total_node_count = 0
 
         for document in selected_documents:
+            preferred_node_ids = list(seed_nodes_by_document.get(document.document_id, []))
             try:
-                node_ids, node_notes = self._agent.select_nodes(effective_question, document)
+                with log_stage("node_selection", document_id=document.document_id):
+                    node_ids, node_notes = self._agent.select_nodes(effective_question, document)
+                    get_metrics().record_llm_call()
                 self._add_trace(
                     "node_selection",
                     "Selected nodes from the document tree.",
@@ -332,6 +397,19 @@ class PageIndexSearchGraphRunner:
                     "Node selection failed, so heuristic node matching will be used.",
                     document_id=document.document_id,
                 )
+            if preferred_node_ids:
+                node_ids = [*preferred_node_ids, *node_ids]
+                deduped_node_ids: list[str] = []
+                for node_id in node_ids:
+                    if node_id and node_id not in deduped_node_ids:
+                        deduped_node_ids.append(node_id)
+                node_ids = deduped_node_ids[:6]
+                self._add_trace(
+                    "neo4j_seed_nodes",
+                    "Promoted Neo4j section hits into the node-selection stage.",
+                    document_id=document.document_id,
+                    node_ids=node_ids,
+                )
             if not node_ids:
                 node_ids = fallback_node_matches(effective_question, document, limit=4)
                 self._add_trace(
@@ -340,12 +418,37 @@ class PageIndexSearchGraphRunner:
                     document_id=document.document_id,
                     node_ids=node_ids,
                 )
+            total_node_count += len(node_ids)
             if node_notes:
                 retrieval_notes.append(f"{document.document_id}: {node_notes}")
-            contexts.extend(build_context_blocks(document, node_ids, max_chars=1600))
 
-        if not contexts:
-            raise ValueError("No relevant indexed nodes were found for the question.")
+            # Use dynamic context sizing
+            effective_max_chars = context_config.effective_max_chars(total_node_count)
+            contexts.extend(build_context_blocks(
+                document, node_ids, question=effective_question, max_chars=effective_max_chars,
+            ))
+
+        # Empty context guard
+        empty_guard_msg = guard_empty_context(contexts)
+        if empty_guard_msg is not None:
+            self._add_trace(
+                "context_building",
+                "Empty context guard triggered.",
+                message=empty_guard_msg,
+            )
+            return {
+                "contexts": [],
+                "retrieval_notes": retrieval_notes,
+                "final_answer": SearchAnswer(
+                    question=state["question"],
+                    answer=empty_guard_msg,
+                    document_ids=[document.document_id for document in selected_documents],
+                    retrieval_notes=" | ".join(retrieval_notes) if retrieval_notes else None,
+                ),
+            }
+
+        # Trim to max blocks
+        contexts = contexts[:context_config.max_context_blocks]
 
         self._add_trace(
             "context_building",
@@ -362,13 +465,18 @@ class PageIndexSearchGraphRunner:
         selected_documents = state["selected_documents"]
         contexts = state["contexts"]
         retrieval_note_text = " | ".join(note for note in state.get("retrieval_notes", []) if note) or None
+        timer = Timer().start()
         try:
-            answer = self._agent.answer_from_contexts(
-                state["question"],
-                contexts[:8],
-                document_ids=[document.document_id for document in selected_documents],
-                retrieval_notes=retrieval_note_text,
-            )
+            with log_stage("answer_synthesis"):
+                answer = self._agent.answer_from_contexts(
+                    state["question"],
+                    contexts[:8],
+                    document_ids=[document.document_id for document in selected_documents],
+                    retrieval_notes=retrieval_note_text,
+                    retrieval_backend="neo4j" if self._neo4j_retrieval is not None else "pageindex",
+                )
+                get_metrics().record_llm_call()
+            get_metrics().record_stage("answer_synthesis", timer.stop())
             self._add_trace(
                 "answer_synthesis",
                 "Synthesized the final grounded answer from the selected contexts.",
@@ -378,6 +486,7 @@ class PageIndexSearchGraphRunner:
             )
             return {"final_answer": answer}
         except Exception:
+            get_metrics().record_stage("answer_synthesis", timer.stop(), error=True)
             fallback_answer = " ".join(context["text"] for context in contexts[:2] if context.get("text")).strip()
             if not fallback_answer:
                 fallback_answer = "I found relevant document nodes, but I could not synthesize a grounded answer."

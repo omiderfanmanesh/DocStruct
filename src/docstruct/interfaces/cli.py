@@ -24,7 +24,7 @@ from docstruct.output_layout import FIXED_MARKDOWN_DIR, FIX_REPORTS_DIR, PAGEIND
 
 def main() -> None:
     if load_dotenv is not None:
-        load_dotenv()
+        load_dotenv(dotenv_path=Path(__file__).resolve().parents[2] / ".env", override=True)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if hasattr(sys.stderr, "reconfigure"):
@@ -51,6 +51,12 @@ def main() -> None:
     ask_parser = subparsers.add_parser("ask", help="Ask a question across PageIndex-backed document indexes")
     ask_parser.add_argument("question", help="Question to answer from indexed documents")
     ask_parser.add_argument("--index-dir", "-i", default=str(PAGEINDEX_DIR), help="Directory containing generated search indexes")
+    ask_parser.add_argument(
+        "--retrieval-backend",
+        choices=("auto", "pageindex", "neo4j"),
+        default="auto",
+        help="Choose which retrieval backend to use",
+    )
 
     args = parser.parse_args()
 
@@ -78,7 +84,12 @@ def main() -> None:
         client = build_client()
         print(f"Searching indexed documents in {args.index_dir}...", file=sys.stderr)
         try:
-            result = answer_question(args.question, args.index_dir, client)
+            result = answer_question(
+                args.question,
+                args.index_dir,
+                client,
+                retrieval_backend=args.retrieval_backend,
+            )
         except Exception as exc:
             print(f"ERROR: {exc}", file=sys.stderr)
             raise SystemExit(1)

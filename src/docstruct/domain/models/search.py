@@ -154,6 +154,9 @@ class SearchAnswer:
     needs_clarification: bool = False
     clarifying_question: str | None = None
     trace: list[SearchTraceStep] = field(default_factory=list)
+    execution_time_seconds: float = 0.0
+    tokens_used: int = 0
+    estimated_cost_usd: float = 0.0
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -165,4 +168,32 @@ class SearchAnswer:
             "needs_clarification": self.needs_clarification,
             "clarifying_question": self.clarifying_question,
             "trace": [step.to_dict() for step in self.trace],
+            "execution_time_seconds": self.execution_time_seconds,
+            "tokens_used": self.tokens_used,
+            "estimated_cost_usd": self.estimated_cost_usd,
         }
+
+
+@dataclass
+class RetrievalCandidate:
+    """A document or section candidate returned by the retrieval layer (before LLM ranking)."""
+
+    document_id: str
+    node_id: str | None  # None for document-level candidates; set for section nodes
+    node_type: str  # "document" or "section"
+    graph_rank: int | None = None  # Rank from graph matching (1-based), None if not returned
+    fulltext_rank: int | None = None  # Rank from full-text search
+    vector_rank: int | None = None  # Rank from vector similarity search
+    rrf_score: float = 0.0  # Fused RRF score
+    source_node: dict[str, Any] = field(default_factory=dict)  # Raw Neo4j node properties for context
+
+
+@dataclass
+class EmbeddingPayload:
+    """Enriched text input for section embedding generation."""
+
+    node_id: str  # Target section node ID
+    document_id: str  # Parent document ID
+    text: str  # Enriched text: section content + document context
+    provider: str  # "openai" or "cohere"
+    model: str  # Model identifier (e.g., "text-embedding-3-small")

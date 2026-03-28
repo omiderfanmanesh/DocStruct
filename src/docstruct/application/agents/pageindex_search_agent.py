@@ -22,6 +22,7 @@ from docstruct.domain.pageindex_search import (
     build_search_profile,
     build_scope_options,
     build_tree_outline,
+    question_targets_documentation,
 )
 from docstruct.infrastructure.llm.structured_output import invoke_structured
 
@@ -46,6 +47,14 @@ class _NodeSelectionPayload(BaseModel):
 
 class _AnswerPayload(BaseModel):
     answer: Optional[str] = None
+    citations: List[Dict] = Field(default_factory=list)
+    clarification_needed: bool = False
+    clarifying_question: Optional[str] = None
+
+
+class _DocumentationAnswerPayload(BaseModel):
+    answer: Optional[str] = None
+    required_documents: List[str] = Field(default_factory=list)
     citations: List[Dict] = Field(default_factory=list)
     clarification_needed: bool = False
     clarifying_question: Optional[str] = None
@@ -230,38 +239,67 @@ class PageIndexSearchAgent:
         *,
         document_ids: list[str],
         retrieval_notes: str | None = None,
+        retrieval_backend: str = "pageindex",
     ) -> SearchAnswer:
-        response = self._call_structured(
-            (
-                "Answer the user's question using only the provided context snippets.\n"
-                "Important guardrails:\n"
-                "- The snippets may come from different universities, regions, or issuing organizations.\n"
-                "- Never merge policies across different scopes into one answer unless the user explicitly asked for a comparison.\n"
-                "- If the question is underspecified for the provided scopes, return clarification_needed=true.\n"
-                "- If the context is insufficient, say so clearly and do not invent facts.\n"
-                "Keep the answer concise, factual, and grounded.\n\n"
-                f"Question: {question}\n"
-                f"Retrieval notes: {retrieval_notes or 'n/a'}\n\n"
-                f"Context snippets:\n{json.dumps(contexts, indent=2, ensure_ascii=False)}\n\n"
-                "Return JSON with keys:\n"
-                '- "answer": string\n'
-                '- "citations": list of objects with document_id, document_title, node_id, node_title, line_number\n'
-                '- "clarification_needed": boolean\n'
-                '- "clarifying_question": string or null\n'
-            ),
-            schema=_AnswerPayload,
-            max_tokens=1400,
-        )
-        citations = []
-        for citation_data in response.citations:
-            try:
-                citations.append(SearchCitation.from_dict(citation_data))
-            except Exception:
-                continue
+        if question_targets_documentation(question) and retrieval_backend == "neo4j":
+            response = self._call_structured(
+                (
+                    "Extract the required documents, forms, certifications, and special-case supporting materials from the provided context snippets.\n"
+                    "Important guardrails:\n"
+                    "- Use only items explicitly supported by the snippets.\n"
+                    "- Prefer concrete checklist items over generic summaries.\n"
+                    "- Keep general requirements separate from special-case documents.\n"
+                    "- Do not invent missing items.\n"
+                    "- If the context is insufficient, say so clearly.\n\n"
+                    f"Question: {question}\n"
+                    f"Retrieval backend: {retrieval_backend}\n"
+                    f"Retrieval notes: {retrieval_notes or 'n/a'}\n\n"
+                    f"Context snippets:\n{json.dumps(contexts, indent=2, ensure_ascii=False)}\n\n"
+                    "Return JSON with keys:\n"
+                    '- "answer": string\n'
+                    '- "required_documents": array of short strings\n'
+                    '- "citations": list of objects with document_id, document_title, node_id, node_title, line_number\n'
+                    '- "clarification_needed": boolean\n'
+                    '- "clarifying_question": string or null\n'
+                ),
+                schema=_DocumentationAnswerPayload,
+                max_tokens=1600,
+            )
+            citations = self._parse_citations(response.citations, contexts)
+            clarification_needed = _as_bool(response.clarification_needed)
+            clarifying_question = str(response.clarifying_question or "").strip() or None
+            answer = self._format_required_documents_answer(
+                str(response.answer or "").strip(),
+                response.required_documents,
+            )
+        else:
+            response = self._call_structured(
+                (
+                    "Answer the user's question using only the provided context snippets.\n"
+                    "Important guardrails:\n"
+                    "- The snippets may come from different universities, regions, or issuing organizations.\n"
+                    "- Never merge policies across different scopes into one answer unless the user explicitly asked for a comparison.\n"
+                    "- If the question is underspecified for the provided scopes, return clarification_needed=true.\n"
+                    "- If the context is insufficient, say so clearly and do not invent facts.\n"
+                    "Keep the answer concise, factual, and grounded.\n\n"
+                    f"Question: {question}\n"
+                    f"Retrieval backend: {retrieval_backend}\n"
+                    f"Retrieval notes: {retrieval_notes or 'n/a'}\n\n"
+                    f"Context snippets:\n{json.dumps(contexts, indent=2, ensure_ascii=False)}\n\n"
+                    "Return JSON with keys:\n"
+                    '- "answer": string\n'
+                    '- "citations": list of objects with document_id, document_title, node_id, node_title, line_number\n'
+                    '- "clarification_needed": boolean\n'
+                    '- "clarifying_question": string or null\n'
+                ),
+                schema=_AnswerPayload,
+                max_tokens=1400,
+            )
+            citations = self._parse_citations(response.citations, contexts)
+            clarification_needed = _as_bool(response.clarification_needed)
+            clarifying_question = str(response.clarifying_question or "").strip() or None
+            answer = str(response.answer or "").strip()
 
-        clarification_needed = _as_bool(response.clarification_needed)
-        clarifying_question = str(response.clarifying_question or "").strip() or None
-        answer = str(response.answer or "").strip()
         if clarification_needed and not answer:
             answer = clarifying_question or "I need the university, region, or issuing organization before I can answer safely."
         if not answer:
@@ -275,3 +313,55 @@ class PageIndexSearchAgent:
             needs_clarification=clarification_needed,
             clarifying_question=clarifying_question,
         )
+
+    @staticmethod
+    def _parse_citations(citation_data_list: list[Dict], contexts: list[dict]) -> list[SearchCitation]:
+        citations: list[SearchCitation] = []
+        for citation_data in citation_data_list:
+            try:
+                citations.append(SearchCitation.from_dict(citation_data))
+            except Exception:
+                continue
+        if citations:
+            return citations
+        return PageIndexSearchAgent._fallback_citations_from_contexts(contexts)
+
+    @staticmethod
+    def _fallback_citations_from_contexts(contexts: list[dict], *, limit: int = 4) -> list[SearchCitation]:
+        citations: list[SearchCitation] = []
+        seen: set[tuple[str, str]] = set()
+        for context in contexts:
+            document_id = str(context.get("document_id") or "")
+            node_id = str(context.get("node_id") or "")
+            key = (document_id, node_id)
+            if not document_id or not node_id or key in seen:
+                continue
+            seen.add(key)
+            citations.append(
+                SearchCitation(
+                    document_id=document_id,
+                    document_title=str(context.get("document_title") or document_id),
+                    node_id=node_id,
+                    node_title=str(context.get("node_title") or node_id),
+                    line_number=context.get("line_number"),
+                )
+            )
+            if len(citations) >= limit:
+                break
+        return citations
+
+    @staticmethod
+    def _format_required_documents_answer(
+        answer_text: str,
+        required_documents: list[str],
+    ) -> str:
+        normalized = [str(item).strip() for item in required_documents if str(item).strip()]
+        if not normalized:
+            return answer_text
+        lines = ["Required items:"]
+        for item in normalized:
+            lines.append(f"- {item}")
+        if answer_text:
+            lines.append("")
+            lines.append(answer_text)
+        return "\n".join(lines)
