@@ -27,7 +27,7 @@ from docstruct.domain.pageindex_search import (
     choose_candidate_documents,
     fallback_node_matches,
 )
-from docstruct.infrastructure.logging import log_stage
+from docstruct.infrastructure.logging import log_pipeline_error, log_stage
 from docstruct.infrastructure.metrics import Timer, get_metrics
 
 if TYPE_CHECKING:
@@ -396,6 +396,13 @@ class PageIndexSearchGraphRunner:
             )
         except Exception as exc:
             degradation_reasons.append(f"rewrite_question: LLM call failed ({type(exc).__name__}), using original question")
+            log_pipeline_error(
+                logger,
+                stage="rewrite_question",
+                question=question,
+                exc=exc,
+                fallback_strategy="use original question",
+            )
             self._add_trace(
                 "rewrite_question",
                 "Question rewrite failed, so the original question will be used.",
@@ -485,6 +492,13 @@ class PageIndexSearchGraphRunner:
             )
         except Exception as exc:
             degradation_reasons.append(f"select_documents: LLM call failed ({type(exc).__name__}), using all candidates")
+            log_pipeline_error(
+                logger,
+                stage="select_documents",
+                question=effective_question,
+                exc=exc,
+                fallback_strategy="use all candidate documents",
+            )
             selection = None
             self._add_trace(
                 "document_selection",
@@ -606,62 +620,126 @@ class PageIndexSearchGraphRunner:
             [document.document_id for document in selected_documents],
         )
 
-        # Dynamic context sizing
+        # Dynamic context sizing and pagination
         context_config = ContextConfig.from_env()
         total_node_count = 0
 
-        for document in selected_documents:
-            preferred_node_ids = list(seed_nodes_by_document.get(document.document_id, []))
-            try:
-                with log_stage("node_selection", document_id=document.document_id):
-                    node_ids, node_notes = self._agent.select_nodes(effective_question, document)
-                    get_metrics().record_llm_call()
-                self._add_trace(
-                    "node_selection",
-                    "Selected nodes from the document tree.",
-                    document_id=document.document_id,
-                    node_ids=node_ids,
-                    reasoning=node_notes,
-                )
-            except Exception as exc:
-                degradation_reasons.append(f"select_nodes({document.document_id}): LLM call failed ({type(exc).__name__})")
-                node_ids, node_notes = [], None
-                self._add_trace(
-                    "node_selection",
-                    "Node selection failed, so heuristic node matching will be used.",
-                    document_id=document.document_id,
-                    error=type(exc).__name__,
-                )
-            if preferred_node_ids:
-                node_ids = [*preferred_node_ids, *node_ids]
-                deduped_node_ids: list[str] = []
-                for node_id in node_ids:
-                    if node_id and node_id not in deduped_node_ids:
-                        deduped_node_ids.append(node_id)
-                node_ids = deduped_node_ids[:6]
-                self._add_trace(
-                    "neo4j_seed_nodes",
-                    "Promoted Neo4j section hits into the node-selection stage.",
-                    document_id=document.document_id,
-                    node_ids=node_ids,
-                )
-            if not node_ids:
-                node_ids = fallback_node_matches(effective_question, document, limit=4)
-                self._add_trace(
-                    "fallback_nodes",
-                    "Used heuristic node matching because no node ids were returned.",
-                    document_id=document.document_id,
-                    node_ids=node_ids,
-                )
-            total_node_count += len(node_ids)
-            if node_notes:
-                retrieval_notes.append(f"{document.document_id}: {node_notes}")
+        # Create token budget for paginated context building
+        token_budget = TokenBudget(
+            max_tokens=context_config.total_context_budget,
+            overflow_policy=context_config.overflow_policy,
+        )
 
-            # Use dynamic context sizing
-            effective_max_chars = context_config.effective_max_chars(total_node_count)
-            contexts.extend(build_context_blocks(
-                document, node_ids, question=effective_question, max_chars=effective_max_chars,
-            ))
+        # Process documents in batches to prevent OOM on large document sets
+        batch_size = context_config.max_batch_size
+        total_documents_matched = len(selected_documents)
+        documents_processed = 0
+        budget_exhausted = False
+
+        for batch_idx in range(0, len(selected_documents), batch_size):
+            batch = selected_documents[batch_idx : batch_idx + batch_size]
+            batch_contexts_added = 0
+
+            for document in batch:
+                if budget_exhausted:
+                    break
+
+                documents_processed += 1
+                preferred_node_ids = list(seed_nodes_by_document.get(document.document_id, []))
+                try:
+                    with log_stage("node_selection", document_id=document.document_id):
+                        node_ids, node_notes = self._agent.select_nodes(effective_question, document)
+                        get_metrics().record_llm_call()
+                    self._add_trace(
+                        "node_selection",
+                        "Selected nodes from the document tree.",
+                        document_id=document.document_id,
+                        node_ids=node_ids,
+                        reasoning=node_notes,
+                    )
+                except Exception as exc:
+                    degradation_reasons.append(f"select_nodes({document.document_id}): LLM call failed ({type(exc).__name__})")
+                    log_pipeline_error(
+                        logger,
+                        stage="select_nodes",
+                        question=effective_question,
+                        exc=exc,
+                        fallback_strategy="use heuristic node matching",
+                    )
+                    node_ids, node_notes = [], None
+                    self._add_trace(
+                        "node_selection",
+                        "Node selection failed, so heuristic node matching will be used.",
+                        document_id=document.document_id,
+                        error=type(exc).__name__,
+                    )
+                if preferred_node_ids:
+                    node_ids = [*preferred_node_ids, *node_ids]
+                    deduped_node_ids: list[str] = []
+                    for node_id in node_ids:
+                        if node_id and node_id not in deduped_node_ids:
+                            deduped_node_ids.append(node_id)
+                    node_ids = deduped_node_ids[:6]
+                    self._add_trace(
+                        "neo4j_seed_nodes",
+                        "Promoted Neo4j section hits into the node-selection stage.",
+                        document_id=document.document_id,
+                        node_ids=node_ids,
+                    )
+                if not node_ids:
+                    node_ids = fallback_node_matches(effective_question, document, limit=4)
+                    self._add_trace(
+                        "fallback_nodes",
+                        "Used heuristic node matching because no node ids were returned.",
+                        document_id=document.document_id,
+                        node_ids=node_ids,
+                    )
+                total_node_count += len(node_ids)
+                if node_notes:
+                    retrieval_notes.append(f"{document.document_id}: {node_notes}")
+
+                # Use dynamic context sizing
+                effective_max_chars = context_config.effective_max_chars(total_node_count)
+                batch_contexts = build_context_blocks(
+                    document, node_ids, question=effective_question, max_chars=effective_max_chars,
+                    token_budget=token_budget,
+                )
+                batch_contexts_added += len(batch_contexts)
+                contexts.extend(batch_contexts)
+
+                # Check if budget is exhausted
+                if token_budget.is_exceeded:
+                    budget_exhausted = True
+
+            # Log pagination progress if batch completed and budget not yet exhausted
+            if batch_contexts_added > 0 and not budget_exhausted:
+                logger.debug(
+                    "Processed batch of documents",
+                    extra={
+                        "stage": "retrieve_contexts",
+                        "batch_index": batch_idx // batch_size,
+                        "batch_size": len(batch),
+                        "contexts_added": batch_contexts_added,
+                        "total_contexts": len(contexts),
+                        "tokens_used": token_budget.used_tokens,
+                    },
+                )
+
+        # Log pagination summary when budget exhaustion stops processing
+        if budget_exhausted:
+            logger.warning(
+                "Context building stopped early due to token budget exhaustion",
+                extra={
+                    "stage": "retrieve_contexts",
+                    "total_documents_matched": total_documents_matched,
+                    "documents_processed": documents_processed,
+                    "contexts_included": len(contexts),
+                    "tokens_used": token_budget.used_tokens,
+                    "tokens_limit": token_budget.max_tokens,
+                    "excluded_items_count": len(token_budget.excluded_items),
+                    "overflow_policy": token_budget.overflow_policy,
+                },
+            )
 
         # Empty context guard
         empty_guard_msg = guard_empty_context(contexts)
