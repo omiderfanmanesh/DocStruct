@@ -2,12 +2,17 @@
 
 from __future__ import annotations
 
+import logging
 from typing import TYPE_CHECKING, Callable, List, Optional, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
 from docstruct.application.agents.pageindex_search_agent import PageIndexSearchAgent
 from docstruct.config import ContextConfig
+from docstruct.domain.token_budget import TokenBudget
+
+# Module-level logger
+logger = logging.getLogger("docstruct.search")
 from docstruct.domain.answer_quality import guard_empty_context
 from docstruct.domain.fallback_strategies import (
     create_fallback_strategies_for_answer_synthesis,
@@ -60,6 +65,83 @@ class PageIndexSearchGraphRunner:
         self._summarize_documents = summarize_documents
         self._neo4j_retrieval = neo4j_retrieval
         self._graph = self._build_graph()
+
+    def _get_model_context_window(self) -> int:
+        """Get the context window limit for the agent's model.
+
+        Returns the maximum tokens the model can process, accounting for both
+        input and output tokens.
+        """
+        model = self._agent._model.lower()
+        # Claude models have 200K context window
+        if "claude" in model:
+            return 200000
+        # OpenAI models
+        if "gpt-4" in model:
+            return 128000  # GPT-4 Turbo
+        if "gpt-3.5" in model:
+            return 16000
+        # Default conservative limit
+        return 4096
+
+    def _estimate_prompt_tokens(self, prompt: str) -> int:
+        """Estimate token count for a prompt string.
+
+        Uses character-based approximation: ~1 token per 4 characters.
+        """
+        return max(1, len(prompt) // 4)
+
+    def _validate_and_adjust_tokens(
+        self,
+        prompt: str,
+        requested_max_tokens: int,
+        stage: str,
+    ) -> int:
+        """Validate prompt size and adjust max_tokens if needed.
+
+        Args:
+            prompt: The prompt that will be sent to the LLM
+            requested_max_tokens: The requested max_tokens for response
+            stage: Pipeline stage name (for logging)
+
+        Returns:
+            Adjusted max_tokens that fits within model context window
+        """
+        model_limit = self._get_model_context_window()
+        prompt_tokens = self._estimate_prompt_tokens(prompt)
+        total_needed = prompt_tokens + requested_max_tokens
+
+        # Check if at 80% of context window
+        warning_threshold = int(model_limit * 0.8)
+        if total_needed > warning_threshold:
+            logger.warning(
+                "Prompt size approaching context window limit",
+                extra={
+                    "stage": stage,
+                    "prompt_tokens": prompt_tokens,
+                    "requested_max_tokens": requested_max_tokens,
+                    "total_needed": total_needed,
+                    "model_limit": model_limit,
+                    "utilization_percent": round(100 * total_needed / model_limit, 1),
+                },
+            )
+
+        # If would exceed limit, reduce max_tokens
+        if total_needed > model_limit:
+            adjusted_max_tokens = max(256, model_limit - prompt_tokens)
+            logger.info(
+                "Reducing max_tokens to fit context window",
+                extra={
+                    "stage": stage,
+                    "original_max_tokens": requested_max_tokens,
+                    "adjusted_max_tokens": adjusted_max_tokens,
+                    "prompt_tokens": prompt_tokens,
+                    "model_limit": model_limit,
+                },
+            )
+            return adjusted_max_tokens
+
+        return requested_max_tokens
 
     def _neo4j_seed_node_ids(
         self,
@@ -520,12 +602,30 @@ class PageIndexSearchGraphRunner:
         timer = Timer().start()
         try:
             with log_stage("answer_synthesis"):
+                # T026/T027: Estimate prompt size and validate before synthesis
+                import json
+                estimated_prompt = (
+                    f"Question: {state['question']}\n"
+                    f"Context snippets: {json.dumps(contexts[:8], indent=2)}\n"
+                )
+                prompt_tokens = self._estimate_prompt_tokens(estimated_prompt)
+
+                # T027: Validate and adjust max_tokens if needed
+                # The agent uses 1600 for documentation, 1400 for general
+                base_max_tokens = 1600 if retrieval_note_text and "documentation" in retrieval_note_text.lower() else 1400
+                adjusted_max_tokens = self._validate_and_adjust_tokens(
+                    estimated_prompt,
+                    base_max_tokens,
+                    "answer_synthesis",
+                )
+
                 answer = self._agent.answer_from_contexts(
                     state["question"],
                     contexts[:8],
                     document_ids=[document.document_id for document in selected_documents],
                     retrieval_notes=retrieval_note_text,
                     retrieval_backend="neo4j" if self._neo4j_retrieval is not None else "pageindex",
+                    max_tokens_override=adjusted_max_tokens if adjusted_max_tokens != base_max_tokens else None,
                 )
                 get_metrics().record_llm_call()
 

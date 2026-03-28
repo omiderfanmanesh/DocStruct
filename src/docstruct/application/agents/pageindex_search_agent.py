@@ -241,8 +241,10 @@ class PageIndexSearchAgent:
         document_ids: list[str],
         retrieval_notes: str | None = None,
         retrieval_backend: str = "pageindex",
+        max_tokens_override: int | None = None,
     ) -> SearchAnswer:
         if question_targets_documentation(question) and retrieval_backend == "neo4j":
+            max_tokens_doc = max_tokens_override or 1600
             response = self._call_structured(
                 (
                     "Extract the required documents, forms, certifications, and special-case supporting materials from the provided context snippets.\n"
@@ -264,7 +266,7 @@ class PageIndexSearchAgent:
                     '- "clarifying_question": string or null\n'
                 ),
                 schema=_DocumentationAnswerPayload,
-                max_tokens=1600,
+                max_tokens=max_tokens_doc,
             )
             citations = self._parse_citations(response.citations, contexts)
             clarification_needed = _as_bool(response.clarification_needed)
@@ -274,6 +276,7 @@ class PageIndexSearchAgent:
                 response.required_documents,
             )
         else:
+            max_tokens_qa = max_tokens_override or 1400
             response = self._call_structured(
                 (
                     "Answer the user's question using only the provided context snippets.\n"
@@ -294,7 +297,7 @@ class PageIndexSearchAgent:
                     '- "clarifying_question": string or null\n'
                 ),
                 schema=_AnswerPayload,
-                max_tokens=1400,
+                max_tokens=max_tokens_qa,
             )
             citations = self._parse_citations(response.citations, contexts)
             clarification_needed = _as_bool(response.clarification_needed)

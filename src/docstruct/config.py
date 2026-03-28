@@ -280,6 +280,10 @@ class ContextConfig:
     max_context_blocks: int = 8
     # Whether to dynamically adjust block size based on selected node count
     dynamic_sizing: bool = True
+    # Token budget overflow policy: 'truncate' (drop lowest-priority) or 'reject' (raise error)
+    overflow_policy: str = "truncate"
+    # Batch size for processing contexts in chunks (prevents OOM on large document sets)
+    max_batch_size: int = 50
 
     @classmethod
     def from_env(cls) -> "ContextConfig":
@@ -288,6 +292,8 @@ class ContextConfig:
             total_context_budget=int(os.getenv("CONTEXT_TOTAL_BUDGET", "12000")),
             max_context_blocks=int(os.getenv("CONTEXT_MAX_BLOCKS", "8")),
             dynamic_sizing=os.getenv("CONTEXT_DYNAMIC_SIZING", "true").lower() == "true",
+            overflow_policy=os.getenv("CONTEXT_OVERFLOW_POLICY", "truncate"),
+            max_batch_size=int(os.getenv("CONTEXT_MAX_BATCH_SIZE", "50")),
         )
 
     def effective_max_chars(self, selected_node_count: int) -> int:

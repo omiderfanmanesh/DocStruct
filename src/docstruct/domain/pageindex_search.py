@@ -2,11 +2,17 @@
 
 from __future__ import annotations
 
+import json
+import logging
 import re
 from pathlib import Path
 from typing import Any
 
 from docstruct.domain.models import SearchDocumentIndex, SearchProfile
+from docstruct.domain.token_budget import TokenBudget
+
+# Module-level logger
+logger = logging.getLogger("docstruct.search")
 
 
 _TOKEN_RE = re.compile(r"[a-z0-9]{3,}")
@@ -778,7 +784,20 @@ def build_context_blocks(
     *,
     question: str | None = None,
     max_chars: int = 1600,
+    token_budget: TokenBudget | None = None,
 ) -> list[dict[str, Any]]:
+    """Build context blocks from selected nodes, respecting token budget limits.
+
+    Args:
+        document: Document containing the nodes
+        node_ids: List of node IDs to include
+        question: Optional question for relevance scoring
+        max_chars: Maximum characters per context block preview
+        token_budget: Optional TokenBudget to enforce limits; if None, no limit is enforced
+
+    Returns:
+        List of context blocks, truncated if token_budget exceeded
+    """
     question_tokens = tokenize(question)
     documentation_query = question_targets_documentation(question)
     contexts: list[dict[str, Any]] = []
@@ -850,20 +869,60 @@ def build_context_blocks(
             node_title = str(candidate.get("title") or candidate.get("node_title") or "")
             line_number = candidate.get("line_num") if candidate.get("line_num") is not None else candidate.get("line_number")
             search_profile = build_search_profile(document)
-            contexts.append(
-                {
-                    "document_id": document.document_id,
-                    "document_title": document.title,
-                    "scope_label": build_document_scope_label(document),
-                    "organization": document.metadata.organization if document.metadata else None,
-                    "year": document.metadata.year if document.metadata else None,
-                    "issuer": search_profile.issuer,
-                    "region": search_profile.region,
-                    "covered_institutions": search_profile.covered_institutions[:4],
-                    "node_id": candidate_node_id,
-                    "node_title": node_title,
-                    "line_number": line_number,
-                    "text": _preview(raw_text, max_chars) or "",
-                }
-            )
+
+            # Build the context dict
+            context_dict = {
+                "document_id": document.document_id,
+                "document_title": document.title,
+                "scope_label": build_document_scope_label(document),
+                "organization": document.metadata.organization if document.metadata else None,
+                "year": document.metadata.year if document.metadata else None,
+                "issuer": search_profile.issuer,
+                "region": search_profile.region,
+                "covered_institutions": search_profile.covered_institutions[:4],
+                "node_id": candidate_node_id,
+                "node_title": node_title,
+                "line_number": line_number,
+                "text": _preview(raw_text, max_chars) or "",
+            }
+
+            # If token budget is enforced, check if this context fits
+            if token_budget is not None:
+                # Estimate tokens by serializing and counting
+                context_str = json.dumps(context_dict, default=str)
+                estimated_tokens = token_budget.estimate_tokens(context_str)
+
+                # Try to add to budget
+                if token_budget.add(candidate_node_id, estimated_tokens):
+                    contexts.append(context_dict)
+                else:
+                    # Context excluded due to budget
+                    logger.debug(
+                        "Context excluded due to token budget",
+                        extra={
+                            "stage": "build_context_blocks",
+                            "node_id": candidate_node_id,
+                            "document_id": document.document_id,
+                            "estimated_tokens": estimated_tokens,
+                            "remaining_budget": token_budget.remaining,
+                        },
+                    )
+            else:
+                # No budget enforcement
+                contexts.append(context_dict)
+
+    # Log summary if contexts were excluded
+    if token_budget is not None and token_budget.excluded_items:
+        logger.info(
+            "Context building truncated due to token budget",
+            extra={
+                "stage": "build_context_blocks",
+                "excluded_count": len(token_budget.excluded_items),
+                "excluded_node_ids": token_budget.excluded_items[:10],  # Log first 10
+                "total_contexts": len(contexts),
+                "tokens_used": token_budget.used_tokens,
+                "tokens_limit": token_budget.max_tokens,
+            },
+        )
+
     return contexts
