@@ -157,6 +157,8 @@ class SearchAnswer:
     execution_time_seconds: float = 0.0
     tokens_used: int = 0
     estimated_cost_usd: float = 0.0
+    degraded: bool = False
+    degradation_reasons: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -171,6 +173,8 @@ class SearchAnswer:
             "execution_time_seconds": self.execution_time_seconds,
             "tokens_used": self.tokens_used,
             "estimated_cost_usd": self.estimated_cost_usd,
+            "degraded": self.degraded,
+            "degradation_reasons": self.degradation_reasons,
         }
 
 

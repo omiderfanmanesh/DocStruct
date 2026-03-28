@@ -9,6 +9,12 @@ from langgraph.graph import END, START, StateGraph
 from docstruct.application.agents.pageindex_search_agent import PageIndexSearchAgent
 from docstruct.config import ContextConfig
 from docstruct.domain.answer_quality import guard_empty_context
+from docstruct.domain.fallback_strategies import (
+    create_fallback_strategies_for_answer_synthesis,
+    create_fallback_strategies_for_document_selection,
+    create_fallback_strategies_for_rewrite,
+)
+from docstruct.domain.llm_response_validation import validate_llm_response
 from docstruct.domain.models import SearchAnswer, SearchDocumentIndex, SearchSelectionDecision
 from docstruct.domain.pageindex_search import (
     build_context_blocks,
@@ -38,6 +44,7 @@ class SearchGraphState(TypedDict, total=False):
     contexts: List[dict]
     retrieval_notes: List[str]
     final_answer: Optional[SearchAnswer]
+    degradation_reasons: List[str]  # Tracks validation failures and fallbacks applied
 
 
 class PageIndexSearchGraphRunner:
@@ -166,6 +173,7 @@ class PageIndexSearchGraphRunner:
                 "contexts": [],
                 "retrieval_notes": [],
                 "final_answer": None,
+                "degradation_reasons": [],
             }
         )
         final_answer = state.get("final_answer")
@@ -179,8 +187,18 @@ class PageIndexSearchGraphRunner:
         effective_question = question
         rewrite_note = None
         inferred_document_ids: list[str] = []
+        degradation_reasons = list(state.get("degradation_reasons", []))
+
         try:
             effective_question, rewrite_note, inferred_document_ids = self._agent.rewrite_question(question, indexes)
+
+            # Validate rewrite response
+            if not effective_question or not isinstance(effective_question, str):
+                degradation_reasons.append("rewrite_question: invalid question type, using original question")
+                effective_question = question
+            elif not inferred_document_ids:
+                inferred_document_ids = []
+
             self._add_trace(
                 "rewrite_question",
                 "Rewrote the question for retrieval.",
@@ -189,12 +207,15 @@ class PageIndexSearchGraphRunner:
                 reasoning=rewrite_note,
                 inferred_document_ids=inferred_document_ids,
             )
-        except Exception:
+        except Exception as exc:
+            degradation_reasons.append(f"rewrite_question: LLM call failed ({type(exc).__name__}), using original question")
             self._add_trace(
                 "rewrite_question",
                 "Question rewrite failed, so the original question will be used.",
                 original_question=question,
+                error=type(exc).__name__,
             )
+
         if effective_question != question:
             rewrite_note = " | ".join(
                 note
@@ -204,11 +225,13 @@ class PageIndexSearchGraphRunner:
                 ]
                 if note
             )
+
         return {
             "effective_question": effective_question,
             "rewrite_note": rewrite_note,
             "inferred_document_ids": inferred_document_ids,
             "retrieval_notes": [note for note in [rewrite_note] if note],
+            "degradation_reasons": degradation_reasons,
         }
 
     def _rank_candidates(self, state: SearchGraphState) -> SearchGraphState:
@@ -253,23 +276,34 @@ class PageIndexSearchGraphRunner:
         candidate_documents = state["candidate_documents"]
         heuristic_clarification = state.get("heuristic_clarification")
         rewrite_note = state.get("rewrite_note")
+        degradation_reasons = list(state.get("degradation_reasons", []))
+
         try:
             selection = self._agent.select_documents(effective_question, candidate_documents)
+
+            # Validate document selection response
+            if selection:
+                if not selection.document_ids or not isinstance(selection.document_ids, list):
+                    degradation_reasons.append("select_documents: invalid document_ids, using all candidates")
+                    selection.document_ids = [doc.document_id for doc in candidate_documents]
+
             self._add_trace(
                 "document_selection",
                 "Selected document scopes for answer generation.",
                 effective_question=effective_question,
-                selected_document_ids=selection.document_ids,
-                needs_clarification=selection.needs_clarification,
-                clarifying_question=selection.clarifying_question,
-                reasoning=selection.thinking,
+                selected_document_ids=selection.document_ids if selection else [],
+                needs_clarification=selection.needs_clarification if selection else False,
+                clarifying_question=selection.clarifying_question if selection else None,
+                reasoning=selection.thinking if selection else None,
             )
-        except Exception:
+        except Exception as exc:
+            degradation_reasons.append(f"select_documents: LLM call failed ({type(exc).__name__}), using all candidates")
             selection = None
             self._add_trace(
                 "document_selection",
                 "Document selection failed, so the workflow will fall back to heuristic candidates.",
                 effective_question=effective_question,
+                error=type(exc).__name__,
             )
 
         if selection and selection.needs_clarification:
@@ -284,12 +318,15 @@ class PageIndexSearchGraphRunner:
                     retrieval_notes=" | ".join(note for note in [rewrite_note, selection.thinking] if note) or None,
                     needs_clarification=True,
                     clarifying_question=clarifying_question,
+                    degraded=len(degradation_reasons) > 0,
+                    degradation_reasons=degradation_reasons,
                 ),
             }
 
         return {
             "selection": selection,
             "selection_notes": selection.thinking if selection else None,
+            "degradation_reasons": degradation_reasons,
         }
 
     def _prepare_selected_documents(self, state: SearchGraphState) -> SearchGraphState:
@@ -302,6 +339,7 @@ class PageIndexSearchGraphRunner:
         question = state["question"]
         effective_question = state["effective_question"]
         multi_document_intent = state["multi_document_intent"]
+        degradation_reasons = list(state.get("degradation_reasons", []))
 
         selected_document_ids = selection.document_ids if selection else []
         document_map = {document.document_id: document for document in candidate_documents}
@@ -334,6 +372,8 @@ class PageIndexSearchGraphRunner:
                         retrieval_notes=" | ".join(note for note in [rewrite_note, selection_notes] if note) or None,
                         needs_clarification=True,
                         clarifying_question=heuristic_clarification,
+                        degraded=len(degradation_reasons) > 0,
+                        degradation_reasons=degradation_reasons,
                     )
                 }
             if not selected_documents:
@@ -361,16 +401,19 @@ class PageIndexSearchGraphRunner:
                     retrieval_notes=" | ".join(note for note in [rewrite_note, selection_notes] if note) or None,
                     needs_clarification=True,
                     clarifying_question=post_selection_clarification,
+                    degraded=len(degradation_reasons) > 0,
+                    degradation_reasons=degradation_reasons,
                 )
             }
 
-        return {"selected_documents": selected_documents}
+        return {"selected_documents": selected_documents, "degradation_reasons": degradation_reasons}
 
     def _retrieve_contexts(self, state: SearchGraphState) -> SearchGraphState:
         effective_question = state["effective_question"]
         selected_documents = state["selected_documents"]
         contexts: list[dict] = []
         retrieval_notes = list(state.get("retrieval_notes", []))
+        degradation_reasons = list(state.get("degradation_reasons", []))
         seed_nodes_by_document = self._neo4j_seed_node_ids(
             effective_question,
             [document.document_id for document in selected_documents],
@@ -393,12 +436,14 @@ class PageIndexSearchGraphRunner:
                     node_ids=node_ids,
                     reasoning=node_notes,
                 )
-            except Exception:
+            except Exception as exc:
+                degradation_reasons.append(f"select_nodes({document.document_id}): LLM call failed ({type(exc).__name__})")
                 node_ids, node_notes = [], None
                 self._add_trace(
                     "node_selection",
                     "Node selection failed, so heuristic node matching will be used.",
                     document_id=document.document_id,
+                    error=type(exc).__name__,
                 )
             if preferred_node_ids:
                 node_ids = [*preferred_node_ids, *node_ids]
@@ -447,6 +492,8 @@ class PageIndexSearchGraphRunner:
                     answer=empty_guard_msg,
                     document_ids=[document.document_id for document in selected_documents],
                     retrieval_notes=" | ".join(retrieval_notes) if retrieval_notes else None,
+                    degraded=len(degradation_reasons) > 0,
+                    degradation_reasons=degradation_reasons,
                 ),
             }
 
@@ -462,12 +509,14 @@ class PageIndexSearchGraphRunner:
         return {
             "contexts": contexts,
             "retrieval_notes": retrieval_notes,
+            "degradation_reasons": degradation_reasons,
         }
 
     def _synthesize_answer(self, state: SearchGraphState) -> SearchGraphState:
         selected_documents = state["selected_documents"]
         contexts = state["contexts"]
         retrieval_note_text = " | ".join(note for note in state.get("retrieval_notes", []) if note) or None
+        degradation_reasons = list(state.get("degradation_reasons", []))
         timer = Timer().start()
         try:
             with log_stage("answer_synthesis"):
@@ -479,6 +528,16 @@ class PageIndexSearchGraphRunner:
                     retrieval_backend="neo4j" if self._neo4j_retrieval is not None else "pageindex",
                 )
                 get_metrics().record_llm_call()
+
+            # Validate answer response
+            if not answer.answer or not isinstance(answer.answer, str):
+                degradation_reasons.append("synthesize_answer: invalid answer text")
+                answer.answer = "I found relevant document nodes, but I could not synthesize a grounded answer."
+
+            if not isinstance(answer.citations, list):
+                degradation_reasons.append("synthesize_answer: invalid citations format")
+                answer.citations = []
+
             get_metrics().record_stage("answer_synthesis", timer.stop())
             self._add_trace(
                 "answer_synthesis",
@@ -487,9 +546,15 @@ class PageIndexSearchGraphRunner:
                 citation_count=len(answer.citations),
                 needs_clarification=answer.needs_clarification,
             )
+
+            # Propagate degradation flags
+            answer.degraded = len(degradation_reasons) > 0
+            answer.degradation_reasons = degradation_reasons
+
             return {"final_answer": answer}
-        except Exception:
+        except Exception as exc:
             get_metrics().record_stage("answer_synthesis", timer.stop(), error=True)
+            degradation_reasons.append(f"synthesize_answer: LLM call failed ({type(exc).__name__})")
             fallback_answer = " ".join(context["text"] for context in contexts[:2] if context.get("text")).strip()
             if not fallback_answer:
                 fallback_answer = "I found relevant document nodes, but I could not synthesize a grounded answer."
@@ -497,6 +562,7 @@ class PageIndexSearchGraphRunner:
                 "answer_synthesis",
                 "Fell back to raw context because final answer synthesis failed.",
                 answer_preview=fallback_answer[:240],
+                error=type(exc).__name__,
             )
             return {
                 "final_answer": SearchAnswer(
@@ -504,5 +570,7 @@ class PageIndexSearchGraphRunner:
                     answer=fallback_answer,
                     document_ids=[document.document_id for document in selected_documents],
                     retrieval_notes=retrieval_note_text,
+                    degraded=len(degradation_reasons) > 0,
+                    degradation_reasons=degradation_reasons,
                 )
             }
