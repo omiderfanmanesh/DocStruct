@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Callable, List, Optional, TypedDict
 from langgraph.graph import END, START, StateGraph
 
 from docstruct.application.agents.pageindex_search_agent import PageIndexSearchAgent
-from docstruct.config import ContextConfig
+from docstruct.config import ContextConfig, RetrievalConfig
 from docstruct.domain.token_budget import TokenBudget
 
 # Module-level logger
@@ -52,6 +52,89 @@ class SearchGraphState(TypedDict, total=False):
     degradation_reasons: List[str]  # Tracks validation failures and fallbacks applied
 
 
+def _cosine_similarity(vec1: list[float], vec2: list[float]) -> float:
+    """Compute cosine similarity between two vectors.
+
+    Args:
+        vec1: First vector
+        vec2: Second vector
+
+    Returns:
+        Cosine similarity score between -1 and 1 (typically 0 to 1 for embeddings)
+    """
+    if not vec1 or not vec2 or len(vec1) != len(vec2):
+        return 0.0
+
+    dot_product = sum(a * b for a, b in zip(vec1, vec2))
+    mag1 = sum(a * a for a in vec1) ** 0.5
+    mag2 = sum(b * b for b in vec2) ** 0.5
+
+    if mag1 == 0 or mag2 == 0:
+        return 0.0
+
+    return dot_product / (mag1 * mag2)
+
+
+def rewrite_similarity_check(
+    original: str,
+    rewritten: str,
+    embedder,
+    threshold: float = 0.6,
+) -> str:
+    """Validate that rewritten question is semantically similar to original.
+
+    If the rewrite diverges significantly (cosine similarity < threshold),
+    return the original question and log a warning.
+
+    Args:
+        original: Original user question
+        rewritten: Rewritten question from LLM
+        embedder: EmbeddingPort instance for generating embeddings
+        threshold: Minimum cosine similarity to accept rewrite (default 0.6)
+
+    Returns:
+        Rewritten question if similarity >= threshold, else original question
+    """
+    if original.strip() == rewritten.strip():
+        # Identical questions have perfect similarity
+        return rewritten
+
+    try:
+        # Get embeddings for both questions
+        original_embedding = embedder.embed(original)
+        rewritten_embedding = embedder.embed(rewritten)
+
+        # Compute cosine similarity
+        similarity = _cosine_similarity(original_embedding, rewritten_embedding)
+
+        if similarity < threshold:
+            logger.warning(
+                "Query rewrite diverged from original intent",
+                extra={
+                    "stage": "rewrite_similarity_check",
+                    "similarity": round(similarity, 3),
+                    "threshold": threshold,
+                    "original_question": original[:100],
+                    "rewritten_question": rewritten[:100],
+                    "fallback_strategy": "use original question",
+                },
+            )
+            return original
+
+        return rewritten
+    except Exception as e:
+        logger.debug(
+            "Error computing rewrite similarity, falling back to original",
+            extra={
+                "stage": "rewrite_similarity_check",
+                "error": str(e),
+                "error_type": type(e).__name__,
+            },
+        )
+        # On error, return original as safe fallback
+        return original
+
+
 class PageIndexSearchGraphRunner:
     def __init__(
         self,
@@ -59,11 +142,21 @@ class PageIndexSearchGraphRunner:
         add_trace: Callable[..., None],
         summarize_documents: Callable[..., list[dict[str, str | None]]],
         neo4j_retrieval: Optional[Neo4jRetrievalPort] = None,
+        embedder=None,
     ) -> None:
         self._agent = PageIndexSearchAgent(client)
         self._add_trace = add_trace
         self._summarize_documents = summarize_documents
         self._neo4j_retrieval = neo4j_retrieval
+        # Build embedder if not provided
+        if embedder is None:
+            try:
+                from docstruct.config import EmbeddingConfig
+                from docstruct.infrastructure.embeddings.factory import build_embedder
+                embedder = build_embedder(EmbeddingConfig.from_env())
+            except Exception:
+                embedder = None
+        self._embedder = embedder
         self._graph = self._build_graph()
 
     def _get_model_context_window(self) -> int:
@@ -280,6 +373,18 @@ class PageIndexSearchGraphRunner:
                 effective_question = question
             elif not inferred_document_ids:
                 inferred_document_ids = []
+
+            # Check semantic similarity between original and rewritten question
+            if effective_question != question and self._embedder:
+                retrieval_config = RetrievalConfig.from_env()
+                effective_question = rewrite_similarity_check(
+                    question,
+                    effective_question,
+                    self._embedder,
+                    threshold=retrieval_config.rewrite_similarity_threshold,
+                )
+                if effective_question == question:
+                    degradation_reasons.append(f"rewrite_question: rewrite diverged below similarity threshold, using original question")
 
             self._add_trace(
                 "rewrite_question",

@@ -193,6 +193,7 @@ class RetrievalConfig:
     enable_graph: bool = True
     enable_fulltext: bool = True
     enable_vector: bool = True
+    rewrite_similarity_threshold: float = 0.6
 
     @classmethod
     def from_env(cls) -> "RetrievalConfig":
@@ -208,6 +209,7 @@ class RetrievalConfig:
             enable_graph=enable_graph,
             enable_fulltext=enable_fulltext,
             enable_vector=enable_vector,
+            rewrite_similarity_threshold=float(os.getenv("REWRITE_SIMILARITY_THRESHOLD", "0.6")),
         )
 
 
