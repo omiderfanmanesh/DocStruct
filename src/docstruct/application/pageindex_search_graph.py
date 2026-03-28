@@ -106,9 +106,13 @@ class PageIndexSearchGraphRunner:
         graph.add_node("retrieve_contexts", self._retrieve_contexts)
         graph.add_node("synthesize_answer", self._synthesize_answer)
 
+        # Parallel fan-out: both rewrite and ranking start simultaneously from START
         graph.add_edge(START, "rewrite_question")
-        graph.add_edge("rewrite_question", "rank_candidates")
+        graph.add_edge(START, "rank_candidates")
+        # Both branches converge at select_documents (fan-in)
+        graph.add_edge("rewrite_question", "select_documents")
         graph.add_edge("rank_candidates", "select_documents")
+
         graph.add_conditional_edges(
             "select_documents",
             self._route_after_select_documents,
@@ -208,13 +212,15 @@ class PageIndexSearchGraphRunner:
         }
 
     def _rank_candidates(self, state: SearchGraphState) -> SearchGraphState:
-        effective_question = state["effective_question"]
+        # Use original question for parallel execution with rewrite_question node.
+        # The effective_question (rewritten) will be merged in select_documents (fan-in).
+        question = state["question"]
 
         # Use Neo4j retrieval if available, otherwise fall back to in-memory method
         if self._neo4j_retrieval:
             # Retrieve candidates from Neo4j
             retrieval_candidates = self._neo4j_retrieval.retrieve_candidates(
-                question=effective_question,
+                question=question,
                 query_embedding=None,  # Vector mode not enabled by default
                 limit=6,
             )
@@ -227,19 +233,16 @@ class PageIndexSearchGraphRunner:
                     candidate_documents.append(doc_index)
         else:
             # Fall back to in-memory candidate selection (original behavior)
-            candidate_documents = choose_candidate_documents(effective_question, state["indexes"], limit=6)
+            candidate_documents = choose_candidate_documents(question, state["indexes"], limit=6)
 
-        inferred_document_ids = state.get("inferred_document_ids", [])
-        if inferred_document_ids:
-            candidate_documents = self._promote_documents(candidate_documents, inferred_document_ids, limit=6)
         self._add_trace(
             "candidate_ranking",
-            "Ranked candidate documents for the effective retrieval question.",
-            effective_question=effective_question,
+            "Ranked candidate documents for the original retrieval question.",
+            original_question=question,
             candidates=self._summarize_documents(candidate_documents, limit=6),
             retrieval_backend="neo4j" if self._neo4j_retrieval is not None else "pageindex",
         )
-        heuristic_clarification = build_scope_clarification(effective_question, candidate_documents[:4])
+        heuristic_clarification = build_scope_clarification(question, candidate_documents[:4])
         return {
             "candidate_documents": candidate_documents,
             "heuristic_clarification": heuristic_clarification,
